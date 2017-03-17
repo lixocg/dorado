@@ -1,0 +1,7 @@
+package com.experian.core.kafka;
+
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+
+public interface ConsumerCallback {
+    void afterReceive(ConsumerRecord<String, String> records);
+}

@@ -1,0 +1,421 @@
+------------------postgresql----------------------------
+------------------建表语句-----------------------------------
+-----------------------------字典表开始----------------------------------------------------
+-------------企业/自然人类型字典表--------------------------
+-- Table: public.litigation_party_category
+
+-- DROP TABLE public.litigation_party_category;
+
+CREATE TABLE public.litigation_party_category
+(
+  id bigint NOT NULL, -- 主键
+  name character varying(255), -- 名称
+  insert_date timestamp with time zone,--数据入库时间
+  CONSTRAINT litigation_party_category_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.litigation_party_category
+  OWNER TO postgres;
+COMMENT ON TABLE public.litigation_party_category
+  IS '企业/自然人类型字典表';
+COMMENT ON COLUMN public.litigation_party_category.id IS '主键';
+COMMENT ON COLUMN public.litigation_party_category.name IS '名称';
+COMMENT ON COLUMN public.litigation_party_category.insert_date IS '数据入库时间';
+------------法院字典表-----------------------------------
+-- Table: public.litigation_court
+
+-- DROP TABLE public.litigation_court;
+
+CREATE TABLE public.litigation_court
+(
+  id bigint NOT NULL, -- 主键
+  district_code character varying(255), -- 区域代码
+  name character varying(255), -- 区域名称
+  court_code character varying(255), -- 法院代码
+  created_date timestamp with time zone, -- 创建时间
+  insert_date timestamp with time zone, -- 数据入库时间
+  CONSTRAINT litigation_court_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.litigation_court
+  OWNER TO postgres;
+COMMENT ON TABLE public.litigation_court
+  IS '法院字典表';
+COMMENT ON COLUMN public.litigation_court.id IS '主键';
+COMMENT ON COLUMN public.litigation_court.district_code IS '区域代码';
+COMMENT ON COLUMN public.litigation_court.name IS '区域名称';
+COMMENT ON COLUMN public.litigation_court.court_code IS '法院代码';
+COMMENT ON COLUMN public.litigation_court.created_date IS '创建时间';
+COMMENT ON COLUMN public.litigation_court.insert_date IS '数据入库时间';
+
+
+
+
+-------------------案件类型表--------------------------
+-- Table: public.litigation_case_category
+
+-- DROP TABLE public.litigation_case_category;
+
+CREATE TABLE public.litigation_case_category
+(
+  id bigint NOT NULL, -- 主键
+  code character varying(255), -- 案件类型代码
+  name character varying(255), -- 案件类型名称
+  insert_date timestamp with time zone, -- 数据入库时间
+  CONSTRAINT litigation_case_category_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.litigation_case_category
+  OWNER TO postgres;
+COMMENT ON TABLE public.litigation_case_category
+  IS '案件类型表';
+COMMENT ON COLUMN public.litigation_case_category.id IS '主键';
+COMMENT ON COLUMN public.litigation_case_category.code IS '案件类型代码';
+COMMENT ON COLUMN public.litigation_case_category.name IS '案件类型名称';
+COMMENT ON COLUMN public.litigation_case_category.insert_date IS '数据入库时间';
+
+
+
+---------------------------------------------------------------------------------
+---------------------------网址信息表-------------------------------------------------
+-- Table: public.litigation_source_url
+
+-- DROP TABLE public.litigation_source_url;
+
+CREATE TABLE public.litigation_source_url
+(
+  id character varying(65) NOT NULL, -- 主键
+  source_url text, -- 来源url
+  description text, -- 诉讼数据源描述
+  created_date timestamp with time zone, -- optix创建时间
+  insert_date timestamp with time zone, -- 数据入库时间
+  CONSTRAINT id PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.litigation_source_url
+  OWNER TO postgres;
+COMMENT ON TABLE public.litigation_source_url
+  IS '诉讼数据来源表';
+COMMENT ON COLUMN public.litigation_source_url.id IS '主键';
+COMMENT ON COLUMN public.litigation_source_url.source_url IS '来源url';
+COMMENT ON COLUMN public.litigation_source_url.description IS '诉讼数据源描述';
+COMMENT ON COLUMN public.litigation_source_url.created_date IS 'optix创建时间';
+COMMENT ON COLUMN public.litigation_source_url.insert_date IS '数据入库时间';
+
+
+-- Index: public.litigation_source_url_id_idx
+
+-- DROP INDEX public.litigation_source_url_id_idx;
+
+CREATE INDEX litigation_source_url_id_idx
+  ON public.litigation_source_url
+  USING btree
+  (id COLLATE pg_catalog."default");
+
+-----------------------------字典表结束----------------------------------------------------
+---------------------------抓取数据信息表------------------------------------------------------
+-- Table: public.litigation_crawled_data
+
+-- DROP TABLE public.litigation_crawled_data;
+
+CREATE TABLE public.litigation_crawled_data
+(
+  id character varying(65) NOT NULL, -- 主键
+  source_url_id character varying(65), -- 来源网址id
+  content_url text, -- 抓取数据内容页url
+  data text, -- 抓取的诉讼数据
+  title text, -- 标题
+  publish_date timestamp with time zone, -- 发布日期
+  created_date timestamp with time zone, -- 创建时间
+  insert_date timestamp with time zone, -- 数据入库时间
+  CONSTRAINT litigation_crawled_data_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.litigation_crawled_data
+  OWNER TO postgres;
+COMMENT ON TABLE public.litigation_crawled_data
+  IS '诉讼抓取数据表';
+COMMENT ON COLUMN public.litigation_crawled_data.id IS '主键';
+COMMENT ON COLUMN public.litigation_crawled_data.source_url_id IS '来源网址id';
+COMMENT ON COLUMN public.litigation_crawled_data.content_url IS '抓取数据内容页url';
+COMMENT ON COLUMN public.litigation_crawled_data.data IS '抓取的诉讼数据';
+COMMENT ON COLUMN public.litigation_crawled_data.title IS '标题';
+COMMENT ON COLUMN public.litigation_crawled_data.publish_date IS '发布日期';
+COMMENT ON COLUMN public.litigation_crawled_data.created_date IS '创建时间';
+COMMENT ON COLUMN public.litigation_crawled_data.insert_date IS '数据入库时间';
+
+
+-- Index: public.litigation_crawled_data_id_idx
+
+-- DROP INDEX public.litigation_crawled_data_id_idx;
+
+CREATE INDEX litigation_crawled_data_id_idx
+  ON public.litigation_crawled_data
+  USING btree
+  (id COLLATE pg_catalog."default");
+
+
+----------------------------诉讼案件表-----------------------------------------------------
+-- Table: public.litigation_parsed_data
+
+-- DROP TABLE public.litigation_parsed_data;
+
+--CREATE TABLE public.litigation_parsed_data
+--(
+--  id character varying(65) NOT NULL, -- 主键
+--  created_date timestamp with time zone, -- 创建时间
+--  updated_date timestamp with time zone, -- 更新时间
+--  CONSTRAINT litigation_parsed_data_pkey PRIMARY KEY (id)
+--)
+--WITH (
+--  OIDS=FALSE
+--);
+--ALTER TABLE public.litigation_parsed_data
+--  OWNER TO postgres;
+--COMMENT ON TABLE public.litigation_parsed_data
+--  IS '诉讼案件主表';
+--COMMENT ON COLUMN public.litigation_parsed_data.id IS '主键';
+--COMMENT ON COLUMN public.litigation_parsed_data.created_date IS '创建时间';
+--COMMENT ON COLUMN public.litigation_parsed_data.updated_date IS '更新时间';
+------------------------------诉讼案件详情表---------------------------------------------------
+-- Table: public.litigation_parsed_data_detail
+
+-- DROP TABLE public.litigation_parsed_data_detail;
+
+CREATE TABLE public.litigation_parsed_data_detail
+(
+  id character varying(65) NOT NULL, -- 主键
+  supplier_id character varying(65) NOT NULL, -- 供应商主键
+  parsed_data_id character varying(65), -- 案件编号
+  supplier_parsed_data_id character varying(65), -- 供应商案件编号，如optix的案件编号
+  crawled_data_id character varying(65), -- 抓取数据表主键id
+  num_non_empty integer, -- optix用的，暂留
+  case_number character varying(255), -- 案号
+  previous_case_number character varying(255), -- 上期案号
+  if_be_court character varying(1), -- 是否勾选（作报告用
+  case_category_id integer, -- 案件类型
+  accuse_date timestamp with time zone, -- 案件审理日期
+  court_id integer, -- 受理法院 / 执行法院
+  case_title text, -- 案件标题
+  accuse_status text, -- 案件状态
+  accuser_list_no_anonymous text,
+  appuser_list_no_anonymous text,
+  party_list_no_anonymous text,
+  simple_detail text, -- 简单案由
+  details text, -- 详细案由
+  total_amount_involved numeric(20,2), -- 涉案金额
+  trial_procedure text,
+  win character varying(255), -- 胜/败诉
+  deduplicated boolean,
+  status integer, -- （“0”表示该条数据解析成功；“1”，表示该条数据有用但未解析成功；“3”表示无用数据）
+  reason text,
+  created_date timestamp with time zone, -- 创建日期
+  updated_date timestamp with time zone, -- 更新时间
+  expiry_date timestamp with time zone, -- 判断是否有效用，若无效，则又有值，重复的和被替代的 数据 则该字段有值
+  insert_date timestamp with time zone, -- 数据入库时间
+  pk_id bigint, -- 与诉讼平台数据关联用
+  data_from integer, -- 数据来源,0-optix,1-db2主表,2-db2进程表,3-sqlserver诉讼平台
+  CONSTRAINT litigation_parsed_data_detail_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.litigation_parsed_data_detail
+  OWNER TO postgres;
+COMMENT ON TABLE public.litigation_parsed_data_detail
+  IS '诉讼案件详情';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.id IS '主键';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.supplier_id IS '供应商主键';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.parsed_data_id IS '案件编号';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.supplier_parsed_data_id IS '供应商案件编号，如optix的案件编号';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.crawled_data_id IS '抓取数据表主键id';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.num_non_empty IS 'optix用的，暂留';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.case_number IS '案号';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.previous_case_number IS '上期案号';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.if_be_court IS '是否勾选（作报告用';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.case_category_id IS '案件类型';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.accuse_date IS '案件审理日期 ';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.court_id IS '受理法院 / 执行法院';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.case_title IS '案件标题';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.accuse_status IS '案件状态';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.simple_detail IS '简单案由';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.details IS '详细案由';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.total_amount_involved IS '涉案金额';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.win IS '胜/败诉';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.status IS '（“0”表示该条数据解析成功；“1”，表示该条数据有用但未解析成功；“3”表示无用数据）';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.created_date IS '创建日期';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.updated_date IS '更新时间';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.expiry_date IS '判断是否有效用，若无效，则又有值，重复的和被替代的 数据 则该字段有值';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.insert_date IS '数据入库时间';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.pk_id IS '与诉讼平台数据关联用';
+COMMENT ON COLUMN public.litigation_parsed_data_detail.data_from IS '数据来源,0-optix,1-db2主表,2-db2进程表,3-sqlserver诉讼平台';
+
+
+-- Index: public.litigation_parsed_data_detail_case_number_idx
+
+-- DROP INDEX public.litigation_parsed_data_detail_case_number_idx;
+
+CREATE INDEX litigation_parsed_data_detail_case_number_idx
+  ON public.litigation_parsed_data_detail
+  USING btree
+  (case_number COLLATE pg_catalog."default");
+
+-- Index: public.litigation_parsed_data_detail_data_from_idx
+
+-- DROP INDEX public.litigation_parsed_data_detail_data_from_idx;
+
+CREATE INDEX litigation_parsed_data_detail_data_from_idx
+  ON public.litigation_parsed_data_detail
+  USING btree
+  (data_from);
+
+-- Index: public.litigation_parsed_data_detail_id_parsed_data_id_idx
+
+-- DROP INDEX public.litigation_parsed_data_detail_id_parsed_data_id_idx;
+
+CREATE INDEX litigation_parsed_data_detail_id_parsed_data_id_idx
+  ON public.litigation_parsed_data_detail
+  USING btree
+  (id COLLATE pg_catalog."default", parsed_data_id COLLATE pg_catalog."default");
+
+-- Index: public.litigation_parsed_data_detail_parsed_data_id_idx
+
+-- DROP INDEX public.litigation_parsed_data_detail_parsed_data_id_idx;
+
+CREATE INDEX litigation_parsed_data_detail_parsed_data_id_idx
+  ON public.litigation_parsed_data_detail
+  USING btree
+  (parsed_data_id COLLATE pg_catalog."default");
+
+-- Index: public.litigation_parsed_data_detail_previous_case_number_idx
+
+-- DROP INDEX public.litigation_parsed_data_detail_previous_case_number_idx;
+
+CREATE INDEX litigation_parsed_data_detail_previous_case_number_idx
+  ON public.litigation_parsed_data_detail
+  USING btree
+  (previous_case_number COLLATE pg_catalog."default");
+
+
+
+
+-----------------------------企业，自然人表----------------------------------------------------
+-- Table: public.litigation_party
+
+-- DROP TABLE public.litigation_party;
+
+CREATE TABLE public.litigation_party
+(
+  id character varying(65) NOT NULL, -- 主键
+  parsed_data_detail_id character varying(65), -- litigation_parsed_data_detail 诉讼案件详情表主键
+  name character varying(255),
+  sbdnum character varying(255),
+  party_category_id integer, -- 若企业/自然人为原告，则置值“1”；若为被告，则置值“2”，若为当事人，则置值“3”
+  legal_representative character varying(255), -- 法定代表人
+  organization_code character varying(255), -- 组织机构代码
+  identification_number character varying(255), -- 身份证号码
+  date_of_birth date, -- 出生日期
+  address character varying(1000), -- 地址
+  organization_name character varying(255), -- 单位名称
+  amount_involved numeric(20,2), -- 履行金额
+  amount_to_be_executed numeric(20,2), -- 未执行金额
+  updated_date timestamp with time zone, -- 更新时间
+  accuse_date timestamp with time zone, -- 案件审理日期
+  insert_date timestamp with time zone, -- 数据入库时间
+  CONSTRAINT litigation_party_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.litigation_party
+  OWNER TO postgres;
+COMMENT ON TABLE public.litigation_party
+  IS '企业/自然人';
+COMMENT ON COLUMN public.litigation_party.id IS '主键';
+COMMENT ON COLUMN public.litigation_party.parsed_data_detail_id IS 'litigation_parsed_data_detail 诉讼案件详情表主键';
+COMMENT ON COLUMN public.litigation_party.party_category_id IS '若企业/自然人为原告，则置值“1”；若为被告，则置值“2”，若为当事人，则置值“3”';
+COMMENT ON COLUMN public.litigation_party.legal_representative IS '法定代表人';
+COMMENT ON COLUMN public.litigation_party.organization_code IS '组织机构代码';
+COMMENT ON COLUMN public.litigation_party.identification_number IS '身份证号码';
+COMMENT ON COLUMN public.litigation_party.date_of_birth IS '出生日期';
+COMMENT ON COLUMN public.litigation_party.address IS '地址';
+COMMENT ON COLUMN public.litigation_party.organization_name IS '单位名称';
+COMMENT ON COLUMN public.litigation_party.amount_involved IS '履行金额';
+COMMENT ON COLUMN public.litigation_party.amount_to_be_executed IS '未执行金额';
+COMMENT ON COLUMN public.litigation_party.updated_date IS '更新时间';
+COMMENT ON COLUMN public.litigation_party.accuse_date IS '案件审理日期';
+COMMENT ON COLUMN public.litigation_party.insert_date IS '数据入库时间';
+
+
+-- Index: public.litigation_party_id_idx
+
+-- DROP INDEX public.litigation_party_id_idx;
+
+CREATE INDEX litigation_party_id_idx
+  ON public.litigation_party
+  USING btree
+  (id COLLATE pg_catalog."default");
+
+-- Index: public.litigation_party_name_idx
+
+-- DROP INDEX public.litigation_party_name_idx;
+
+CREATE INDEX litigation_party_name_idx
+  ON public.litigation_party
+  USING btree
+  (name COLLATE pg_catalog."default");
+
+-- Index: public.litigation_party_parsed_data_detail_id_idx
+
+-- DROP INDEX public.litigation_party_parsed_data_detail_id_idx;
+
+CREATE INDEX litigation_party_parsed_data_detail_id_idx
+  ON public.litigation_party
+  USING btree
+  (parsed_data_detail_id COLLATE pg_catalog."default");
+
+-- Index: public.litigation_party_sbdnum_idx
+
+-- DROP INDEX public.litigation_party_sbdnum_idx;
+
+CREATE INDEX litigation_party_sbdnum_idx
+  ON public.litigation_party
+  USING btree
+  (sbdnum COLLATE pg_catalog."default");
+
+
+-------------------数据初始化------------------------------------
+insert into litigation_case_category VALUES (1, '01000', '裁判文书');
+insert into litigation_case_category VALUES (2, '01100', '民事案件');
+insert into litigation_case_category VALUES (3, '01200', '刑事案件');
+insert into litigation_case_category VALUES (4, '01300', '行政案件');
+insert into litigation_case_category VALUES (5, '01400', '赔偿案件');
+insert into litigation_case_category VALUES (6, '01500', '执行案件');
+insert into litigation_case_category VALUES (7, '02000', '执行公告');
+insert into litigation_case_category VALUES (8, '03000', '失信公告');
+insert into litigation_case_category VALUES (9, '04000', '开庭公告');
+insert into litigation_case_category VALUES (10, '05000', '法院公告');
+insert into litigation_case_category VALUES (11, '07000', '限制高消费/出入境/招投标');
+insert into litigation_case_category VALUES (12, '07100', '限制高消费');
+insert into litigation_case_category VALUES (13, '07200', '限制出入境');
+insert into litigation_case_category VALUES (14, '07300', '限制招投标');
+insert into litigation_case_category VALUES (15, '08000', '其他');
+--------------------------------------------------------------------
+-------------------------------------------------------------------------
+INSERT INTO litigation_party_category VALUES (1, '原吿人');
+INSERT INTO litigation_party_category VALUES(2, '被吿人');
+INSERT INTO litigation_party_category VALUES(3, '当事人');
+
+
+
+

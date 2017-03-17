@@ -1,0 +1,68 @@
+package com.experian.web.listener;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
+
+import com.experian.core.constant.LitiBusiConstant;
+import com.experian.core.utils.PropUtil;
+import com.experian.daas.litigation.pojo.LitigationAPIPojo;
+import com.experian.daas.litigation.service.LitigationAdapterService;
+import com.google.gson.Gson;
+
+@Component
+public class StartupListener implements ApplicationListener<ContextRefreshedEvent> {
+
+	@Resource(name = "litigationAdapterService")
+	private LitigationAdapterService litigationAdapterService;
+
+	@Override
+	public void onApplicationEvent(ContextRefreshedEvent evt) {
+		if (evt.getApplicationContext().getParent() == null) {
+			System.out.println("-------------------------诉讼去重任务开始启动---------------");
+			new Thread(new LitigationAdapterJob(litigationAdapterService)).start();
+		}
+	}
+
+	/**
+	 * 数据清洗任务
+	 * @author e00898a
+	 *
+	 */
+	public class LitigationAdapterJob implements Runnable {
+		Logger logger = Logger.getLogger(LitigationAdapterJob.class);
+
+		private LitigationAdapterService litigationAdapterService;
+
+		public LitigationAdapterJob(LitigationAdapterService litigationAdapterService) {
+			this.litigationAdapterService = litigationAdapterService;
+		}
+
+		public void run() {
+			boolean flag = true;
+			logger.info(">>>>>>>是否允许去重>>>>>>"+(PropUtil.getValue("litigation_flag"))+"<<<<<<<<<<<");
+			while (flag&&"true".equals(PropUtil.getValue("litigation_flag"))) {
+				flag = false;
+				List<LitigationAPIPojo> pojos = litigationAdapterService.getLitigationAPIPojo(1, 1,LitiBusiConstant.DataFetchStatus.UN_FETCH,LitiBusiConstant.ParsedStatus.SUCCESS);
+				if (pojos != null) {
+					for (LitigationAPIPojo pojo : pojos) {
+						try {
+							litigationAdapterService.executeAdapt(pojo);
+						} catch (Exception e) {
+							Gson gson = new Gson();
+							logger.error("诉讼数据《" + gson.toJson(pojo) + "》去重发生错误《" + e.getMessage() + "》");
+							continue;
+						}
+					}
+				}
+				flag = true;
+			}
+		}
+
+	}
+}

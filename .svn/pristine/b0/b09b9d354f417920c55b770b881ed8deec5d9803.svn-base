@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.experian.daas.litigation.dao.LitigationErrorCrawledDataDao">
+  <resultMap id="BaseResultMap" type="com.experian.dto.entity.litigation.LitigationErrorCrawledData">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="source_url_id" jdbcType="VARCHAR" property="sourceUrlId" />
+    <result column="content_url" jdbcType="VARCHAR" property="contentUrl" />
+    <result column="data" jdbcType="VARCHAR" property="data" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="publish_date" jdbcType="TIMESTAMP" property="publishDate" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="insert_date" jdbcType="TIMESTAMP" property="insertDate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from litigation_error_crawled_data
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.experian.dto.entity.litigation.LitigationErrorCrawledData">
+    insert into litigation_error_crawled_data (id, source_url_id, content_url, 
+      data, title, publish_date, 
+      created_date, insert_date)
+    values (#{id,jdbcType=VARCHAR}, #{sourceUrlId,jdbcType=VARCHAR}, #{contentUrl,jdbcType=VARCHAR}, 
+      #{data,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{publishDate,jdbcType=TIMESTAMP}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{insertDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.experian.dto.entity.litigation.LitigationErrorCrawledData">
+    update litigation_error_crawled_data
+    set source_url_id = #{sourceUrlId,jdbcType=VARCHAR},
+      content_url = #{contentUrl,jdbcType=VARCHAR},
+      data = #{data,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      insert_date = #{insertDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, source_url_id, content_url, data, title, publish_date, created_date, insert_date
+    from litigation_error_crawled_data
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, source_url_id, content_url, data, title, publish_date, created_date, insert_date
+    from litigation_error_crawled_data
+  </select>
+</mapper>

@@ -1,0 +1,51 @@
+package com.experian.daas.test.litigation;
+
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.log4j.Logger;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.experian.comp.kafka.ConsumerCallback;
+import com.experian.comp.utility.KafkaUtil;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring/spring-*.xml")
+public class kafkaTest {
+	Logger logger = Logger.getLogger(kafkaTest.class);
+
+	@Test
+	public void doSend() {
+		for (int i = 0; i <= 200000; i++) {
+			KafkaUtil.send("parti01", i + "", "data" + i);
+			try {
+				//Thread.sleep(100);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		Assert.assertTrue(true);
+	}
+
+	@Test
+	public void doReceive() {
+		KafkaUtil.receive(new ConsumerCallback() {
+
+			@Override
+			public void afterReceive(ConsumerRecord<String, String> records) {
+				logger.info(records.key() + "...." + records.value() + "..." + records.partition());
+			}
+		}, "parti01group01", "parti01", 3);
+		try {
+			Thread.sleep(Integer.MAX_VALUE);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+
+}

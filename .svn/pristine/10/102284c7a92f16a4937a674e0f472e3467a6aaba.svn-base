@@ -1,0 +1,21 @@
+package com.experian.daas.integration.adapter.baseinfo.dao;
+
+import com.experian.daas.integration.adapter.baseinfo.entity.CreditCorpBaseInfo;
+import com.experian.daas.integration.adapter.baseinfo.entity.CreditReportOrder;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+public interface CreditReportOrderDao {
+    int deleteByPrimaryKey(String ordernum);
+
+    int insert(CreditReportOrder record);
+
+    CreditReportOrder selectByPrimaryKey(String ordernum);
+
+    List<CreditReportOrder> selectAll();
+
+    int updateByPrimaryKey(CreditReportOrder record);
+
+	List<CreditReportOrder> selectByCorpBaseInfoSbdnums(@Param("creditCorpBaseInfos")List<CreditCorpBaseInfo> creditCorpBaseInfos);
+}

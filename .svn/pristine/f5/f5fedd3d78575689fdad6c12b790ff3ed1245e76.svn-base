@@ -1,0 +1,20 @@
+package com.experian.daas.integration.adapter.litigation.dao;
+
+import com.experian.daas.integration.adapter.litigation.entity.LitigationErrorParty;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+public interface LitigationErrorPartyDao {
+	int deleteByPrimaryKey(String id);
+
+	int insert(LitigationErrorParty record);
+
+	LitigationErrorParty selectByPrimaryKey(String id);
+
+	List<LitigationErrorParty> selectAll();
+
+	int updateByPrimaryKey(LitigationErrorParty record);
+
+	void batchInsert(@Param("parties") List<LitigationErrorParty> parties);
+}

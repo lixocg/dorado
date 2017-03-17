@@ -1,0 +1,5 @@
+db.driver=${driver}
+db.URL=${URL}
+db.user=${user}
+db.password=${password}
+ 

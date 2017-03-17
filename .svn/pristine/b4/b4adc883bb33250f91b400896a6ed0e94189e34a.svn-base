@@ -1,0 +1,108 @@
+package com.experian.daas.litigation.rest;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.experian.core.pojo.R;
+import com.experian.daas.litigation.jobs.LitigationHistoryTransitJob;
+import com.experian.daas.litigation.jobs.LitigationSqlServerTransitJob;
+import com.experian.daas.litigation.jobs.LitigationTransitJob;
+import com.experian.daas.litigation.jobs.ThreadPoolLog;
+import com.experian.daas.litigation.service.LitigationTransitService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+
+@RestController
+@RequestMapping("/litigation/transit")
+@Api(value = "诉讼旧数据迁移API")
+public class LitigationTransitRest {
+	private static final Logger logger = Logger.getLogger(LitigationTransitRest.class);
+
+	@Autowired
+	private LitigationTransitService litigationTransitService;
+
+	@ApiOperation(value = "DB2主表数据迁移")
+	@ApiImplicitParam(name = "count", value = "启动任务数", required = true, dataType = "int", paramType = "path", defaultValue = "10")
+	@RequestMapping(value = "/executeDb2Root/{count}", method = RequestMethod.GET)
+	public R<Void> executeDb2Root(@PathVariable("count") int count) {
+		ExecutorService executorService = Executors.newFixedThreadPool(count);
+		// 查询待处理的诉讼主表数据条数
+		Integer countNum = litigationTransitService.getCorpLitigationCount();
+		logger.info("DB2诉讼主表记录总数：" + countNum);
+		if (countNum > 0) {
+			/**
+			 * 每个线程跑10000条数据
+			 */
+			// 页码
+			int curPage = 0;
+			// 每页数量
+			int pageSize = 10000;
+			while (curPage * pageSize < countNum) {
+				curPage++;
+				executorService.execute(new LitigationTransitJob(litigationTransitService, curPage, pageSize));
+			}
+		}
+		new ThreadPoolLog("DB2诉讼主表", executorService).start();
+		return new R<Void>();
+	}
+
+	@ApiOperation(value = "DB2进程数据迁移")
+	@ApiImplicitParam(name = "count", value = "启动任务数", required = true, dataType = "int", paramType = "path", defaultValue = "10")
+	@RequestMapping(value = "/executeDb2HistoryRoot/{count}", method = RequestMethod.GET)
+	public R<Void> executeDb2HistoryRoot(@PathVariable("count") int count) {
+		ExecutorService executorService = Executors.newFixedThreadPool(count);
+		// 查询待处理的诉讼进程表数据条数
+		Integer countNum = litigationTransitService.getLitigationHistroyCount();
+		logger.info("DB2诉讼进程表记录总数：" + countNum);
+		if (countNum > 0) {
+			/**
+			 * 每个线程跑2000条数据
+			 */
+			// 页码
+			int curPage = 0;
+			// 每页数量
+			int pageSize = 2000;
+			while (curPage * pageSize < countNum) {
+				curPage++;
+				executorService.execute(new LitigationHistoryTransitJob(litigationTransitService, curPage, pageSize));
+			}
+		}
+		new ThreadPoolLog("DB2诉讼进程表", executorService).start();
+		return new R<Void>();
+	}
+
+	@ApiOperation(value = "sqlserver诉讼平台数据迁移")
+	@ApiImplicitParam(name = "count", value = "启动任务数", required = true, dataType = "int", paramType = "path", defaultValue = "10")
+	@RequestMapping(value = "/executeSqlServer/{count}", method = RequestMethod.GET)
+	public R<Void> executeSqlServer(@PathVariable("count") int count) {
+		ExecutorService executorService = Executors.newFixedThreadPool(count);
+		// 查询待处理的诉讼平台数据条数
+		Integer countNum = litigationTransitService.getSqlserverCorpLitigationCount();
+		logger.info("诉讼平台记录总数：" + countNum);
+		if (countNum > 0) {
+			/**
+			 * 每个线程跑2000条数据
+			 */
+			// 页码
+			int curPage = 0;
+			// 每页数量
+			int pageSize = 2000;
+			while (curPage * pageSize < countNum) {
+				curPage++;
+				executorService.execute(new LitigationSqlServerTransitJob(litigationTransitService, curPage, pageSize));
+			}
+		}
+		new ThreadPoolLog("诉讼平台", executorService).start();
+		return new R<Void>();
+	}
+
+}

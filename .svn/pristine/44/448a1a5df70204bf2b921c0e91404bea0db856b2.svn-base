@@ -1,0 +1,861 @@
+package com.experian.daas.litigation.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * 映射表： T_CORPLITIGATION
+ */
+public class CorpLitigation implements Serializable {
+    /**
+     * 映射字段： SBDNUM
+     */
+    private String sbdnum;
+
+    /**
+     * 映射字段： INFONUM
+     */
+    private Integer infonum;
+
+    /**
+     * 映射字段： OBTAININGDATE
+     */
+    private Date obtainingdate;
+
+    /**
+     * 映射字段： LITIGATIONAGENT
+     */
+    private String litigationagent;
+
+    /**
+     * 映射字段： UPDATETIME
+     */
+    private Date updatetime;
+
+    /**
+     * 映射字段： CASECODE
+     */
+    private String casecode;
+
+    /**
+     * 映射字段： CASEDETAIL
+     */
+    private String casedetail;
+
+    /**
+     * 映射字段： COURT
+     */
+    private String court;
+
+    /**
+     * 映射字段： CASEID
+     */
+    private String caseid;
+
+    /**
+     * 映射字段： ACCUSER1
+     */
+    private String accuser1;
+
+    /**
+     * 映射字段： ACCUSER2
+     */
+    private String accuser2;
+
+    /**
+     * 映射字段： ACCUSER3
+     */
+    private String accuser3;
+
+    /**
+     * 映射字段： ACCUSER4
+     */
+    private String accuser4;
+
+    /**
+     * 映射字段： ACCUSER5
+     */
+    private String accuser5;
+
+    /**
+     * 映射字段： APPUSER1
+     */
+    private String appuser1;
+
+    /**
+     * 映射字段： APPUSER2
+     */
+    private String appuser2;
+
+    /**
+     * 映射字段： APPUSER3
+     */
+    private String appuser3;
+
+    /**
+     * 映射字段： APPUSER4
+     */
+    private String appuser4;
+
+    /**
+     * 映射字段： APPUSER5
+     */
+    private String appuser5;
+
+    /**
+     * 映射字段： PARTY1
+     */
+    private String party1;
+
+    /**
+     * 映射字段： PARTY2
+     */
+    private String party2;
+
+    /**
+     * 映射字段： PARTY3
+     */
+    private String party3;
+
+    /**
+     * 映射字段： PARTY4
+     */
+    private String party4;
+
+    /**
+     * 映射字段： PARTY5
+     */
+    private String party5;
+
+    /**
+     * 映射字段： ACCDATE
+     */
+    private Date accdate;
+
+    /**
+     * 映射字段： IFBECOURT
+     */
+    private String ifbecourt;
+
+    /**
+     * 映射字段： ACCSBDNUM1
+     */
+    private String accsbdnum1;
+
+    /**
+     * 映射字段： ACCSBDNUM2
+     */
+    private String accsbdnum2;
+
+    /**
+     * 映射字段： ACCSBDNUM3
+     */
+    private String accsbdnum3;
+
+    /**
+     * 映射字段： ACCSBDNUM4
+     */
+    private String accsbdnum4;
+
+    /**
+     * 映射字段： ACCSBDNUM5
+     */
+    private String accsbdnum5;
+
+    /**
+     * 映射字段： APPSBDNUM1
+     */
+    private String appsbdnum1;
+
+    /**
+     * 映射字段： APPSBDNUM2
+     */
+    private String appsbdnum2;
+
+    /**
+     * 映射字段： APPSBDNUM3
+     */
+    private String appsbdnum3;
+
+    /**
+     * 映射字段： APPSBDNUM4
+     */
+    private String appsbdnum4;
+
+    /**
+     * 映射字段： APPSBDNUM5
+     */
+    private String appsbdnum5;
+
+    /**
+     * 映射字段： PARTSBDNUM1
+     */
+    private String partsbdnum1;
+
+    /**
+     * 映射字段： PARTSBDNUM2
+     */
+    private String partsbdnum2;
+
+    /**
+     * 映射字段： PARTSBDNUM3
+     */
+    private String partsbdnum3;
+
+    /**
+     * 映射字段： PARTSBDNUM4
+     */
+    private String partsbdnum4;
+
+    /**
+     * 映射字段： PARTSBDNUM5
+     */
+    private String partsbdnum5;
+
+    /**
+     * 映射字段： IFCOLLECT
+     */
+    private String ifcollect;
+
+    /**
+     * 映射字段： PKID
+     */
+    private String pkid;
+
+    /**
+     * 映射字段： SINPLECASE
+     */
+    private String sinplecase;
+
+    /**
+     * 映射字段： LITIGATIONAGENTURL
+     */
+    private String litigationagenturl;
+
+
+    /**
+     * 映射字段： LITIGATION
+     */
+    private String litigation;
+
+    /**
+     * 映射字段： SIMPLECASE
+     */
+    private String simplecase;
+
+    /**
+     * 映射字段： MINUTECASE
+     */
+    private String minutecase;
+
+    /**
+     * 映射字段： NOTICEDETAILS
+     */
+    private String noticedetails;
+
+    /**
+     * 映射字段： NOTE
+     */
+    private String note;
+
+    /**
+     * 映射字段： COURTID
+     */
+    private String courtid;
+
+    private static final long serialVersionUID = 1L;
+
+    public String getSbdnum() {
+        return sbdnum;
+    }
+
+    public void setSbdnum(String sbdnum) {
+        this.sbdnum = sbdnum == null ? null : sbdnum.trim();
+    }
+
+    public Integer getInfonum() {
+        return infonum;
+    }
+
+    public void setInfonum(Integer infonum) {
+        this.infonum = infonum;
+    }
+
+    public Date getObtainingdate() {
+        return obtainingdate;
+    }
+
+    public void setObtainingdate(Date obtainingdate) {
+        this.obtainingdate = obtainingdate;
+    }
+
+    public String getLitigationagent() {
+        return litigationagent;
+    }
+
+    public void setLitigationagent(String litigationagent) {
+        this.litigationagent = litigationagent == null ? null : litigationagent.trim();
+    }
+
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    public String getCasecode() {
+        return casecode;
+    }
+
+    public void setCasecode(String casecode) {
+        this.casecode = casecode == null ? null : casecode.trim();
+    }
+
+    public String getCasedetail() {
+        return casedetail;
+    }
+
+    public void setCasedetail(String casedetail) {
+        this.casedetail = casedetail == null ? null : casedetail.trim();
+    }
+
+    public String getCourt() {
+        return court;
+    }
+
+    public void setCourt(String court) {
+        this.court = court == null ? null : court.trim();
+    }
+
+    public String getCaseid() {
+        return caseid;
+    }
+
+    public void setCaseid(String caseid) {
+        this.caseid = caseid == null ? null : caseid.trim();
+    }
+
+    public String getAccuser1() {
+        return accuser1;
+    }
+
+    public void setAccuser1(String accuser1) {
+        this.accuser1 = accuser1 == null ? null : accuser1.trim();
+    }
+
+    public String getAccuser2() {
+        return accuser2;
+    }
+
+    public void setAccuser2(String accuser2) {
+        this.accuser2 = accuser2 == null ? null : accuser2.trim();
+    }
+
+    public String getAccuser3() {
+        return accuser3;
+    }
+
+    public void setAccuser3(String accuser3) {
+        this.accuser3 = accuser3 == null ? null : accuser3.trim();
+    }
+
+    public String getAccuser4() {
+        return accuser4;
+    }
+
+    public void setAccuser4(String accuser4) {
+        this.accuser4 = accuser4 == null ? null : accuser4.trim();
+    }
+
+    public String getAccuser5() {
+        return accuser5;
+    }
+
+    public void setAccuser5(String accuser5) {
+        this.accuser5 = accuser5 == null ? null : accuser5.trim();
+    }
+
+    public String getAppuser1() {
+        return appuser1;
+    }
+
+    public void setAppuser1(String appuser1) {
+        this.appuser1 = appuser1 == null ? null : appuser1.trim();
+    }
+
+    public String getAppuser2() {
+        return appuser2;
+    }
+
+    public void setAppuser2(String appuser2) {
+        this.appuser2 = appuser2 == null ? null : appuser2.trim();
+    }
+
+    public String getAppuser3() {
+        return appuser3;
+    }
+
+    public void setAppuser3(String appuser3) {
+        this.appuser3 = appuser3 == null ? null : appuser3.trim();
+    }
+
+    public String getAppuser4() {
+        return appuser4;
+    }
+
+    public void setAppuser4(String appuser4) {
+        this.appuser4 = appuser4 == null ? null : appuser4.trim();
+    }
+
+    public String getAppuser5() {
+        return appuser5;
+    }
+
+    public void setAppuser5(String appuser5) {
+        this.appuser5 = appuser5 == null ? null : appuser5.trim();
+    }
+
+    public String getParty1() {
+        return party1;
+    }
+
+    public void setParty1(String party1) {
+        this.party1 = party1 == null ? null : party1.trim();
+    }
+
+    public String getParty2() {
+        return party2;
+    }
+
+    public void setParty2(String party2) {
+        this.party2 = party2 == null ? null : party2.trim();
+    }
+
+    public String getParty3() {
+        return party3;
+    }
+
+    public void setParty3(String party3) {
+        this.party3 = party3 == null ? null : party3.trim();
+    }
+
+    public String getParty4() {
+        return party4;
+    }
+
+    public void setParty4(String party4) {
+        this.party4 = party4 == null ? null : party4.trim();
+    }
+
+    public String getParty5() {
+        return party5;
+    }
+
+    public void setParty5(String party5) {
+        this.party5 = party5 == null ? null : party5.trim();
+    }
+
+    public Date getAccdate() {
+        return accdate;
+    }
+
+    public void setAccdate(Date accdate) {
+        this.accdate = accdate;
+    }
+
+    public String getIfbecourt() {
+        return ifbecourt;
+    }
+
+    public void setIfbecourt(String ifbecourt) {
+        this.ifbecourt = ifbecourt == null ? null : ifbecourt.trim();
+    }
+
+    public String getAccsbdnum1() {
+        return accsbdnum1;
+    }
+
+    public void setAccsbdnum1(String accsbdnum1) {
+        this.accsbdnum1 = accsbdnum1 == null ? null : accsbdnum1.trim();
+    }
+
+    public String getAccsbdnum2() {
+        return accsbdnum2;
+    }
+
+    public void setAccsbdnum2(String accsbdnum2) {
+        this.accsbdnum2 = accsbdnum2 == null ? null : accsbdnum2.trim();
+    }
+
+    public String getAccsbdnum3() {
+        return accsbdnum3;
+    }
+
+    public void setAccsbdnum3(String accsbdnum3) {
+        this.accsbdnum3 = accsbdnum3 == null ? null : accsbdnum3.trim();
+    }
+
+    public String getAccsbdnum4() {
+        return accsbdnum4;
+    }
+
+    public void setAccsbdnum4(String accsbdnum4) {
+        this.accsbdnum4 = accsbdnum4 == null ? null : accsbdnum4.trim();
+    }
+
+    public String getAccsbdnum5() {
+        return accsbdnum5;
+    }
+
+    public void setAccsbdnum5(String accsbdnum5) {
+        this.accsbdnum5 = accsbdnum5 == null ? null : accsbdnum5.trim();
+    }
+
+    public String getAppsbdnum1() {
+        return appsbdnum1;
+    }
+
+    public void setAppsbdnum1(String appsbdnum1) {
+        this.appsbdnum1 = appsbdnum1 == null ? null : appsbdnum1.trim();
+    }
+
+    public String getAppsbdnum2() {
+        return appsbdnum2;
+    }
+
+    public void setAppsbdnum2(String appsbdnum2) {
+        this.appsbdnum2 = appsbdnum2 == null ? null : appsbdnum2.trim();
+    }
+
+    public String getAppsbdnum3() {
+        return appsbdnum3;
+    }
+
+    public void setAppsbdnum3(String appsbdnum3) {
+        this.appsbdnum3 = appsbdnum3 == null ? null : appsbdnum3.trim();
+    }
+
+    public String getAppsbdnum4() {
+        return appsbdnum4;
+    }
+
+    public void setAppsbdnum4(String appsbdnum4) {
+        this.appsbdnum4 = appsbdnum4 == null ? null : appsbdnum4.trim();
+    }
+
+    public String getAppsbdnum5() {
+        return appsbdnum5;
+    }
+
+    public void setAppsbdnum5(String appsbdnum5) {
+        this.appsbdnum5 = appsbdnum5 == null ? null : appsbdnum5.trim();
+    }
+
+    public String getPartsbdnum1() {
+        return partsbdnum1;
+    }
+
+    public void setPartsbdnum1(String partsbdnum1) {
+        this.partsbdnum1 = partsbdnum1 == null ? null : partsbdnum1.trim();
+    }
+
+    public String getPartsbdnum2() {
+        return partsbdnum2;
+    }
+
+    public void setPartsbdnum2(String partsbdnum2) {
+        this.partsbdnum2 = partsbdnum2 == null ? null : partsbdnum2.trim();
+    }
+
+    public String getPartsbdnum3() {
+        return partsbdnum3;
+    }
+
+    public void setPartsbdnum3(String partsbdnum3) {
+        this.partsbdnum3 = partsbdnum3 == null ? null : partsbdnum3.trim();
+    }
+
+    public String getPartsbdnum4() {
+        return partsbdnum4;
+    }
+
+    public void setPartsbdnum4(String partsbdnum4) {
+        this.partsbdnum4 = partsbdnum4 == null ? null : partsbdnum4.trim();
+    }
+
+    public String getPartsbdnum5() {
+        return partsbdnum5;
+    }
+
+    public void setPartsbdnum5(String partsbdnum5) {
+        this.partsbdnum5 = partsbdnum5 == null ? null : partsbdnum5.trim();
+    }
+
+    public String getIfcollect() {
+        return ifcollect;
+    }
+
+    public void setIfcollect(String ifcollect) {
+        this.ifcollect = ifcollect == null ? null : ifcollect.trim();
+    }
+
+    public String getPkid() {
+        return pkid;
+    }
+
+    public void setPkid(String pkid) {
+        this.pkid = pkid == null ? null : pkid.trim();
+    }
+
+    public String getSinplecase() {
+        return sinplecase;
+    }
+
+    public void setSinplecase(String sinplecase) {
+        this.sinplecase = sinplecase == null ? null : sinplecase.trim();
+    }
+
+    public String getLitigationagenturl() {
+        return litigationagenturl;
+    }
+
+    public void setLitigationagenturl(String litigationagenturl) {
+        this.litigationagenturl = litigationagenturl == null ? null : litigationagenturl.trim();
+    }
+
+
+    public String getLitigation() {
+        return litigation;
+    }
+
+    public void setLitigation(String litigation) {
+        this.litigation = litigation == null ? null : litigation.trim();
+    }
+
+    public String getSimplecase() {
+        return simplecase;
+    }
+
+    public void setSimplecase(String simplecase) {
+        this.simplecase = simplecase == null ? null : simplecase.trim();
+    }
+
+    public String getMinutecase() {
+        return minutecase;
+    }
+
+    public void setMinutecase(String minutecase) {
+        this.minutecase = minutecase == null ? null : minutecase.trim();
+    }
+
+    public String getNoticedetails() {
+        return noticedetails;
+    }
+
+    public void setNoticedetails(String noticedetails) {
+        this.noticedetails = noticedetails == null ? null : noticedetails.trim();
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
+    }
+
+    public String getCourtid() {
+        return courtid;
+    }
+
+    public void setCourtid(String courtid) {
+        this.courtid = courtid == null ? null : courtid.trim();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        CorpLitigation other = (CorpLitigation) that;
+        return (this.getSbdnum() == null ? other.getSbdnum() == null : this.getSbdnum().equals(other.getSbdnum()))
+            && (this.getInfonum() == null ? other.getInfonum() == null : this.getInfonum().equals(other.getInfonum()))
+            && (this.getObtainingdate() == null ? other.getObtainingdate() == null : this.getObtainingdate().equals(other.getObtainingdate()))
+            && (this.getLitigationagent() == null ? other.getLitigationagent() == null : this.getLitigationagent().equals(other.getLitigationagent()))
+            && (this.getUpdatetime() == null ? other.getUpdatetime() == null : this.getUpdatetime().equals(other.getUpdatetime()))
+            && (this.getCasecode() == null ? other.getCasecode() == null : this.getCasecode().equals(other.getCasecode()))
+            && (this.getCasedetail() == null ? other.getCasedetail() == null : this.getCasedetail().equals(other.getCasedetail()))
+            && (this.getCourt() == null ? other.getCourt() == null : this.getCourt().equals(other.getCourt()))
+            && (this.getCaseid() == null ? other.getCaseid() == null : this.getCaseid().equals(other.getCaseid()))
+            && (this.getAccuser1() == null ? other.getAccuser1() == null : this.getAccuser1().equals(other.getAccuser1()))
+            && (this.getAccuser2() == null ? other.getAccuser2() == null : this.getAccuser2().equals(other.getAccuser2()))
+            && (this.getAccuser3() == null ? other.getAccuser3() == null : this.getAccuser3().equals(other.getAccuser3()))
+            && (this.getAccuser4() == null ? other.getAccuser4() == null : this.getAccuser4().equals(other.getAccuser4()))
+            && (this.getAccuser5() == null ? other.getAccuser5() == null : this.getAccuser5().equals(other.getAccuser5()))
+            && (this.getAppuser1() == null ? other.getAppuser1() == null : this.getAppuser1().equals(other.getAppuser1()))
+            && (this.getAppuser2() == null ? other.getAppuser2() == null : this.getAppuser2().equals(other.getAppuser2()))
+            && (this.getAppuser3() == null ? other.getAppuser3() == null : this.getAppuser3().equals(other.getAppuser3()))
+            && (this.getAppuser4() == null ? other.getAppuser4() == null : this.getAppuser4().equals(other.getAppuser4()))
+            && (this.getAppuser5() == null ? other.getAppuser5() == null : this.getAppuser5().equals(other.getAppuser5()))
+            && (this.getParty1() == null ? other.getParty1() == null : this.getParty1().equals(other.getParty1()))
+            && (this.getParty2() == null ? other.getParty2() == null : this.getParty2().equals(other.getParty2()))
+            && (this.getParty3() == null ? other.getParty3() == null : this.getParty3().equals(other.getParty3()))
+            && (this.getParty4() == null ? other.getParty4() == null : this.getParty4().equals(other.getParty4()))
+            && (this.getParty5() == null ? other.getParty5() == null : this.getParty5().equals(other.getParty5()))
+            && (this.getAccdate() == null ? other.getAccdate() == null : this.getAccdate().equals(other.getAccdate()))
+            && (this.getIfbecourt() == null ? other.getIfbecourt() == null : this.getIfbecourt().equals(other.getIfbecourt()))
+            && (this.getAccsbdnum1() == null ? other.getAccsbdnum1() == null : this.getAccsbdnum1().equals(other.getAccsbdnum1()))
+            && (this.getAccsbdnum2() == null ? other.getAccsbdnum2() == null : this.getAccsbdnum2().equals(other.getAccsbdnum2()))
+            && (this.getAccsbdnum3() == null ? other.getAccsbdnum3() == null : this.getAccsbdnum3().equals(other.getAccsbdnum3()))
+            && (this.getAccsbdnum4() == null ? other.getAccsbdnum4() == null : this.getAccsbdnum4().equals(other.getAccsbdnum4()))
+            && (this.getAccsbdnum5() == null ? other.getAccsbdnum5() == null : this.getAccsbdnum5().equals(other.getAccsbdnum5()))
+            && (this.getAppsbdnum1() == null ? other.getAppsbdnum1() == null : this.getAppsbdnum1().equals(other.getAppsbdnum1()))
+            && (this.getAppsbdnum2() == null ? other.getAppsbdnum2() == null : this.getAppsbdnum2().equals(other.getAppsbdnum2()))
+            && (this.getAppsbdnum3() == null ? other.getAppsbdnum3() == null : this.getAppsbdnum3().equals(other.getAppsbdnum3()))
+            && (this.getAppsbdnum4() == null ? other.getAppsbdnum4() == null : this.getAppsbdnum4().equals(other.getAppsbdnum4()))
+            && (this.getAppsbdnum5() == null ? other.getAppsbdnum5() == null : this.getAppsbdnum5().equals(other.getAppsbdnum5()))
+            && (this.getPartsbdnum1() == null ? other.getPartsbdnum1() == null : this.getPartsbdnum1().equals(other.getPartsbdnum1()))
+            && (this.getPartsbdnum2() == null ? other.getPartsbdnum2() == null : this.getPartsbdnum2().equals(other.getPartsbdnum2()))
+            && (this.getPartsbdnum3() == null ? other.getPartsbdnum3() == null : this.getPartsbdnum3().equals(other.getPartsbdnum3()))
+            && (this.getPartsbdnum4() == null ? other.getPartsbdnum4() == null : this.getPartsbdnum4().equals(other.getPartsbdnum4()))
+            && (this.getPartsbdnum5() == null ? other.getPartsbdnum5() == null : this.getPartsbdnum5().equals(other.getPartsbdnum5()))
+            && (this.getIfcollect() == null ? other.getIfcollect() == null : this.getIfcollect().equals(other.getIfcollect()))
+            && (this.getPkid() == null ? other.getPkid() == null : this.getPkid().equals(other.getPkid()))
+            && (this.getSinplecase() == null ? other.getSinplecase() == null : this.getSinplecase().equals(other.getSinplecase()))
+            && (this.getLitigationagenturl() == null ? other.getLitigationagenturl() == null : this.getLitigationagenturl().equals(other.getLitigationagenturl()))
+            && (this.getLitigation() == null ? other.getLitigation() == null : this.getLitigation().equals(other.getLitigation()))
+            && (this.getSimplecase() == null ? other.getSimplecase() == null : this.getSimplecase().equals(other.getSimplecase()))
+            && (this.getMinutecase() == null ? other.getMinutecase() == null : this.getMinutecase().equals(other.getMinutecase()))
+            && (this.getNoticedetails() == null ? other.getNoticedetails() == null : this.getNoticedetails().equals(other.getNoticedetails()))
+            && (this.getNote() == null ? other.getNote() == null : this.getNote().equals(other.getNote()))
+            && (this.getCourtid() == null ? other.getCourtid() == null : this.getCourtid().equals(other.getCourtid()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getSbdnum() == null) ? 0 : getSbdnum().hashCode());
+        result = prime * result + ((getInfonum() == null) ? 0 : getInfonum().hashCode());
+        result = prime * result + ((getObtainingdate() == null) ? 0 : getObtainingdate().hashCode());
+        result = prime * result + ((getLitigationagent() == null) ? 0 : getLitigationagent().hashCode());
+        result = prime * result + ((getUpdatetime() == null) ? 0 : getUpdatetime().hashCode());
+        result = prime * result + ((getCasecode() == null) ? 0 : getCasecode().hashCode());
+        result = prime * result + ((getCasedetail() == null) ? 0 : getCasedetail().hashCode());
+        result = prime * result + ((getCourt() == null) ? 0 : getCourt().hashCode());
+        result = prime * result + ((getCaseid() == null) ? 0 : getCaseid().hashCode());
+        result = prime * result + ((getAccuser1() == null) ? 0 : getAccuser1().hashCode());
+        result = prime * result + ((getAccuser2() == null) ? 0 : getAccuser2().hashCode());
+        result = prime * result + ((getAccuser3() == null) ? 0 : getAccuser3().hashCode());
+        result = prime * result + ((getAccuser4() == null) ? 0 : getAccuser4().hashCode());
+        result = prime * result + ((getAccuser5() == null) ? 0 : getAccuser5().hashCode());
+        result = prime * result + ((getAppuser1() == null) ? 0 : getAppuser1().hashCode());
+        result = prime * result + ((getAppuser2() == null) ? 0 : getAppuser2().hashCode());
+        result = prime * result + ((getAppuser3() == null) ? 0 : getAppuser3().hashCode());
+        result = prime * result + ((getAppuser4() == null) ? 0 : getAppuser4().hashCode());
+        result = prime * result + ((getAppuser5() == null) ? 0 : getAppuser5().hashCode());
+        result = prime * result + ((getParty1() == null) ? 0 : getParty1().hashCode());
+        result = prime * result + ((getParty2() == null) ? 0 : getParty2().hashCode());
+        result = prime * result + ((getParty3() == null) ? 0 : getParty3().hashCode());
+        result = prime * result + ((getParty4() == null) ? 0 : getParty4().hashCode());
+        result = prime * result + ((getParty5() == null) ? 0 : getParty5().hashCode());
+        result = prime * result + ((getAccdate() == null) ? 0 : getAccdate().hashCode());
+        result = prime * result + ((getIfbecourt() == null) ? 0 : getIfbecourt().hashCode());
+        result = prime * result + ((getAccsbdnum1() == null) ? 0 : getAccsbdnum1().hashCode());
+        result = prime * result + ((getAccsbdnum2() == null) ? 0 : getAccsbdnum2().hashCode());
+        result = prime * result + ((getAccsbdnum3() == null) ? 0 : getAccsbdnum3().hashCode());
+        result = prime * result + ((getAccsbdnum4() == null) ? 0 : getAccsbdnum4().hashCode());
+        result = prime * result + ((getAccsbdnum5() == null) ? 0 : getAccsbdnum5().hashCode());
+        result = prime * result + ((getAppsbdnum1() == null) ? 0 : getAppsbdnum1().hashCode());
+        result = prime * result + ((getAppsbdnum2() == null) ? 0 : getAppsbdnum2().hashCode());
+        result = prime * result + ((getAppsbdnum3() == null) ? 0 : getAppsbdnum3().hashCode());
+        result = prime * result + ((getAppsbdnum4() == null) ? 0 : getAppsbdnum4().hashCode());
+        result = prime * result + ((getAppsbdnum5() == null) ? 0 : getAppsbdnum5().hashCode());
+        result = prime * result + ((getPartsbdnum1() == null) ? 0 : getPartsbdnum1().hashCode());
+        result = prime * result + ((getPartsbdnum2() == null) ? 0 : getPartsbdnum2().hashCode());
+        result = prime * result + ((getPartsbdnum3() == null) ? 0 : getPartsbdnum3().hashCode());
+        result = prime * result + ((getPartsbdnum4() == null) ? 0 : getPartsbdnum4().hashCode());
+        result = prime * result + ((getPartsbdnum5() == null) ? 0 : getPartsbdnum5().hashCode());
+        result = prime * result + ((getIfcollect() == null) ? 0 : getIfcollect().hashCode());
+        result = prime * result + ((getPkid() == null) ? 0 : getPkid().hashCode());
+        result = prime * result + ((getSinplecase() == null) ? 0 : getSinplecase().hashCode());
+        result = prime * result + ((getLitigationagenturl() == null) ? 0 : getLitigationagenturl().hashCode());
+        result = prime * result + ((getLitigation() == null) ? 0 : getLitigation().hashCode());
+        result = prime * result + ((getSimplecase() == null) ? 0 : getSimplecase().hashCode());
+        result = prime * result + ((getMinutecase() == null) ? 0 : getMinutecase().hashCode());
+        result = prime * result + ((getNoticedetails() == null) ? 0 : getNoticedetails().hashCode());
+        result = prime * result + ((getNote() == null) ? 0 : getNote().hashCode());
+        result = prime * result + ((getCourtid() == null) ? 0 : getCourtid().hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", sbdnum=").append(sbdnum);
+        sb.append(", infonum=").append(infonum);
+        sb.append(", obtainingdate=").append(obtainingdate);
+        sb.append(", litigationagent=").append(litigationagent);
+        sb.append(", updatetime=").append(updatetime);
+        sb.append(", casecode=").append(casecode);
+        sb.append(", casedetail=").append(casedetail);
+        sb.append(", court=").append(court);
+        sb.append(", caseid=").append(caseid);
+        sb.append(", accuser1=").append(accuser1);
+        sb.append(", accuser2=").append(accuser2);
+        sb.append(", accuser3=").append(accuser3);
+        sb.append(", accuser4=").append(accuser4);
+        sb.append(", accuser5=").append(accuser5);
+        sb.append(", appuser1=").append(appuser1);
+        sb.append(", appuser2=").append(appuser2);
+        sb.append(", appuser3=").append(appuser3);
+        sb.append(", appuser4=").append(appuser4);
+        sb.append(", appuser5=").append(appuser5);
+        sb.append(", party1=").append(party1);
+        sb.append(", party2=").append(party2);
+        sb.append(", party3=").append(party3);
+        sb.append(", party4=").append(party4);
+        sb.append(", party5=").append(party5);
+        sb.append(", accdate=").append(accdate);
+        sb.append(", ifbecourt=").append(ifbecourt);
+        sb.append(", accsbdnum1=").append(accsbdnum1);
+        sb.append(", accsbdnum2=").append(accsbdnum2);
+        sb.append(", accsbdnum3=").append(accsbdnum3);
+        sb.append(", accsbdnum4=").append(accsbdnum4);
+        sb.append(", accsbdnum5=").append(accsbdnum5);
+        sb.append(", appsbdnum1=").append(appsbdnum1);
+        sb.append(", appsbdnum2=").append(appsbdnum2);
+        sb.append(", appsbdnum3=").append(appsbdnum3);
+        sb.append(", appsbdnum4=").append(appsbdnum4);
+        sb.append(", appsbdnum5=").append(appsbdnum5);
+        sb.append(", partsbdnum1=").append(partsbdnum1);
+        sb.append(", partsbdnum2=").append(partsbdnum2);
+        sb.append(", partsbdnum3=").append(partsbdnum3);
+        sb.append(", partsbdnum4=").append(partsbdnum4);
+        sb.append(", partsbdnum5=").append(partsbdnum5);
+        sb.append(", ifcollect=").append(ifcollect);
+        sb.append(", pkid=").append(pkid);
+        sb.append(", sinplecase=").append(sinplecase);
+        sb.append(", litigationagenturl=").append(litigationagenturl);
+        sb.append(", litigation=").append(litigation);
+        sb.append(", simplecase=").append(simplecase);
+        sb.append(", minutecase=").append(minutecase);
+        sb.append(", noticedetails=").append(noticedetails);
+        sb.append(", note=").append(note);
+        sb.append(", courtid=").append(courtid);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
+}

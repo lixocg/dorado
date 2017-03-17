@@ -1,0 +1,31 @@
+package com.experian.dsrc.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.experian.core.constant.ServiceNameConst;
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
+import com.netflix.discovery.shared.Application;
+
+@Service
+public class DiscoveryService {
+	private static final Logger logger = Logger.getLogger(DiscoveryService.class);
+
+	@Autowired
+	private EurekaClient eurekaClient;
+
+	public List<InstanceInfo> getServiceInstances(String serviceName) {
+		Application application = eurekaClient.getApplication(serviceName);
+		if (application == null) {
+			logger.error(ServiceNameConst.DORADO_DAAS_LITIGATION_SERVICE + "服务不存在");
+		}
+		return application != null ? application.getInstances() : new ArrayList<InstanceInfo>();
+	}
+
+
+}

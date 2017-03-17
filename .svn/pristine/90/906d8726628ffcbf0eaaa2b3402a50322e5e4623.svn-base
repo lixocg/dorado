@@ -1,0 +1,59 @@
+package com.experian.daas.litigation.component.rabbitmq;
+
+import java.io.IOException;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.MessageProperties;
+
+@Component
+public class RabbitClient {
+	private static final Logger logger = Logger.getLogger(RabbitClient.class);
+	@Autowired
+	private Channel channel;
+
+	public boolean createQueue(String queueName) {
+		try {
+			channel.queueDeclare(queueName, false, false, false, null);
+		} catch (IOException e) {
+			logger.error(e);
+			return false;
+		}
+		return true;
+	}
+
+	public boolean deleteQueue(String queueName) {
+		try {
+			channel.queueDelete(queueName);
+		} catch (IOException e) {
+			logger.error(e);
+			return false;
+		}
+		return true;
+	}
+
+	public void sendMsg(String queueName, String msg) {
+		if (StringUtils.isEmpty(msg)) {
+			return;
+		}
+		try {
+			createQueue(queueName);
+			channel.basicPublish("", queueName, MessageProperties.TEXT_PLAIN, msg.getBytes());
+		} catch (IOException e) {
+			logger.error(e);
+		}
+	}
+	
+	public void reveiceMsg(String queueName,StringConsumer consumer){
+		try {
+			createQueue(queueName);
+			channel.basicConsume(queueName,true, consumer);
+		} catch (Exception e) {
+			logger.error(e);
+		}
+	}
+}

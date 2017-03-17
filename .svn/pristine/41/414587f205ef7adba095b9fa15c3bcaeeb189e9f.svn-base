@@ -1,0 +1,12 @@
+package com.experian.daas.integration.adapter.baseinfo.dao;
+
+import com.experian.daas.integration.adapter.baseinfo.entity.CentralCorpBaseInfo;
+import java.util.List;
+
+public interface CentralCorpBaseInfoDao {
+    int insert(CentralCorpBaseInfo record);
+
+    List<CentralCorpBaseInfo> selectAll();
+
+	List<CentralCorpBaseInfo> selectByCorpName(String corpName);
+}

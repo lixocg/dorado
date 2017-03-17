@@ -1,0 +1,116 @@
+package com.experian.daas.litigation.service.impl;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import com.experian.core.constant.LitiBusiConstant;
+import com.experian.core.rabbitmq.EndPoint;
+import com.experian.daas.litigation.component.rabbitmq.Producer;
+import com.experian.daas.litigation.service.LitigationAdapterService;
+import com.experian.daas.litigation.service.LitigationMqService;
+import com.experian.dto.pojo.litigation.LitigationAPIPojo;
+import com.google.gson.Gson;
+import com.rabbitmq.client.AMQP.BasicProperties;
+import com.rabbitmq.client.Consumer;
+import com.rabbitmq.client.Envelope;
+import com.rabbitmq.client.ShutdownSignalException;
+
+@Service
+public class LitigationMqServiceImpl implements LitigationMqService {
+	private static final Logger logger = Logger.getLogger(LitigationAdapterServiceImpl.class);
+
+	@Autowired
+	private LitigationAdapterService litigationAdapterService;
+
+	private static Gson gson = new Gson();
+
+	public static final int POOL_SIZE = 10;
+
+	public static final String QUEUE_NAME_PREFIX = "litigationQueue";
+
+	@Override
+	public void produce() throws Exception {
+		for (int i = 1; i < 100; i++) {
+			long start = System.currentTimeMillis();
+			List<LitigationAPIPojo> pojos = litigationAdapterService.getLitigationAPIPojo(i, 1000,
+					null, LitiBusiConstant.DataStatus.SUCCESS);
+			logger.info("查询1000条耗时：" + (System.currentTimeMillis() - start));
+			if (CollectionUtils.isEmpty(pojos)) {
+				break;
+			}
+			for (LitigationAPIPojo pojo : pojos) {
+				int courtId = pojo.getLitigationParsedDataDetail().getCourtId();
+				int mod = courtId % POOL_SIZE;
+				String queueName = QUEUE_NAME_PREFIX + mod;
+				logger.info("courtId:" + courtId + ",入队列:" + queueName);
+				Producer producer = new Producer(queueName, "127.0.0.1", 5672, "root", "root");
+				producer.sendJsonMessage(gson.toJson(pojo));
+			}
+		}
+	}
+
+	@Override
+	public void consume() {
+		for (int i = 0; i < POOL_SIZE; i++) {
+			try {
+				new LitigationPojoConsumer(QUEUE_NAME_PREFIX + i, "127.0.0.1", 5672, "root", "root").run();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	class LitigationPojoConsumer extends EndPoint implements Runnable, Consumer {
+		public LitigationPojoConsumer(String queue, String host, int port, String user, String password)
+				throws Exception {
+			super(queue, host, port, user, password);
+		}
+
+		public void run() {
+			try {
+				channel.basicConsume(queue, true, this);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		/**
+		 * Called when consumer is registered.
+		 */
+		public void handleConsumeOk(String consumerTag) {
+			// System.out.println("Consumer "+consumerTag +" registered");
+		}
+
+		/**
+		 * Called when new message is available.
+		 */
+		public void handleDelivery(String consumerTag, Envelope env, BasicProperties props, byte[] body)
+				throws IOException {
+			String str = new String(body, "utf-8");
+			LitigationAPIPojo pojo = gson.fromJson(str, LitigationAPIPojo.class);
+			try {
+				litigationAdapterService.executeAdapt(pojo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		public void handleCancel(String consumerTag) {
+		}
+
+		public void handleCancelOk(String consumerTag) {
+		}
+
+		public void handleRecoverOk(String consumerTag) {
+		}
+
+		public void handleShutdownSignal(String consumerTag, ShutdownSignalException arg1) {
+		}
+
+	}
+}

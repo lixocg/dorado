@@ -1,0 +1,23 @@
+#\u4f7f\u7528log4j-extra\u5305
+log4j.rootLogger=debug,Console,file
+### \u628a\u65e5\u5fd7\u4fe1\u606f\u8f93\u51fa\u5230\u63a7\u5236\u53f0 ###  
+log4j.appender.Console=org.apache.log4j.ConsoleAppender  
+log4j.appender.Console.Target=System.out  
+log4j.appender.Console.layout = org.apache.log4j.PatternLayout  
+log4j.appender.Console.layout.ConversionPattern=%d [%t] [%p] %C.%M[%L]- %m%n
+### \u628a\u65e5\u5fd7\u4fe1\u606f\u8f93\u51fa\u5230\u6587\u4ef6\uff1a
+log4j.appender.file=org.apache.log4j.rolling.RollingFileAppender
+log4j.appender.file.RollingPolicy=org.apache.log4j.rolling.TimeBasedRollingPolicy
+log4j.appender.file.RollingPolicy.FileNamePattern=c:/logs/${project.artifactId}/%d{yyyy-MM-dd}/%d{HH}.log
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+log4j.appender.file.layout.ConversionPattern=%d [%t] [%p] %C.%M[%L]- %m%n
+log4j.appender.file.Append=true
+\u3000 
+###\u663e\u793aSQL\u8bed\u53e5\u90e8\u5206  
+log4j.logger.com.mybatis=DEBUG  
+log4j.logger.com.mybatis.common.jdbc.SimpleDataSource=DEBUG  
+log4j.logger.com.mybatis.common.jdbc.ScriptRunner=DEBUG  
+log4j.logger.com.mybatis.sqlmap.engine.impl.SqlMapClientDelegate=DEBUG  
+log4j.logger.java.sql.Connection=DEBUG
+log4j.logger.java.sql.Statement=DEBUG  
+log4j.logger.java.sql.PreparedStatement=DEBUG

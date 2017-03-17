@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+    	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+    	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	<bean id="parentDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="1" />
+		<property name="minIdle" value="1" />
+		<property name="maxActive" value="20" />
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="60000" />
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		<!-- <property name="validationQuery" value="SELECT 'x' from dual" /> -->
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="stat" />
+	</bean>
+	<!-- DB1 -->
+	<bean id="db1" parent="parentDataSource">
+		<property name="driverClassName" value="${db1.driver}" />
+		<property name="url" value="${db1.database}" />
+		<property name="username" value="${db1.user}" />
+		<property name="password" value="${db1.password}" />
+	</bean>
+	<bean id="sessionFactory1" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="db1" />
+		<property name="mapperLocations" value="classpath*:com/experian/**/dao/xml/*.xml" />
+		<property name="configLocation" value="classpath:mybatis/mybatisConfig.xml" />
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=postgresql
+						</value>
+					</property>
+				</bean>
+				<bean class="com.experian.core.sharding.plugin.ShardPlugin">
+				</bean>
+			</array>
+		</property>
+	</bean>
+	<bean id="tx1"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref bean="db1" />
+		</property>
+	</bean>
+	<!-- DB2 -->
+	<bean id="db2" parent="parentDataSource">
+		<property name="driverClassName" value="${db2.driver}" />
+		<property name="url" value="${db2.database}" />
+		<property name="username" value="${db2.user}" />
+		<property name="password" value="${db2.password}" />
+	</bean>
+	<bean id="sessionFactory2" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="db2" />
+		<property name="mapperLocations" value="classpath*:com/experian/**/dao/xml/*.xml" />
+		<property name="configLocation" value="classpath:mybatis/mybatisConfig.xml" />
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=db2
+						</value>
+					</property>
+				</bean>
+				<bean class="com.experian.core.sharding.plugin.ShardPlugin">
+				</bean>
+			</array>
+		</property>
+	</bean>
+	<bean id="tx2"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref bean="db2" />
+		</property>
+	</bean>
+	<!-- DB3 -->
+	<bean id="db3" parent="parentDataSource">
+		<property name="driverClassName" value="${db3.driver}" />
+		<property name="url" value="${db3.database}" />
+		<property name="username" value="${db3.user}" />
+		<property name="password" value="${db3.password}" />
+	</bean>
+	<bean id="sessionFactory3" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="db3" />
+		<property name="mapperLocations" value="classpath*:com/experian/**/dao/xml/*.xml" />
+		<property name="configLocation" value="classpath:mybatis/mybatisConfig.xml" />
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=sqlserver
+						</value>
+					</property>
+				</bean>
+				<bean class="com.experian.core.sharding.plugin.ShardPlugin">
+				</bean>
+			</array>
+		</property>
+	</bean>
+	<bean id="tx3"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref bean="db3" />
+		</property>
+	</bean>
+	<!-- DB4 -->
+	<bean id="db4" parent="parentDataSource">
+		<property name="driverClassName" value="${db4.driver}" />
+		<property name="url" value="${db4.database}" />
+		<property name="username" value="${db4.user}" />
+		<property name="password" value="${db4.password}" />
+	</bean>
+	<bean id="sessionFactory4" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="db4" />
+		<property name="mapperLocations" value="classpath*:com/experian/**/dao/xml/*.xml" />
+		<property name="configLocation" value="classpath:mybatis/mybatisConfig.xml" />
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=db2
+						</value>
+					</property>
+				</bean>
+				<bean class="com.experian.core.sharding.plugin.ShardPlugin">
+				</bean>
+			</array>
+		</property>
+	</bean>
+	<bean id="tx4"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref bean="db4" />
+		</property>
+	</bean>
+	<!-- ChainedTx -->
+	<bean id="chainedTransactionManager" class="com.experian.core.tx.ChainedTransactionManager">
+		<constructor-arg>
+			<list>
+				<ref bean="tx1" />
+				<ref bean="tx2" />
+				<ref bean="tx3" />
+				<ref bean="tx4" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="sqlSessionTemplate"
+		class="com.experian.core.sharding.sqlsessiontemplate.CustomSqlSessionTemplate"
+		scope="prototype">
+		<!-- default datasource -->
+		<constructor-arg ref="sessionFactory1" />
+		<property name="targetSqlSessionFactorys">
+			<map>
+				<entry value-ref="sessionFactory1" key="postgresql" />
+				<entry value-ref="sessionFactory2" key="db2_credit" />
+				<entry value-ref="sessionFactory3" key="sqlserver" />
+				<entry value-ref="sessionFactory4" key="db2_center" />
+			</map>
+		</property>
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.experian.**.dao" />
+		<property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate" />
+	</bean>
+	<!-- 开启事务 -->
+	<tx:annotation-driven proxy-target-class="true"
+		transaction-manager="chainedTransactionManager" order="2" />
+</beans>

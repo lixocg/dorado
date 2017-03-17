@@ -1,0 +1,80 @@
+package com.experian.core.rest;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.HttpRequestRetryHandler;
+import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
+import org.springframework.web.client.DefaultResponseErrorHandler;
+import org.springframework.web.client.RestTemplate;
+
+@Configuration
+public class RestConfig {
+	@Bean
+	public PoolingHttpClientConnectionManager poolingHttpClientConnectionManager() {
+		PoolingHttpClientConnectionManager phccm = new PoolingHttpClientConnectionManager();
+		// 整个连接池的并发
+		phccm.setMaxTotal(1000);
+		// 每个主机的并发
+		phccm.setDefaultMaxPerRoute(1000);
+		return phccm;
+	}
+
+	@Bean
+	public HttpClientBuilder httpClientBuilder(PoolingHttpClientConnectionManager phccm) {
+		HttpClientBuilder hcb = HttpClientBuilder.create();
+		hcb.setConnectionManager(phccm);
+		// 开启重试，2次
+		HttpRequestRetryHandler retryHandler = new DefaultHttpRequestRetryHandler(2, true);
+		hcb.setRetryHandler(retryHandler);
+		return hcb;
+	}
+
+	@Bean
+	public HttpClient httpClient(HttpClientBuilder httpClientBuilder) {
+		return httpClientBuilder.build();
+	}
+
+	@Bean
+	public HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory(HttpClient httpClient) {
+		HttpComponentsClientHttpRequestFactory hcrf = new HttpComponentsClientHttpRequestFactory(httpClient);
+		// 连接超时时间，毫秒
+		hcrf.setConnectionRequestTimeout(5000);
+		// 读写超时时间，毫秒
+		hcrf.setReadTimeout(200000);
+		return hcrf;
+	}
+
+	@Bean
+	public RestTemplate restTemplate(HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory) {
+		RestTemplate restTemplate = new RestTemplate(httpComponentsClientHttpRequestFactory);
+		restTemplate.setErrorHandler(new DefaultResponseErrorHandler());
+		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+//		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+//		ObjectMapper mapper = new ObjectMapper();
+//		mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+//		jsonConverter.setObjectMapper(mapper);
+//		messageConverters.add(jsonConverter);
+//		StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+//		List<MediaType> list = new ArrayList<MediaType>();
+//		Charset charset = Charset.forName("UTF-8");
+//		list.add(new MediaType("text", "plain", charset));
+//		list.add(new MediaType("text", "html", charset));
+//		list.add(new MediaType("application", "xml", charset));
+//		list.add(new MediaType("application", "json", charset));
+//		stringConverter.setSupportedMediaTypes(list);
+//		messageConverters.add(stringConverter);
+		GsonHttpMessageConverter gsonHttpMessageConverter = new GsonHttpMessageConverter();
+		messageConverters.add(gsonHttpMessageConverter);
+		restTemplate.setMessageConverters(messageConverters);
+		return restTemplate;
+	}
+}

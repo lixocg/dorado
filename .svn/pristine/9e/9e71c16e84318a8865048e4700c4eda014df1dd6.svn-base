@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.experian.daas.integration.trans.litigation.middle.dao.LitigationTempSourceUrlDao">
+  <resultMap id="BaseResultMap" type="com.experian.daas.integration.trans.litigation.entity.middle.LitigationTempSourceUrl">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="source_url" jdbcType="VARCHAR" property="sourceUrl" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from litigation_temp_source_url
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.experian.daas.integration.trans.litigation.entity.middle.LitigationTempSourceUrl">
+    insert into litigation_temp_source_url (id, source_url, description, 
+      created_date)
+    values (#{id,jdbcType=VARCHAR}, #{sourceUrl,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.experian.daas.integration.trans.litigation.entity.middle.LitigationTempSourceUrl">
+    update litigation_temp_source_url
+    set source_url = #{sourceUrl,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, source_url, description, created_date
+    from litigation_temp_source_url
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, source_url, description, created_date
+    from litigation_temp_source_url
+  </select>
+</mapper>

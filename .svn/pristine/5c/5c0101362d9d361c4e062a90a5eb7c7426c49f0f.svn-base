@@ -1,0 +1,31 @@
+package com.experian.core.test.service.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.experian.core.sharding.sqlsessiontemplate.CustomerContextHolder;
+import com.experian.core.test.dao.UserDao;
+import com.experian.core.test.entity.User;
+import com.experian.core.test.service.UserService;
+
+@Service("userService")
+public class UserServiceImpl implements UserService {
+	@Resource
+	private UserDao userDao;
+
+	public void insert(User user) {
+		if (user.getId() < 203) {
+			userDao.insert(user);
+		} else {
+			CustomerContextHolder.setContextType("db2");
+			userDao.insert(user);
+		}
+	}
+
+	public List<User> select() {
+		return userDao.select();
+	}
+}

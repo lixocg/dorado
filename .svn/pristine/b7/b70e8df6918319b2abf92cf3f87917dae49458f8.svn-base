@@ -1,0 +1,13 @@
+dbs:
+	db1:
+		driver:com.mysql.jdbc.Driver
+		url:jdbc:mysql://localhost:3306/daas2?characterEncoding=utf-8
+		user:root
+		password:root
+	db2:
+		driver:com.mysql.jdbc.Driver
+		url:jdbc:mysql://localhost:3306/daas1?characterEncoding=utf-8
+		user:root
+		password:root
+
+

@@ -1,0 +1,69 @@
+package com.experian.daas.test.litigation;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.experian.daas.litigation.LitigationApplication;
+import com.experian.daas.litigation.component.rabbitmq.ConsumerHandler;
+import com.experian.daas.litigation.component.rabbitmq.RabbitClient;
+import com.experian.daas.litigation.component.rabbitmq.StringConsumer;
+import com.experian.daas.litigation.service.LitigationMqService;
+
+@SpringBootTest(classes = LitigationApplication.class)
+@RunWith(SpringRunner.class)
+public class LitigationMqServiceTest {
+	@Autowired
+	private LitigationMqService litigationMqService;
+
+	@Autowired
+	private RabbitClient rabbit;
+
+	@Test
+	public void xxx() {
+		for (int i = 0; i < 20; i++) {
+			rabbit.sendMsg("testQueue", "msg" + i);
+			System.out.println("send:" + ("msg" + i));
+		}
+	}
+
+	@Test
+	public void yyy() {
+		rabbit.reveiceMsg("testQueue", new StringConsumer(new ConsumerHandler() {
+
+			@Override
+			public void handle(String msg) {
+				System.out.println("receive:" + msg);
+			}
+		}));
+		try {
+			Thread.sleep(Integer.MAX_VALUE);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test01() throws Exception {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					litigationMqService.produce();
+				} catch (Exception e) {
+				}
+			}
+		}).start();
+		;
+
+		try {
+			Thread.sleep(Integer.MAX_VALUE);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}

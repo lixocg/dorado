@@ -1,0 +1,11 @@
+package com.experian.task.job.service;
+
+import java.util.List;
+
+import com.experian.task.job.entity.QrtzCustomerJob;
+
+public interface JobService {
+	public List<QrtzCustomerJob> findAll();
+	int update(QrtzCustomerJob record);
+	QrtzCustomerJob findByNameAndGname(QrtzCustomerJob record);
+}

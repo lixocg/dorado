@@ -1,0 +1,85 @@
+package com.experian.daas.litigation.service.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.experian.daas.litigation.component.rabbitmq.RabbitClient;
+import com.experian.daas.litigation.config.ConstantConfig;
+import com.experian.daas.litigation.dao.LitigationCaseCategoryDao;
+import com.experian.daas.litigation.dao.LitigationCourtDao;
+import com.experian.daas.litigation.dao.LitigationCrawledDataDao;
+import com.experian.daas.litigation.dao.LitigationParsedDataDetailDao;
+import com.experian.daas.litigation.dao.LitigationPartyDao;
+import com.experian.daas.litigation.dao.LitigationSourceUrlDao;
+import com.experian.daas.litigation.service.LitigationToMonitorService;
+import com.experian.dto.entity.litigation.LitigationCaseCategory;
+import com.experian.dto.entity.litigation.LitigationCourt;
+import com.experian.dto.entity.litigation.LitigationCrawledData;
+import com.experian.dto.entity.litigation.LitigationParsedDataDetail;
+import com.experian.dto.entity.litigation.LitigationParty;
+import com.experian.dto.entity.litigation.LitigationSourceUrl;
+import com.experian.dto.pojo.litigation.Litigation;
+import com.experian.dto.pojo.litigation.LitigationAPIPojo;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+@Service
+public class LitigationToMonitorServiceImpl implements LitigationToMonitorService {
+	private static final Logger logger = Logger.getLogger(LitigationAdapterServiceImpl.class);
+
+	@Resource
+	private LitigationParsedDataDetailDao parsedDataDetailDao;
+
+	@Resource
+	private LitigationPartyDao partyDao;
+
+	@Resource
+	private LitigationCrawledDataDao crawledDataDao;
+
+	@Resource
+	private LitigationCaseCategoryDao caseCategoryDao;
+
+	@Resource
+	private LitigationCourtDao courtDao;
+
+	@Resource
+	private LitigationSourceUrlDao sourceUrlDao;
+
+	@Autowired
+	private RabbitClient rabbit;
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public String transLitigationTo(LitigationAPIPojo litigation) {
+		LitigationParsedDataDetail detail = litigation.getLitigationParsedDataDetail();
+		LitigationCrawledData crawledData = litigation.getLitigationCrawledData();
+		List<LitigationParty> parties = litigation.getLitigationPartyList();
+
+		Litigation li = new Litigation();
+		Integer caseCategoryId = detail.getCaseCategoryId();
+		Integer courtId = detail.getCourtId();
+		LitigationCaseCategory caseCategory = caseCategoryDao.selectByPrimaryKey(caseCategoryId);
+		LitigationCourt court = courtDao.selectByPrimaryKey(courtId);
+		Integer sourceUrlId = crawledData.getSourceUrlId();
+		LitigationSourceUrl sourceUrl = sourceUrlDao.selectByPrimaryKey(sourceUrlId);
+
+		li.setDetail(detail);
+		li.setParty(parties);
+		li.setCrawledData(crawledData);
+		li.setCaseCategory(caseCategory);
+		li.setCourt(court);
+		li.setSourceUrl(sourceUrl);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String msg = gson.toJson(li);
+		// 发送给监测消息队列
+		rabbit.sendMsg(ConstantConfig.Queue.LITIGATION_MONITOR_QUEUE, msg);
+		logger.info("给监测模块传输数据：id:" + detail.getId());
+		return msg;
+	}
+}

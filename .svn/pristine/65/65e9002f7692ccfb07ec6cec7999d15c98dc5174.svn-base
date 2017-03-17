@@ -1,0 +1,97 @@
+package com.experian.daas.litigation.web.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.experian.core.constant.LitiBusiConstant;
+import com.experian.core.pojo.R;
+import com.experian.core.utils.jedis.JedisSingleUtil;
+import com.experian.daas.litigation.pojo.LitigationAPIPojo;
+import com.experian.daas.litigation.service.LitigationAdapterService;
+import com.experian.daas.litigation.service.LitigationBatchAdapterService;
+
+/**
+ * 诉讼数据清洗
+ * 
+ * @author e00898a
+ *
+ */
+@Controller
+@RequestMapping("/integration/adapter/litigation")
+public class LitigationAdapterController {
+	@Autowired
+	private LitigationAdapterService litigationAdapterService;
+	
+	@Autowired
+	private LitigationBatchAdapterService litigationBatchAdapterService;
+	// /**
+	// * 新开启线程清洗诉讼数据
+	// * @return
+	// */
+	// @RequestMapping("/executeAdapter")
+	// @ResponseBody
+	// public ResultPojo executeAdapter() {
+	// new LitigationAdapterJob().run();
+	// return new ResultPojo("01", "诉讼数据去重任务启动成功！");
+	// }
+
+	@RequestMapping("/getApiPojoById")
+	@ResponseBody
+	public R<LitigationAPIPojo> getApiPojoById(@RequestParam String id) {
+		LitigationAPIPojo apiPojo = litigationAdapterService.getAPiPojoById(id,
+				LitiBusiConstant.DataFetchStatus.UN_FETCH, LitiBusiConstant.ParsedStatus.SUCCESS);
+		if (apiPojo == null) {
+			return null;
+		}
+		return new R<LitigationAPIPojo>(apiPojo);
+	}
+
+	@RequestMapping("/executeDureplicate")
+	@ResponseBody
+	public R<String> executeDureplicate(@RequestParam String id) {
+		LitigationAPIPojo apiPojo = litigationAdapterService.getAPiPojoById(id,
+				LitiBusiConstant.DataFetchStatus.UN_FETCH, LitiBusiConstant.ParsedStatus.SUCCESS);
+		try {
+			String res = litigationAdapterService.executeAdapt(apiPojo);
+			return new R<String>(res);
+		} catch (Exception e) {
+			return new R<String>(R.FAILED, e.getMessage());
+		}
+
+	}
+
+	@RequestMapping("/batchDeduplicate")
+	public String batchDeduplicate(HttpServletRequest request) {
+		String isStop = JedisSingleUtil.get("isStop");
+		request.setAttribute("isStop", isStop);
+		return "/integration/adapter/litigation/batchDeduplicate";
+	}
+
+	@RequestMapping("/page")
+	public String page() {
+		return "/integration/adapter/litigation/page";
+	}
+
+
+	@RequestMapping("/startDeduplicate")
+	@ResponseBody
+	public R<String> startDeduplicate(@RequestParam String num) {
+		long _num = Long.parseLong(num);
+		litigationBatchAdapterService.start(_num);
+		return new R<String>("started");
+	}
+
+	@RequestMapping("/stopDeduplicate")
+	@ResponseBody
+	public R<String> stopDeduplicate() {
+		litigationBatchAdapterService.stop();
+		return new R<String>("stopped");
+	}
+	
+
+}

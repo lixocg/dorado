@@ -1,0 +1,13 @@
+org.quartz.scheduler.instanceName = ExperianTaskCenter
+org.quartz.threadPool.threadCount = 50
+org.quartz.jobStore.class = org.quartz.impl.jdbcjobstore.JobStoreTX
+org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+#org.quartz.jobStore.misfireThreshold=1000
+org.quartz.jobStore.tablePrefix = QRTZ_
+org.quartz.jobStore.dataSource = ts
+
+org.quartz.dataSource.ts.driver =${driver}
+org.quartz.dataSource.ts.URL = ${URL}
+org.quartz.dataSource.ts.user = ${user}
+org.quartz.dataSource.ts.password = ${password}
+org.quartz.dataSource.ts.maxConnections = 20   

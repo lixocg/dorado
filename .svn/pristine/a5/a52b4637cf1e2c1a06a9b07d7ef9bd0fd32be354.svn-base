@@ -1,0 +1,34 @@
+package com.experian.daas.litigation.web.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.experian.core.pojo.R;
+import com.experian.daas.baseinfo.service.BaseInfoService;
+
+@Controller
+@RequestMapping("/integration/adapter/baseinfo")
+public class BaseInfoController {
+	@Autowired
+	private BaseInfoService baseInfoService;
+
+	@RequestMapping("/page")
+	public String page() {
+		return "/integration/adapter/baseinfo/page";
+	}
+
+	@ResponseBody
+	@RequestMapping("/matchSbdnum")
+	public R<String> matchSbdnum(@RequestParam String name) {
+		try {
+			String sbdnum = baseInfoService.match(name);
+			return new R<String>(sbdnum);
+		} catch (Exception e) {
+			return new R<String>(R.FAILED, e.getMessage());
+		}
+
+	}
+}

@@ -1,0 +1,45 @@
+package com.experian.daas.test.litigation;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.experian.daas.litigation.LitigationApplication;
+import com.experian.daas.litigation.service.LitigationMqService;
+
+@SpringBootTest(classes = LitigationApplication.class)
+@RunWith(SpringRunner.class)
+public class LitigationMqServiceTest {
+	@Autowired
+	private LitigationMqService litigationMqService;
+	
+	@Test
+	public void test01() throws Exception{
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					litigationMqService.produce();
+				} catch (Exception e) {
+				}
+			}
+		}).start();;
+		
+		new Thread((new Runnable() {
+			
+			@Override
+			public void run() {
+				litigationMqService.consume();
+			}
+		})).start();
+		
+		try {
+			Thread.sleep(Integer.MAX_VALUE);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}

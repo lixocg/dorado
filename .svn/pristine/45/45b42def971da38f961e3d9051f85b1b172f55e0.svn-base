@@ -1,0 +1,17 @@
+package com.experian.daas.baseinfo;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.ComponentScan;
+//@EnableDiscoveryClient
+@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+@ComponentScan(basePackages = { "com.experian.core", "com.experian.daas.**.rest", "com.experian.**.service",
+		"com.experian.daas.baseinfo.config" })
+public class BaseInfoApplication {
+
+	public static void main(String[] args) {
+		new SpringApplicationBuilder(BaseInfoApplication.class).web(true).run(args);
+	}
+
+}

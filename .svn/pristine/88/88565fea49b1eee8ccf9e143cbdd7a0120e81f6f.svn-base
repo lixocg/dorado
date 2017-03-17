@@ -1,0 +1,18 @@
+package com.experian.daas.litigation.pojo;
+
+import java.util.List;
+
+import com.experian.daas.litigation.entity.LitigationSourceUrl;
+
+public class SourceUrlAPIPojo extends BaseAPIPojo {
+	private List<LitigationSourceUrl> data;
+
+	public List<LitigationSourceUrl> getData() {
+		return data;
+	}
+
+	public void setData(List<LitigationSourceUrl> data) {
+		this.data = data;
+	}
+	
+}

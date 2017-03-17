@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dorado-daas-web</title>
+<script src="${ctx}/jquery/jquery.min.js"></script>
+<script>
+$(function(){
+	window.location.href=ctx+"/login/page";
+});
+</script>
+</head>
+<body>
+	<h1>this is dorado-daas-web index page!!!</h1>
+</body>
+</html>

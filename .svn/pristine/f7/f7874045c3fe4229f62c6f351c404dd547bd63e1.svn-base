@@ -1,0 +1,16 @@
+package com.experian.core.test.dao;
+
+import java.util.List;
+
+import com.experian.core.sharding.annotation.Params;
+import com.experian.core.sharding.annotation.Shard;
+import com.experian.core.test.entity.User;
+import com.experian.core.test.stratege.UserStrategy;
+
+@Shard
+public interface UserDao {
+	@Params(tables = { "user" }, strategy = UserStrategy.class)
+	public void insert(User u);
+	@Params(tables = { "user" }, strategy = UserStrategy.class)
+	public List<User> select();
+}

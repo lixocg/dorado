@@ -1,0 +1,32 @@
+package com.experian.daas.brand.service.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.experian.core.sharding.sqlsessiontemplate.CustomerContextHolder;
+import com.experian.daas.brand.dao.BrandInfoDao;
+import com.experian.daas.brand.entity.BrandInfo;
+import com.experian.daas.brand.service.BrandService;
+import com.github.pagehelper.PageHelper;
+
+@Service
+public class BrandServiceImpl implements BrandService{
+//	private static final Logger logger = Logger.getLogger(BrandServiceImpl.class);
+	
+	@Resource
+	private BrandInfoDao brandInfoDao;
+	
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public List<BrandInfo> getBrandByPage(int curPage, int pageSize){
+		CustomerContextHolder.setContextType(CustomerContextHolder.DB2_CREDIT);
+		PageHelper.startPage(curPage, pageSize);
+		List<BrandInfo> brands = brandInfoDao.selectAll();
+		return brands;
+	}
+	
+}

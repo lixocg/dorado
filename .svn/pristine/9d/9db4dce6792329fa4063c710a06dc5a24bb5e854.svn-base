@@ -1,0 +1,20 @@
+server:
+    port: 9091
+
+eureka:
+    client:
+    serviceUrl:
+      defaultZone: http://discovery:9090/eureka/
+instance:
+    preferIpAddress: true
+
+ribbon:
+    eureka:
+    enabled: true
+    
+spring:
+    application:
+		name: baseinfo-service
+    config:
+    	location:classpath:config/
+        

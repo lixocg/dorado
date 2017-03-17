@@ -1,0 +1,7 @@
+package com.experian.daas.litigation.service;
+
+public interface LitigationMqService {
+
+	void produce() throws Exception;
+
+}

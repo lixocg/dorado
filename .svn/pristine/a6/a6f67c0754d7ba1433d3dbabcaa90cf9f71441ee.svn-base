@@ -1,0 +1,14 @@
+spring.application.name=dorado-daas-litigation
+server.port=9093
+eureka.client.serviceUrl.defaultZone=http://localhost:9090/eureka/
+
+spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
+
+spring.profiles.active=${profileActive}
+
+##RabbitMQ
+spring.rabbitmq.host=127.0.0.1
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=root
+spring.rabbitmq.password=root
+

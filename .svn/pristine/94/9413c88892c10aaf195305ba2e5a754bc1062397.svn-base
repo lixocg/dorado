@@ -1,0 +1,10 @@
+spring.application.name=dorado-dsrc
+
+server.port=9090
+
+eureka.instance.hostname=dorado-dsrc
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+eureka.client.service-url.defaultZone=http://dorado-dsrc:${server.port}/eureka/
+
+spring.cloud.config.discovery.enabled=true

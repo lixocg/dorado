@@ -1,0 +1,113 @@
+package com.experian.web.controller;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.experian.daas.litigation.enums.ResultEnum;
+import com.experian.daas.litigation.service.LitigationTransitService;
+import com.experian.web.jobs.LitigationHistoryTransitJob;
+import com.experian.web.jobs.LitigationSqlServerTransitJob;
+import com.experian.web.jobs.LitigationTransitJob;
+import com.experian.web.jobs.ThreadPoolLog;
+
+@Controller
+@RequestMapping("/integration/trans/litigation")
+public class LitigationTransController {
+	Logger logger=Logger.getLogger(LitigationTransController.class);
+	@Resource(name="litigationTransitService")
+	private LitigationTransitService litigationTransitService;
+	
+	@RequestMapping("/list")
+	public String list() {
+		return "integration/trans/litigation/list";
+	}
+	/**
+	 * @param count(线程数)
+	 * @return
+	 */
+	@RequestMapping("/executeDb2Root")
+	@ResponseBody
+	public ResultEnum executeDb2Root(int count){
+		ExecutorService executorService = Executors.newFixedThreadPool(count);  
+		//查询待处理的诉讼主表数据条数
+		Integer countNum=litigationTransitService.getCorpLitigationCount();
+		logger.info("DB2诉讼主表记录总数："+countNum);
+		if(countNum>0){
+			/**
+			 * 每个线程跑10000条数据
+			 */
+			//页码
+			int curPage=0;
+			//每页数量
+			int pageSize=10000;
+			while(curPage*pageSize<countNum){
+				curPage++;
+				executorService.execute(new LitigationTransitJob(litigationTransitService,curPage,pageSize));   
+			}
+		}
+        new ThreadPoolLog("DB2诉讼主表",executorService).start();
+		return ResultEnum.SUCCESS;
+	}
+	/**
+	 * @param count(线程数)
+	 * @return
+	 */
+	@RequestMapping("/executeDb2HistoryRoot")
+	@ResponseBody
+	public ResultEnum executeDb2HistoryRoot(int count){
+		ExecutorService executorService = Executors.newFixedThreadPool(count);  
+		//查询待处理的诉讼进程表数据条数
+		Integer countNum=litigationTransitService.getLitigationHistroyCount();
+		logger.info("DB2诉讼进程表记录总数："+countNum);
+		if(countNum>0){
+			/**
+			 * 每个线程跑2000条数据
+			 */
+			//页码
+			int curPage=0;
+			//每页数量
+			int pageSize=2000;
+			while(curPage*pageSize<countNum){
+				curPage++;
+				executorService.execute(new LitigationHistoryTransitJob(litigationTransitService,curPage,pageSize));   
+			}
+		}
+		new ThreadPoolLog("DB2诉讼进程表",executorService).start();
+		return ResultEnum.SUCCESS;
+	}
+	/**
+	 * @param count(线程数)
+	 * @return
+	 */
+	@RequestMapping("/executeSqlServer")
+	@ResponseBody
+	public ResultEnum executeSqlServer(int count){
+		ExecutorService executorService = Executors.newFixedThreadPool(count);  
+		//查询待处理的诉讼平台数据条数
+		Integer countNum=litigationTransitService.getSqlserverCorpLitigationCount();
+		logger.info("诉讼平台记录总数："+countNum);
+		if(countNum>0){
+			/**
+			 * 每个线程跑2000条数据
+			 */
+			//页码
+			int curPage=0;
+			//每页数量
+			int pageSize=2000;
+			while(curPage*pageSize<countNum){
+				curPage++;
+				executorService.execute(new LitigationSqlServerTransitJob(litigationTransitService,curPage,pageSize));   
+			}
+		}
+		new ThreadPoolLog("诉讼平台",executorService).start();
+		return ResultEnum.SUCCESS;
+	}
+	
+}

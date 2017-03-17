@@ -1,0 +1,159 @@
+package com.experian.task.base.utils;
+
+import static org.quartz.CronScheduleBuilder.cronSchedule;
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.TriggerBuilder.newTrigger;
+
+import java.util.Map;
+
+import org.quartz.Job;
+import org.quartz.JobDetail;
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
+import org.quartz.TriggerKey;
+import org.quartz.impl.StdSchedulerFactory;
+
+/**
+ * 类名：QuartzManager <br/>
+ * 功能：<br/>
+ * 详细：Quartz增、删、改工具类 <br/>
+ * 
+ * 时间格式: <!-- s m h d m w(?) y(?) -->, 分别对应: 秒>分>小时>日>月>周>年, 汇总说明:
+ * 
+ * Cron表达式的时间字段除允许设置数值外，还可使用一些特殊的字符，提供列表、范围、通配符等功能，细说如下：
+ * 
+ * ●星号(*)：可用在所有字段中，表示对应时间域的每一个时刻，例如，*在分钟字段时，表示“每分钟”；
+ * 
+ * ●问号（?）：该字符只在日期和星期字段中使用，它通常指定为“无意义的值”，相当于点位符；
+ * 
+ * ●减号(-)：表达一个范围，如在小时字段中使用“10-12”，则表示从10到12点，即10,11,12；
+ * 
+ * ●逗号(,)：表达一个列表值，如在星期字段中使用“MON,WED,FRI”，则表示星期一，星期三和星期五；
+ * 
+ * ●斜杠(/)：x/y表达一个等步长序列，x为起始值，y为增量步长值。如在分钟字段中使用0/15，则表示为0,15,30和45秒，而5/
+ * 15在分钟字段中表示5,20,35,50
+ * 
+ */
+public class QuartzUtil {
+
+	//logger //logger = //logger.get//logger("JobUtil");
+
+	public Scheduler scheduler = null;
+
+	public QuartzUtil() {
+		try {
+			scheduler = new StdSchedulerFactory().getScheduler();
+		} catch (SchedulerException ex) {
+			//logger.error("初始化调度器=> [失败]:" + ex.getLocalizedMessage());
+		}
+	}
+	public QuartzUtil(Scheduler scheduler) {
+		this.scheduler=scheduler;
+	}
+
+	public void addJob(String name, String group, Class<? extends Job> clazz, String cronExpression) {
+		try {
+			// 构造任务
+			JobDetail job = newJob(clazz).withIdentity(name, group).build();
+
+			// 构造任务触发器
+			Trigger trg = newTrigger().withIdentity(name, group).withSchedule(cronSchedule(cronExpression)).build();
+			// 将作业添加到调度器
+			scheduler.scheduleJob(job, trg);
+			//logger.info("创建作业=> [作业名称：" + name + " 作业组：" + group + "] ");
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+			//logger.info("创建作业=> [作业名称：" + name + " 作业组：" + group + "]=> [失败]");
+		}
+	}
+	public void addJob(String name, String group, Class<? extends Job> clazz, String cronExpression,Map<String,Object> dataMap) {
+		try {
+			// 构造任务
+			JobDetail job = newJob(clazz).withIdentity(name, group).build();
+			// 构造任务触发器
+			Trigger trg = newTrigger().withIdentity(name, group).withSchedule(cronSchedule(cronExpression)).build();
+			job.getJobDataMap().putAll(dataMap);
+			// 将作业添加到调度器
+			scheduler.scheduleJob(job, trg);
+			//logger.info("创建作业=> [作业名称：" + name + " 作业组：" + group + "] ");
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+			//logger.info("创建作业=> [作业名称：" + name + " 作业组：" + group + "]=> [失败]");
+		}
+	}
+
+	public void removeJob(String name, String group) {
+		try {
+			TriggerKey tk = TriggerKey.triggerKey(name, group);
+			scheduler.pauseTrigger(tk);// 停止触发器
+			scheduler.unscheduleJob(tk);// 移除触发器
+			JobKey jobKey = JobKey.jobKey(name, group);
+			scheduler.deleteJob(jobKey);// 删除作业
+			//logger.info("删除作业=> [作业名称：" + name + " 作业组：" + group + "] ");
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+			//logger.info("删除作业=> [作业名称：" + name + " 作业组：" + group + "]=> [失败]");
+		}
+	}
+
+	public void pauseJob(String name, String group) {
+		try {
+			JobKey jobKey = JobKey.jobKey(name, group);
+			scheduler.pauseJob(jobKey);
+			//logger.info("暂停作业=> [作业名称：" + name + " 作业组：" + group + "] ");
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+			//logger.info("暂停作业=> [作业名称：" + name + " 作业组：" + group + "]=> [失败]");
+		}
+	}
+
+	public void resumeJob(String name, String group) {
+		try {
+			JobKey jobKey = JobKey.jobKey(name, group);
+			scheduler.resumeJob(jobKey);
+			//logger.info("恢复作业=> [作业名称：" + name + " 作业组：" + group + "] ");
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+			//logger.info("恢复作业=> [作业名称：" + name + " 作业组：" + group + "]=> [失败]");
+		}
+	}
+
+	public void modifyTime(String name, String group, String cronExpression) {
+		try {
+			TriggerKey tk = TriggerKey.triggerKey(name, group);
+			// 构造任务触发器
+			Trigger trg = newTrigger().withIdentity(name, group).withSchedule(cronSchedule(cronExpression)).build();
+			scheduler.rescheduleJob(tk, trg);
+			//logger.info("修改作业触发时间=> [作业名称：" + name + " 作业组：" + group + "] ");
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+			//logger.info("修改作业触发时间=> [作业名称：" + name + " 作业组：" + group + "]=> [失败]");
+		}
+	}
+
+	public void start() {
+		try {
+			if(scheduler.isShutdown()){
+				scheduler.start();
+				//logger.info("启动调度器 ");
+			}
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+			//logger.info("启动调度器=> [失败]");
+		}
+	}
+
+	public void shutdown() {
+		try {
+			if(scheduler.isStarted()){
+				scheduler.shutdown();
+				//logger.info("停止调度器 ");
+			}
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+			//logger.info("停止调度器=> [失败]");
+		}
+	}
+}

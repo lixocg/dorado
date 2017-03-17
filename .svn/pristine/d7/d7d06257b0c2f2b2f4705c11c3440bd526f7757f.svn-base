@@ -1,0 +1,12 @@
+package com.experian.task.job.dao;
+
+import com.experian.task.job.entity.QrtzCustomerJob;
+import java.util.List;
+
+public interface JobDao {
+	int update(QrtzCustomerJob record);
+
+	List<QrtzCustomerJob> findAll();
+
+	QrtzCustomerJob findByNameAndGname(QrtzCustomerJob record);
+}

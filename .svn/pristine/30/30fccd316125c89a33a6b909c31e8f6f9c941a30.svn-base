@@ -1,0 +1,50 @@
+package com.experian.daas.litigation.web.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.experian.daas.litigation.pojo.ResultPojo;
+
+@Controller
+@RequestMapping("/base")
+public class BaseController {
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "base/login";
+	}
+
+	@RequestMapping(value = "/main")
+	public String main() {
+		return "base/main";
+	}
+
+	@RequestMapping(value = "/loginSys", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultPojo loginSys(String user, String pwd, HttpServletRequest request) {
+		ResultPojo pojo = null;
+		if (StringUtils.isEmpty(user) || StringUtils.isEmpty(pwd)) {
+			pojo = new ResultPojo("11", "用户名或密码不能为空！");
+			return pojo;
+		}
+		Subject subject = SecurityUtils.getSubject();
+		AuthenticationToken token = new UsernamePasswordToken(user, pwd);
+		try {
+			subject.login(token);
+			pojo = new ResultPojo("01", "认证成功！");
+		} catch (IncorrectCredentialsException e) {
+			pojo = new ResultPojo("21", "用户名或密码错误！");
+		}
+
+		return pojo;
+	}
+}

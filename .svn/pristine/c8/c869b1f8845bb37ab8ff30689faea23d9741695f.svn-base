@@ -1,0 +1,22 @@
+package com.experian.task.job.enums;
+
+public enum JobTypeEnum {
+	NO_REPEAT("1", "²»²¹·¢"), 
+	REPEAT("2", "²¹·¢");
+	JobTypeEnum(String type, String content) {
+		this.type = type;
+		this.content = content;
+	}
+
+	private String type;
+	private String content;
+
+	public String getType() {
+		return type;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+}

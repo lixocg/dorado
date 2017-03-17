@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+  "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<context id="testTables" targetRuntime="MyBatis3Simple"
+		defaultModelType="flat">
+		<!-- 生成的Java文件的编码 -->
+		<property name="javaFileEncoding" value="UTF-8" />
+		<!-- 格式化java代码 -->
+		<property name="javaFormatter"
+			value="org.mybatis.generator.api.dom.DefaultJavaFormatter" />
+		<!-- 格式化XML代码 -->
+		<property name="xmlFormatter"
+			value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
+
+		<!-- 生成的pojo，将implements Serializable -->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<!-- generate entity时，生成hashcode和equals方法 -->
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<!-- genenat entity时,生成toString -->
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="false" />
+			<property name="addRemarkComments" value="true" />
+		</commentGenerator>
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="${jdbc.driver}"
+			connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}">
+		</jdbcConnection>
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 
+			和 NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- targetProject:生成PO类的位置 -->
+		<javaModelGenerator targetPackage="${model.package}"
+			targetProject="${target.project.entity}">
+			<property name="enableSubPackages" value="false" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- targetProject:xml映射文件生成的位置 -->
+		<sqlMapGenerator targetPackage="${xml.package}"
+			targetProject="${target.project.xml}">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<!-- targetPackage：dao生成的位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="${dao.package}" targetProject="${target.project.dao}">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+
+		<!-- 指定数据库表 -->
+		<!-- db2 -->
+		<!-- <table tableName="t_corplitigation" domainObjectName="CorpLitigation"> 
+			<columnOverride column="COURTID" javaType="java.lang.String" jdbcType="VARCHAR" 
+			/> </table> <table tableName="t_corplitigation_history" domainObjectName="CorplitigationHistory"> 
+			<columnOverride column="COURTID" javaType="java.lang.String" jdbcType="VARCHAR" 
+			/> </table> <table tableName="tc_caseclass" domainObjectName="CaseClass" 
+			/> <table tableName="tc_court" domainObjectName="Court" /> -->
+
+		<!-- 信用库 -->
+		<!-- <table tableName="v_corpbaseinfo" domainObjectName="CreditCorpBaseInfo"> 
+			</table> <table tableName="T_REPORTORDER" domainObjectName="CreditReportOrder"> 
+			</table> <table tableName="t_corpregistration" domainObjectName="CreditCorpRegistration"></table> -->
+
+
+		<!--中央库 -->
+		<!-- <table tableName="T_REPORTORDER" domainObjectName="CentralReportOrder"> 
+			</table> -->
+
+		<!-- postgresql -->
+		<!-- 正式表 -->
+		<table tableName="litigation_party_category"></table>
+		<table tableName="litigation_case_category"></table>
+		<table tableName="litigation_court"></table>
+		<table tableName="litigation_source_url"></table>
+
+		<table tableName="litigation_crawled_data"></table>
+		<table tableName="litigation_party"></table>
+		<table tableName="litigation_parsed_data_detail"></table>
+		<!--临时表 不包含字典表 -->
+		<table tableName="litigation_temp_parsed_data_detail"></table>
+		<table tableName="litigation_temp_crawled_data"></table>
+		<table tableName="litigation_temp_party"></table>
+		<table tableName="litigation_error_parsed_data_detail"></table>
+		<table tableName="litigation_error_crawled_data"></table>
+		<table tableName="litigation_error_party"/>
+
+			<!-- 异常表 -->
+			<!-- <table tableName="litigation_error_crawled_data"></table> <table 
+				tableName="litigation_error_party"></table> -->
+			<!-- sqlserver -->
+			<!-- <table tableName="t_corplitigation" domainObjectName="PCorpLitigation"> 
+				</table> -->
+
+	</context>
+</generatorConfiguration>

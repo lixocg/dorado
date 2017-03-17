@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.experian.daas.integration.adapter.litigation.dao.LitigationErrorPartyDao">
+	<resultMap id="BaseResultMap"
+		type="com.experian.daas.integration.adapter.litigation.entity.LitigationErrorParty">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="parsed_data_detail_id" jdbcType="VARCHAR"
+			property="parsedDataDetailId" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="sbdnum" jdbcType="VARCHAR" property="sbdnum" />
+		<result column="party_category_id" jdbcType="INTEGER" property="partyCategoryId" />
+		<result column="legal_representative" jdbcType="VARCHAR"
+			property="legalRepresentative" />
+		<result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
+		<result column="identification_number" jdbcType="VARCHAR"
+			property="identificationNumber" />
+		<result column="date_of_birth" jdbcType="DATE" property="dateOfBirth" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="organization_name" jdbcType="VARCHAR" property="organizationName" />
+		<result column="amount_involved" jdbcType="NUMERIC" property="amountInvolved" />
+		<result column="amount_to_be_executed" jdbcType="NUMERIC"
+			property="amountToBeExecuted" />
+		<result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
+		<result column="accuse_date" jdbcType="TIMESTAMP" property="accuseDate" />
+		<result column="insert_date" jdbcType="TIMESTAMP" property="insertDate" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		litigation_error_party
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.experian.daas.integration.adapter.litigation.entity.LitigationErrorParty">
+		insert into litigation_error_party (id,
+		parsed_data_detail_id, name,
+		sbdnum, party_category_id,
+		legal_representative,
+		organization_code, identification_number,
+		date_of_birth, address, organization_name,
+		amount_involved,
+		amount_to_be_executed, updated_date,
+		accuse_date, insert_date)
+		values
+		(#{id,jdbcType=VARCHAR}, #{parsedDataDetailId,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{sbdnum,jdbcType=VARCHAR},
+		#{partyCategoryId,jdbcType=INTEGER},
+		#{legalRepresentative,jdbcType=VARCHAR},
+		#{organizationCode,jdbcType=VARCHAR},
+		#{identificationNumber,jdbcType=VARCHAR},
+		#{dateOfBirth,jdbcType=DATE}, #{address,jdbcType=VARCHAR},
+		#{organizationName,jdbcType=VARCHAR},
+		#{amountInvolved,jdbcType=NUMERIC},
+		#{amountToBeExecuted,jdbcType=NUMERIC},
+		#{updatedDate,jdbcType=TIMESTAMP},
+		#{accuseDate,jdbcType=TIMESTAMP},
+		#{insertDate,jdbcType=TIMESTAMP})
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.experian.daas.integration.adapter.litigation.entity.LitigationErrorParty">
+		update litigation_error_party
+		set parsed_data_detail_id =
+		#{parsedDataDetailId,jdbcType=VARCHAR},
+		name =
+		#{name,jdbcType=VARCHAR},
+		sbdnum = #{sbdnum,jdbcType=VARCHAR},
+		party_category_id = #{partyCategoryId,jdbcType=INTEGER},
+		legal_representative = #{legalRepresentative,jdbcType=VARCHAR},
+		organization_code = #{organizationCode,jdbcType=VARCHAR},
+		identification_number = #{identificationNumber,jdbcType=VARCHAR},
+		date_of_birth = #{dateOfBirth,jdbcType=DATE},
+		address =
+		#{address,jdbcType=VARCHAR},
+		organization_name =
+		#{organizationName,jdbcType=VARCHAR},
+		amount_involved =
+		#{amountInvolved,jdbcType=NUMERIC},
+		amount_to_be_executed =
+		#{amountToBeExecuted,jdbcType=NUMERIC},
+		updated_date =
+		#{updatedDate,jdbcType=TIMESTAMP},
+		accuse_date =
+		#{accuseDate,jdbcType=TIMESTAMP},
+		insert_date =
+		#{insertDate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select id, parsed_data_detail_id, name, sbdnum,
+		party_category_id,
+		legal_representative,
+		organization_code,
+		identification_number, date_of_birth, address, organization_name,
+		amount_involved, amount_to_be_executed, updated_date, accuse_date,
+		insert_date
+		from litigation_error_party
+		where id =
+		#{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select id,
+		parsed_data_detail_id, name, sbdnum, party_category_id,
+		legal_representative,
+		organization_code, identification_number,
+		date_of_birth, address, organization_name,
+		amount_involved,
+		amount_to_be_executed, updated_date, accuse_date,
+		insert_date
+		from
+		litigation_error_party
+	</select>
+
+	<insert id="batchInsert" parameterType="java.util.List">
+		insert into litigation_error_party (id, parsed_data_detail_id, name,
+		sbdnum, party_category_id, legal_representative,
+		organization_code,
+		identification_number,
+		date_of_birth, address, organization_name,
+		amount_involved, amount_to_be_executed, updated_date,
+		accuse_date,
+		insert_date)
+		values
+		<foreach collection="parties" item="party" separator=",">
+			(#{party.id,jdbcType=VARCHAR},
+			#{party.parsedDataDetailId,jdbcType=VARCHAR},
+			#{party.name,jdbcType=VARCHAR},
+			#{party.sbdnum,jdbcType=VARCHAR},
+			#{party.partyCategoryId,jdbcType=INTEGER},
+			#{party.legalRepresentative,jdbcType=VARCHAR},
+			#{party.organizationCode,jdbcType=VARCHAR},
+			#{party.identificationNumber,jdbcType=VARCHAR},
+			#{party.dateOfBirth,jdbcType=DATE},
+			#{party.address,jdbcType=VARCHAR},
+			#{party.organizationName,jdbcType=VARCHAR},
+			#{party.amountInvolved,jdbcType=NUMERIC},
+			#{party.amountToBeExecuted,jdbcType=NUMERIC},
+			#{party.updatedDate,jdbcType=TIMESTAMP},
+			#{party.accuseDate,jdbcType=TIMESTAMP},
+			#{party.insertDate,jdbcType=TIMESTAMP})
+		</foreach>
+	</insert>
+</mapper>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Integration</title>
+<style>
+.panel {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	font: bold;
+	font-size: 28px;
+	color: red;
+}
+
+.ligigation_table {
+	border: 1px solid gray;
+}
+
+.ligigation_table td {
+	border: 1px solid gray;
+}
+
+.ligigation_table th {
+	border: 1px solid gray;
+}
+</style>
+<script src="${ctx}/resources/jquery/jquery.min.js"></script>
+<script>
+</script>
+</head>
+<body>
+<div><a href="${ctx}/integration/trans/litigation/list">旧数据转移</a></div>
+<hr>
+<div><a href="${ctx}/integration/adapter/litigation/page">去重</a></div>
+<hr>
+<div><a href="${ctx}/integration/adapter/baseinfo/page">匹配sbdnum</a></div>
+<hr>
+<div><a href="${ctx}/integration/adapter/litigation/batchDeduplicate">批量去重</a></div>
+</body>
+</html>

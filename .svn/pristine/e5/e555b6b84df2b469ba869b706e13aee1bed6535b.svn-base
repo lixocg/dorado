@@ -1,0 +1,17 @@
+package com.experian.daas.brand.service;
+
+import java.util.List;
+
+import com.experian.daas.brand.entity.BrandInfo;
+
+public interface BrandService {
+
+	/**
+	 * 分页获取商标数据
+	 * @param curPage
+	 * @param pageSize
+	 * @return
+	 */
+	List<BrandInfo> getBrandByPage(int curPage, int pageSize);
+
+}

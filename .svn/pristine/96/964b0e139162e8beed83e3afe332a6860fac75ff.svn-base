@@ -1,0 +1,146 @@
+package com.experian.daas.center.litigation.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * 法院字典表
+ * 映射表： litigation_court
+ */
+public class LitigationCourt implements Serializable {
+    /**
+     * 主键
+     * 映射字段： id
+     */
+    private Long id;
+
+    /**
+     * 区域代码
+     * 映射字段： district_code
+     */
+    private String districtCode;
+
+    /**
+     * 区域名称
+     * 映射字段： name
+     */
+    private String name;
+
+    /**
+     * 法院代码
+     * 映射字段： court_code
+     */
+    private String courtCode;
+
+    /**
+     * 创建时间
+     * 映射字段： created_date
+     */
+    private Date createdDate;
+
+    /**
+     * 数据入库时间
+     * 映射字段： insert_date
+     */
+    private Date insertDate;
+
+    private static final long serialVersionUID = 1L;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDistrictCode() {
+        return districtCode;
+    }
+
+    public void setDistrictCode(String districtCode) {
+        this.districtCode = districtCode == null ? null : districtCode.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getCourtCode() {
+        return courtCode;
+    }
+
+    public void setCourtCode(String courtCode) {
+        this.courtCode = courtCode == null ? null : courtCode.trim();
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getInsertDate() {
+        return insertDate;
+    }
+
+    public void setInsertDate(Date insertDate) {
+        this.insertDate = insertDate;
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        LitigationCourt other = (LitigationCourt) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getDistrictCode() == null ? other.getDistrictCode() == null : this.getDistrictCode().equals(other.getDistrictCode()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getCourtCode() == null ? other.getCourtCode() == null : this.getCourtCode().equals(other.getCourtCode()))
+            && (this.getCreatedDate() == null ? other.getCreatedDate() == null : this.getCreatedDate().equals(other.getCreatedDate()))
+            && (this.getInsertDate() == null ? other.getInsertDate() == null : this.getInsertDate().equals(other.getInsertDate()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getDistrictCode() == null) ? 0 : getDistrictCode().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getCourtCode() == null) ? 0 : getCourtCode().hashCode());
+        result = prime * result + ((getCreatedDate() == null) ? 0 : getCreatedDate().hashCode());
+        result = prime * result + ((getInsertDate() == null) ? 0 : getInsertDate().hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", districtCode=").append(districtCode);
+        sb.append(", name=").append(name);
+        sb.append(", courtCode=").append(courtCode);
+        sb.append(", createdDate=").append(createdDate);
+        sb.append(", insertDate=").append(insertDate);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
+}

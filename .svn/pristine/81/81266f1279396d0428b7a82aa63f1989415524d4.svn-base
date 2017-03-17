@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.experian.daas.litigation.dao.CorpLitigationDao">
+	<resultMap id="BaseResultMap" type="com.experian.daas.litigation.entity.CorpLitigation">
+		<id column="SBDNUM" jdbcType="CHAR" property="sbdnum" />
+		<id column="INFONUM" jdbcType="INTEGER" property="infonum" />
+		<result column="OBTAININGDATE" jdbcType="DATE" property="obtainingdate" />
+		<result column="LITIGATIONAGENT" jdbcType="VARCHAR" property="litigationagent" />
+		<result column="UPDATETIME" jdbcType="DATE" property="updatetime" />
+		<result column="CASECODE" jdbcType="VARCHAR" property="casecode" />
+		<result column="CASEDETAIL" jdbcType="VARCHAR" property="casedetail" />
+		<result column="COURT" jdbcType="VARCHAR" property="court" />
+		<result column="CASEID" jdbcType="VARCHAR" property="caseid" />
+		<result column="ACCUSER1" jdbcType="VARCHAR" property="accuser1" />
+		<result column="ACCUSER2" jdbcType="VARCHAR" property="accuser2" />
+		<result column="ACCUSER3" jdbcType="VARCHAR" property="accuser3" />
+		<result column="ACCUSER4" jdbcType="VARCHAR" property="accuser4" />
+		<result column="ACCUSER5" jdbcType="VARCHAR" property="accuser5" />
+		<result column="APPUSER1" jdbcType="VARCHAR" property="appuser1" />
+		<result column="APPUSER2" jdbcType="VARCHAR" property="appuser2" />
+		<result column="APPUSER3" jdbcType="VARCHAR" property="appuser3" />
+		<result column="APPUSER4" jdbcType="VARCHAR" property="appuser4" />
+		<result column="APPUSER5" jdbcType="VARCHAR" property="appuser5" />
+		<result column="PARTY1" jdbcType="VARCHAR" property="party1" />
+		<result column="PARTY2" jdbcType="VARCHAR" property="party2" />
+		<result column="PARTY3" jdbcType="VARCHAR" property="party3" />
+		<result column="PARTY4" jdbcType="VARCHAR" property="party4" />
+		<result column="PARTY5" jdbcType="VARCHAR" property="party5" />
+		<result column="ACCDATE" jdbcType="DATE" property="accdate" />
+		<result column="IFBECOURT" jdbcType="CHAR" property="ifbecourt" />
+		<result column="ACCSBDNUM1" jdbcType="CHAR" property="accsbdnum1" />
+		<result column="ACCSBDNUM2" jdbcType="CHAR" property="accsbdnum2" />
+		<result column="ACCSBDNUM3" jdbcType="CHAR" property="accsbdnum3" />
+		<result column="ACCSBDNUM4" jdbcType="CHAR" property="accsbdnum4" />
+		<result column="ACCSBDNUM5" jdbcType="CHAR" property="accsbdnum5" />
+		<result column="APPSBDNUM1" jdbcType="CHAR" property="appsbdnum1" />
+		<result column="APPSBDNUM2" jdbcType="CHAR" property="appsbdnum2" />
+		<result column="APPSBDNUM3" jdbcType="CHAR" property="appsbdnum3" />
+		<result column="APPSBDNUM4" jdbcType="CHAR" property="appsbdnum4" />
+		<result column="APPSBDNUM5" jdbcType="CHAR" property="appsbdnum5" />
+		<result column="PARTSBDNUM1" jdbcType="CHAR" property="partsbdnum1" />
+		<result column="PARTSBDNUM2" jdbcType="CHAR" property="partsbdnum2" />
+		<result column="PARTSBDNUM3" jdbcType="CHAR" property="partsbdnum3" />
+		<result column="PARTSBDNUM4" jdbcType="CHAR" property="partsbdnum4" />
+		<result column="PARTSBDNUM5" jdbcType="CHAR" property="partsbdnum5" />
+		<result column="IFCOLLECT" jdbcType="CHAR" property="ifcollect" />
+		<result column="PKID" jdbcType="CHAR" property="pkid" />
+		<result column="SINPLECASE" jdbcType="VARCHAR" property="sinplecase" />
+		<result column="LITIGATIONAGENTURL" jdbcType="VARCHAR" property="litigationagenturl" />
+		<result column="LITIGATION" jdbcType="CLOB" property="litigation" />
+		<result column="SIMPLECASE" jdbcType="CLOB" property="simplecase" />
+		<result column="MINUTECASE" jdbcType="CLOB" property="minutecase" />
+		<result column="NOTICEDETAILS" jdbcType="CLOB" property="noticedetails" />
+		<result column="NOTE" jdbcType="CLOB" property="note" />
+		<result column="COURTID" jdbcType="VARCHAR" property="courtid" />
+	</resultMap>
+
+	<select id="getCorpLitigationCount" resultType="java.lang.Integer">
+		select count(1) from T_CORPLITIGATION
+	</select>
+	<select id="getCorpLitigationByPage" resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		(
+		SELECT
+		"SBDNUM",
+		"INFONUM",
+		"OBTAININGDATE",
+		"LITIGATIONAGENT",
+		"LITIGATION",
+		"UPDATETIME",
+		"CASECODE",
+		"CASEDETAIL",
+		"COURT",
+		"CASEID",
+		"ACCUSER1",
+		"ACCUSER2",
+		"ACCUSER3",
+		"ACCUSER4",
+		"ACCUSER5",
+		"APPUSER1",
+		"APPUSER2",
+		"APPUSER3",
+		"APPUSER4",
+		"APPUSER5",
+		"PARTY1",
+		"PARTY2",
+		"PARTY3",
+		"PARTY4",
+		"PARTY5",
+		"ACCDATE",
+		"SIMPLECASE",
+		"MINUTECASE",
+		"NOTICEDETAILS",
+		"NOTE",
+		"IFBECOURT",
+		"ACCSBDNUM1",
+		"ACCSBDNUM2",
+		"ACCSBDNUM3",
+		"ACCSBDNUM4",
+		"ACCSBDNUM5",
+		"APPSBDNUM1",
+		"APPSBDNUM2",
+		"APPSBDNUM3",
+		"APPSBDNUM4",
+		"APPSBDNUM5",
+		"PARTSBDNUM1",
+		"PARTSBDNUM2",
+		"PARTSBDNUM3",
+		"PARTSBDNUM4",
+		"PARTSBDNUM5",
+		"IFCOLLECT",
+		"PKID",
+		"COURTID",
+		"SINPLECASE",
+		"LITIGATIONAGENTURL",
+		rownumber () OVER () AS rn
+		FROM
+		T_CORPLITIGATION T
+		) AS a1
+		WHERE
+		a1.rn BETWEEN #{startRow}
+		AND #{endRow}
+	</select>
+</mapper>

@@ -1,0 +1,41 @@
+package com.experian.daas.litigation.config;
+
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+
+@Configuration
+public class RabbitMqConfig {
+	public static final String EXCHANGE = "litigationDeplicateExchange";
+
+	public static final String QUEUE_PREFIX = "litigationQueue";
+
+	public static final int QUEUE_SIZE = 10;
+
+	@Bean
+	public ConnectionFactory connectionFactory() {
+		ConnectionFactory factory = new ConnectionFactory();
+		factory.setHost("127.0.0.1");
+		factory.setUsername("root");
+		factory.setPassword("root");
+		return factory;
+	}
+
+	@Bean
+	public Connection connection(ConnectionFactory connectionFactory) throws Exception {
+		ExecutorService es = Executors.newFixedThreadPool(QUEUE_SIZE);
+		return connectionFactory.newConnection(es);
+	}
+
+	@Bean
+	public Channel channel(Connection connection) throws IOException {
+		return connection.createChannel();
+	}
+}

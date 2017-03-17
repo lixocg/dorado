@@ -1,0 +1,51 @@
+package com.experian.core.test;
+
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.experian.core.test.entity.User;
+import com.experian.core.test.service.UserService;
+
+/**
+ * @author bin
+ */
+public class UserTest {
+
+	private ClassPathXmlApplicationContext appCtx;
+
+	@Before
+	public void init() {
+		appCtx = new ClassPathXmlApplicationContext(new String[] { "spring.xml", "spring-mybatis.xml" });
+	}
+
+	@Test
+	public void test_add() {
+		UserService userService = appCtx.getBean("userService", UserService.class);
+		try {
+			for(int i=201;i<=204;i++){
+				User u=new User();
+				u.setId(i);
+				u.setName("user_"+i);
+				userService.insert(u);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void test_select() {
+		UserService userService = appCtx.getBean("userService", UserService.class);
+		List<User> users=userService.select();
+		if(users!=null&&users.size()!=0){
+			for(User u:users){
+				System.out.println(u.getName());
+			}
+		}
+	}
+	
+
+}

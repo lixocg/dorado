@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.experian.daas.litigation.dao.LitigationSourceUrlDao">
+  <resultMap id="BaseResultMap" type="com.experian.dto.entity.litigation.LitigationSourceUrl">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="source_url" jdbcType="VARCHAR" property="sourceUrl" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="insert_date" jdbcType="TIMESTAMP" property="insertDate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from litigation_source_url
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.experian.dto.entity.litigation.LitigationSourceUrl">
+    insert into litigation_source_url (id, source_url, description, 
+      created_date, insert_date)
+    values (#{id,jdbcType=VARCHAR}, #{sourceUrl,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{insertDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.experian.dto.entity.litigation.LitigationSourceUrl">
+    update litigation_source_url
+    set source_url = #{sourceUrl,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      insert_date = #{insertDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, source_url, description, created_date, insert_date
+    from litigation_source_url
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, source_url, description, created_date, insert_date
+    from litigation_source_url
+  </select>
+</mapper>

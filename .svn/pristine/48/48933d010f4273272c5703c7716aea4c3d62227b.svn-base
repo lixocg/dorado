@@ -1,0 +1,9 @@
+spring.application.name=dorado-daas-litigation
+server.port=9093
+eureka.client.serviceUrl.defaultZone=${eurekaAddress}
+
+spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
+
+spring.profiles.active=${profileActive}
+
+

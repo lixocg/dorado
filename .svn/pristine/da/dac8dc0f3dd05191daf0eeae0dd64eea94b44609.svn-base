@@ -1,0 +1,27 @@
+### db2	\u8bc9\u8bbc\u65e7\u6570\u636e\u4e3b\u8868\u3001\u8fdb\u7a0b\u8868\u3001\u5339\u914dsbdnum\u4fe1\u7528\u5e93
+db2.driverClassName=com.ibm.db2.jcc.DB2Driver
+db2.url=jdbc\:db2\://10.157.211.25:50000/CCSSDB1
+db2.username=erp
+db2.password=Idm@ptoart
+
+### db2 \u5339\u914dsbdnum\u4e2d\u592e\u5e93
+db4.driverClassName=com.ibm.db2.jcc.DB2Driver
+db4.url=jdbc\:db2\://CNWJSDBCCS10:50000/SBISDB1
+db4.username=erp
+db4.password=Idm@ptoart
+
+### sqlserver \u8bc9\u8bbc\u5e73\u53f0\u6570
+db3.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+db3.url=jdbc:sqlserver://CNWJSDBCCS11:1433;databaseName=litigation
+db3.username=litigation
+db3.password=litigation123
+
+### postgresql \u65b0\u8bc9\u8bbc\u5e73\u53f0\u6570\u636e\u5e93
+db1.driverClassName=org.postgresql.Driver
+db1.url=jdbc:postgresql://10.157.211.102:5432/daas
+db1.username=postgres
+db1.password=bU1ld!t0ut
+
+
+
+

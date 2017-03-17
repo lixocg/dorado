@@ -1,0 +1,17 @@
+package com.experian.daas.center.litigation.dao;
+
+import java.util.List;
+
+import com.experian.daas.center.litigation.entity.LitigationSourceUrl;
+
+public interface LitigationSourceUrlDao {
+    int deleteByPrimaryKey(String id);
+
+    int insert(LitigationSourceUrl record);
+
+    LitigationSourceUrl selectByPrimaryKey(String id);
+
+    List<LitigationSourceUrl> selectAll();
+
+    int updateByPrimaryKey(LitigationSourceUrl record);
+}

@@ -1,0 +1,13 @@
+package com.experian.core.constant;
+
+/**
+ * 需要注册到eureka的服务名称，命名规则：spring.application.name=项目名
+ * 
+ * @author lixiongcheng
+ *
+ */
+public class ServiceNameConst {
+	public static final String DORADO_DAAS_BASEINFO_SERVICE = "dorado-daas-baseinfo";
+
+	public static final String DORADO_DAAS_LITIGATION_SERVICE = "dorado-daas-litigation";
+}

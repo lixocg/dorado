@@ -1,0 +1,73 @@
+package com.experian.core.rest;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.apache.http.Header;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicHeader;
+import org.assertj.core.util.Lists;
+import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import com.google.common.io.BaseEncoding;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+@Component
+public class RestTemplateFactory implements FactoryBean<RestTemplate>, InitializingBean {
+	public static final int CONNECTION_TIME_OUT = 30 * 1000;
+
+	public static final int READ_TIME_OUT = 100 * 1000;
+
+	private RestTemplate restTemplate;
+
+	public RestTemplate getObject() {
+		return restTemplate;
+	}
+
+	public Class<RestTemplate> getObjectType() {
+		return RestTemplate.class;
+	}
+
+	public boolean isSingleton() {
+		return true;
+	}
+
+	public void afterPropertiesSet() throws UnsupportedEncodingException {
+		List<HttpMessageConverter<?>>  converters = Lists.newArrayList();
+		GsonHttpMessageConverter converter = new GsonHttpMessageConverter();
+		Gson gson = new GsonBuilder().serializeNulls()    // null 也序列化
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")     // 时间转化为特定格式 yyyy-MM-dd HH:mm:ss
+                .create();
+		converter.setGson(gson);
+		converters.add(converter);
+		restTemplate = new RestTemplate(converters);
+		Collection<Header> defaultHeaders = new ArrayList<Header>();
+		Header header = new BasicHeader("Authorization",
+				"Basic " + BaseEncoding.base64().encode("moodle:".getBytes("UTF-8")));
+		defaultHeaders.add(header);
+
+		BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+		credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("moodle", ""));
+		CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultCredentialsProvider(credentialsProvider)
+				.setDefaultHeaders(defaultHeaders).build();
+		HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
+		requestFactory.setConnectTimeout(CONNECTION_TIME_OUT);
+		requestFactory.setReadTimeout(READ_TIME_OUT);
+
+		//restTemplate.setRequestFactory(requestFactory);
+	}
+
+}

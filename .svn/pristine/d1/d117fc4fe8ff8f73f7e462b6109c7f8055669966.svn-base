@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Experian定制任务调度中心</title>
+<style type="text/css">
+table {
+	width: 100%;
+}
+/* Table Head */
+table thead th {
+	background-color: rgb(81, 130, 187);
+	color: #fff;
+	border-bottom-width: 0;
+}
+
+/* Column Style */
+table td {
+	color: #000;
+	text-align: center;
+}
+/* Heading and Column Style */
+table tr, table th {
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(81, 130, 187);
+}
+
+/* Padding and font style */
+table td, table th {
+	padding: 5px 10px;
+	font-size: 12px;
+	font-family: Verdana;
+	font-weight: bold;
+}
+
+.stop_btn {
+	color: red;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.start_btn {
+	color: green;
+	cursor: pointer;
+	font-weight: bold;
+}
+</style>
+<script src="${ctx}/resources/lib/jquery.min.js"></script>
+<script src="${ctx}/resources/base/base.js"></script>
+<script>
+	var ctx = "${ctx}";
+	function edit(_status, _name, _gname) {
+		ajaxPost(ctx + "/job/edit", {
+			status : _status,
+			name : _name,
+			gname : _gname
+		}, function(data) {
+			console.log(data);
+			if (data.code == '1') {
+				alert("Success!!!");
+				location.reload();
+			}
+		});
+	}
+</script>
+</head>
+<body>
+	<table>
+		<!-- Replace "table-1" with any of the design numbers -->
+		<thead>
+			<th>任务组别</th>
+			<th>任务名称</th>
+			<th>任务状态</th>
+			<th>是否补发</th>
+			<th>表达式</th>
+			<th>操作选项</th>
+		</thead>
+		<tbody>
+			<#list list as job>
+			<tr>
+				<td>${job.gname}</td>
+				<td>${job.name}</td>
+				<td><#if job.status == '1'> 启用 <#else> 停用 </#if></td>
+				<td><#if job.type == '1'> 不补发 <#else> 补发 </#if></td>
+				<td>${job.cron}</td>
+				<td>
+					<#if job.status == '1'>
+					<input type="button" value="停用" class="stop_btn" onclick="edit(2,'${job.name}','${job.gname}')">
+					<#else>
+					<input type="button" value="启用" class="start_btn" onclick="edit(1,'${job.name}','${job.gname}');">
+					</#if>
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+</body>
+</html>

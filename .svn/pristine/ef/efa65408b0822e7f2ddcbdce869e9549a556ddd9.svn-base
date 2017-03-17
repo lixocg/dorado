@@ -1,0 +1,26 @@
+#Root Logger  
+#log4j.rootLogger = [ level ] , appenderName, appenderName,  
+#ConversionPattern:%d{yyyy-MM-dd-HH\:mm\:ss,SSS} [%t]  [%c] [%p] - %m%n
+#FilePath =  /opt/uploads/maven_logs/maven_web.log  
+#########################################################################  
+#\u5c06Mybatis log4j\u8fd0\u884c\u7ea7\u522b\u8c03\u5230DEBUG\u53ef\u4ee5\u5728\u63a7\u5236\u53f0\u6253\u5370\u51faMybatis\u8fd0\u884c\u7684sql\u8bed\u53e5  
+log4j.rootLogger=${log},Console,File  
+### \u628a\u65e5\u5fd7\u4fe1\u606f\u8f93\u51fa\u5230\u63a7\u5236\u53f0 ###  
+log4j.appender.Console=org.apache.log4j.ConsoleAppender  
+log4j.appender.Console.Target=System.out  
+log4j.appender.Console.layout = org.apache.log4j.PatternLayout  
+log4j.appender.Console.layout.ConversionPattern=%d{yyyy-MM-dd-HH\:mm\:ss,SSS} [%t]  [%c] [%p] - %m%n   
+### \u628a\u65e5\u5fd7\u4fe1\u606f\u8f93\u51fa\u5230\u6587\u4ef6\uff1a/opt/uploads/maven_logs/maven_web.log ###  
+log4j.appender.File = org.apache.log4j.DailyRollingFileAppender  
+log4j.appender.File.File =${logpath}
+log4j.appender.File.Threshold = DEBUG  
+log4j.appender.File.layout = org.apache.log4j.PatternLayout  
+log4j.appender.File.layout.ConversionPattern =%d{yyyy-MM-dd-HH\:mm\:ss,SSS} [%t]  [%c] [%p] - %m%n   
+###\u663e\u793aSQL\u8bed\u53e5\u90e8\u5206  
+log4j.logger.com.mybatis=DEBUG  
+log4j.logger.com.mybatis.common.jdbc.SimpleDataSource=DEBUG    
+log4j.logger.com.mybatis.common.jdbc.ScriptRunner=DEBUG  
+log4j.logger.com.mybatis.sqlmap.engine.impl.SqlMapClientDelegate=DEBUG  
+log4j.logger.java.sql.Connection=DEBUG  
+log4j.logger.java.sql.Statement=DEBUG  
+log4j.logger.java.sql.PreparedStatement=DEBUG

@@ -1,0 +1,8 @@
+package com.experian.daas.litigation.service;
+
+import com.experian.daas.litigation.entity.LitigationCaseCategory;
+
+public interface LitigationService {
+	LitigationCaseCategory getLitigationCaseCategory(Long id);
+
+}

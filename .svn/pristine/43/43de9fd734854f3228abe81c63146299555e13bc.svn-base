@@ -1,0 +1,269 @@
+package com.experian.daas.litigation.config;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.alibaba.druid.pool.DruidDataSourceFactory;
+import com.experian.core.sharding.plugin.ShardPlugin;
+import com.experian.core.sharding.sqlsessiontemplate.CustomSqlSessionTemplate;
+import com.experian.core.sharding.sqlsessiontemplate.CustomerContextHolder;
+import com.experian.core.tx.ChainedTransactionManager;
+import com.github.pagehelper.PageHelper;
+
+/**
+ * mybatis配置
+ * 
+ * @author lixiongcheng
+ *
+ */
+@Configuration
+@EnableTransactionManagement
+@PropertySource(value="classpath:conf/${spring.profiles.active}/db.properties")
+public class MyBatisConfig implements EnvironmentAware{
+	public Environment env;
+
+	// >>>>>>>>>>>>>>>>>>>>>第一个数据源开始<<<<db2信用库<<<<<<<<<<<<<<<<
+	@Bean
+	public DataSource db1DataSource() throws Exception {
+		Properties props = new Properties();
+		props.put("driverClassName", env.getProperty("db2.driverClassName"));
+		props.put("url", env.getProperty("db2.url"));
+		props.put("username", env.getProperty("db2.username"));
+		props.put("password", env.getProperty("db2.password"));
+		return DruidDataSourceFactory.createDataSource(props);
+	}
+
+	@Bean
+	public SqlSessionFactoryBean db1SqlSessionFactoryBean(@Qualifier("db1DataSource") DataSource dataSource)
+			throws Exception {
+		SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
+		fb.setDataSource(dataSource);
+		fb.setMapperLocations(
+				new PathMatchingResourcePatternResolver().getResources("classpath*:com/experian/**/dao/xml/*.xml"));
+		fb.setConfigLocation(
+				new PathMatchingResourcePatternResolver().getResource("classpath:mybatis/mybatisConfig.xml"));
+		// 添加插件
+		fb.setPlugins(new Interceptor[] { pageHelper(), new ShardPlugin() });
+		return fb;
+	}
+
+	@Bean
+	public DataSourceTransactionManager db1TransactionManager(@Qualifier("db1DataSource") DataSource dataSource)
+			throws Exception {
+		return new DataSourceTransactionManager(dataSource);
+	}
+
+	// >>>>>>>>>>>>>>>>>>>>>第一个数据源结束<<<<<<<<<<<<<<<<<<<<
+
+	// >>>>>>>>>>>>>>>>>>>>>第二个数据源开始<<<<<db2中央库<<<<<<<<<<<<<<<
+	/**
+	 * 第二个数据源
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@Bean
+	DataSource db2DataSource() throws Exception {
+		Properties props = new Properties();
+		props.put("driverClassName", env.getProperty("db4.driverClassName"));
+		props.put("url", env.getProperty("db4.url"));
+		props.put("username", env.getProperty("db4.username"));
+		props.put("password", env.getProperty("db4.password"));
+		return DruidDataSourceFactory.createDataSource(props);
+	}
+
+	@Bean
+	public SqlSessionFactoryBean db2SqlSessionFactoryBean(@Qualifier("db2DataSource") DataSource dataSource)
+			throws Exception {
+		SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
+		fb.setDataSource(dataSource);
+		fb.setMapperLocations(
+				new PathMatchingResourcePatternResolver().getResources("classpath*:com/experian/**/dao/xml/*.xml"));
+		fb.setConfigLocation(
+				new PathMatchingResourcePatternResolver().getResource("classpath:mybatis/mybatisConfig.xml"));
+		fb.setPlugins(new Interceptor[] { pageHelper(), new ShardPlugin() });
+		return fb;
+	}
+
+	@Bean
+	public DataSourceTransactionManager db2TransactionManager(@Qualifier("db2DataSource") DataSource dataSource)
+			throws Exception {
+		return new DataSourceTransactionManager(dataSource);
+	}
+
+	// >>>>>>>>>>>>>>>>>>>>>第二个数据源结束<<<<<<<<<<<<<<<<<<<<
+
+	// >>>>>>>>>>>>>>>>>>>>>第三个数据源开始<<<<<sqlserver诉讼平台<<<<<<<<<<<<<<<
+	/**
+	 * 第三个数据源
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@Bean
+	DataSource db3DataSource() throws Exception {
+		Properties props = new Properties();
+		props.put("driverClassName", env.getProperty("db3.driverClassName"));
+		props.put("url", env.getProperty("db3.url"));
+		props.put("username", env.getProperty("db3.username"));
+		props.put("password", env.getProperty("db3.password"));
+		return DruidDataSourceFactory.createDataSource(props);
+	}
+
+	@Bean
+	public SqlSessionFactoryBean db3SqlSessionFactoryBean(@Qualifier("db3DataSource") DataSource dataSource)
+			throws Exception {
+		SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
+		fb.setDataSource(dataSource);
+		fb.setMapperLocations(
+				new PathMatchingResourcePatternResolver().getResources("classpath*:com/experian/**/dao/xml/*.xml"));
+		fb.setConfigLocation(
+				new PathMatchingResourcePatternResolver().getResource("classpath:mybatis/mybatisConfig.xml"));
+		fb.setPlugins(new Interceptor[] { pageHelper(), new ShardPlugin() });
+		return fb;
+	}
+
+	@Bean
+	public DataSourceTransactionManager db3TransactionManager(@Qualifier("db3DataSource") DataSource dataSource)
+			throws Exception {
+		return new DataSourceTransactionManager(dataSource);
+	}
+
+	// >>>>>>>>>>>>>>>>>>>>>第三个数据源结束<<<<<<<<<<<<<<<<<<<<
+
+	// >>>>>>>>>>>>>>>>>>>>>第四个数据源开始<<<<postgresql库<<<<<<<<<<<<<<<<
+	/**
+	 * 第四个数据源
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@Bean
+	@Primary
+	DataSource db4DataSource() throws Exception {
+		Properties props = new Properties();
+		props.put("driverClassName", env.getProperty("db1.driverClassName"));
+		props.put("url", env.getProperty("db1.url"));
+		props.put("username", env.getProperty("db1.username"));
+		props.put("password", env.getProperty("db1.password"));
+		return DruidDataSourceFactory.createDataSource(props);
+	}
+
+	@Bean
+	public SqlSessionFactoryBean db4SqlSessionFactoryBean(@Qualifier("db4DataSource") DataSource dataSource)
+			throws Exception {
+		SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
+		fb.setDataSource(dataSource);
+		fb.setMapperLocations(
+				new PathMatchingResourcePatternResolver().getResources("classpath*:com/experian/**/dao/xml/*.xml"));
+		fb.setConfigLocation(
+				new PathMatchingResourcePatternResolver().getResource("classpath:mybatis/mybatisConfig.xml"));
+		fb.setPlugins(new Interceptor[] { pageHelper(), new ShardPlugin() });
+		return fb;
+	}
+
+	@Bean
+	public DataSourceTransactionManager db4TransactionManager(@Qualifier("db4DataSource") DataSource dataSource)
+			throws Exception {
+		return new DataSourceTransactionManager(dataSource);
+	}
+
+	// >>>>>>>>>>>>>>>>>>>>>第四个数据源结束<<<<<<<<<<<<<<<<<<<<
+
+	/**
+	 * 多数据源事物管理器
+	 * 
+	 * @param dtm1
+	 * @param dtm2
+	 * @return
+	 */
+	@Bean
+	@Primary
+	public ChainedTransactionManager chainedTransactionManager(
+			@Qualifier("db1TransactionManager") DataSourceTransactionManager dtm1,
+			@Qualifier("db2TransactionManager") DataSourceTransactionManager dtm2,
+			@Qualifier("db3TransactionManager") DataSourceTransactionManager dtm3,
+			@Qualifier("db4TransactionManager") DataSourceTransactionManager dtm4) {
+		return new ChainedTransactionManager(dtm1, dtm2, dtm3, dtm4);
+	}
+
+	/**
+	 * customSqlSessionTemplate 配置
+	 * 
+	 * @param sfb1
+	 * @param sfb2
+	 * @return
+	 * @throws Exception
+	 */
+	@Bean(name = "customSqlSessionTemplate")
+	public CustomSqlSessionTemplate customSqlSessionTemplate(
+			@Qualifier("db1SqlSessionFactoryBean") SqlSessionFactoryBean sfb1,
+			@Qualifier("db2SqlSessionFactoryBean") SqlSessionFactoryBean sfb2,
+			@Qualifier("db3SqlSessionFactoryBean") SqlSessionFactoryBean sfb3,
+			@Qualifier("db4SqlSessionFactoryBean") SqlSessionFactoryBean sfb4) throws Exception {
+		CustomSqlSessionTemplate cst = new CustomSqlSessionTemplate(sfb1.getObject());
+		Map<Object, SqlSessionFactory> targetSqlSessionFactorys = new HashMap<Object, SqlSessionFactory>();
+		targetSqlSessionFactorys.put(CustomerContextHolder.DB2_CREDIT, sfb1.getObject());
+		targetSqlSessionFactorys.put(CustomerContextHolder.DB2_CENTER, sfb2.getObject());
+		targetSqlSessionFactorys.put(CustomerContextHolder.SQLSERVER, sfb3.getObject());
+		targetSqlSessionFactorys.put(CustomerContextHolder.POSTGRESQL, sfb4.getObject());
+		cst.setTargetSqlSessionFactorys(targetSqlSessionFactorys);
+		cst.setDefaultTargetSqlSessionFactory(sfb4.getObject());
+		return cst;
+	}
+
+	/**
+	 * mybatis Dao扫描配置
+	 * 
+	 * @param customSqlSessionTemplate
+	 * @return
+	 */
+	@Bean
+	public MapperScannerConfigurer mapperScannerConfigurer(CustomSqlSessionTemplate customSqlSessionTemplate) {
+		MapperScannerConfigurer msc = new MapperScannerConfigurer();
+		msc.setBasePackage("com.experian.**.dao");
+		msc.setSqlSessionTemplateBeanName("customSqlSessionTemplate");
+		return msc;
+	}
+
+	/**
+	 * pageHelper 插件
+	 * 
+	 * @return
+	 */
+	private PageHelper pageHelper() {
+		PageHelper pageHelper = new PageHelper();
+//		Properties properties = new Properties();
+//		properties.setProperty("reasonable", "true");
+//		properties.setProperty("supportMethodsArguments", "true");
+//		properties.setProperty("returnPageInfo", "check");
+//		properties.setProperty("params", "count=countSql");
+//		properties.setProperty("dialect", "mysql");
+//		pageHelper.setProperties(properties);
+		return pageHelper;
+	}
+
+	@Override
+	public void setEnvironment(Environment environment) {
+		this.env = environment;
+	}
+
+}

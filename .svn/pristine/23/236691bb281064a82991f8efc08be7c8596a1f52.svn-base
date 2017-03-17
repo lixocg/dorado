@@ -1,0 +1,16 @@
+package com.experian.daas.center.litigation.dao;
+
+import com.experian.daas.center.litigation.entity.LitigationPartyCategory;
+import java.util.List;
+
+public interface LitigationPartyCategoryDao {
+    int deleteByPrimaryKey(Long id);
+
+    int insert(LitigationPartyCategory record);
+
+    LitigationPartyCategory selectByPrimaryKey(Long id);
+
+    List<LitigationPartyCategory> selectAll();
+
+    int updateByPrimaryKey(LitigationPartyCategory record);
+}

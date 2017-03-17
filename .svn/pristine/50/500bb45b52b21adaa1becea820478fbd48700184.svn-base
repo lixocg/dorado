@@ -1,0 +1,13 @@
+package com.experian.task.test;
+
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+public class TestJobFiveSec implements Job {
+
+	@Override
+	public void execute(JobExecutionContext JEContext) throws JobExecutionException {
+		System.out.println("这个任务是从现在开始执行，以后每5秒执行一次！");
+	}
+}

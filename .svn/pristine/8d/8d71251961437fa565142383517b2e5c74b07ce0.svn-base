@@ -1,0 +1,49 @@
+package com.experian.core.services;
+
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.stereotype.Component;
+
+import com.experian.core.pojo.ServiceInfo;
+import com.google.common.collect.Lists;
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
+import com.netflix.discovery.shared.Application;
+
+/**
+ * eureka服务发现组件
+ * 
+ * @author lixiongcheng
+ *
+ */
+@Component
+public class DiscoveryService {
+
+	@Autowired
+	private EurekaClient eurekaClient;
+	
+
+	public List<ServiceInfo> getServiceInstances(String serviceName) {
+		Application application = eurekaClient.getApplication(serviceName);
+		if (application == null) {
+			throw new RuntimeException("EurekaDiscovery.NotFound:" + serviceName);
+		}
+		List<InstanceInfo> instances = application.getInstances();
+		if (CollectionUtils.isEmpty(instances)) {
+			String err = "Check your service name:" + serviceName;
+			throw new RuntimeException(err);
+		}
+		List<ServiceInfo> services = Lists.newArrayList();
+		for (InstanceInfo i : instances) {
+			ServiceInfo service = new ServiceInfo();
+			service.setAppName(i.getAppName());
+			service.setInstanceId(i.getInstanceId());
+			service.setHomePageUrl(i.getHomePageUrl());
+			services.add(service);
+		}
+		return services;
+	}
+}

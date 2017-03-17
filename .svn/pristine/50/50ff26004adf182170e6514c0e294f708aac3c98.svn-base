@@ -1,0 +1,37 @@
+package com.experian.core.utils.jedis;
+
+import redis.clients.jedis.JedisCluster;
+
+/**
+ * @author e00898a
+ *
+ */
+public class JedisClusterUtil extends JedisBase{
+	private static JedisCluster jedisCluster;
+	static {
+		/**
+		 * 设置主机
+		 */
+		jedisCluster = new JedisCluster(HostAndPortEnum.getAllHost(),config);
+	}
+	
+	public static String get(String key) {
+		return jedisCluster.get(key);
+	}
+
+	public static String set(String key, String value) {
+		return jedisCluster.set(key, value);
+	}
+
+	public static String hget(String hkey, String key) {
+		return jedisCluster.hget(hkey, key);
+	}
+
+	public static long hset(String hkey, String key, String value) {
+		return jedisCluster.hset(hkey, key, value);
+	}
+
+	public static long incr(String key) {
+		return jedisCluster.incr(key);
+	}
+}

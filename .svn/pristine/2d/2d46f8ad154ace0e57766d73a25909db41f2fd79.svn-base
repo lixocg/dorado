@@ -1,0 +1,25 @@
+function ajaxPost(url, dataParam, callback,errorC) {
+	var retData = null;
+	$.ajax({
+		type : "post",
+		async : false,
+		url : url,
+		data : dataParam,
+		dataType : "json",
+		success : function(data, status) {
+			console.log(data);
+			if(data&&("100"==data.code)){
+				alert(data.data); 
+				return; 
+			}
+			retData = data;
+			if (callback != null && callback != "" && callback != undefined)
+				callback(data, status);
+		},
+		error : function(err, err1, err2) {
+			if (undefined!=errorC&&null!=errorC)errorC(err,err1,err2);
+			alert("请求失败！");
+		}
+	});
+	return retData; 
+}

@@ -1,0 +1,222 @@
+package com.experian.daas.test.litigation;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.CollectionUtils;
+
+import com.experian.core.constant.LitiBusiConstant;
+import com.experian.core.enums.Srv;
+import com.experian.core.rest.RestClient;
+import com.experian.daas.litigation.LitigationApplication;
+import com.experian.daas.litigation.service.LitigationAdapterService;
+import com.experian.daas.litigation.service.LitigationChannelService;
+import com.experian.daas.litigation.service.LitigationErrorService;
+import com.experian.daas.litigation.service.LitigationErrorService.ErrorStatistic;
+import com.experian.daas.litigation.service.LitigationService;
+import com.experian.daas.litigation.service.LitigationTransitService;
+import com.experian.dto.pojo.litigation.LitigationAPIPojo;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+@SpringBootTest(classes = LitigationApplication.class)
+@RunWith(SpringRunner.class)
+public class LitigationServiceTest {
+	Logger logger = Logger.getLogger(LitigationServiceTest.class);
+
+	@Resource(name = "litigationService")
+	private LitigationService litigationService;
+
+	@Autowired
+	private LitigationTransitService litigationTransitService;
+
+	@Autowired
+	private LitigationChannelService litigationChannelService;
+
+	@Resource(name = "litigationAdapterService")
+	private LitigationAdapterService litigationAdapterService;
+
+	@Autowired
+	private LitigationErrorService litigationErrorService;
+
+	private Gson gson = new Gson();
+
+	@Test
+	public void testInvoke() {
+		String sbdnum = RestClient.get(Srv.baseinfo, "/baseinfo/match/{name}", String.class, "华润(集团)有限公司");
+		System.out.println(sbdnum);
+	}
+
+	@Test
+	public void testCaseCategory() {
+		litigationService.getLitigationCaseCategory(1);
+	}
+
+	/**
+	 * 诉讼主表迁移测试
+	 * 
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void transmitCorpLitigationTest() throws InterruptedException {
+		logger.info("诉讼主表记录数:>>>>>>>>>>" + litigationTransitService.getCorpLitigationCount());
+		litigationTransitService.transmitCorpLitigation(4, 50);
+		Thread.sleep(Integer.MAX_VALUE);
+	}
+
+	/**
+	 * 诉讼进程表迁移测试
+	 */
+	@Test
+	public void transmitCorpLitigationHistoryTest() {
+		logger.info("诉讼进程表记录数:>>>>>>>>>>" + litigationTransitService.getLitigationHistroyCount());
+		litigationTransitService.transmitCorpLitigationHistory(1, 1);
+	}
+
+	/**
+	 * 诉讼平台迁移测试
+	 */
+	@Test
+	public void transmitSqlserverCorpLitigationTest() {
+		logger.info("诉讼平台记录数:>>>>>>>>>>" + litigationTransitService.getSqlserverCorpLitigationCount());
+		litigationTransitService.transmitSqlserverCorpLitigation(1, 1);
+	}
+
+	@Test
+	public void testDudeplicate() {
+		LitigationAPIPojo pojo = litigationAdapterService.getAPiPojoById("O3113811", 0,
+				LitiBusiConstant.ParsedStatus.SUCCESS);
+		String res = null;
+		try {
+			res = litigationAdapterService.executeAdapt(pojo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(res);
+	}
+
+	/**
+	 * 数据去重测试
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void LitigationAdapterServiceTest() throws Exception {
+		List<LitigationAPIPojo> pojos = litigationAdapterService.getLitigationAPIPojo(1, 100, null,
+				LitiBusiConstant.ParsedStatus.SUCCESS);
+		System.out.println(pojos.size());
+		// long start = System.currentTimeMillis();
+		// for (int i = 1; i < Integer.MAX_VALUE; i++) {
+		// List<LitigationAPIPojo> pojos =
+		// litigationAdapterService.getLitigationAPIPojo(i, 100,
+		// LitiBusiConstant.DataFetchStatus.UN_FETCH,
+		// LitiBusiConstant.ParsedStatus.SUCCESS);
+		// System.err.println("======当前页码:" + i + ",数量:" + pojos.size());
+		// if (CollectionUtils.isEmpty(pojos))
+		// break;
+		// for (LitigationAPIPojo pojo : pojos) {
+		// litigationAdapterService.executeAdapt(pojo);
+		// }
+		// }
+		// System.out.println(">>>>>>>>>>>>>>>>>>>>>>耗时:" +
+		// (System.currentTimeMillis() - start));
+		// Thread.sleep(Integer.MAX_VALUE);
+	}
+
+	@Test
+	public void testPage() {
+		List<LitigationAPIPojo> pojos = litigationAdapterService.getLitigationAPIPojo(1, 5,
+				LitiBusiConstant.DataFetchStatus.UN_FETCH, LitiBusiConstant.ParsedStatus.SUCCESS);
+		System.out.println(gson.toJson(pojos));
+	}
+
+	@Test
+	public void LitigationAPIPojoTest() {
+		LitigationAPIPojo aPiPojoById = litigationAdapterService.getAPiPojoById("O1168800", 0,
+				LitiBusiConstant.ParsedStatus.SUCCESS);
+		System.out.println(gson.toJson(aPiPojoById));
+	}
+
+	/**
+	 * optix数据落入临时表中
+	 */
+	@Test
+	public void transmitOptixToPostgresqlTest() {
+		InputStream inStream = this.getClass().getResourceAsStream("optix.json");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(inStream));
+		StringBuilder builder = new StringBuilder();
+
+		String line = null;
+		try {
+			while ((line = reader.readLine()) != null) {
+				builder.append(line);
+			}
+			JsonParser parser = new JsonParser();
+			JsonElement jsonEl = parser.parse(builder.toString());
+
+			JsonObject jsonObj = jsonEl.getAsJsonObject();// 转换成Json对象
+			String data = gson.toJson(jsonObj.get("data"));
+			List<LitigationAPIPojo> apiPojo = gson.fromJson(data, new TypeToken<List<LitigationAPIPojo>>() {
+			}.getType());
+			litigationChannelService.litigationChannel(apiPojo);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				inStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Test
+	public void testDetailAdapter() {
+		List<LitigationAPIPojo> lastestPojos = litigationAdapterService.getLastest(1, 0,
+				LitiBusiConstant.ParsedStatus.SUCCESS);
+		System.out.println(gson.toJson(lastestPojos));
+	}
+
+	@Test
+	public void doDeplicate() throws Exception {
+		while (true) {
+			List<LitigationAPIPojo> lastestPojos = litigationAdapterService.getLastest(100, 0,
+					LitiBusiConstant.ParsedStatus.SUCCESS);
+			if (CollectionUtils.isEmpty(lastestPojos))
+				break;
+
+			for (LitigationAPIPojo pojo : lastestPojos) {
+				litigationAdapterService.executeAdapt(pojo);
+			}
+			// 统计去重
+			ErrorStatistic errorStatisticOfRepli = litigationErrorService
+					.getErrorStatistic(LitiBusiConstant.ErrorType.deplication.ordinal());
+			ErrorStatistic errorStatisticOfNoCre = litigationErrorService
+					.getErrorStatistic(LitiBusiConstant.ErrorType.dataNotCriteria.ordinal());
+			System.err.println("*******************统计结果******************************");
+			System.err.println("当前执行去重数量:" + lastestPojos.size());
+			System.err.println("重复的总detail数量:" + errorStatisticOfRepli.getErrorDetailNum());
+			System.err.println("重复的总crawledData数量:" + errorStatisticOfRepli.getErrorCrawledDataNum());
+			System.err.println("重复的总party数量:" + errorStatisticOfRepli.getErrorPartyNum());
+			System.err.println("数据非标准的总detail数量:" + errorStatisticOfNoCre.getErrorDetailNum());
+			System.err.println("数据非标准的总crawledData数量:" + errorStatisticOfNoCre.getErrorCrawledDataNum());
+			System.err.println("数据非标准的总party数量:" + errorStatisticOfNoCre.getErrorPartyNum());
+			System.err.println("*************************************************");
+		}
+	}
+
+}

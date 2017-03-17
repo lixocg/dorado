@@ -1,0 +1,84 @@
+package com.experian.core.utils.jedis;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
+public class JedisSingleUtil extends JedisBase {
+	private static JedisPool jedisPool = null;
+	static {
+		jedisPool = new JedisPool(config, "127.0.0.1", 6379, 10000);
+	}
+
+	public static String get(String key) {
+		String rs=null;
+		Jedis jedis=null;
+		try{
+			jedis=jedisPool.getResource();
+			rs=jedis.get(key);
+		}finally{
+			if(jedis!=null){
+				jedis.close();
+			}
+		}
+		return rs;
+	}
+
+	public static String set(String key, String value) {
+		String rs=null;
+		Jedis jedis=null;
+		try{
+			jedis=jedisPool.getResource();
+			rs=jedis.set(key, value);
+		}finally{
+			if(jedis!=null){
+				jedis.close();
+			}
+		}
+		return rs;
+	}
+
+	public static long incr(String key) {
+		Long rs=null;
+		Jedis jedis=null;
+		try{
+			jedis=jedisPool.getResource();
+			rs=jedis.incr(key);
+		}finally{
+			if(jedis!=null){
+				jedis.close();
+			}
+		}
+		return rs;
+	}
+	
+	public static boolean exists(String key){
+		boolean rs = false;
+		Jedis jedis=null;
+		try{
+			jedis=jedisPool.getResource();
+			rs=jedis.exists(key);
+		}finally{
+			if(jedis!=null){
+				jedis.close();
+			}
+		}
+		return rs;
+	}
+
+	public static void main(String[] args) {
+		ExecutorService executorService = Executors.newFixedThreadPool(1);
+		for (int i = 0; i < 100; i++) {
+			executorService.execute(new TestThread());
+		}
+		executorService.shutdown();
+	}
+}
+
+class TestThread implements Runnable {
+	public void run() {
+		System.out.println(Thread.currentThread() + ">>>" + JedisSingleUtil.incr("litigation_id"));
+	}
+}

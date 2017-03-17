@@ -1,0 +1,12 @@
+package com.experian.daas.integration.adapter.baseinfo.dao;
+
+import com.experian.daas.integration.adapter.baseinfo.entity.CreditCorpBaseInfo;
+import java.util.List;
+
+public interface CreditCorpBaseInfoDao {
+    int insert(CreditCorpBaseInfo record);
+
+    List<CreditCorpBaseInfo> selectAll();
+
+	List<CreditCorpBaseInfo> selectByCorpName(String corpName);
+}

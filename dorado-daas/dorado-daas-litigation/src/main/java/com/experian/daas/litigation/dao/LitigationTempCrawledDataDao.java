@@ -1,0 +1,20 @@
+package com.experian.daas.litigation.dao;
+
+import java.util.List;
+
+import com.experian.dto.entity.litigation.LitigationTempCrawledData;
+
+public interface LitigationTempCrawledDataDao {
+    int deleteByPrimaryKey(String id);
+
+    int insert(LitigationTempCrawledData record);
+
+    LitigationTempCrawledData selectByPrimaryKey(String id);
+
+    List<LitigationTempCrawledData> selectAll();
+
+    int updateByPrimaryKey(LitigationTempCrawledData record);
+
+	List<LitigationTempCrawledData> selectBySupplierId(String supplierId);
+    
+}

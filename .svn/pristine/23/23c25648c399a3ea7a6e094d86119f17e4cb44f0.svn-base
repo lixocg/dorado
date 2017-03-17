@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.experian.daas.integration.adapter.baseinfo.dao.CreditCorpRegistrationDao">
+	<resultMap id="BaseResultMap"
+		type="com.experian.daas.integration.adapter.baseinfo.entity.CreditCorpRegistration">
+		<id column="SBDNUM" jdbcType="CHAR" property="sbdnum" />
+		<result column="REGNO" jdbcType="VARCHAR" property="regno" />
+		<result column="REGISTRY" jdbcType="VARCHAR" property="registry" />
+		<result column="LEGALSTATUS" jdbcType="VARCHAR" property="legalstatus" />
+		<result column="REGISTERCAPITAL" jdbcType="DECIMAL" property="registercapital" />
+		<result column="LEGALMAN" jdbcType="VARCHAR" property="legalman" />
+		<result column="REGADDR" jdbcType="VARCHAR" property="regaddr" />
+		<result column="REGZIP" jdbcType="VARCHAR" property="regzip" />
+		<result column="REGAREACODE" jdbcType="VARCHAR" property="regareacode" />
+		<result column="REGTEL" jdbcType="VARCHAR" property="regtel" />
+		<result column="REGFAX" jdbcType="VARCHAR" property="regfax" />
+		<result column="REGDATE" jdbcType="DATE" property="regdate" />
+		<result column="APPROVEDATE" jdbcType="DATE" property="approvedate" />
+		<result column="OPERADATEFROM" jdbcType="DATE" property="operadatefrom" />
+		<result column="OPERADATETO" jdbcType="DATE" property="operadateto" />
+		<result column="OPERAPERIOD" jdbcType="INTEGER" property="operaperiod" />
+		<result column="EMPLOYEES" jdbcType="INTEGER" property="employees" />
+		<result column="CURRENCYCODE" jdbcType="CHAR" property="currencycode" />
+		<result column="REGISTCAPITAL" jdbcType="DECIMAL" property="registcapital" />
+		<result column="FORMOFINVESTMENT" jdbcType="VARCHAR" property="formofinvestment" />
+		<result column="ORGANIZATIONUNIT" jdbcType="VARCHAR" property="organizationunit" />
+		<result column="INVESTMENTSOURCE" jdbcType="VARCHAR" property="investmentsource" />
+		<result column="TAXCODE" jdbcType="VARCHAR" property="taxcode" />
+		<result column="HIGHERAUTHOR" jdbcType="VARCHAR" property="higherauthor" />
+		<result column="NOTE" jdbcType="VARCHAR" property="note" />
+		<result column="UPDATETIME" jdbcType="DATE" property="updatetime" />
+		<result column="LEGALSTATUSCODE" jdbcType="CHAR" property="legalstatuscode" />
+		<result column="ALTERSTATUS" jdbcType="CHAR" property="alterstatus" />
+		<result column="ALTERTIME" jdbcType="DATE" property="altertime" />
+		<result column="ANNUALINSPECT" jdbcType="BIGINT" property="annualinspect" />
+		<result column="IFSHOW" jdbcType="CHAR" property="ifshow" />
+		<result column="IFSHOWREGCHANGE" jdbcType="CHAR" property="ifshowregchange" />
+		<result column="SCCODE" jdbcType="VARCHAR" property="sccode" />
+		<result column="MAINPRODUCT" jdbcType="CLOB" property="mainproduct" />
+		<result column="REGCHANGE" jdbcType="CLOB" property="regchange" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		T_CORPREGISTRATION
+		where SBDNUM = #{sbdnum,jdbcType=CHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.experian.daas.integration.adapter.baseinfo.entity.CreditCorpRegistration">
+		insert into T_CORPREGISTRATION (SBDNUM, REGNO, REGISTRY,
+		LEGALSTATUS, REGISTERCAPITAL, LEGALMAN,
+		REGADDR, REGZIP, REGAREACODE,
+		REGTEL, REGFAX, REGDATE,
+		APPROVEDATE, OPERADATEFROM, OPERADATETO,
+		OPERAPERIOD, EMPLOYEES, CURRENCYCODE,
+		REGISTCAPITAL, FORMOFINVESTMENT,
+		ORGANIZATIONUNIT,
+		INVESTMENTSOURCE, TAXCODE, HIGHERAUTHOR,
+		NOTE,
+		UPDATETIME, LEGALSTATUSCODE,
+		ALTERSTATUS, ALTERTIME, ANNUALINSPECT,
+		IFSHOW, IFSHOWREGCHANGE, SCCODE,
+		MAINPRODUCT, REGCHANGE)
+		values
+		(#{sbdnum,jdbcType=CHAR}, #{regno,jdbcType=VARCHAR},
+		#{registry,jdbcType=VARCHAR},
+		#{legalstatus,jdbcType=VARCHAR},
+		#{registercapital,jdbcType=DECIMAL}, #{legalman,jdbcType=VARCHAR},
+		#{regaddr,jdbcType=VARCHAR}, #{regzip,jdbcType=VARCHAR},
+		#{regareacode,jdbcType=VARCHAR},
+		#{regtel,jdbcType=VARCHAR},
+		#{regfax,jdbcType=VARCHAR}, #{regdate,jdbcType=DATE},
+		#{approvedate,jdbcType=DATE}, #{operadatefrom,jdbcType=DATE},
+		#{operadateto,jdbcType=DATE},
+		#{operaperiod,jdbcType=INTEGER},
+		#{employees,jdbcType=INTEGER}, #{currencycode,jdbcType=CHAR},
+		#{registcapital,jdbcType=DECIMAL},
+		#{formofinvestment,jdbcType=VARCHAR},
+		#{organizationunit,jdbcType=VARCHAR},
+		#{investmentsource,jdbcType=VARCHAR}, #{taxcode,jdbcType=VARCHAR},
+		#{higherauthor,jdbcType=VARCHAR},
+		#{note,jdbcType=VARCHAR},
+		#{updatetime,jdbcType=DATE}, #{legalstatuscode,jdbcType=CHAR},
+		#{alterstatus,jdbcType=CHAR}, #{altertime,jdbcType=DATE},
+		#{annualinspect,jdbcType=BIGINT},
+		#{ifshow,jdbcType=CHAR},
+		#{ifshowregchange,jdbcType=CHAR}, #{sccode,jdbcType=VARCHAR},
+		#{mainproduct,jdbcType=CLOB}, #{regchange,jdbcType=CLOB})
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.experian.daas.integration.adapter.baseinfo.entity.CreditCorpRegistration">
+		update T_CORPREGISTRATION
+		set REGNO =
+		#{regno,jdbcType=VARCHAR},
+		REGISTRY = #{registry,jdbcType=VARCHAR},
+		LEGALSTATUS = #{legalstatus,jdbcType=VARCHAR},
+		REGISTERCAPITAL =
+		#{registercapital,jdbcType=DECIMAL},
+		LEGALMAN =
+		#{legalman,jdbcType=VARCHAR},
+		REGADDR = #{regaddr,jdbcType=VARCHAR},
+		REGZIP = #{regzip,jdbcType=VARCHAR},
+		REGAREACODE =
+		#{regareacode,jdbcType=VARCHAR},
+		REGTEL = #{regtel,jdbcType=VARCHAR},
+		REGFAX = #{regfax,jdbcType=VARCHAR},
+		REGDATE =
+		#{regdate,jdbcType=DATE},
+		APPROVEDATE = #{approvedate,jdbcType=DATE},
+		OPERADATEFROM = #{operadatefrom,jdbcType=DATE},
+		OPERADATETO =
+		#{operadateto,jdbcType=DATE},
+		OPERAPERIOD =
+		#{operaperiod,jdbcType=INTEGER},
+		EMPLOYEES =
+		#{employees,jdbcType=INTEGER},
+		CURRENCYCODE =
+		#{currencycode,jdbcType=CHAR},
+		REGISTCAPITAL =
+		#{registcapital,jdbcType=DECIMAL},
+		FORMOFINVESTMENT =
+		#{formofinvestment,jdbcType=VARCHAR},
+		ORGANIZATIONUNIT =
+		#{organizationunit,jdbcType=VARCHAR},
+		INVESTMENTSOURCE =
+		#{investmentsource,jdbcType=VARCHAR},
+		TAXCODE =
+		#{taxcode,jdbcType=VARCHAR},
+		HIGHERAUTHOR =
+		#{higherauthor,jdbcType=VARCHAR},
+		NOTE = #{note,jdbcType=VARCHAR},
+		UPDATETIME = #{updatetime,jdbcType=DATE},
+		LEGALSTATUSCODE =
+		#{legalstatuscode,jdbcType=CHAR},
+		ALTERSTATUS =
+		#{alterstatus,jdbcType=CHAR},
+		ALTERTIME = #{altertime,jdbcType=DATE},
+		ANNUALINSPECT = #{annualinspect,jdbcType=BIGINT},
+		IFSHOW =
+		#{ifshow,jdbcType=CHAR},
+		IFSHOWREGCHANGE =
+		#{ifshowregchange,jdbcType=CHAR},
+		SCCODE = #{sccode,jdbcType=VARCHAR},
+		MAINPRODUCT = #{mainproduct,jdbcType=CLOB},
+		REGCHANGE =
+		#{regchange,jdbcType=CLOB}
+		where SBDNUM = #{sbdnum,jdbcType=CHAR}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select SBDNUM, REGNO, REGISTRY, LEGALSTATUS,
+		REGISTERCAPITAL, LEGALMAN,
+		REGADDR,
+		REGZIP, REGAREACODE, REGTEL, REGFAX,
+		REGDATE, APPROVEDATE, OPERADATEFROM,
+		OPERADATETO,
+		OPERAPERIOD,
+		EMPLOYEES, CURRENCYCODE, REGISTCAPITAL, FORMOFINVESTMENT,
+		ORGANIZATIONUNIT,
+		INVESTMENTSOURCE, TAXCODE, HIGHERAUTHOR, NOTE,
+		UPDATETIME, LEGALSTATUSCODE,
+		ALTERSTATUS,
+		ALTERTIME, ANNUALINSPECT,
+		IFSHOW, IFSHOWREGCHANGE, SCCODE, MAINPRODUCT,
+		REGCHANGE
+		from
+		T_CORPREGISTRATION
+		where SBDNUM = #{sbdnum,jdbcType=CHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select SBDNUM, REGNO, REGISTRY,
+		LEGALSTATUS, REGISTERCAPITAL, LEGALMAN,
+		REGADDR,
+		REGZIP, REGAREACODE,
+		REGTEL, REGFAX, REGDATE, APPROVEDATE, OPERADATEFROM,
+		OPERADATETO,
+		OPERAPERIOD, EMPLOYEES, CURRENCYCODE, REGISTCAPITAL, FORMOFINVESTMENT,
+		ORGANIZATIONUNIT,
+		INVESTMENTSOURCE, TAXCODE, HIGHERAUTHOR, NOTE,
+		UPDATETIME, LEGALSTATUSCODE,
+		ALTERSTATUS,
+		ALTERTIME, ANNUALINSPECT,
+		IFSHOW, IFSHOWREGCHANGE, SCCODE, MAINPRODUCT,
+		REGCHANGE
+		from
+		T_CORPREGISTRATION
+	</select>
+
+	<!-- 分割线 -->
+	<select id="selectBySbdnums" parameterType="hashmap" resultMap="BaseResultMap">
+		select * from T_CORPREGISTRATION where sbdnum in
+		<foreach collection="sbdnums" item="sbdnum" index="index"
+			open="(" separator="," close=")">
+			#{sbdnum}
+		</foreach>
+		<if test="orderField != null">
+			order by ${orderField} desc
+		</if>
+	</select>
+</mapper>

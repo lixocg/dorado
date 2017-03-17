@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.experian.daas.baseinfo.dao.CreditReportOrderDao">
+	<resultMap id="BaseResultMap"
+		type="com.experian.daas.baseinfo.entity.CreditReportOrder">
+		<id column="ORDERNUM" jdbcType="CHAR" property="ordernum" />
+		<result column="CONTRACTCODE" jdbcType="CHAR" property="contractcode" />
+		<result column="MEMREFCODE" jdbcType="VARCHAR" property="memrefcode" />
+		<result column="MEMBERCODE" jdbcType="CHAR" property="membercode" />
+		<result column="SBDNUM" jdbcType="CHAR" property="sbdnum" />
+		<result column="CORPNAME" jdbcType="VARCHAR" property="corpname" />
+		<result column="CONFIRMCORPNAME" jdbcType="VARCHAR" property="confirmcorpname" />
+		<result column="DISTRICTCODE" jdbcType="CHAR" property="districtcode" />
+		<result column="BUSIADDR" jdbcType="VARCHAR" property="busiaddr" />
+		<result column="BUSIZIP" jdbcType="VARCHAR" property="busizip" />
+		<result column="BUSITELAREACODE" jdbcType="VARCHAR" property="busitelareacode" />
+		<result column="BUSITEL" jdbcType="VARCHAR" property="busitel" />
+		<result column="BUSIFAX" jdbcType="VARCHAR" property="busifax" />
+		<result column="URL" jdbcType="VARCHAR" property="url" />
+		<result column="CORPENAME" jdbcType="VARCHAR" property="corpename" />
+		<result column="BUSIEADDR" jdbcType="VARCHAR" property="busieaddr" />
+		<result column="LINKMANNUM" jdbcType="INTEGER" property="linkmannum" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="SEX" jdbcType="CHAR" property="sex" />
+		<result column="RESPONSIBILITY" jdbcType="VARCHAR" property="responsibility" />
+		<result column="TELAREACODE" jdbcType="VARCHAR" property="telareacode" />
+		<result column="TEL" jdbcType="VARCHAR" property="tel" />
+		<result column="FAX" jdbcType="VARCHAR" property="fax" />
+		<result column="MOBILEPHONE" jdbcType="VARCHAR" property="mobilephone" />
+		<result column="EMAIL" jdbcType="VARCHAR" property="email" />
+		<result column="PRODUCTCODE" jdbcType="CHAR" property="productcode" />
+		<result column="SERVICETYPE" jdbcType="CHAR" property="servicetype" />
+		<result column="LANGTYPE" jdbcType="CHAR" property="langtype" />
+		<result column="BASICPRICE" jdbcType="DECIMAL" property="basicprice" />
+		<result column="TRANSPRICE" jdbcType="DECIMAL" property="transprice" />
+		<result column="SPECIALPRICE" jdbcType="DECIMAL" property="specialprice" />
+		<result column="OTHERPRICE" jdbcType="DECIMAL" property="otherprice" />
+		<result column="DISCOUNTFEE" jdbcType="DECIMAL" property="discountfee" />
+		<result column="BADFEE" jdbcType="DECIMAL" property="badfee" />
+		<result column="ORDERPRICE" jdbcType="DECIMAL" property="orderprice" />
+		<result column="CURRENCYCODE" jdbcType="CHAR" property="currencycode" />
+		<result column="MEMLINKMANNUM" jdbcType="INTEGER" property="memlinkmannum" />
+		<result column="UNITNUM" jdbcType="DOUBLE" property="unitnum" />
+		<result column="SERVICEMAN" jdbcType="CHAR" property="serviceman" />
+		<result column="ORDERDATE" jdbcType="DATE" property="orderdate" />
+		<result column="ORDERTIME" jdbcType="TIME" property="ordertime" />
+		<result column="SCHEDULEDATE" jdbcType="DATE" property="scheduledate" />
+		<result column="SCHEDULETIME" jdbcType="TIME" property="scheduletime" />
+		<result column="REQUIREDDATE" jdbcType="DATE" property="requireddate" />
+		<result column="SENDDATE" jdbcType="DATE" property="senddate" />
+		<result column="IFRECKONING" jdbcType="CHAR" property="ifreckoning" />
+		<result column="ORDERSCORE" jdbcType="INTEGER" property="orderscore" />
+		<result column="PAYMENT" jdbcType="CHAR" property="payment" />
+		<result column="PAIDFEE" jdbcType="DECIMAL" property="paidfee" />
+		<result column="NOTE" jdbcType="VARCHAR" property="note" />
+		<result column="ORDERSTATE" jdbcType="CHAR" property="orderstate" />
+		<result column="FIRSTSENDDATE" jdbcType="DATE" property="firstsenddate" />
+		<result column="UPDATETIME" jdbcType="DATE" property="updatetime" />
+		<result column="RATE" jdbcType="DECIMAL" property="rate" />
+		<result column="BILLNUM" jdbcType="CHAR" property="billnum" />
+		<result column="FOLLOW_STATUS" jdbcType="CHAR" property="followStatus" />
+		<result column="SENDTIME" jdbcType="TIME" property="sendtime" />
+		<result column="ISSHOWRATING" jdbcType="CHAR" property="isshowrating" />
+		<result column="SERVICE_ITEM" jdbcType="VARCHAR" property="serviceItem" />
+		<result column="INSPECTEMAIL" jdbcType="VARCHAR" property="inspectemail" />
+		<result column="CLOSEFLAG" jdbcType="VARCHAR" property="closeflag" />
+		<result column="PROJECTFILE" jdbcType="VARCHAR" property="projectfile" />
+		<result column="PROJECTCONFIRMFILE" jdbcType="VARCHAR"
+			property="projectconfirmfile" />
+		<result column="CONFIRMFILE" jdbcType="VARCHAR" property="confirmfile" />
+		<result column="ISSHOWRATING2" jdbcType="CHAR" property="isshowrating2" />
+		<result column="COUNTRYCODE" jdbcType="CHAR" property="countrycode" />
+		<result column="ENDVALUETIME" jdbcType="DATE" property="endvaluetime" />
+		<result column="FOLLOWORDERNUM" jdbcType="CHAR" property="followordernum" />
+		<result column="DISCOUNTTYPE" jdbcType="INTEGER" property="discounttype" />
+		<result column="WITHDRAWTYPE" jdbcType="INTEGER" property="withdrawtype" />
+		<result column="WITHDRAWAPPLY" jdbcType="INTEGER" property="withdrawapply" />
+		<result column="STARTVALUETIME" jdbcType="DATE" property="startvaluetime" />
+		<result column="CUSTOMDEMAND" jdbcType="VARCHAR" property="customdemand" />
+		<result column="IFREVOKE" jdbcType="CHAR" property="ifrevoke" />
+		<result column="SURVEYCNOTE" jdbcType="CLOB" property="surveycnote" />
+		<result column="SURVEYENOTE" jdbcType="CLOB" property="surveyenote" />
+		<result column="SPECIALCNOTE" jdbcType="CLOB" property="specialcnote" />
+		<result column="SPECIALENOTE" jdbcType="CLOB" property="specialenote" />
+		<result column="MEMBERNOTE" jdbcType="CLOB" property="membernote" />
+		<result column="ORDERNOTE" jdbcType="CLOB" property="ordernote" />
+		<result column="WITHDRAWNOTE" jdbcType="CLOB" property="withdrawnote" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		T_REPORTORDER
+		where ORDERNUM = #{ordernum,jdbcType=CHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.experian.daas.baseinfo.entity.CreditReportOrder">
+		insert into T_REPORTORDER (ORDERNUM, CONTRACTCODE,
+		MEMREFCODE,
+		MEMBERCODE, SBDNUM, CORPNAME,
+		CONFIRMCORPNAME, DISTRICTCODE,
+		BUSIADDR,
+		BUSIZIP, BUSITELAREACODE, BUSITEL,
+		BUSIFAX, URL, CORPENAME,
+		BUSIEADDR, LINKMANNUM, NAME,
+		SEX, RESPONSIBILITY, TELAREACODE,
+		TEL, FAX,
+		MOBILEPHONE,
+		EMAIL, PRODUCTCODE, SERVICETYPE,
+		LANGTYPE, BASICPRICE,
+		TRANSPRICE,
+		SPECIALPRICE, OTHERPRICE, DISCOUNTFEE,
+		BADFEE, ORDERPRICE,
+		CURRENCYCODE,
+		MEMLINKMANNUM, UNITNUM, SERVICEMAN,
+		ORDERDATE, ORDERTIME,
+		SCHEDULEDATE,
+		SCHEDULETIME, REQUIREDDATE, SENDDATE,
+		IFRECKONING,
+		ORDERSCORE, PAYMENT,
+		PAIDFEE, NOTE, ORDERSTATE,
+		FIRSTSENDDATE,
+		UPDATETIME, RATE,
+		BILLNUM, FOLLOW_STATUS, SENDTIME,
+		ISSHOWRATING,
+		SERVICE_ITEM, INSPECTEMAIL,
+		CLOSEFLAG, PROJECTFILE, PROJECTCONFIRMFILE,
+		CONFIRMFILE, ISSHOWRATING2, COUNTRYCODE,
+		ENDVALUETIME, FOLLOWORDERNUM,
+		DISCOUNTTYPE,
+		WITHDRAWTYPE, WITHDRAWAPPLY, STARTVALUETIME,
+		CUSTOMDEMAND, IFREVOKE, SURVEYCNOTE,
+		SURVEYENOTE, SPECIALCNOTE,
+		SPECIALENOTE,
+		MEMBERNOTE, ORDERNOTE, WITHDRAWNOTE
+		)
+		values
+		(#{ordernum,jdbcType=CHAR}, #{contractcode,jdbcType=CHAR},
+		#{memrefcode,jdbcType=VARCHAR},
+		#{membercode,jdbcType=CHAR},
+		#{sbdnum,jdbcType=CHAR}, #{corpname,jdbcType=VARCHAR},
+		#{confirmcorpname,jdbcType=VARCHAR}, #{districtcode,jdbcType=CHAR},
+		#{busiaddr,jdbcType=VARCHAR},
+		#{busizip,jdbcType=VARCHAR},
+		#{busitelareacode,jdbcType=VARCHAR}, #{busitel,jdbcType=VARCHAR},
+		#{busifax,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+		#{corpename,jdbcType=VARCHAR},
+		#{busieaddr,jdbcType=VARCHAR},
+		#{linkmannum,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{sex,jdbcType=CHAR}, #{responsibility,jdbcType=VARCHAR},
+		#{telareacode,jdbcType=VARCHAR},
+		#{tel,jdbcType=VARCHAR},
+		#{fax,jdbcType=VARCHAR}, #{mobilephone,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR}, #{productcode,jdbcType=CHAR},
+		#{servicetype,jdbcType=CHAR},
+		#{langtype,jdbcType=CHAR},
+		#{basicprice,jdbcType=DECIMAL}, #{transprice,jdbcType=DECIMAL},
+		#{specialprice,jdbcType=DECIMAL}, #{otherprice,jdbcType=DECIMAL},
+		#{discountfee,jdbcType=DECIMAL},
+		#{badfee,jdbcType=DECIMAL},
+		#{orderprice,jdbcType=DECIMAL}, #{currencycode,jdbcType=CHAR},
+		#{memlinkmannum,jdbcType=INTEGER}, #{unitnum,jdbcType=DOUBLE},
+		#{serviceman,jdbcType=CHAR},
+		#{orderdate,jdbcType=DATE},
+		#{ordertime,jdbcType=TIME}, #{scheduledate,jdbcType=DATE},
+		#{scheduletime,jdbcType=TIME}, #{requireddate,jdbcType=DATE},
+		#{senddate,jdbcType=DATE},
+		#{ifreckoning,jdbcType=CHAR},
+		#{orderscore,jdbcType=INTEGER}, #{payment,jdbcType=CHAR},
+		#{paidfee,jdbcType=DECIMAL}, #{note,jdbcType=VARCHAR},
+		#{orderstate,jdbcType=CHAR},
+		#{firstsenddate,jdbcType=DATE},
+		#{updatetime,jdbcType=DATE}, #{rate,jdbcType=DECIMAL},
+		#{billnum,jdbcType=CHAR}, #{followStatus,jdbcType=CHAR},
+		#{sendtime,jdbcType=TIME},
+		#{isshowrating,jdbcType=CHAR},
+		#{serviceItem,jdbcType=VARCHAR}, #{inspectemail,jdbcType=VARCHAR},
+		#{closeflag,jdbcType=VARCHAR}, #{projectfile,jdbcType=VARCHAR},
+		#{projectconfirmfile,jdbcType=VARCHAR},
+		#{confirmfile,jdbcType=VARCHAR}, #{isshowrating2,jdbcType=CHAR},
+		#{countrycode,jdbcType=CHAR},
+		#{endvaluetime,jdbcType=DATE},
+		#{followordernum,jdbcType=CHAR}, #{discounttype,jdbcType=INTEGER},
+		#{withdrawtype,jdbcType=INTEGER}, #{withdrawapply,jdbcType=INTEGER},
+		#{startvaluetime,jdbcType=DATE},
+		#{customdemand,jdbcType=VARCHAR},
+		#{ifrevoke,jdbcType=CHAR}, #{surveycnote,jdbcType=CLOB},
+		#{surveyenote,jdbcType=CLOB}, #{specialcnote,jdbcType=CLOB},
+		#{specialenote,jdbcType=CLOB},
+		#{membernote,jdbcType=CLOB},
+		#{ordernote,jdbcType=CLOB}, #{withdrawnote,jdbcType=CLOB}
+		)
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.experian.daas.baseinfo.entity.CreditReportOrder">
+		update T_REPORTORDER
+		set CONTRACTCODE =
+		#{contractcode,jdbcType=CHAR},
+		MEMREFCODE =
+		#{memrefcode,jdbcType=VARCHAR},
+		MEMBERCODE =
+		#{membercode,jdbcType=CHAR},
+		SBDNUM = #{sbdnum,jdbcType=CHAR},
+		CORPNAME
+		= #{corpname,jdbcType=VARCHAR},
+		CONFIRMCORPNAME =
+		#{confirmcorpname,jdbcType=VARCHAR},
+		DISTRICTCODE =
+		#{districtcode,jdbcType=CHAR},
+		BUSIADDR = #{busiaddr,jdbcType=VARCHAR},
+		BUSIZIP = #{busizip,jdbcType=VARCHAR},
+		BUSITELAREACODE =
+		#{busitelareacode,jdbcType=VARCHAR},
+		BUSITEL =
+		#{busitel,jdbcType=VARCHAR},
+		BUSIFAX = #{busifax,jdbcType=VARCHAR},
+		URL
+		= #{url,jdbcType=VARCHAR},
+		CORPENAME = #{corpename,jdbcType=VARCHAR},
+		BUSIEADDR = #{busieaddr,jdbcType=VARCHAR},
+		LINKMANNUM =
+		#{linkmannum,jdbcType=INTEGER},
+		NAME = #{name,jdbcType=VARCHAR},
+		SEX =
+		#{sex,jdbcType=CHAR},
+		RESPONSIBILITY =
+		#{responsibility,jdbcType=VARCHAR},
+		TELAREACODE =
+		#{telareacode,jdbcType=VARCHAR},
+		TEL = #{tel,jdbcType=VARCHAR},
+		FAX =
+		#{fax,jdbcType=VARCHAR},
+		MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR},
+		EMAIL = #{email,jdbcType=VARCHAR},
+		PRODUCTCODE =
+		#{productcode,jdbcType=CHAR},
+		SERVICETYPE =
+		#{servicetype,jdbcType=CHAR},
+		LANGTYPE = #{langtype,jdbcType=CHAR},
+		BASICPRICE = #{basicprice,jdbcType=DECIMAL},
+		TRANSPRICE =
+		#{transprice,jdbcType=DECIMAL},
+		SPECIALPRICE =
+		#{specialprice,jdbcType=DECIMAL},
+		OTHERPRICE =
+		#{otherprice,jdbcType=DECIMAL},
+		DISCOUNTFEE =
+		#{discountfee,jdbcType=DECIMAL},
+		BADFEE = #{badfee,jdbcType=DECIMAL},
+		ORDERPRICE = #{orderprice,jdbcType=DECIMAL},
+		CURRENCYCODE =
+		#{currencycode,jdbcType=CHAR},
+		MEMLINKMANNUM =
+		#{memlinkmannum,jdbcType=INTEGER},
+		UNITNUM =
+		#{unitnum,jdbcType=DOUBLE},
+		SERVICEMAN = #{serviceman,jdbcType=CHAR},
+		ORDERDATE = #{orderdate,jdbcType=DATE},
+		ORDERTIME =
+		#{ordertime,jdbcType=TIME},
+		SCHEDULEDATE =
+		#{scheduledate,jdbcType=DATE},
+		SCHEDULETIME =
+		#{scheduletime,jdbcType=TIME},
+		REQUIREDDATE =
+		#{requireddate,jdbcType=DATE},
+		SENDDATE = #{senddate,jdbcType=DATE},
+		IFRECKONING = #{ifreckoning,jdbcType=CHAR},
+		ORDERSCORE =
+		#{orderscore,jdbcType=INTEGER},
+		PAYMENT = #{payment,jdbcType=CHAR},
+		PAIDFEE = #{paidfee,jdbcType=DECIMAL},
+		NOTE = #{note,jdbcType=VARCHAR},
+		ORDERSTATE = #{orderstate,jdbcType=CHAR},
+		FIRSTSENDDATE =
+		#{firstsenddate,jdbcType=DATE},
+		UPDATETIME =
+		#{updatetime,jdbcType=DATE},
+		RATE = #{rate,jdbcType=DECIMAL},
+		BILLNUM =
+		#{billnum,jdbcType=CHAR},
+		FOLLOW_STATUS =
+		#{followStatus,jdbcType=CHAR},
+		SENDTIME = #{sendtime,jdbcType=TIME},
+		ISSHOWRATING = #{isshowrating,jdbcType=CHAR},
+		SERVICE_ITEM =
+		#{serviceItem,jdbcType=VARCHAR},
+		INSPECTEMAIL =
+		#{inspectemail,jdbcType=VARCHAR},
+		CLOSEFLAG =
+		#{closeflag,jdbcType=VARCHAR},
+		PROJECTFILE =
+		#{projectfile,jdbcType=VARCHAR},
+		PROJECTCONFIRMFILE =
+		#{projectconfirmfile,jdbcType=VARCHAR},
+		CONFIRMFILE =
+		#{confirmfile,jdbcType=VARCHAR},
+		ISSHOWRATING2 =
+		#{isshowrating2,jdbcType=CHAR},
+		COUNTRYCODE =
+		#{countrycode,jdbcType=CHAR},
+		ENDVALUETIME =
+		#{endvaluetime,jdbcType=DATE},
+		FOLLOWORDERNUM =
+		#{followordernum,jdbcType=CHAR},
+		DISCOUNTTYPE =
+		#{discounttype,jdbcType=INTEGER},
+		WITHDRAWTYPE =
+		#{withdrawtype,jdbcType=INTEGER},
+		WITHDRAWAPPLY =
+		#{withdrawapply,jdbcType=INTEGER},
+		STARTVALUETIME =
+		#{startvaluetime,jdbcType=DATE},
+		CUSTOMDEMAND =
+		#{customdemand,jdbcType=VARCHAR},
+		IFREVOKE = #{ifrevoke,jdbcType=CHAR},
+		SURVEYCNOTE = #{surveycnote,jdbcType=CLOB},
+		SURVEYENOTE =
+		#{surveyenote,jdbcType=CLOB},
+		SPECIALCNOTE =
+		#{specialcnote,jdbcType=CLOB},
+		SPECIALENOTE =
+		#{specialenote,jdbcType=CLOB},
+		MEMBERNOTE =
+		#{membernote,jdbcType=CLOB},
+		ORDERNOTE = #{ordernote,jdbcType=CLOB},
+		WITHDRAWNOTE = #{withdrawnote,jdbcType=CLOB}
+		where ORDERNUM =
+		#{ordernum,jdbcType=CHAR}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select ORDERNUM, CONTRACTCODE, MEMREFCODE, MEMBERCODE,
+		SBDNUM, CORPNAME,
+		CONFIRMCORPNAME,
+		DISTRICTCODE, BUSIADDR, BUSIZIP,
+		BUSITELAREACODE, BUSITEL, BUSIFAX, URL, CORPENAME,
+		BUSIEADDR,
+		LINKMANNUM, NAME, SEX, RESPONSIBILITY, TELAREACODE, TEL,
+		FAX,
+		MOBILEPHONE,
+		EMAIL, PRODUCTCODE, SERVICETYPE, LANGTYPE, BASICPRICE,
+		TRANSPRICE,
+		SPECIALPRICE,
+		OTHERPRICE, DISCOUNTFEE, BADFEE, ORDERPRICE,
+		CURRENCYCODE, MEMLINKMANNUM,
+		UNITNUM,
+		SERVICEMAN, ORDERDATE, ORDERTIME,
+		SCHEDULEDATE, SCHEDULETIME, REQUIREDDATE,
+		SENDDATE,
+		IFRECKONING,
+		ORDERSCORE, PAYMENT, PAIDFEE, NOTE, ORDERSTATE, FIRSTSENDDATE,
+		UPDATETIME,
+		RATE, BILLNUM, FOLLOW_STATUS, SENDTIME, ISSHOWRATING,
+		SERVICE_ITEM,
+		INSPECTEMAIL,
+		CLOSEFLAG, PROJECTFILE, PROJECTCONFIRMFILE,
+		CONFIRMFILE, ISSHOWRATING2,
+		COUNTRYCODE,
+		ENDVALUETIME, FOLLOWORDERNUM,
+		DISCOUNTTYPE, WITHDRAWTYPE, WITHDRAWAPPLY,
+		STARTVALUETIME,
+		CUSTOMDEMAND, IFREVOKE, SURVEYCNOTE, SURVEYENOTE, SPECIALCNOTE,
+		SPECIALENOTE,
+		MEMBERNOTE,
+		ORDERNOTE, WITHDRAWNOTE
+		from T_REPORTORDER
+		where ORDERNUM = #{ordernum,jdbcType=CHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select ORDERNUM, CONTRACTCODE,
+		MEMREFCODE, MEMBERCODE, SBDNUM, CORPNAME,
+		CONFIRMCORPNAME,
+		DISTRICTCODE, BUSIADDR, BUSIZIP, BUSITELAREACODE, BUSITEL, BUSIFAX,
+		URL, CORPENAME,
+		BUSIEADDR, LINKMANNUM, NAME, SEX, RESPONSIBILITY,
+		TELAREACODE, TEL,
+		FAX, MOBILEPHONE,
+		EMAIL, PRODUCTCODE, SERVICETYPE,
+		LANGTYPE, BASICPRICE, TRANSPRICE,
+		SPECIALPRICE,
+		OTHERPRICE, DISCOUNTFEE,
+		BADFEE, ORDERPRICE, CURRENCYCODE, MEMLINKMANNUM,
+		UNITNUM,
+		SERVICEMAN,
+		ORDERDATE, ORDERTIME, SCHEDULEDATE, SCHEDULETIME, REQUIREDDATE,
+		SENDDATE,
+		IFRECKONING, ORDERSCORE, PAYMENT, PAIDFEE, NOTE, ORDERSTATE,
+		FIRSTSENDDATE,
+		UPDATETIME,
+		RATE, BILLNUM, FOLLOW_STATUS, SENDTIME,
+		ISSHOWRATING, SERVICE_ITEM,
+		INSPECTEMAIL,
+		CLOSEFLAG, PROJECTFILE,
+		PROJECTCONFIRMFILE, CONFIRMFILE, ISSHOWRATING2,
+		COUNTRYCODE,
+		ENDVALUETIME, FOLLOWORDERNUM, DISCOUNTTYPE, WITHDRAWTYPE,
+		WITHDRAWAPPLY,
+		STARTVALUETIME,
+		CUSTOMDEMAND, IFREVOKE, SURVEYCNOTE,
+		SURVEYENOTE, SPECIALCNOTE, SPECIALENOTE,
+		MEMBERNOTE,
+		ORDERNOTE,
+		WITHDRAWNOTE
+		from T_REPORTORDER
+	</select>
+
+	<!--分割线 -->
+	<select id="selectByCorpBaseInfoSbdnums" parameterType="java.util.List"
+		resultMap="BaseResultMap">
+		select * from T_REPORTORDER where SBDNUM in
+		<foreach collection="creditCorpBaseInfos" item="info" index="index"
+			open="(" separator="," close=")">
+			#{info.sbdnum}
+		</foreach>
+	</select>
+</mapper>

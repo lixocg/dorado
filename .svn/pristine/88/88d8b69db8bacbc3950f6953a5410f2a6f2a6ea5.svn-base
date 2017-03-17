@@ -1,0 +1,32 @@
+package com.experian.daas.litigation.config;
+
+import java.io.IOException;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+
+@Configuration
+public class RabbitMqConfig {
+	@Bean
+	public ConnectionFactory connectionFactory() {
+		ConnectionFactory factory = new ConnectionFactory();
+		factory.setHost("127.0.0.1");
+		factory.setUsername("root");
+		factory.setPassword("root");
+		return factory;
+	}
+
+	@Bean
+	public Connection connection(ConnectionFactory connectionFactory) throws Exception {
+		return connectionFactory.newConnection();
+	}
+
+	@Bean
+	public Channel channel(Connection connection) throws IOException {
+		return connection.createChannel();
+	}
+}

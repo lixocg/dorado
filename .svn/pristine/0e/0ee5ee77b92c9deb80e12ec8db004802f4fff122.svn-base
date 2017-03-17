@@ -1,0 +1,17 @@
+package com.experian.daas.integration.trans.litigation.middle.dao;
+
+import java.util.List;
+
+import com.experian.daas.integration.trans.litigation.entity.middle.LitigationTempSourceUrl;
+
+public interface LitigationTempSourceUrlDao {
+    int deleteByPrimaryKey(String id);
+
+    int insert(LitigationTempSourceUrl record);
+
+    LitigationTempSourceUrl selectByPrimaryKey(String id);
+
+    List<LitigationTempSourceUrl> selectAll();
+
+    int updateByPrimaryKey(LitigationTempSourceUrl record);
+}

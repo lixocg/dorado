@@ -1,0 +1,22 @@
+package com.experian.core.rabbitmq;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class Test {
+	/**
+	 * @param args
+	 * @throws SQLException
+	 * @throws IOException
+	 */
+	public static void main(String[] args) throws Exception {
+		QueueConsumer consumer = new QueueConsumer("binTest","127.0.0.1",5672,"guest","guest");
+		Thread consumerThread = new Thread(consumer);
+		consumerThread.start();
+		Producer producer = new Producer("binTest","127.0.0.1",5672,"guest","guest");
+		for (int i = 0; i < 100; i++) {
+			producer.sendJsonMessage("��Ϣ_"+i);
+			System.out.println("Message Number " + i + " sent.");
+		}
+	}
+}

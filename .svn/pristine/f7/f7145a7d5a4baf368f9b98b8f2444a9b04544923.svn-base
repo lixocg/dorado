@@ -1,0 +1,31 @@
+package com.experian.comp.utility;
+
+import com.experian.comp.kafka.ConsumerCallback;
+import com.experian.comp.kafka.PooledKafka;
+import com.experian.core.utils.SpringContextUtil;
+
+public class KafkaUtil {
+	private KafkaUtil() {
+	}
+
+	private static PooledKafka pooledKafka = null;
+
+	static {
+		if (pooledKafka == null) {
+			pooledKafka = (PooledKafka) SpringContextUtil.getBean("pooledKafka");
+		}
+	}
+
+	public static boolean send(String topic, String value) {
+		return pooledKafka.send(topic, value);
+	}
+
+	public static boolean send(String topic, String key, String value) {
+		return pooledKafka.send(topic, key, value);
+	}
+
+	public static void receive(ConsumerCallback callback, String groupId, String topic, Integer taskNum) {
+		pooledKafka.receive(callback, groupId, topic, taskNum);
+	}
+
+}

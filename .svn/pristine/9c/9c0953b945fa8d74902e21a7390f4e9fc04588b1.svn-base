@@ -1,0 +1,26 @@
+package com.experian.daas.web.integration.trans.litigation.enums;
+
+public enum ResultEnum {
+	SUCCESS("1","启动成功！"),FAILED("2","启动失败！");
+	ResultEnum(String code,String msg){
+		this.code=code;
+		this.msg=msg;
+	}
+	private String code;
+	private String msg;
+	public String getCode() {
+		return code;
+	}
+	public String getMsg() {
+		return msg;
+	}
+	public static String msgOf(String code){
+		for(ResultEnum rsEnum:values()){
+			if(rsEnum.getCode().equals(code)){
+				return rsEnum.getMsg();
+			}
+		}
+		return null;
+	}
+	
+}

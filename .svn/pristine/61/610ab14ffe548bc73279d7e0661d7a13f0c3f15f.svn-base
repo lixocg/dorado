@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.experian.daas.litigation.dao.LitigationSourceUrlDao">
+	<resultMap id="BaseResultMap"
+		type="com.experian.dto.entity.litigation.LitigationSourceUrl">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+		<result column="insert_date" jdbcType="TIMESTAMP" property="insertDate" />
+		<result column="source_url" jdbcType="LONGVARCHAR" property="sourceUrl" />
+		<result column="description" jdbcType="LONGVARCHAR" property="description" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from litigation_source_url
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.experian.dto.entity.litigation.LitigationSourceUrl">
+		insert into litigation_source_url (id, created_date, insert_date,
+		source_url, description)
+		values (#{id,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP},
+		#{insertDate,jdbcType=TIMESTAMP},
+		#{sourceUrl,jdbcType=LONGVARCHAR}, #{description,jdbcType=LONGVARCHAR})
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.experian.dto.entity.litigation.LitigationSourceUrl">
+		update litigation_source_url
+		set created_date = #{createdDate,jdbcType=TIMESTAMP},
+		insert_date = #{insertDate,jdbcType=TIMESTAMP},
+		source_url = #{sourceUrl,jdbcType=LONGVARCHAR},
+		description = #{description,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select id, created_date, insert_date, source_url, description
+		from litigation_source_url
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select id, created_date, insert_date, source_url, description
+		from litigation_source_url
+	</select>
+</mapper>

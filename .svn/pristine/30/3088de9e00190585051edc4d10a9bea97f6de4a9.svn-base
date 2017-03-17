@@ -1,0 +1,18 @@
+package com.experian.core.sharding.utils;
+
+import javax.servlet.http.HttpServletRequest;
+
+public class HttpUtils {
+	public boolean IsMoblie(HttpServletRequest request) {
+		String agent = request.getHeader("user-agent").toLowerCase().trim();
+		if (agent == "" || agent.indexOf("mobile") != -1 || agent.indexOf("mobi") != -1 || agent.indexOf("nokia") != -1
+				|| agent.indexOf("samsung") != -1 || agent.indexOf("sonyericsson") != -1 || agent.indexOf("mot") != -1
+				|| agent.indexOf("blackberry") != -1 || agent.indexOf("lg") != -1 || agent.indexOf("htc") != -1
+				|| agent.indexOf("j2me") != -1 || agent.indexOf("ucweb") != -1 || agent.indexOf("opera mini") != -1
+				|| agent.indexOf("mobi") != -1 || agent.indexOf("android") != -1 || agent.indexOf("iphone") != -1) {
+			// 终端可能是手机
+			return true;
+		}
+		return false;
+	}
+}

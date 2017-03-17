@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Integration</title>
+<style>
+.panel {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	font: bold;
+	font-size: 28px;
+	color: red;
+}
+
+.ligigation_table {
+	border: 1px solid gray;
+}
+
+.ligigation_table td {
+	border: 1px solid gray;
+}
+
+.ligigation_table th {
+	border: 1px solid gray;
+}
+</style>
+<script src="${ctx}/jquery/jquery.min.js"></script>
+<script>
+	var ctx="${ctx}";
+	function db2RootTransaction() {
+		var data=ajaxPost(ctx+"/litigation/transit/executeDb2Root",{"count":$("#count1").val()});
+		if(data.status=="0"){
+			alert("启动成功");
+		}else{
+			alert("启动失败");
+		}
+	}
+	function db2RootHistroyTransaction() {
+		var data=ajaxPost(ctx+"/litigation/transit/executeDb2HistoryRoot",{"count":$("#count2").val()});
+		if(data.status=="0"){
+			alert("启动成功");
+		}else{
+			alert("启动失败");
+		}
+	}
+	function sqlserverTransaction() {
+		var data=ajaxPost(ctx+"/litigation/transit/executeSqlServer",{"count":$("#count3").val()});
+		if(data.status=="0"){
+			alert("启动成功");
+		}else{
+			alert("启动失败");
+		}
+	}
+    function ajaxPost(url,data) {  
+        var returnvalue;  
+        var options = {  
+            type: 'POST',  
+            url: url,  
+            data: data,  
+            async:false,  
+            success: function (result) {  
+            	returnvalue = result;  
+            },  
+            dataType: "json",  
+            error: function (result) {  
+                alert(JSON.stringify(result));  
+            }  
+        };  
+        $.ajax(options);   
+        return returnvalue;  
+    } 
+</script>
+</head>
+<body>
+	<div class="panel">数据迁移任务列表</div>
+	<table class="ligigation_table">
+		<thead>
+			<th>序号</th>
+			<th>名称</th>
+			<th>开启线程数</th>
+			<th>操作</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>DB2诉讼主表数据迁移</td>
+				<td><input id="count1" value="10" /></td>
+				<td><input type="button" value="启动主表"
+					onclick="db2RootTransaction();" /></td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>DB2诉讼进程表数据迁移</td>
+				<td><input id="count2" value="10" /></td>
+				<td><input type="button" value="启动进程"
+					onclick="db2RootHistroyTransaction();" /></td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>诉讼平台数据迁移</td>
+				<td><input id="count3" value="10" /></td>
+				<td><input type="button" value="启动诉讼平台"
+					onclick="sqlserverTransaction();" /></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

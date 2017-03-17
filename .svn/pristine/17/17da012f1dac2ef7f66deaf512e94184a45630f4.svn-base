@@ -1,0 +1,19 @@
+package com.experian.dto.pojo.litigation;
+
+import java.util.List;
+
+import com.experian.core.pojo.BaseAPIPojo;
+import com.experian.dto.entity.litigation.LitigationCourt;
+
+public class CourtAPIPojo extends BaseAPIPojo {
+	private List<LitigationCourt> data;
+
+	public List<LitigationCourt> getData() {
+		return data;
+	}
+
+	public void setData(List<LitigationCourt> data) {
+		this.data = data;
+	}
+	
+}

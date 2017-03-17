@@ -1,0 +1,29 @@
+package com.experian.core.utils.jedis;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import redis.clients.jedis.HostAndPort;
+
+/**
+ * Redis服务器配置
+ * @author e00898a
+ *
+ */
+public enum HostAndPortEnum {
+	HOST("127.0.0.1",6379);
+	HostAndPortEnum(String host,int port){
+		this.host=host;
+		this.port=port;
+	}
+	private String host;
+	private int port;
+	public static Set<HostAndPort> getAllHost(){
+		Set<HostAndPort> set=new HashSet<HostAndPort>();
+		for(HostAndPortEnum em:values()){
+			HostAndPort host=new HostAndPort(em.host,em.port);
+			set.add(host);
+		}
+		return set;
+	}
+}

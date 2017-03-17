@@ -1,0 +1,45 @@
+package com.experian.core.test.stratege;
+
+import com.experian.core.sharding.builder.ShardObject;
+import com.experian.core.sharding.shard.Strategy;
+import com.experian.core.test.entity.User;
+
+public class UserStrategy implements Strategy {
+	@Override
+	public String getTargetSql(String oldSql, Object parm, ShardObject object) {
+		if (object.getMapperId().indexOf(".insert") > -1) {
+			return buildInsert(oldSql, parm, object.getTables());
+		} else if (object.getMapperId().indexOf(".select") > -1) {
+			return buildSelect(oldSql, parm, object.getTables());
+		}
+		return oldSql;
+	}
+
+	private String buildSelect(String oldSql, Object parm, String[] tables) {
+		String targetSql = oldSql;
+		for (String table : tables) {
+			targetSql = oldSql.replace("$[" + table + "]", table + "1");
+		}
+		targetSql=targetSql+" union all ";
+		for (String table : tables) {
+			targetSql =targetSql + oldSql.replace("$[" + table + "]", table + "2");
+		}
+		return targetSql;
+	}
+
+	private String buildInsert(String oldSql, Object parm, String[] tables) {
+		String targetSql = oldSql;
+		User u = (User) parm;
+		if (tables != null) {
+			for (String table : tables) {
+				if (u.getId() % 2 == 1) {
+					targetSql = targetSql.replace("$[" + table + "]", table + "1");
+				} else {
+					targetSql = targetSql.replace("$[" + table + "]", table + "2");
+				}
+			}
+		}
+		return targetSql;
+	}
+
+}

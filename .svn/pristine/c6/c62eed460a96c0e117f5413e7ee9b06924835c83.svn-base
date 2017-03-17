@@ -1,0 +1,16 @@
+package com.experian.daas.brand.dao;
+
+import com.experian.daas.brand.entity.BrandInfo;
+import java.util.List;
+
+public interface BrandInfoDao {
+    int deleteByPrimaryKey(String regno);
+
+    int insert(BrandInfo record);
+
+    BrandInfo selectByPrimaryKey(String regno);
+
+    List<BrandInfo> selectAll();
+
+    int updateByPrimaryKey(BrandInfo record);
+}

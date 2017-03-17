@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.experian.daas.litigation.dao.PCorpLitigationDao">
+	<resultMap id="BaseResultMap"
+		type="com.experian.daas.litigation.entity.PCorpLitigation">
+		<result column="PK_ID" jdbcType="BIGINT" property="pkId" />
+		<result column="CASEID" jdbcType="VARCHAR" property="caseid" />
+		<result column="SIMPLECASEID" jdbcType="VARCHAR" property="simplecaseid" />
+		<result column="SBDNUM" jdbcType="CHAR" property="sbdnum" />
+		<result column="INFONUM" jdbcType="INTEGER" property="infonum" />
+		<result column="OBTAININGDATE" jdbcType="TIMESTAMP" property="obtainingdate" />
+		<result column="LITIGATIONAGENT" jdbcType="VARCHAR" property="litigationagent" />
+		<result column="CASECODE" jdbcType="VARCHAR" property="casecode" />
+		<result column="CASEDETAIL" jdbcType="VARCHAR" property="casedetail" />
+		<result column="COURT" jdbcType="VARCHAR" property="court" />
+		<result column="COURTID" jdbcType="BIGINT" property="courtid" />
+		<result column="ACCUSER1" jdbcType="VARCHAR" property="accuser1" />
+		<result column="ACCUSER2" jdbcType="VARCHAR" property="accuser2" />
+		<result column="ACCUSER3" jdbcType="VARCHAR" property="accuser3" />
+		<result column="ACCUSER4" jdbcType="VARCHAR" property="accuser4" />
+		<result column="ACCUSER5" jdbcType="VARCHAR" property="accuser5" />
+		<result column="APPUSER1" jdbcType="VARCHAR" property="appuser1" />
+		<result column="APPUSER2" jdbcType="VARCHAR" property="appuser2" />
+		<result column="APPUSER3" jdbcType="VARCHAR" property="appuser3" />
+		<result column="APPUSER4" jdbcType="VARCHAR" property="appuser4" />
+		<result column="APPUSER5" jdbcType="VARCHAR" property="appuser5" />
+		<result column="PARTY1" jdbcType="VARCHAR" property="party1" />
+		<result column="PARTY2" jdbcType="VARCHAR" property="party2" />
+		<result column="PARTY3" jdbcType="VARCHAR" property="party3" />
+		<result column="PARTY4" jdbcType="VARCHAR" property="party4" />
+		<result column="PARTY5" jdbcType="VARCHAR" property="party5" />
+		<result column="ACCDATE" jdbcType="TIMESTAMP" property="accdate" />
+		<result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+		<result column="ENTRYPERSONID" jdbcType="BIGINT" property="entrypersonid" />
+		<result column="ACC_PEOPLE1" jdbcType="CHAR" property="accPeople1" />
+		<result column="ACC_PEOPLE2" jdbcType="CHAR" property="accPeople2" />
+		<result column="ACC_PEOPLE3" jdbcType="CHAR" property="accPeople3" />
+		<result column="ACC_PEOPLE4" jdbcType="CHAR" property="accPeople4" />
+		<result column="ACC_PEOPLE5" jdbcType="CHAR" property="accPeople5" />
+		<result column="APP_PEOPLE1" jdbcType="CHAR" property="appPeople1" />
+		<result column="APP_PEOPLE2" jdbcType="CHAR" property="appPeople2" />
+		<result column="APP_PEOPLE3" jdbcType="CHAR" property="appPeople3" />
+		<result column="APP_PEOPLE4" jdbcType="CHAR" property="appPeople4" />
+		<result column="APP_PEOPLE5" jdbcType="CHAR" property="appPeople5" />
+		<result column="PARTY_PEOPLE1" jdbcType="CHAR" property="partyPeople1" />
+		<result column="PARTY_PEOPLE2" jdbcType="CHAR" property="partyPeople2" />
+		<result column="PARTY_PEOPLE3" jdbcType="CHAR" property="partyPeople3" />
+		<result column="PARTY_PEOPLE4" jdbcType="CHAR" property="partyPeople4" />
+		<result column="PARTY_PEOPLE5" jdbcType="CHAR" property="partyPeople5" />
+		<result column="AUDITFLAG" jdbcType="CHAR" property="auditflag" />
+		<result column="failureReason" jdbcType="VARCHAR" property="failurereason" />
+		<result column="dbflag" jdbcType="CHAR" property="dbflag" />
+		<result column="user_update" jdbcType="CHAR" property="userUpdate" />
+		<result column="isUpdate" jdbcType="CHAR" property="isupdate" />
+		<result column="isProduce" jdbcType="CHAR" property="isproduce" />
+		<result column="SIMPLEACCUSER1" jdbcType="VARCHAR" property="simpleaccuser1" />
+		<result column="SIMPLEACCUSER2" jdbcType="VARCHAR" property="simpleaccuser2" />
+		<result column="SIMPLEACCUSER3" jdbcType="VARCHAR" property="simpleaccuser3" />
+		<result column="SIMPLEACCUSER4" jdbcType="VARCHAR" property="simpleaccuser4" />
+		<result column="SIMPLEACCUSER5" jdbcType="VARCHAR" property="simpleaccuser5" />
+		<result column="SIMPLEAPPUSER1" jdbcType="VARCHAR" property="simpleappuser1" />
+		<result column="SIMPLEAPPUSER2" jdbcType="VARCHAR" property="simpleappuser2" />
+		<result column="SIMPLEAPPUSER3" jdbcType="VARCHAR" property="simpleappuser3" />
+		<result column="SIMPLEAPPUSER4" jdbcType="VARCHAR" property="simpleappuser4" />
+		<result column="SIMPLEAPPUSER5" jdbcType="VARCHAR" property="simpleappuser5" />
+		<result column="SIMPLEPARTY1" jdbcType="VARCHAR" property="simpleparty1" />
+		<result column="SIMPLEPARTY2" jdbcType="VARCHAR" property="simpleparty2" />
+		<result column="SIMPLEPARTY3" jdbcType="VARCHAR" property="simpleparty3" />
+		<result column="SIMPLEPARTY4" jdbcType="VARCHAR" property="simpleparty4" />
+		<result column="SIMPLEPARTY5" jdbcType="VARCHAR" property="simpleparty5" />
+		<result column="LITIGATION" jdbcType="LONGVARCHAR" property="litigation" />
+		<result column="SIMPLECASE" jdbcType="LONGVARCHAR" property="simplecase" />
+		<result column="MINUTECASE" jdbcType="LONGVARCHAR" property="minutecase" />
+		<result column="NoticeDetails" jdbcType="LONGVARCHAR" property="noticedetails" />
+		<result column="NOTE" jdbcType="LONGVARCHAR" property="note" />
+		<result column="LITIGATIONAGENTURL" jdbcType="LONGVARCHAR"
+			property="litigationagenturl" />
+	</resultMap>
+	<!-- 获取诉讼平台诉讼记录总数 -->
+	<select id="getSqlserverCorpLitigationCount" resultType="java.lang.Integer">
+		select
+		count(1) from
+		T_CORPLITIGATION
+	</select>
+	<!--分页查询 -->
+	<select id="getSqlserverCorpLitigationByPage" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			(
+				SELECT
+					ROW_NUMBER () OVER (
+						ORDER BY
+							T_CORPLITIGATION.dbflag DESC
+					) AS rownum,
+					*
+				FROM
+					T_CORPLITIGATION where dbflag='1'
+			) AS temp
+		WHERE
+			temp.rownum BETWEEN #{startRow}
+		AND #{endRow}
+	</select>
+</mapper>

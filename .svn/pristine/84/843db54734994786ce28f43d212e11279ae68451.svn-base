@@ -1,0 +1,23 @@
+package com.experian.core.utils.jedis;
+
+import redis.clients.jedis.JedisPoolConfig;
+
+public abstract class JedisBase {
+	protected static JedisPoolConfig config = null;
+	static {
+		/**
+		 * 初始化配置
+		 */
+		config = new JedisPoolConfig();
+		config.setMaxTotal(PoolConfig.maxTotal);
+		config.setMaxIdle(PoolConfig.maxIdle);
+		config.setNumTestsPerEvictionRun(PoolConfig.numTestsPerEvictionRun);
+		config.setTimeBetweenEvictionRunsMillis(PoolConfig.timeBetweenEvictionRunsMillis);
+		config.setMinEvictableIdleTimeMillis(PoolConfig.minEvictableIdleTimeMillis);
+		config.setSoftMinEvictableIdleTimeMillis(PoolConfig.softMinEvictableIdleTimeMillis);
+		config.setMaxWaitMillis(PoolConfig.maxWaitMillis);
+		config.setTestOnBorrow(PoolConfig.testOnBorrow);
+		config.setTestWhileIdle(PoolConfig.testWhileIdle);
+		config.setBlockWhenExhausted(PoolConfig.blockWhenExhausted);
+	}
+}

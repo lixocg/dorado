@@ -1,0 +1,333 @@
+package com.experian.daas.baseinfo.service.impl;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+
+import com.experian.core.database.sharding.sqlsessiontemplate.CustomerContextHolder;
+import com.experian.daas.baseinfo.dao.CentralCorpBaseInfoDao;
+import com.experian.daas.baseinfo.dao.CentralReportOrderDao;
+import com.experian.daas.baseinfo.dao.CreditCorpBaseInfoDao;
+import com.experian.daas.baseinfo.dao.CreditCorpRegistrationDao;
+import com.experian.daas.baseinfo.dao.CreditReportOrderDao;
+import com.experian.daas.baseinfo.service.BaseInfoService;
+import com.experian.dto.entity.baseinfo.CentralCorpBaseInfo;
+import com.experian.dto.entity.baseinfo.CentralReportOrder;
+import com.experian.dto.entity.baseinfo.CreditCorpBaseInfo;
+import com.experian.dto.entity.baseinfo.CreditCorpRegistration;
+import com.experian.dto.entity.baseinfo.CreditReportOrder;
+
+/**
+ * 匹配sbdnum
+ * 
+ * @author lixiongcheng
+ *
+ */
+@Service("baseInfoService")
+public class BaseInfoServiceImpl implements BaseInfoService {
+	private static final Logger logger = Logger.getLogger(BaseInfoServiceImpl.class);
+	/**
+	 * 信用库
+	 */
+	@Resource
+	private CreditCorpBaseInfoDao creditCorpBaseInfoDao;
+
+	@Resource
+	private CreditCorpRegistrationDao creditCorpRegistrationDao;
+
+	@Resource
+	private CreditReportOrderDao creditReportOrderDao;
+
+	/**
+	 * 中央库
+	 */
+	@Resource
+	private CentralCorpBaseInfoDao centralCorpBaseInfoDao;
+
+	@Resource
+	private CentralReportOrderDao centralReportOrderDao;
+
+	@Override
+	public String match(String corpName) throws Exception {
+		logger.info("<<<<<<<<<<<<<<匹配sbdnum开始....企业名称：" + corpName + ">>>>>>>>");
+		long start = System.currentTimeMillis();
+		String sbdnum = null;
+		if (StringUtils.isEmpty(corpName)) {
+			logger.error("公司名称为空");
+			throw new Exception("公司名称为空");
+		}
+		// 信用库查询,按优先级升序，更新时间降序，sbdnum升序排序
+		CustomerContextHolder.setContextType(CustomerContextHolder.DB2_CREDIT);
+		List<CreditCorpBaseInfo> creditCorpBaseInfos = creditCorpBaseInfoDao.selectByCorpName(corpName);
+		if (!CollectionUtils.isEmpty(creditCorpBaseInfos)) {// 在信用库中匹配sbdnum
+			sbdnum = getSbdnumFromCreditDB(creditCorpBaseInfos);
+		} else {// 到中央库中匹配sbdnum
+			sbdnum = getSbdnumFromCentralDB(corpName);
+		}
+		logger.info("<<<<<<<<<<<<<<匹配sbdnum结束...企业名称：" + corpName + "=>"+sbdnum+">>>耗时:" + (System.currentTimeMillis() - start));
+		return sbdnum;
+	}
+
+	/**
+	 * 中央库匹配sbdnum
+	 * 
+	 * @param corpName
+	 * @return
+	 */
+	private String getSbdnumFromCentralDB(String corpName) {
+		// 查询,按优先级升序，更新时间降序，sbdnum升序排序
+		CustomerContextHolder.setContextType(CustomerContextHolder.DB2_CENTER);
+		List<CentralCorpBaseInfo> centralCorpBaseInfos = centralCorpBaseInfoDao.selectByCorpName(corpName);
+		if (CollectionUtils.isEmpty(centralCorpBaseInfos)) {
+			return null;
+		}
+		if(centralCorpBaseInfos.size()==1){
+			return centralCorpBaseInfos.get(0).getSbdnum();
+		}
+		List<CentralReportOrder> centralReportOrders = centralReportOrderDao
+				.selectByCorpBaseInfoSbdnums(centralCorpBaseInfos);
+		if (!CollectionUtils.isEmpty(centralReportOrders)) {
+			List<CreditReportOrder> creditReportOrders = trans2CreditReportOrder(centralReportOrders);
+			return matchWithOrderedReport(creditReportOrders);
+		} else {
+			List<CreditCorpBaseInfo> creditCorpBaseInfos = trans2CreditCorpBaseInfo(centralCorpBaseInfos);
+			return matchWithoutOrderedReport(creditCorpBaseInfos);
+		}
+	}
+
+	/**
+	 * 中央库CentralReportOrder转到信用库CreditReportOrder
+	 * 
+	 * @param centralReportOrders
+	 *            中央库
+	 * @return
+	 */
+	private List<CreditReportOrder> trans2CreditReportOrder(List<CentralReportOrder> centralReportOrders) {
+		List<CreditReportOrder> creditReportOrders = new ArrayList<CreditReportOrder>();
+		for (CentralReportOrder centralReportOrder : centralReportOrders) {
+			CreditReportOrder creditReportOrder = new CreditReportOrder();
+			BeanUtils.copyProperties(centralReportOrder, creditReportOrder);
+			creditReportOrders.add(creditReportOrder);
+		}
+		return creditReportOrders;
+	}
+
+	/**
+	 * 中央库CentralCorpBaseInfo转到信用库CreditCorpBaseInfo
+	 * 
+	 * @param centralCorpBaseInfos
+	 *            中央库
+	 * @return
+	 */
+	private List<CreditCorpBaseInfo> trans2CreditCorpBaseInfo(List<CentralCorpBaseInfo> centralCorpBaseInfos) {
+		List<CreditCorpBaseInfo> creditCorpBaseInfos = new ArrayList<CreditCorpBaseInfo>();
+		for (CentralCorpBaseInfo centralCorpBaseInfo : centralCorpBaseInfos) {
+			CreditCorpBaseInfo creditCorpBaseInfo = new CreditCorpBaseInfo();
+			BeanUtils.copyProperties(centralCorpBaseInfo, creditCorpBaseInfo);
+			creditCorpBaseInfos.add(creditCorpBaseInfo);
+		}
+		return creditCorpBaseInfos;
+	}
+
+	/**
+	 * 信用库匹配sbdnum
+	 * 
+	 * @param creditCorpBaseInfos
+	 * @return
+	 */
+	private String getSbdnumFromCreditDB(List<CreditCorpBaseInfo> creditCorpBaseInfos) {
+		if(creditCorpBaseInfos.size()==1){
+			return creditCorpBaseInfos.get(0).getSbdnum();
+		}
+		// 看做过报告情况
+		CustomerContextHolder.setContextType(CustomerContextHolder.DB2_CREDIT);
+		List<CreditReportOrder> creditReportOrders = creditReportOrderDao
+				.selectByCorpBaseInfoSbdnums(creditCorpBaseInfos);
+		if (!CollectionUtils.isEmpty(creditReportOrders)) {// 做过报告
+			return matchWithOrderedReport(creditReportOrders);
+		} else {// 没做过报告
+			return matchWithoutOrderedReport(creditCorpBaseInfos);
+		}
+	}
+
+	/**
+	 * 信用库匹配没有做过报告的sbdnum
+	 * 
+	 * @param creditCorpBaseInfos
+	 * @return
+	 */
+	private String matchWithoutOrderedReport(List<CreditCorpBaseInfo> creditCorpBaseInfos) {
+		CreditCorpBaseInfo creditCorpBaseInfoOfMaxPriority = creditCorpBaseInfos.get(0);// 最高优先级的
+		/**
+		 * 根据企业基本信息表的优先级字段，首先选择优先级不为1或0的sbdnum，根据优先级升序，更新时间降序，sbdnum升序排序
+		 * ，选出优先级最高的；若优先级都为1或0，则根据优先级升序，更新时间降序，sbdnum升序排序，选出优先级最高的。
+		 */
+		for (Iterator<CreditCorpBaseInfo> it = creditCorpBaseInfos.iterator(); it.hasNext();) {
+			CreditCorpBaseInfo info = it.next();
+			String priority = info.getPriority();
+			if ("0".equals(priority) || "1".equals(priority)) {
+				it.remove();
+			}
+		}
+		if (creditCorpBaseInfos.size() == 0) {// 优先级全是0或1
+			return creditCorpBaseInfoOfMaxPriority.getSbdnum();
+		} else {// 没有0或1优先级的
+			return creditCorpBaseInfos.get(0).getSbdnum();
+		}
+	}
+
+	/**
+	 * 信用库匹配做过报告的sbdnum
+	 * 
+	 * @param creditReportOrders
+	 * @return
+	 */
+	private String matchWithOrderedReport(List<CreditReportOrder> creditReportOrders) {
+		// 若只有一个sbdnum做过，则返回这个sbdnum
+		if (creditReportOrders.size() == 1) {
+			return creditReportOrders.get(0).getSbdnum();
+		}
+		// 按报告类型排序
+		Collections.sort(creditReportOrders, new Comparator<CreditReportOrder>() {
+			@Override
+			public int compare(CreditReportOrder o1, CreditReportOrder o2) {
+				Integer level1 = ProductTypeLevelEnum.getLevelByCode(o1.getProductcode());
+				Integer level2 = ProductTypeLevelEnum.getLevelByCode(o2.getProductcode());
+				if (level1 > level2) {
+					return 1;
+				} else if (level1 < level2) {
+					return -1;
+				}
+				return 0;
+			}
+		});
+		// 找产品类型最大的个数
+		List<String> maxProductCodeOfSbdnums = new ArrayList<String>();
+		String maxProductcode = null;
+		for (int i = 0; i < creditReportOrders.size(); i++) {
+			String productCode = creditReportOrders.get(i).getProductcode();
+			if (i == 0) {
+				maxProductcode = productCode;
+				maxProductCodeOfSbdnums.add(creditReportOrders.get(i).getSbdnum());
+			} else {
+				if (maxProductcode.equals(productCode)) {
+					maxProductCodeOfSbdnums.add(creditReportOrders.get(i).getSbdnum());
+				}
+			}
+		}
+		if (maxProductCodeOfSbdnums.size() == 1) {// 只有一个sbdnum对应的产品类型最大，则返回该sbdnum
+			return maxProductCodeOfSbdnums.get(0);
+		} else {// 返回核对日期最新的，如果都没有核对日期或核对日期都相等，则返回sbdnum小的
+			CustomerContextHolder.setContextType(CustomerContextHolder.DB2_CREDIT);
+			List<CreditCorpRegistration> creditCorpRegistrations = creditCorpRegistrationDao
+					.selectBySbdnums(maxProductCodeOfSbdnums, "approvedate");
+			if (CollectionUtils.isEmpty(creditCorpRegistrations)) {// 返回sbdnum小
+				Collections.sort(maxProductCodeOfSbdnums);// 默认升序
+				return maxProductCodeOfSbdnums.get(0);
+			}
+			// 找核对日期
+			int nullApprovedate = 0;
+			int sameThefirstApprovedate = 0;
+			Date firstApprovedate = null;
+			List<String> sbdnumsOfnotNullApprovedate = new ArrayList<String>();
+			for (int i = 0; i < creditCorpRegistrations.size(); i++) {
+				Date approvedate = creditCorpRegistrations.get(i).getApprovedate();
+				if (i == 0) {
+					firstApprovedate = approvedate;
+					sameThefirstApprovedate++;
+				} else {
+					if (firstApprovedate.equals(approvedate)) {
+						sameThefirstApprovedate++;
+					}
+				}
+				if (approvedate == null) {
+					nullApprovedate++;
+				} else {
+					sbdnumsOfnotNullApprovedate.add(creditCorpRegistrations.get(i).getSbdnum());
+				}
+			}
+			// 如果都没有核对日期或核对日期都相等，则返回sbdnum小的
+			if (nullApprovedate == creditCorpRegistrations.size()
+					|| sameThefirstApprovedate == creditCorpRegistrations.size()) {
+				Collections.sort(maxProductCodeOfSbdnums);// 默认升序
+				return maxProductCodeOfSbdnums.get(0);
+			}
+			// 非空审核日期，返回最新的
+			return sbdnumsOfnotNullApprovedate.get(0);
+		}
+	}
+
+	/**
+	 * 产品类型级别枚举
+	 * 
+	 * @author e00769a
+	 *
+	 */
+	public static enum ProductTypeLevelEnum {
+		/**
+		 * 深度信用报告
+		 */
+		DeepCreditReport("B001", 1),
+		/**
+		 * 企业信用报告
+		 */
+		CorpCreditReport("B006", 2),
+		/**
+		 * 企业财务报告
+		 */
+		CorpFinanceReport("B008", 3),
+		/**
+		 * 企业信用概览报告
+		 */
+		CorpCreditAbstractReport("B009", 4),
+		/**
+		 * 公共记录报告
+		 */
+		PublicRecordReport("B012", 5),
+		/**
+		 * 特殊概览报告
+		 */
+		SpecialAbstractReport("B020", 6),
+		/**
+		 * 企业注册报告
+		 */
+		CorpRegistrationReport("B024", 7),
+		/**
+		 * 企业营业执照报告
+		 */
+		CorpBusinessCardReport("B040", 8),
+		/**
+		 * 信用监测
+		 */
+		CreditInspectReport("B042", 9);
+
+		private String productCode;
+		private Integer level;
+
+		private ProductTypeLevelEnum(String productCode, Integer level) {
+			this.productCode = productCode;
+			this.level = level;
+		}
+
+		public static Integer getLevelByCode(String code) {
+			for (ProductTypeLevelEnum pe : ProductTypeLevelEnum.values()) {
+				if (pe.productCode.equals(code)) {
+					return pe.level;
+				}
+			}
+			return 0;
+		}
+	}
+
+}

@@ -1,0 +1,171 @@
+package com.experian.daas.service.impl.test.litigation.db2;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
+/**
+ * API测试类
+ * 
+ * @author bin
+ *
+ */
+public class Litigation2OptixApiTest {
+
+	/**
+	 * 新增案件编号
+	 */
+	public static void testCaseCatagoraty() {
+		String caseStr = "{\"data\":[{\"id\":\"123123\",\"code\":\"TESTCODE\",\"name\":\"TESTNAME\"}],\"token\":\"8cd5b29e0b86315979e224f14780e244\"}";
+		String rs = sendPost(UrlEnum.CaseUrl.getUrl(), caseStr);
+		System.out.println(rs);
+	}
+
+	/**
+	 * 新增法院
+	 */
+	public static void testLitigationNewCourt() {
+		String courtStr = "{\"data\":[{\"id\":100000,\"districtCode\":\"districtcode\",\"name\":\"testName\",\"courtCode\":\"courtCode\"}],\"token\":\"8cd5b29e0b86315979e224f14780e244\"}";
+		String rs = sendPost(UrlEnum.CourtUrl.getUrl(), courtStr);
+		System.out.println(rs);
+	}
+
+	/**
+	 * 新增目标网址
+	 */
+	public static void testSourceUrl() {
+		String urlStr = "{\"data\":[{\"id\":\"123123\",\"sourceUrl\":\"www.baidu.com\",\"description\":\"description\"}],\"token\":\"8cd5b29e0b86315979e224f14780e244\"}";
+		String rs = sendPost(UrlEnum.SourceUrl.getUrl(), urlStr);
+		System.out.println(rs);
+	}
+
+	/**
+	 * 新增企业/自然人字典
+	 */
+	public static void testPartyUrl() {
+		String partyStr = "{\"data\":[{\"id\":\"123123\",\"name\":\"testName\"}],\"token\":\"8cd5b29e0b86315979e224f14780e244\"}";
+		String rs = sendPost(UrlEnum.PartyUrl.getUrl(), partyStr);
+		System.out.println(rs);
+	}
+
+	/**
+	 * optix数据落入临时表中
+	 * 
+	 * @throws FileNotFoundException
+	 */
+	public static void testLitigationUrl() throws Exception {
+		String p = "";
+		
+		String rs = sendPost(UrlEnum.LitigationUrl.getUrl(), p);
+		System.out.println(rs);
+	}
+
+	/**
+	 * 发送 POST 工具
+	 * 
+	 * @param url
+	 * @param param
+	 * @return
+	 */
+	public static String sendPost(String url, String param) {
+		OutputStream out = null;
+		BufferedReader in = null;
+		String result = "";
+		try {
+			URL realUrl = new URL(url);
+			URLConnection conn = realUrl.openConnection();
+			conn.setRequestProperty("accept", "*/*");
+			conn.setRequestProperty("connection", "Keep-Alive");
+			conn.setRequestProperty("content-type", "application/json;charset=UTF-8");
+			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+			conn.setDoOutput(true);
+			conn.setDoInput(true);
+			out = conn.getOutputStream();
+			out.write(param.getBytes("utf-8"));
+			out.flush();
+			in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line;
+			while ((line = in.readLine()) != null) {
+				result += line;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (out != null) {
+					out.close();
+				}
+				if (in != null) {
+					in.close();
+				}
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	public static void main(String[] args) throws Exception {
+		// 测试案件类型新增
+//		 testCaseCatagoraty();
+//		// 测试新增法院
+//		 testLitigationNewCourt();
+//		// 新增目标网站
+//		 testSourceUrl();
+//		// 新增企业/自然人类型
+//		 testPartyUrl();
+		testLitigationUrl();
+	}
+
+	/**
+	 * API枚举常量
+	 * 
+	 * @author e00898a
+	 *
+	 */
+	public enum UrlEnum {
+		//
+		LitigationUrl("http://127.0.0.1:8080/dorado-daas-web/daas/intergration/channel/litigation/api/newData",
+				"诉讼数据API"),
+		//
+		CaseUrl("http://127.0.0.1:8080/dorado-daas-web/daas/intergration/channel/litigation/api/newCaseCategory",
+				"新增案件类型API"),
+		//
+		CourtUrl("http://127.0.0.1:8080/dorado-daas-web/daas/intergration/channel/litigation/api/newCourt", "新增法院URL"),
+		//
+		SourceUrl("http://127.0.0.1:8080/dorado-daas-web/daas/intergration/channel/litigation/api/newSourceUrl",
+				"新增诉讼来源URL"),
+		//
+		PartyUrl("http://127.0.0.1:8080/dorado-daas-web/daas/intergration/channel/litigation/api/newPartyCategory",
+				"新增案件类型字典URL");
+
+		UrlEnum(String url, String name) {
+			this.url = url;
+			this.name = name;
+		}
+
+		private String url;
+		private String name;
+
+		public String getUrl() {
+			return url;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public static String nameof(String url) {
+			for (UrlEnum u : values()) {
+				if (u.getUrl().equals(url)) {
+					return u.getName();
+				}
+			}
+			return "NotFoundUrl";
+		}
+	}
+}

@@ -1,0 +1,91 @@
+package com.experian.task.job.entity;
+
+/**
+ * 映射表： qrtz_customer_job
+ */
+public class QrtzCustomerJob {
+    /**
+     * 组
+     * 映射字段： group
+     */
+    private String gname;
+
+    /**
+     * 名称
+     * 映射字段： name
+     */
+    private String name;
+
+    /**
+     * 状态：1启用、2停用
+     * 映射字段： status
+     */
+    private String status;
+
+    /**
+     * 类型：1代表持久化不执行补发2代表中间如果失败进行补发'
+     * 映射字段： type
+     */
+    private String type;
+
+    /**
+     * 工作的实现类，仅供开发人员使用
+     * 映射字段： job
+     */
+    private String job;
+
+    /**
+     * 执行任务的规则，仅限开发人员使用
+     * 映射字段： cron
+     */
+    private String cron;
+    
+
+    public String getGname() {
+        return gname;
+    }
+ 
+    public void setGname(String gname) {
+        this.gname = gname == null ? null : gname.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job == null ? null : job.trim();
+    }
+
+    public String getCron() {
+        return cron;
+    }
+
+    public void setCron(String cron) {
+        this.cron = cron == null ? null : cron.trim();
+    }
+}

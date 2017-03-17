@@ -1,0 +1,11 @@
+spring.application.name=dorado-api
+server.port=8080
+
+#\u914d\u7f6e\u670d\u52a1\u6620\u5c04
+zuul.routes.api-litigation.path=/api-liti/**
+zuul.routes.api-litigation.serviceId=dorado-daas-litigation
+
+zuul.routes.api-baseinfo.path=/api-base/**
+zuul.routes.api-baseinfo.serviceId=dorado-daas-baseinfo
+
+eureka.client.serviceUrl.defaultZone=${eurekaAddress}

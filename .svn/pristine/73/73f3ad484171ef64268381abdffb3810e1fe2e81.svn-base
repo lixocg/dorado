@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Integration</title>
+<style>
+.panel {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	font: bold;
+	font-size: 28px;
+	color: red;
+}
+
+.ligigation_table {
+	border: 1px solid gray;
+}
+
+.ligigation_table td {
+	border: 1px solid gray;
+}
+
+.ligigation_table th {
+	border: 1px solid gray;
+}
+
+.test_box {
+    width: 1250px; 
+    min-height: 50px; 
+    max-height: 300px;
+    _height: 120px; 
+    padding: 3px; 
+    outline: 0; 
+    border: 1px solid #a0b3d6; 
+    font-size: 12px; 
+    word-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-user-modify: read-write-plaintext-only;
+}
+</style>
+<script src="${ctx}/resources/jquery/jquery.min.js"></script>
+<script>
+	var ctx="${ctx}";
+    function ajaxPost(url,data) {  
+        var returnvalue;  
+        var options = {  
+            type: 'POST',  
+            url: url,  
+            data: data,  
+            async:false,  
+            success: function (result) {  
+            	returnvalue = result;  
+            },  
+            dataType: "json",  
+            error: function (result) {
+            	if(result.status != 200){
+               		 alert(JSON.stringify(result));
+            	}
+            }  
+        };  
+        $.ajax(options);   
+        return returnvalue;  
+    }
+    
+    $(function(){
+    	
+    	 $("#confirm").bind("click",function(){
+    	    	var id = $("#litigationDetailId").val();
+    	    	var data = ajaxPost("${ctx}/integration/adapter/litigation/getApiPojoById",{"id":id});
+    	    	if(data==null){
+    	    		alert("没有此id相关数据");
+    	    		return;
+    	    	}
+    	    	$("#crawledDataArea").html("");
+    	    	$("#litigationDetailArea").html("");
+    	    	$("#partyArea").html("");
+    	    	$("#dereplication").html("");
+    	    	$("#crawledDataArea").html(format(JSON.stringify(data.data.litigationCrawledData)));
+    	    	$("#litigationDetailArea").html(format(JSON.stringify(data.data.litigationParsedDataDetail)));
+    	    	$("#partyArea").html(format(JSON.stringify(data.data.litigationPartyList)));
+    	    });
+    	 
+    	 $("#executeDureplicate").bind("click",function(){
+    		 var id = $("#litigationDetailId").val();
+ 	    	var res = ajaxPost("${ctx}/integration/adapter/litigation/executeDureplicate",{"id":id});
+ 	    	if(res.status == 0){
+ 	    		$("#dereplication").html("");
+    			$("#dereplication").html(res.data);
+    		 }else{
+    			 $("#dereplication").html("");
+    			 $("#dereplication").html(res.error);
+    		 }
+    	 });
+    });
+    
+    function format(txt,compress/*是否为压缩模式*/){/* 格式化JSON源码(对象转换为JSON文本) */  
+        var indentChar = '    ';   
+        if(/^\s*$/.test(txt)){   
+            alert('数据为空,无法格式化! ');   
+            return;   
+        }   
+        try{var data=eval('('+txt+')');}   
+        catch(e){   
+            alert('数据源语法错误,格式化失败! 错误信息: '+e.description,'err');   
+            return;   
+        };   
+        var draw=[],last=false,This=this,line=compress?'':'\n',nodeCount=0,maxDepth=0;   
+           
+        var notify=function(name,value,isLast,indent/*缩进*/,formObj){   
+            nodeCount++;/*节点计数*/  
+            for (var i=0,tab='';i<indent;i++ )tab+=indentChar;/* 缩进HTML */  
+            tab=compress?'':tab;/*压缩模式忽略缩进*/  
+            maxDepth=++indent;/*缩进递增并记录*/  
+            if(value&&value.constructor==Array){/*处理数组*/  
+                draw.push(tab+(formObj?('"'+name+'":'):'')+'['+line);/*缩进'[' 然后换行*/  
+                for (var i=0;i<value.length;i++)   
+                    notify(i,value[i],i==value.length-1,indent,false);   
+                draw.push(tab+']'+(isLast?line:(','+line)));/*缩进']'换行,若非尾元素则添加逗号*/  
+            }else   if(value&&typeof value=='object'){/*处理对象*/  
+                    draw.push(tab+(formObj?('"'+name+'":'):'')+'{'+line);/*缩进'{' 然后换行*/  
+                    var len=0,i=0;   
+                    for(var key in value)len++;   
+                    for(var key in value)notify(key,value[key],++i==len,indent,true);   
+                    draw.push(tab+'}'+(isLast?line:(','+line)));/*缩进'}'换行,若非尾元素则添加逗号*/  
+                }else{   
+                        if(typeof value=='string')value='"'+value+'"';   
+                        draw.push(tab+(formObj?('"'+name+'":'):'')+value+(isLast?'':',')+line);   
+                };   
+        };   
+        var isLast=true,indent=0;   
+        notify('',data,isLast,indent,false);   
+        return draw.join('');   
+    }  
+</script>
+</head>
+<body>
+	诉讼详情id:<input id="litigationDetailId" type="text" value="">
+	<input id="confirm" type="button" value="只是查询"></br>
+	<hr>
+	抓取数据表：<div class="test_box" id="crawledDataArea" contenteditable="true"><br /></div>
+	诉讼详情表：<div class="test_box" id="litigationDetailArea" contenteditable="true"><br /></div>
+	企业自然人表：<div class="test_box" id="partyArea" contenteditable="true"><br /></div>
+	<hr>
+	<input type="button" value="执行该条数据去重" id="executeDureplicate"><br>
+	去重trace：<div class="test_box" id="dereplication" contenteditable="true"><br /></div>
+</body>
+</html>

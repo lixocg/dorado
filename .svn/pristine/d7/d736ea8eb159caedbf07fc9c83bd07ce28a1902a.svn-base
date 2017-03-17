@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.experian.daas.litigation.dao.LitigationPartyDao">
+	<resultMap id="BaseResultMap"
+		type="com.experian.dto.entity.litigation.LitigationParty">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="parsed_data_detail_id" jdbcType="VARCHAR"
+			property="parsedDataDetailId" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="sbdnum" jdbcType="VARCHAR" property="sbdnum" />
+		<result column="party_category_id" jdbcType="INTEGER" property="partyCategoryId" />
+		<result column="legal_representative" jdbcType="VARCHAR"
+			property="legalRepresentative" />
+		<result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
+		<result column="identification_number" jdbcType="VARCHAR"
+			property="identificationNumber" />
+		<result column="date_of_birth" jdbcType="DATE" property="dateOfBirth" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="organization_name" jdbcType="VARCHAR" property="organizationName" />
+		<result column="amount_involved" jdbcType="NUMERIC" property="amountInvolved" />
+		<result column="amount_to_be_executed" jdbcType="NUMERIC"
+			property="amountToBeExecuted" />
+		<result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
+		<result column="accuse_date" jdbcType="TIMESTAMP" property="accuseDate" />
+		<result column="insert_date" jdbcType="TIMESTAMP" property="insertDate" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		litigation_party
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.experian.dto.entity.litigation.LitigationParty">
+		insert into litigation_party (id, parsed_data_detail_id,
+		name,
+		sbdnum, party_category_id, legal_representative,
+		organization_code, identification_number,
+		date_of_birth, address,
+		organization_name,
+		amount_involved, amount_to_be_executed,
+		updated_date,
+		accuse_date, insert_date)
+		values (#{id,jdbcType=VARCHAR},
+		#{parsedDataDetailId,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{sbdnum,jdbcType=VARCHAR}, #{partyCategoryId,jdbcType=INTEGER},
+		#{legalRepresentative,jdbcType=VARCHAR},
+		#{organizationCode,jdbcType=VARCHAR},
+		#{identificationNumber,jdbcType=VARCHAR},
+		#{dateOfBirth,jdbcType=DATE}, #{address,jdbcType=VARCHAR},
+		#{organizationName,jdbcType=VARCHAR},
+		#{amountInvolved,jdbcType=NUMERIC},
+		#{amountToBeExecuted,jdbcType=NUMERIC},
+		#{updatedDate,jdbcType=TIMESTAMP},
+		#{accuseDate,jdbcType=TIMESTAMP},
+		#{insertDate,jdbcType=TIMESTAMP})
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.experian.dto.entity.litigation.LitigationParty">
+		update litigation_party
+		set parsed_data_detail_id =
+		#{parsedDataDetailId,jdbcType=VARCHAR},
+		name =
+		#{name,jdbcType=VARCHAR},
+		sbdnum = #{sbdnum,jdbcType=VARCHAR},
+		party_category_id = #{partyCategoryId,jdbcType=INTEGER},
+		legal_representative = #{legalRepresentative,jdbcType=VARCHAR},
+		organization_code = #{organizationCode,jdbcType=VARCHAR},
+		identification_number = #{identificationNumber,jdbcType=VARCHAR},
+		date_of_birth = #{dateOfBirth,jdbcType=DATE},
+		address =
+		#{address,jdbcType=VARCHAR},
+		organization_name =
+		#{organizationName,jdbcType=VARCHAR},
+		amount_involved =
+		#{amountInvolved,jdbcType=NUMERIC},
+		amount_to_be_executed =
+		#{amountToBeExecuted,jdbcType=NUMERIC},
+		updated_date =
+		#{updatedDate,jdbcType=TIMESTAMP},
+		accuse_date =
+		#{accuseDate,jdbcType=TIMESTAMP},
+		insert_date =
+		#{insertDate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select id, parsed_data_detail_id, name, sbdnum,
+		party_category_id,
+		legal_representative,
+		organization_code,
+		identification_number, date_of_birth, address, organization_name,
+		amount_involved, amount_to_be_executed, updated_date, accuse_date,
+		insert_date
+		from litigation_party
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select id,
+		parsed_data_detail_id, name, sbdnum, party_category_id,
+		legal_representative,
+		organization_code, identification_number,
+		date_of_birth, address, organization_name,
+		amount_involved,
+		amount_to_be_executed, updated_date, accuse_date,
+		insert_date
+		from
+		litigation_party
+	</select>
+
+	<!--严禁覆盖 -->
+	<select id="getCountByParsedDataDetailId" parameterType="string"
+		resultType="int">
+		select count(1) from litigation_party where
+		parsed_data_detail_id
+		=#{parsedDataDetailId}
+	</select>
+
+
+	<select id="selectByParsedDataDetailId" parameterType="string"
+		resultMap="BaseResultMap">
+		select * from litigation_party where parsed_data_detail_id
+		=#{parsedDataDetailId}
+	</select>
+
+
+	<delete id="batchDetele" parameterType="java.util.List">
+		delete from litigation_party where id in
+		<foreach collection="list" item="party" open="(" separator=","
+			close=")">
+			#{ party.id}
+		</foreach>
+	</delete>
+
+	<insert id="batchInsert" parameterType="java.util.List">
+		insert into litigation_party (id, parsed_data_detail_id, name,
+		sbdnum,
+		party_category_id, legal_representative,
+		organization_code,
+		identification_number,
+		date_of_birth, address, organization_name,
+		amount_involved, amount_to_be_executed, updated_date,
+		accuse_date,
+		insert_date)
+		values
+		<foreach collection="parties" item="party"
+			separator=",">
+			(#{party.id,jdbcType=VARCHAR},
+			#{party.parsedDataDetailId,jdbcType=VARCHAR},
+			#{party.name,jdbcType=VARCHAR},
+			#{party.sbdnum,jdbcType=VARCHAR},
+			#{party.partyCategoryId,jdbcType=INTEGER},
+			#{party.legalRepresentative,jdbcType=VARCHAR},
+			#{party.organizationCode,jdbcType=VARCHAR},
+			#{party.identificationNumber,jdbcType=VARCHAR},
+			#{party.dateOfBirth,jdbcType=DATE},
+			#{party.address,jdbcType=VARCHAR},
+			#{party.organizationName,jdbcType=VARCHAR},
+			#{party.amountInvolved,jdbcType=NUMERIC},
+			#{party.amountToBeExecuted,jdbcType=NUMERIC},
+			#{party.updatedDate,jdbcType=TIMESTAMP},
+			#{party.accuseDate,jdbcType=TIMESTAMP},
+			#{party.insertDate,jdbcType=TIMESTAMP})
+		</foreach>
+	</insert>
+
+	<select id="batchSelectAccPartyDescOrder" parameterType="java.util.List"
+		resultType="hashmap">
+		SELECT
+		parsed_data_detail_id,COUNT (1) as num
+		FROM
+		litigation_party
+		WHERE
+		parsed_data_detail_id IN
+		<foreach collection="litis" item="liti" open="("
+			separator="," close=")">
+			#{liti.id}
+		</foreach>
+		GROUP BY parsed_data_detail_id ORDER BY NUM DESC
+	</select>
+
+	<select id="batchSelectSbdnumDescOrder" parameterType="java.util.List"
+		resultType="hashmap">
+		SELECT
+		parsed_data_detail_id,COUNT (1) as num
+		FROM
+		litigation_party
+		WHERE
+		parsed_data_detail_id IN
+		<foreach collection="litis" item="liti" index="index" open="("
+			separator="," close=")">
+			#{liti.id}
+		</foreach>
+		and sbdnum is not NULL and sbdnum !='' GROUP BY parsed_data_detail_id
+		ORDER BY NUM
+		DESC
+	</select>
+	<!-- 通过自然人集合查找有案号或者上期案号的自然人数据 -->
+	<select id="selectByPartyList" parameterType="hashmap"
+		resultMap="BaseResultMap">
+		SELECT
+		b.*
+		FROM
+		litigation_parsed_data_detail A
+		LEFT JOIN
+		litigation_party
+		b ON A . ID = b.parsed_data_detail_id
+		WHERE 1=1
+		<if test="nullCode==1">
+			AND ((A .case_number IS NOT NULL AND A .case_number!='')
+			OR (A.previous_case_number IS NOT NULL AND
+			A.previous_case_number!=''))
+		</if>
+		<if test="nullCode==2">
+			AND ((A .case_number IS NULL or A .case_number='')
+			AND
+			(A.previous_case_number IS NULL OR A.previous_case_number=''))
+		</if>
+		<if test="parties != null and parties.size()>0">
+			and b.NAME IN
+			<foreach collection="parties" item="party" index="index"
+				open="(" separator="," close=")">
+				#{party.name}
+			</foreach>
+		</if>
+	</select>
+
+	<select id="selectByPartyListWithCaseNumber" parameterType="hashmap"
+		resultMap="BaseResultMap">
+		SELECT
+		b.*
+		FROM
+		litigation_parsed_data_detail A
+		LEFT JOIN
+		litigation_party
+		b ON A . ID = b.parsed_data_detail_id
+		WHERE 1=1
+		<if test="serialCaseNumber !=null and serialCaseNumber != ''">
+			AND parsed_data_id = #{serialCaseNumber}
+		</if>
+		<if test="caseNumber!=null and caseNumber!=''">
+			AND case_number = #{caseNumber}
+		</if>
+		<if test="parties != null and parties.size()>0">
+			and b.NAME IN
+			<foreach collection="parties" item="party" index="index"
+				open="(" separator="," close=")">
+				#{party.name}
+			</foreach>
+		</if>
+	</select>
+
+	<delete id="deleteByDetailId" parameterType="string">
+		delete from
+		litigation_party where
+		parsed_data_detail_id = #{detailId}
+	</delete>
+
+	<update id="updateSbdnumByPrimaryKey" parameterType="hashmap">
+		update
+		litigation_party set sbdnum = #{sbdnum} where id =#{id}
+	</update>
+</mapper>

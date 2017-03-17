@@ -1,0 +1,31 @@
+package com.experian.task.job.service.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.experian.task.job.dao.JobDao;
+import com.experian.task.job.entity.QrtzCustomerJob;
+import com.experian.task.job.service.JobService;
+@Service("jobService")
+public class JobServiceImpl implements JobService {
+	@Resource(name="jobDao")
+	private JobDao jobDao;
+
+	public List<QrtzCustomerJob> findAll() {
+		return jobDao.findAll();
+	}
+
+	@Override
+	public int update(QrtzCustomerJob record) {
+		return jobDao.update(record);
+	}
+
+	@Override
+	public QrtzCustomerJob findByNameAndGname(QrtzCustomerJob record) {
+		return jobDao.findByNameAndGname(record);
+	}
+
+}

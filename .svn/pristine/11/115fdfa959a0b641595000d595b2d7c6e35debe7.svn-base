@@ -1,0 +1,64 @@
+package com.experian.daas.litigation.service;
+
+import java.util.List;
+
+import com.experian.dto.pojo.litigation.LitigationAPIPojo;
+
+/**
+ * 诉讼数据清洗落地
+ * 
+ * @author lixiongcheng
+ *
+ */
+public interface LitigationAdapterService {
+	public static final String MATCH_SBDNUM_QUEUE = "matchSbdnumQueue";
+
+	public static final int POOL_SIZE = 10;
+
+	public static final String QUEUE_NAME_PREFIX = "litigationQueue";
+
+	/**
+	 * 执行数据清洗
+	 * 
+	 * @param litigation
+	 * @throws Exception
+	 */
+	String executeAdapt(LitigationAPIPojo litigation);
+
+	/**
+	 * 主键获取
+	 * 
+	 * @param detailId
+	 * @param fetchState
+	 *            0 未被清洗，1-已清洗数据
+	 * @param parsedStatus
+	 *            0-解析成功,1-未解析成功，但有用,3-无用数据
+	 * @return
+	 */
+	LitigationAPIPojo getAPiPojoById(String detailId, Integer fetchState, Integer parsedStatus);
+
+	/**
+	 * 获取list
+	 * 
+	 * @param pageNum
+	 * @param pageSize
+	 * @param fetchState
+	 *            0 未被清洗，1-已清洗数据
+	 * @param parsedStatus
+	 *            0-解析成功,1-未解析成功，但有用,3-无用数据
+	 * @return
+	 */
+	List<LitigationAPIPojo> getLitigationAPIPojo(int pageNum, int pageSize, Integer fetchState, Integer parsedStatus);
+
+	/**
+	 * 获取最新num条fetchState状态数据
+	 * 
+	 * @param num
+	 * @param fetchState
+	 * @param parsedStatus
+	 *            0-解析成功,1-未解析成功，但有用,3-无用数据
+	 * @return
+	 */
+	List<LitigationAPIPojo> getLastest(long num, Integer fetchState, Integer parsedStatus);
+
+}

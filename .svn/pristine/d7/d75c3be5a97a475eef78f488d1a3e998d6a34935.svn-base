@@ -1,0 +1,18 @@
+package com.experian.daas.litigation.pojo;
+
+import java.util.List;
+
+import com.experian.daas.litigation.entity.LitigationPartyCategory;
+
+public class PartyCategoryAPIPojo extends BaseAPIPojo {
+	private List<LitigationPartyCategory> data;
+
+	public List<LitigationPartyCategory> getData() {
+		return data;
+	}
+
+	public void setData(List<LitigationPartyCategory> data) {
+		this.data = data;
+	}
+	
+}

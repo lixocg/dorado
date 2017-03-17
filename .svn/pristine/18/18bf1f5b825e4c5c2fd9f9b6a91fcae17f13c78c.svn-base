@@ -1,0 +1,2 @@
+eureka.client.serviceUrl.defaultZone=${eurekaAddress}
+

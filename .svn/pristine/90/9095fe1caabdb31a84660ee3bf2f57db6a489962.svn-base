@@ -1,0 +1,1068 @@
+package com.experian.daas.baseinfo.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
+/**
+ * 映射表： V_CORPBASEINFO
+ */
+public class CentralCorpBaseInfo implements Serializable {
+    /**
+     * 映射字段： SBDNUM
+     */
+    private String sbdnum;
+
+    /**
+     * 映射字段： CORPNAME
+     */
+    private String corpname;
+
+    /**
+     * 映射字段： BUSIADDR
+     */
+    private String busiaddr;
+
+    /**
+     * 映射字段： BUSIZIP
+     */
+    private String busizip;
+
+    /**
+     * 映射字段： BUSITELAREACODE
+     */
+    private String busitelareacode;
+
+    /**
+     * 映射字段： BUSITEL
+     */
+    private String busitel;
+
+    /**
+     * 映射字段： BUSIFAX
+     */
+    private String busifax;
+
+    /**
+     * 映射字段： URL
+     */
+    private String url;
+
+    /**
+     * 映射字段： EMAIL
+     */
+    private String email;
+
+    /**
+     * 映射字段： BISMAJORREVENUES
+     */
+    private BigDecimal bismajorrevenues;
+
+    /**
+     * 映射字段： BISTOTALASSETS
+     */
+    private BigDecimal bistotalassets;
+
+    /**
+     * 映射字段： BISTOTALEMPLOYEES
+     */
+    private Integer bistotalemployees;
+
+    /**
+     * 映射字段： BISCHIEFEXECUTE
+     */
+    private String bischiefexecute;
+
+    /**
+     * 映射字段： DISTRICTCODE
+     */
+    private String districtcode;
+
+    /**
+     * 映射字段： MAINTRADECODE
+     */
+    private String maintradecode;
+
+    /**
+     * 映射字段： MAINSBDTRADECODE
+     */
+    private String mainsbdtradecode;
+
+    /**
+     * 映射字段： LEGALSTATUSCODE
+     */
+    private String legalstatuscode;
+
+    /**
+     * 映射字段： INSTITUTIONALCODE
+     */
+    private String institutionalcode;
+
+    /**
+     * 映射字段： COUNTRYCODE
+     */
+    private String countrycode;
+
+    /**
+     * 映射字段： INVESTORCOUNTRYCODE
+     */
+    private String investorcountrycode;
+
+    /**
+     * 映射字段： PRIORITY
+     */
+    private String priority;
+
+    /**
+     * 映射字段： REGISTERCAPITAL
+     */
+    private BigDecimal registercapital;
+
+    /**
+     * 映射字段： STARTINGDATE
+     */
+    private Date startingdate;
+
+    /**
+     * 映射字段： OPERATIONSTATUS
+     */
+    private String operationstatus;
+
+    /**
+     * 映射字段： COMPANYSTATUS
+     */
+    private String companystatus;
+
+    /**
+     * 映射字段： COMPANYTYPE
+     */
+    private String companytype;
+
+    /**
+     * 映射字段： UPDATETIME
+     */
+    private Date updatetime;
+
+    /**
+     * 映射字段： SBDMNUM
+     */
+    private String sbdmnum;
+
+    /**
+     * 映射字段： FREETEL
+     */
+    private String freetel;
+
+    /**
+     * 映射字段： IFLARGEBUS
+     */
+    private String iflargebus;
+
+    /**
+     * 映射字段： REPTYPE
+     */
+    private String reptype;
+
+    /**
+     * 映射字段： CREPORTDATE
+     */
+    private Date creportdate;
+
+    /**
+     * 映射字段： FINANCEDATE
+     */
+    private Date financedate;
+
+    /**
+     * 映射字段： IFLISTEDCOMPANY
+     */
+    private String iflistedcompany;
+
+    /**
+     * 映射字段： CONTROLSBDNUM
+     */
+    private String controlsbdnum;
+
+    /**
+     * 映射字段： PRODUCTCODE
+     */
+    private String productcode;
+
+    /**
+     * 映射字段： PRODUCTCODE2
+     */
+    private String productcode2;
+
+    /**
+     * 映射字段： IFSHOWFINANCE
+     */
+    private String ifshowfinance;
+
+    /**
+     * 映射字段： CORPNAMEINDEX
+     */
+    private Long corpnameindex;
+
+    /**
+     * 映射字段： CORPNAMEINDEX02
+     */
+    private Long corpnameindex02;
+
+    /**
+     * 映射字段： BUSITEL1
+     */
+    private String busitel1;
+
+    /**
+     * 映射字段： BUSITEL2
+     */
+    private String busitel2;
+
+    /**
+     * 映射字段： BUSITEL3
+     */
+    private String busitel3;
+
+    /**
+     * 映射字段： BUSITEL4
+     */
+    private String busitel4;
+
+    /**
+     * 映射字段： BUSIFAX1
+     */
+    private String busifax1;
+
+    /**
+     * 映射字段： BUSIFAX2
+     */
+    private String busifax2;
+
+    /**
+     * 映射字段： BUSITEL1FLAG
+     */
+    private String busitel1flag;
+
+    /**
+     * 映射字段： BUSITEL2FLAG
+     */
+    private String busitel2flag;
+
+    /**
+     * 映射字段： BUSITEL3FLAG
+     */
+    private String busitel3flag;
+
+    /**
+     * 映射字段： BUSITEL4FLAG
+     */
+    private String busitel4flag;
+
+    /**
+     * 映射字段： BUSIFAX1FLAG
+     */
+    private String busifax1flag;
+
+    /**
+     * 映射字段： BUSIFAX2FLAG
+     */
+    private String busifax2flag;
+
+    /**
+     * 映射字段： ADDRVERACITY
+     */
+    private BigDecimal addrveracity;
+
+    /**
+     * 映射字段： ISSHOWADDR
+     */
+    private String isshowaddr;
+
+    /**
+     * 映射字段： BUSIADDR_OLD
+     */
+    private String busiaddrOld;
+
+    /**
+     * 映射字段： IFDEBT
+     */
+    private String ifdebt;
+
+    /**
+     * 映射字段： IFSECRET
+     */
+    private String ifsecret;
+
+    /**
+     * 映射字段： IFLISTEDCOMPANY1
+     */
+    private String iflistedcompany1;
+
+    /**
+     * 映射字段： TRADECODE_BAK
+     */
+    private String tradecodeBak;
+
+    /**
+     * 映射字段： IFDELIST
+     */
+    private String ifdelist;
+
+    /**
+     * 映射字段： IFLISTEDCOMPANY_HK
+     */
+    private String iflistedcompanyHk;
+
+    /**
+     * 映射字段： MAINPRODUCT
+     */
+    private String mainproduct;
+
+    /**
+     * 映射字段： NOTE
+     */
+    private String note;
+
+    /**
+     * 映射字段： BRIEFINTRO
+     */
+    private String briefintro;
+
+    private static final long serialVersionUID = 1L;
+
+    public String getSbdnum() {
+        return sbdnum;
+    }
+
+    public void setSbdnum(String sbdnum) {
+        this.sbdnum = sbdnum == null ? null : sbdnum.trim();
+    }
+
+    public String getCorpname() {
+        return corpname;
+    }
+
+    public void setCorpname(String corpname) {
+        this.corpname = corpname == null ? null : corpname.trim();
+    }
+
+    public String getBusiaddr() {
+        return busiaddr;
+    }
+
+    public void setBusiaddr(String busiaddr) {
+        this.busiaddr = busiaddr == null ? null : busiaddr.trim();
+    }
+
+    public String getBusizip() {
+        return busizip;
+    }
+
+    public void setBusizip(String busizip) {
+        this.busizip = busizip == null ? null : busizip.trim();
+    }
+
+    public String getBusitelareacode() {
+        return busitelareacode;
+    }
+
+    public void setBusitelareacode(String busitelareacode) {
+        this.busitelareacode = busitelareacode == null ? null : busitelareacode.trim();
+    }
+
+    public String getBusitel() {
+        return busitel;
+    }
+
+    public void setBusitel(String busitel) {
+        this.busitel = busitel == null ? null : busitel.trim();
+    }
+
+    public String getBusifax() {
+        return busifax;
+    }
+
+    public void setBusifax(String busifax) {
+        this.busifax = busifax == null ? null : busifax.trim();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
+    public BigDecimal getBismajorrevenues() {
+        return bismajorrevenues;
+    }
+
+    public void setBismajorrevenues(BigDecimal bismajorrevenues) {
+        this.bismajorrevenues = bismajorrevenues;
+    }
+
+    public BigDecimal getBistotalassets() {
+        return bistotalassets;
+    }
+
+    public void setBistotalassets(BigDecimal bistotalassets) {
+        this.bistotalassets = bistotalassets;
+    }
+
+    public Integer getBistotalemployees() {
+        return bistotalemployees;
+    }
+
+    public void setBistotalemployees(Integer bistotalemployees) {
+        this.bistotalemployees = bistotalemployees;
+    }
+
+    public String getBischiefexecute() {
+        return bischiefexecute;
+    }
+
+    public void setBischiefexecute(String bischiefexecute) {
+        this.bischiefexecute = bischiefexecute == null ? null : bischiefexecute.trim();
+    }
+
+    public String getDistrictcode() {
+        return districtcode;
+    }
+
+    public void setDistrictcode(String districtcode) {
+        this.districtcode = districtcode == null ? null : districtcode.trim();
+    }
+
+    public String getMaintradecode() {
+        return maintradecode;
+    }
+
+    public void setMaintradecode(String maintradecode) {
+        this.maintradecode = maintradecode == null ? null : maintradecode.trim();
+    }
+
+    public String getMainsbdtradecode() {
+        return mainsbdtradecode;
+    }
+
+    public void setMainsbdtradecode(String mainsbdtradecode) {
+        this.mainsbdtradecode = mainsbdtradecode == null ? null : mainsbdtradecode.trim();
+    }
+
+    public String getLegalstatuscode() {
+        return legalstatuscode;
+    }
+
+    public void setLegalstatuscode(String legalstatuscode) {
+        this.legalstatuscode = legalstatuscode == null ? null : legalstatuscode.trim();
+    }
+
+    public String getInstitutionalcode() {
+        return institutionalcode;
+    }
+
+    public void setInstitutionalcode(String institutionalcode) {
+        this.institutionalcode = institutionalcode == null ? null : institutionalcode.trim();
+    }
+
+    public String getCountrycode() {
+        return countrycode;
+    }
+
+    public void setCountrycode(String countrycode) {
+        this.countrycode = countrycode == null ? null : countrycode.trim();
+    }
+
+    public String getInvestorcountrycode() {
+        return investorcountrycode;
+    }
+
+    public void setInvestorcountrycode(String investorcountrycode) {
+        this.investorcountrycode = investorcountrycode == null ? null : investorcountrycode.trim();
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority == null ? null : priority.trim();
+    }
+
+    public BigDecimal getRegistercapital() {
+        return registercapital;
+    }
+
+    public void setRegistercapital(BigDecimal registercapital) {
+        this.registercapital = registercapital;
+    }
+
+    public Date getStartingdate() {
+        return startingdate;
+    }
+
+    public void setStartingdate(Date startingdate) {
+        this.startingdate = startingdate;
+    }
+
+    public String getOperationstatus() {
+        return operationstatus;
+    }
+
+    public void setOperationstatus(String operationstatus) {
+        this.operationstatus = operationstatus == null ? null : operationstatus.trim();
+    }
+
+    public String getCompanystatus() {
+        return companystatus;
+    }
+
+    public void setCompanystatus(String companystatus) {
+        this.companystatus = companystatus == null ? null : companystatus.trim();
+    }
+
+    public String getCompanytype() {
+        return companytype;
+    }
+
+    public void setCompanytype(String companytype) {
+        this.companytype = companytype == null ? null : companytype.trim();
+    }
+
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    public String getSbdmnum() {
+        return sbdmnum;
+    }
+
+    public void setSbdmnum(String sbdmnum) {
+        this.sbdmnum = sbdmnum == null ? null : sbdmnum.trim();
+    }
+
+    public String getFreetel() {
+        return freetel;
+    }
+
+    public void setFreetel(String freetel) {
+        this.freetel = freetel == null ? null : freetel.trim();
+    }
+
+    public String getIflargebus() {
+        return iflargebus;
+    }
+
+    public void setIflargebus(String iflargebus) {
+        this.iflargebus = iflargebus == null ? null : iflargebus.trim();
+    }
+
+    public String getReptype() {
+        return reptype;
+    }
+
+    public void setReptype(String reptype) {
+        this.reptype = reptype == null ? null : reptype.trim();
+    }
+
+    public Date getCreportdate() {
+        return creportdate;
+    }
+
+    public void setCreportdate(Date creportdate) {
+        this.creportdate = creportdate;
+    }
+
+    public Date getFinancedate() {
+        return financedate;
+    }
+
+    public void setFinancedate(Date financedate) {
+        this.financedate = financedate;
+    }
+
+    public String getIflistedcompany() {
+        return iflistedcompany;
+    }
+
+    public void setIflistedcompany(String iflistedcompany) {
+        this.iflistedcompany = iflistedcompany == null ? null : iflistedcompany.trim();
+    }
+
+    public String getControlsbdnum() {
+        return controlsbdnum;
+    }
+
+    public void setControlsbdnum(String controlsbdnum) {
+        this.controlsbdnum = controlsbdnum == null ? null : controlsbdnum.trim();
+    }
+
+    public String getProductcode() {
+        return productcode;
+    }
+
+    public void setProductcode(String productcode) {
+        this.productcode = productcode == null ? null : productcode.trim();
+    }
+
+    public String getProductcode2() {
+        return productcode2;
+    }
+
+    public void setProductcode2(String productcode2) {
+        this.productcode2 = productcode2 == null ? null : productcode2.trim();
+    }
+
+    public String getIfshowfinance() {
+        return ifshowfinance;
+    }
+
+    public void setIfshowfinance(String ifshowfinance) {
+        this.ifshowfinance = ifshowfinance == null ? null : ifshowfinance.trim();
+    }
+
+    public Long getCorpnameindex() {
+        return corpnameindex;
+    }
+
+    public void setCorpnameindex(Long corpnameindex) {
+        this.corpnameindex = corpnameindex;
+    }
+
+    public Long getCorpnameindex02() {
+        return corpnameindex02;
+    }
+
+    public void setCorpnameindex02(Long corpnameindex02) {
+        this.corpnameindex02 = corpnameindex02;
+    }
+
+    public String getBusitel1() {
+        return busitel1;
+    }
+
+    public void setBusitel1(String busitel1) {
+        this.busitel1 = busitel1 == null ? null : busitel1.trim();
+    }
+
+    public String getBusitel2() {
+        return busitel2;
+    }
+
+    public void setBusitel2(String busitel2) {
+        this.busitel2 = busitel2 == null ? null : busitel2.trim();
+    }
+
+    public String getBusitel3() {
+        return busitel3;
+    }
+
+    public void setBusitel3(String busitel3) {
+        this.busitel3 = busitel3 == null ? null : busitel3.trim();
+    }
+
+    public String getBusitel4() {
+        return busitel4;
+    }
+
+    public void setBusitel4(String busitel4) {
+        this.busitel4 = busitel4 == null ? null : busitel4.trim();
+    }
+
+    public String getBusifax1() {
+        return busifax1;
+    }
+
+    public void setBusifax1(String busifax1) {
+        this.busifax1 = busifax1 == null ? null : busifax1.trim();
+    }
+
+    public String getBusifax2() {
+        return busifax2;
+    }
+
+    public void setBusifax2(String busifax2) {
+        this.busifax2 = busifax2 == null ? null : busifax2.trim();
+    }
+
+    public String getBusitel1flag() {
+        return busitel1flag;
+    }
+
+    public void setBusitel1flag(String busitel1flag) {
+        this.busitel1flag = busitel1flag == null ? null : busitel1flag.trim();
+    }
+
+    public String getBusitel2flag() {
+        return busitel2flag;
+    }
+
+    public void setBusitel2flag(String busitel2flag) {
+        this.busitel2flag = busitel2flag == null ? null : busitel2flag.trim();
+    }
+
+    public String getBusitel3flag() {
+        return busitel3flag;
+    }
+
+    public void setBusitel3flag(String busitel3flag) {
+        this.busitel3flag = busitel3flag == null ? null : busitel3flag.trim();
+    }
+
+    public String getBusitel4flag() {
+        return busitel4flag;
+    }
+
+    public void setBusitel4flag(String busitel4flag) {
+        this.busitel4flag = busitel4flag == null ? null : busitel4flag.trim();
+    }
+
+    public String getBusifax1flag() {
+        return busifax1flag;
+    }
+
+    public void setBusifax1flag(String busifax1flag) {
+        this.busifax1flag = busifax1flag == null ? null : busifax1flag.trim();
+    }
+
+    public String getBusifax2flag() {
+        return busifax2flag;
+    }
+
+    public void setBusifax2flag(String busifax2flag) {
+        this.busifax2flag = busifax2flag == null ? null : busifax2flag.trim();
+    }
+
+    public BigDecimal getAddrveracity() {
+        return addrveracity;
+    }
+
+    public void setAddrveracity(BigDecimal addrveracity) {
+        this.addrveracity = addrveracity;
+    }
+
+    public String getIsshowaddr() {
+        return isshowaddr;
+    }
+
+    public void setIsshowaddr(String isshowaddr) {
+        this.isshowaddr = isshowaddr == null ? null : isshowaddr.trim();
+    }
+
+    public String getBusiaddrOld() {
+        return busiaddrOld;
+    }
+
+    public void setBusiaddrOld(String busiaddrOld) {
+        this.busiaddrOld = busiaddrOld == null ? null : busiaddrOld.trim();
+    }
+
+    public String getIfdebt() {
+        return ifdebt;
+    }
+
+    public void setIfdebt(String ifdebt) {
+        this.ifdebt = ifdebt == null ? null : ifdebt.trim();
+    }
+
+    public String getIfsecret() {
+        return ifsecret;
+    }
+
+    public void setIfsecret(String ifsecret) {
+        this.ifsecret = ifsecret == null ? null : ifsecret.trim();
+    }
+
+    public String getIflistedcompany1() {
+        return iflistedcompany1;
+    }
+
+    public void setIflistedcompany1(String iflistedcompany1) {
+        this.iflistedcompany1 = iflistedcompany1 == null ? null : iflistedcompany1.trim();
+    }
+
+    public String getTradecodeBak() {
+        return tradecodeBak;
+    }
+
+    public void setTradecodeBak(String tradecodeBak) {
+        this.tradecodeBak = tradecodeBak == null ? null : tradecodeBak.trim();
+    }
+
+    public String getIfdelist() {
+        return ifdelist;
+    }
+
+    public void setIfdelist(String ifdelist) {
+        this.ifdelist = ifdelist == null ? null : ifdelist.trim();
+    }
+
+    public String getIflistedcompanyHk() {
+        return iflistedcompanyHk;
+    }
+
+    public void setIflistedcompanyHk(String iflistedcompanyHk) {
+        this.iflistedcompanyHk = iflistedcompanyHk == null ? null : iflistedcompanyHk.trim();
+    }
+
+    public String getMainproduct() {
+        return mainproduct;
+    }
+
+    public void setMainproduct(String mainproduct) {
+        this.mainproduct = mainproduct == null ? null : mainproduct.trim();
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
+    }
+
+    public String getBriefintro() {
+        return briefintro;
+    }
+
+    public void setBriefintro(String briefintro) {
+        this.briefintro = briefintro == null ? null : briefintro.trim();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        CentralCorpBaseInfo other = (CentralCorpBaseInfo) that;
+        return (this.getSbdnum() == null ? other.getSbdnum() == null : this.getSbdnum().equals(other.getSbdnum()))
+            && (this.getCorpname() == null ? other.getCorpname() == null : this.getCorpname().equals(other.getCorpname()))
+            && (this.getBusiaddr() == null ? other.getBusiaddr() == null : this.getBusiaddr().equals(other.getBusiaddr()))
+            && (this.getBusizip() == null ? other.getBusizip() == null : this.getBusizip().equals(other.getBusizip()))
+            && (this.getBusitelareacode() == null ? other.getBusitelareacode() == null : this.getBusitelareacode().equals(other.getBusitelareacode()))
+            && (this.getBusitel() == null ? other.getBusitel() == null : this.getBusitel().equals(other.getBusitel()))
+            && (this.getBusifax() == null ? other.getBusifax() == null : this.getBusifax().equals(other.getBusifax()))
+            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
+            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
+            && (this.getBismajorrevenues() == null ? other.getBismajorrevenues() == null : this.getBismajorrevenues().equals(other.getBismajorrevenues()))
+            && (this.getBistotalassets() == null ? other.getBistotalassets() == null : this.getBistotalassets().equals(other.getBistotalassets()))
+            && (this.getBistotalemployees() == null ? other.getBistotalemployees() == null : this.getBistotalemployees().equals(other.getBistotalemployees()))
+            && (this.getBischiefexecute() == null ? other.getBischiefexecute() == null : this.getBischiefexecute().equals(other.getBischiefexecute()))
+            && (this.getDistrictcode() == null ? other.getDistrictcode() == null : this.getDistrictcode().equals(other.getDistrictcode()))
+            && (this.getMaintradecode() == null ? other.getMaintradecode() == null : this.getMaintradecode().equals(other.getMaintradecode()))
+            && (this.getMainsbdtradecode() == null ? other.getMainsbdtradecode() == null : this.getMainsbdtradecode().equals(other.getMainsbdtradecode()))
+            && (this.getLegalstatuscode() == null ? other.getLegalstatuscode() == null : this.getLegalstatuscode().equals(other.getLegalstatuscode()))
+            && (this.getInstitutionalcode() == null ? other.getInstitutionalcode() == null : this.getInstitutionalcode().equals(other.getInstitutionalcode()))
+            && (this.getCountrycode() == null ? other.getCountrycode() == null : this.getCountrycode().equals(other.getCountrycode()))
+            && (this.getInvestorcountrycode() == null ? other.getInvestorcountrycode() == null : this.getInvestorcountrycode().equals(other.getInvestorcountrycode()))
+            && (this.getPriority() == null ? other.getPriority() == null : this.getPriority().equals(other.getPriority()))
+            && (this.getRegistercapital() == null ? other.getRegistercapital() == null : this.getRegistercapital().equals(other.getRegistercapital()))
+            && (this.getStartingdate() == null ? other.getStartingdate() == null : this.getStartingdate().equals(other.getStartingdate()))
+            && (this.getOperationstatus() == null ? other.getOperationstatus() == null : this.getOperationstatus().equals(other.getOperationstatus()))
+            && (this.getCompanystatus() == null ? other.getCompanystatus() == null : this.getCompanystatus().equals(other.getCompanystatus()))
+            && (this.getCompanytype() == null ? other.getCompanytype() == null : this.getCompanytype().equals(other.getCompanytype()))
+            && (this.getUpdatetime() == null ? other.getUpdatetime() == null : this.getUpdatetime().equals(other.getUpdatetime()))
+            && (this.getSbdmnum() == null ? other.getSbdmnum() == null : this.getSbdmnum().equals(other.getSbdmnum()))
+            && (this.getFreetel() == null ? other.getFreetel() == null : this.getFreetel().equals(other.getFreetel()))
+            && (this.getIflargebus() == null ? other.getIflargebus() == null : this.getIflargebus().equals(other.getIflargebus()))
+            && (this.getReptype() == null ? other.getReptype() == null : this.getReptype().equals(other.getReptype()))
+            && (this.getCreportdate() == null ? other.getCreportdate() == null : this.getCreportdate().equals(other.getCreportdate()))
+            && (this.getFinancedate() == null ? other.getFinancedate() == null : this.getFinancedate().equals(other.getFinancedate()))
+            && (this.getIflistedcompany() == null ? other.getIflistedcompany() == null : this.getIflistedcompany().equals(other.getIflistedcompany()))
+            && (this.getControlsbdnum() == null ? other.getControlsbdnum() == null : this.getControlsbdnum().equals(other.getControlsbdnum()))
+            && (this.getProductcode() == null ? other.getProductcode() == null : this.getProductcode().equals(other.getProductcode()))
+            && (this.getProductcode2() == null ? other.getProductcode2() == null : this.getProductcode2().equals(other.getProductcode2()))
+            && (this.getIfshowfinance() == null ? other.getIfshowfinance() == null : this.getIfshowfinance().equals(other.getIfshowfinance()))
+            && (this.getCorpnameindex() == null ? other.getCorpnameindex() == null : this.getCorpnameindex().equals(other.getCorpnameindex()))
+            && (this.getCorpnameindex02() == null ? other.getCorpnameindex02() == null : this.getCorpnameindex02().equals(other.getCorpnameindex02()))
+            && (this.getBusitel1() == null ? other.getBusitel1() == null : this.getBusitel1().equals(other.getBusitel1()))
+            && (this.getBusitel2() == null ? other.getBusitel2() == null : this.getBusitel2().equals(other.getBusitel2()))
+            && (this.getBusitel3() == null ? other.getBusitel3() == null : this.getBusitel3().equals(other.getBusitel3()))
+            && (this.getBusitel4() == null ? other.getBusitel4() == null : this.getBusitel4().equals(other.getBusitel4()))
+            && (this.getBusifax1() == null ? other.getBusifax1() == null : this.getBusifax1().equals(other.getBusifax1()))
+            && (this.getBusifax2() == null ? other.getBusifax2() == null : this.getBusifax2().equals(other.getBusifax2()))
+            && (this.getBusitel1flag() == null ? other.getBusitel1flag() == null : this.getBusitel1flag().equals(other.getBusitel1flag()))
+            && (this.getBusitel2flag() == null ? other.getBusitel2flag() == null : this.getBusitel2flag().equals(other.getBusitel2flag()))
+            && (this.getBusitel3flag() == null ? other.getBusitel3flag() == null : this.getBusitel3flag().equals(other.getBusitel3flag()))
+            && (this.getBusitel4flag() == null ? other.getBusitel4flag() == null : this.getBusitel4flag().equals(other.getBusitel4flag()))
+            && (this.getBusifax1flag() == null ? other.getBusifax1flag() == null : this.getBusifax1flag().equals(other.getBusifax1flag()))
+            && (this.getBusifax2flag() == null ? other.getBusifax2flag() == null : this.getBusifax2flag().equals(other.getBusifax2flag()))
+            && (this.getAddrveracity() == null ? other.getAddrveracity() == null : this.getAddrveracity().equals(other.getAddrveracity()))
+            && (this.getIsshowaddr() == null ? other.getIsshowaddr() == null : this.getIsshowaddr().equals(other.getIsshowaddr()))
+            && (this.getBusiaddrOld() == null ? other.getBusiaddrOld() == null : this.getBusiaddrOld().equals(other.getBusiaddrOld()))
+            && (this.getIfdebt() == null ? other.getIfdebt() == null : this.getIfdebt().equals(other.getIfdebt()))
+            && (this.getIfsecret() == null ? other.getIfsecret() == null : this.getIfsecret().equals(other.getIfsecret()))
+            && (this.getIflistedcompany1() == null ? other.getIflistedcompany1() == null : this.getIflistedcompany1().equals(other.getIflistedcompany1()))
+            && (this.getTradecodeBak() == null ? other.getTradecodeBak() == null : this.getTradecodeBak().equals(other.getTradecodeBak()))
+            && (this.getIfdelist() == null ? other.getIfdelist() == null : this.getIfdelist().equals(other.getIfdelist()))
+            && (this.getIflistedcompanyHk() == null ? other.getIflistedcompanyHk() == null : this.getIflistedcompanyHk().equals(other.getIflistedcompanyHk()))
+            && (this.getMainproduct() == null ? other.getMainproduct() == null : this.getMainproduct().equals(other.getMainproduct()))
+            && (this.getNote() == null ? other.getNote() == null : this.getNote().equals(other.getNote()))
+            && (this.getBriefintro() == null ? other.getBriefintro() == null : this.getBriefintro().equals(other.getBriefintro()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getSbdnum() == null) ? 0 : getSbdnum().hashCode());
+        result = prime * result + ((getCorpname() == null) ? 0 : getCorpname().hashCode());
+        result = prime * result + ((getBusiaddr() == null) ? 0 : getBusiaddr().hashCode());
+        result = prime * result + ((getBusizip() == null) ? 0 : getBusizip().hashCode());
+        result = prime * result + ((getBusitelareacode() == null) ? 0 : getBusitelareacode().hashCode());
+        result = prime * result + ((getBusitel() == null) ? 0 : getBusitel().hashCode());
+        result = prime * result + ((getBusifax() == null) ? 0 : getBusifax().hashCode());
+        result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
+        result = prime * result + ((getBismajorrevenues() == null) ? 0 : getBismajorrevenues().hashCode());
+        result = prime * result + ((getBistotalassets() == null) ? 0 : getBistotalassets().hashCode());
+        result = prime * result + ((getBistotalemployees() == null) ? 0 : getBistotalemployees().hashCode());
+        result = prime * result + ((getBischiefexecute() == null) ? 0 : getBischiefexecute().hashCode());
+        result = prime * result + ((getDistrictcode() == null) ? 0 : getDistrictcode().hashCode());
+        result = prime * result + ((getMaintradecode() == null) ? 0 : getMaintradecode().hashCode());
+        result = prime * result + ((getMainsbdtradecode() == null) ? 0 : getMainsbdtradecode().hashCode());
+        result = prime * result + ((getLegalstatuscode() == null) ? 0 : getLegalstatuscode().hashCode());
+        result = prime * result + ((getInstitutionalcode() == null) ? 0 : getInstitutionalcode().hashCode());
+        result = prime * result + ((getCountrycode() == null) ? 0 : getCountrycode().hashCode());
+        result = prime * result + ((getInvestorcountrycode() == null) ? 0 : getInvestorcountrycode().hashCode());
+        result = prime * result + ((getPriority() == null) ? 0 : getPriority().hashCode());
+        result = prime * result + ((getRegistercapital() == null) ? 0 : getRegistercapital().hashCode());
+        result = prime * result + ((getStartingdate() == null) ? 0 : getStartingdate().hashCode());
+        result = prime * result + ((getOperationstatus() == null) ? 0 : getOperationstatus().hashCode());
+        result = prime * result + ((getCompanystatus() == null) ? 0 : getCompanystatus().hashCode());
+        result = prime * result + ((getCompanytype() == null) ? 0 : getCompanytype().hashCode());
+        result = prime * result + ((getUpdatetime() == null) ? 0 : getUpdatetime().hashCode());
+        result = prime * result + ((getSbdmnum() == null) ? 0 : getSbdmnum().hashCode());
+        result = prime * result + ((getFreetel() == null) ? 0 : getFreetel().hashCode());
+        result = prime * result + ((getIflargebus() == null) ? 0 : getIflargebus().hashCode());
+        result = prime * result + ((getReptype() == null) ? 0 : getReptype().hashCode());
+        result = prime * result + ((getCreportdate() == null) ? 0 : getCreportdate().hashCode());
+        result = prime * result + ((getFinancedate() == null) ? 0 : getFinancedate().hashCode());
+        result = prime * result + ((getIflistedcompany() == null) ? 0 : getIflistedcompany().hashCode());
+        result = prime * result + ((getControlsbdnum() == null) ? 0 : getControlsbdnum().hashCode());
+        result = prime * result + ((getProductcode() == null) ? 0 : getProductcode().hashCode());
+        result = prime * result + ((getProductcode2() == null) ? 0 : getProductcode2().hashCode());
+        result = prime * result + ((getIfshowfinance() == null) ? 0 : getIfshowfinance().hashCode());
+        result = prime * result + ((getCorpnameindex() == null) ? 0 : getCorpnameindex().hashCode());
+        result = prime * result + ((getCorpnameindex02() == null) ? 0 : getCorpnameindex02().hashCode());
+        result = prime * result + ((getBusitel1() == null) ? 0 : getBusitel1().hashCode());
+        result = prime * result + ((getBusitel2() == null) ? 0 : getBusitel2().hashCode());
+        result = prime * result + ((getBusitel3() == null) ? 0 : getBusitel3().hashCode());
+        result = prime * result + ((getBusitel4() == null) ? 0 : getBusitel4().hashCode());
+        result = prime * result + ((getBusifax1() == null) ? 0 : getBusifax1().hashCode());
+        result = prime * result + ((getBusifax2() == null) ? 0 : getBusifax2().hashCode());
+        result = prime * result + ((getBusitel1flag() == null) ? 0 : getBusitel1flag().hashCode());
+        result = prime * result + ((getBusitel2flag() == null) ? 0 : getBusitel2flag().hashCode());
+        result = prime * result + ((getBusitel3flag() == null) ? 0 : getBusitel3flag().hashCode());
+        result = prime * result + ((getBusitel4flag() == null) ? 0 : getBusitel4flag().hashCode());
+        result = prime * result + ((getBusifax1flag() == null) ? 0 : getBusifax1flag().hashCode());
+        result = prime * result + ((getBusifax2flag() == null) ? 0 : getBusifax2flag().hashCode());
+        result = prime * result + ((getAddrveracity() == null) ? 0 : getAddrveracity().hashCode());
+        result = prime * result + ((getIsshowaddr() == null) ? 0 : getIsshowaddr().hashCode());
+        result = prime * result + ((getBusiaddrOld() == null) ? 0 : getBusiaddrOld().hashCode());
+        result = prime * result + ((getIfdebt() == null) ? 0 : getIfdebt().hashCode());
+        result = prime * result + ((getIfsecret() == null) ? 0 : getIfsecret().hashCode());
+        result = prime * result + ((getIflistedcompany1() == null) ? 0 : getIflistedcompany1().hashCode());
+        result = prime * result + ((getTradecodeBak() == null) ? 0 : getTradecodeBak().hashCode());
+        result = prime * result + ((getIfdelist() == null) ? 0 : getIfdelist().hashCode());
+        result = prime * result + ((getIflistedcompanyHk() == null) ? 0 : getIflistedcompanyHk().hashCode());
+        result = prime * result + ((getMainproduct() == null) ? 0 : getMainproduct().hashCode());
+        result = prime * result + ((getNote() == null) ? 0 : getNote().hashCode());
+        result = prime * result + ((getBriefintro() == null) ? 0 : getBriefintro().hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", sbdnum=").append(sbdnum);
+        sb.append(", corpname=").append(corpname);
+        sb.append(", busiaddr=").append(busiaddr);
+        sb.append(", busizip=").append(busizip);
+        sb.append(", busitelareacode=").append(busitelareacode);
+        sb.append(", busitel=").append(busitel);
+        sb.append(", busifax=").append(busifax);
+        sb.append(", url=").append(url);
+        sb.append(", email=").append(email);
+        sb.append(", bismajorrevenues=").append(bismajorrevenues);
+        sb.append(", bistotalassets=").append(bistotalassets);
+        sb.append(", bistotalemployees=").append(bistotalemployees);
+        sb.append(", bischiefexecute=").append(bischiefexecute);
+        sb.append(", districtcode=").append(districtcode);
+        sb.append(", maintradecode=").append(maintradecode);
+        sb.append(", mainsbdtradecode=").append(mainsbdtradecode);
+        sb.append(", legalstatuscode=").append(legalstatuscode);
+        sb.append(", institutionalcode=").append(institutionalcode);
+        sb.append(", countrycode=").append(countrycode);
+        sb.append(", investorcountrycode=").append(investorcountrycode);
+        sb.append(", priority=").append(priority);
+        sb.append(", registercapital=").append(registercapital);
+        sb.append(", startingdate=").append(startingdate);
+        sb.append(", operationstatus=").append(operationstatus);
+        sb.append(", companystatus=").append(companystatus);
+        sb.append(", companytype=").append(companytype);
+        sb.append(", updatetime=").append(updatetime);
+        sb.append(", sbdmnum=").append(sbdmnum);
+        sb.append(", freetel=").append(freetel);
+        sb.append(", iflargebus=").append(iflargebus);
+        sb.append(", reptype=").append(reptype);
+        sb.append(", creportdate=").append(creportdate);
+        sb.append(", financedate=").append(financedate);
+        sb.append(", iflistedcompany=").append(iflistedcompany);
+        sb.append(", controlsbdnum=").append(controlsbdnum);
+        sb.append(", productcode=").append(productcode);
+        sb.append(", productcode2=").append(productcode2);
+        sb.append(", ifshowfinance=").append(ifshowfinance);
+        sb.append(", corpnameindex=").append(corpnameindex);
+        sb.append(", corpnameindex02=").append(corpnameindex02);
+        sb.append(", busitel1=").append(busitel1);
+        sb.append(", busitel2=").append(busitel2);
+        sb.append(", busitel3=").append(busitel3);
+        sb.append(", busitel4=").append(busitel4);
+        sb.append(", busifax1=").append(busifax1);
+        sb.append(", busifax2=").append(busifax2);
+        sb.append(", busitel1flag=").append(busitel1flag);
+        sb.append(", busitel2flag=").append(busitel2flag);
+        sb.append(", busitel3flag=").append(busitel3flag);
+        sb.append(", busitel4flag=").append(busitel4flag);
+        sb.append(", busifax1flag=").append(busifax1flag);
+        sb.append(", busifax2flag=").append(busifax2flag);
+        sb.append(", addrveracity=").append(addrveracity);
+        sb.append(", isshowaddr=").append(isshowaddr);
+        sb.append(", busiaddrOld=").append(busiaddrOld);
+        sb.append(", ifdebt=").append(ifdebt);
+        sb.append(", ifsecret=").append(ifsecret);
+        sb.append(", iflistedcompany1=").append(iflistedcompany1);
+        sb.append(", tradecodeBak=").append(tradecodeBak);
+        sb.append(", ifdelist=").append(ifdelist);
+        sb.append(", iflistedcompanyHk=").append(iflistedcompanyHk);
+        sb.append(", mainproduct=").append(mainproduct);
+        sb.append(", note=").append(note);
+        sb.append(", briefintro=").append(briefintro);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
+}

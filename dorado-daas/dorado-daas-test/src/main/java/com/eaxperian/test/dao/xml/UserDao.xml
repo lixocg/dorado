@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eaxperian.test.dao.UserDao">
+	<resultMap id="BaseResultMap" type="com.eaxperian.test.modle.User">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="birth" jdbcType="TIMESTAMP" property="birth" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from user
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.eaxperian.test.modle.User">
+		insert into user (id, name, birth
+		)
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{birth,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<update id="updateByPrimaryKey" parameterType="com.eaxperian.test.modle.User">
+		update user
+		set name = #{name,jdbcType=VARCHAR},
+		birth = #{birth,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select id, name, birth
+		from user
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select id, name, birth
+		from user
+	</select>
+	<update id="createTable" parameterType="int">
+		create table ${name} like user;
+	</update>
+
+	<select id="ifTableExists" parameterType="hashmap" resultType="int">
+		select count(1) from INFORMATION_SCHEMA.tables where table_name
+		=#{tableName} and TABLE_SCHEMA=#{tableSchema};
+	</select>
+</mapper>

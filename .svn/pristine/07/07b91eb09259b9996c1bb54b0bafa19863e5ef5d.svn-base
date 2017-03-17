@@ -1,0 +1,17 @@
+spring:
+    application:
+        name: discovery
+
+server:
+    port: 9090
+
+eureka:
+    instance:
+        hostname: discovery
+    client:
+        register-with-eureka: false
+        fetch-registry: false
+        service-url:
+            defaultZone: http://discovery:${server.port}/eureka/
+
+spring.cloud.config.discovery.enabled: true

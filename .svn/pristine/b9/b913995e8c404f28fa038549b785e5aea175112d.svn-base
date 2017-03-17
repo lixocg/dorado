@@ -1,0 +1,4 @@
+package com.experian.core.constant;
+
+public class SysConstant {
+}

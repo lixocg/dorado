@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.experian.task.job.dao.JobDao">
+	<resultMap id="BaseResultMap" type="com.experian.task.job.entity.QrtzCustomerJob">
+		<result column="gname" jdbcType="CHAR" property="gname" />
+		<result column="name" jdbcType="CHAR" property="name" />
+		<result column="status" jdbcType="CHAR" property="status" />
+		<result column="type" jdbcType="CHAR" property="type" />
+		<result column="job" jdbcType="CHAR" property="job" />
+		<result column="cron" jdbcType="CHAR" property="cron" />
+	</resultMap>
+	<insert id="update" parameterType="com.experian.task.job.entity.QrtzCustomerJob">
+		update qrtz_customer_job
+		set
+		status=#{status,jdbcType=CHAR}
+		where gname=#{gname,jdbcType=CHAR}
+		and
+		name=#{name,jdbcType=CHAR}
+	</insert>
+	<select id="findAll" resultMap="BaseResultMap">
+		select gname, name, status,
+		type,
+		job, cron
+		from qrtz_customer_job
+		order by gname asc,name asc
+	</select>
+	<select id="findByNameAndGname" parameterType="com.experian.task.job.entity.QrtzCustomerJob"
+		resultMap="BaseResultMap">
+		select gname, name,
+		status,
+		type,
+		job, cron
+		from
+		qrtz_customer_job
+		where
+		gname=#{gname,jdbcType=CHAR} and
+		name=#{name,jdbcType=CHAR}
+	</select>
+</mapper>

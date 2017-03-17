@@ -1,0 +1,30 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : bin
+ Source Server Type    : MySQL
+ Source Server Version : 50543
+ Source Host           : localhost
+ Source Database       : db1
+
+ Target Server Type    : MySQL
+ Target Server Version : 50543
+ File Encoding         : utf-8
+
+ Date: 07/27/2016 13:38:22 PM
+*/
+
+SET NAMES utf8;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+--  Table structure for `tbl_j_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_j_user`;
+CREATE TABLE `tbl_j_user` (
+  `username` varchar(100) DEFAULT NULL,
+  `id` int(11) NOT NULL
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+SET FOREIGN_KEY_CHECKS = 1;

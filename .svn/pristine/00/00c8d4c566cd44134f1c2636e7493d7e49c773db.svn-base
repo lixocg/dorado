@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.experian.daas.litigation.dao.LitigationCaseCategoryDao">
+	<resultMap id="BaseResultMap"
+		type="com.experian.dto.entity.litigation.LitigationCaseCategory">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="code" jdbcType="VARCHAR" property="code" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="insert_date" jdbcType="TIMESTAMP" property="insertDate" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from litigation_case_category
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"
+		parameterType="com.experian.dto.entity.litigation.LitigationCaseCategory">
+		insert into litigation_case_category (id, code, name,
+		insert_date)
+		values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{insertDate,jdbcType=TIMESTAMP})
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.experian.dto.entity.litigation.LitigationCaseCategory">
+		update litigation_case_category
+		set code = #{code,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		insert_date = #{insertDate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select id, code, name, insert_date
+		from litigation_case_category
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select id, code, name, insert_date
+		from litigation_case_category
+	</select>
+
+	<!-- 不要覆盖！！！ -->
+	<select id="selectByCode" resultMap="BaseResultMap"
+		parameterType="string">
+		select id, code, name
+		from litigation_case_category where
+		code = #{code}
+	</select>
+</mapper>

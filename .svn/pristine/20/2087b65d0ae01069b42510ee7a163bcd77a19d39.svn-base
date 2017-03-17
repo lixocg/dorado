@@ -1,0 +1,19 @@
+package com.experian.core.kafka;
+
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+
+public class ConsumerTask implements Runnable {
+
+	private final ConsumerRecord<String, String> records;
+	private ConsumerCallback callback;
+
+	public ConsumerTask(ConsumerRecord<String, String> records, ConsumerCallback callback) {
+		this.records = records;
+		this.callback = callback;
+	}
+
+	@Override
+	public void run() {
+		callback.afterReceive(records);
+	}
+}

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.experian.daas.litigation.dao.LitigationTempParsedDataDetailDao">
+	<resultMap id="BaseResultMap"
+		type="com.experian.dto.entity.litigation.LitigationTempParsedDataDetail">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="supplier_id" jdbcType="VARCHAR" property="supplierId" />
+		<result column="parsed_data_id" jdbcType="VARCHAR" property="parsedDataId" />
+		<result column="supplier_parsed_data_id" jdbcType="VARCHAR"
+			property="supplierParsedDataId" />
+		<result column="crawled_data_id" jdbcType="VARCHAR" property="crawledDataId" />
+		<result column="case_number" jdbcType="VARCHAR" property="caseNumber" />
+		<result column="simple_case_number" jdbcType="VARCHAR"
+			property="simpleCaseNumber" />
+		<result column="previous_case_number" jdbcType="VARCHAR"
+			property="previousCaseNumber" />
+		<result column="simple_previous_case_number" jdbcType="VARCHAR"
+			property="simplePreviousCaseNumber" />
+		<result column="if_be_court" jdbcType="CHAR" property="ifBeCourt" />
+		<result column="case_category_id" jdbcType="INTEGER" property="caseCategoryId" />
+		<result column="accuse_date" jdbcType="TIMESTAMP" property="accuseDate" />
+		<result column="court_id" jdbcType="INTEGER" property="courtId" />
+		<result column="total_amount_involved" jdbcType="DECIMAL"
+			property="totalAmountInvolved" />
+		<result column="win" jdbcType="VARCHAR" property="win" />
+		<result column="deduplicated" jdbcType="BIT" property="deduplicated" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+		<result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
+		<result column="insert_date" jdbcType="TIMESTAMP" property="insertDate" />
+		<result column="expiry_date" jdbcType="TIMESTAMP" property="expiryDate" />
+		<result column="pk_id" jdbcType="BIGINT" property="pkId" />
+		<result column="data_from" jdbcType="INTEGER" property="dataFrom" />
+		<result column="fetch_flag" jdbcType="INTEGER" property="fetchFlag" />
+		<result column="case_title" jdbcType="LONGVARCHAR" property="caseTitle" />
+		<result column="accuse_status" jdbcType="LONGVARCHAR" property="accuseStatus" />
+		<result column="accuser_list_no_anonymous" jdbcType="LONGVARCHAR"
+			property="accuserListNoAnonymous" />
+		<result column="appuser_list_no_anonymous" jdbcType="LONGVARCHAR"
+			property="appuserListNoAnonymous" />
+		<result column="party_list_no_anonymous" jdbcType="LONGVARCHAR"
+			property="partyListNoAnonymous" />
+		<result column="simple_detail" jdbcType="LONGVARCHAR" property="simpleDetail" />
+		<result column="details" jdbcType="LONGVARCHAR" property="details" />
+		<result column="trial_procedure" jdbcType="LONGVARCHAR"
+			property="trialProcedure" />
+		<result column="reason" jdbcType="LONGVARCHAR" property="reason" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from litigation_temp_parsed_data_detail
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.experian.dto.entity.litigation.LitigationTempParsedDataDetail">
+		insert into litigation_temp_parsed_data_detail (id, supplier_id,
+		parsed_data_id,
+		supplier_parsed_data_id, crawled_data_id, case_number,
+		simple_case_number, previous_case_number, simple_previous_case_number,
+		if_be_court, case_category_id, accuse_date,
+		court_id, total_amount_involved, win,
+		deduplicated, status, created_date,
+		updated_date, insert_date, expiry_date,
+		pk_id, data_from, fetch_flag,
+		case_title, accuse_status, accuser_list_no_anonymous,
+		appuser_list_no_anonymous, party_list_no_anonymous,
+		simple_detail, details, trial_procedure,
+		reason)
+		values (#{id,jdbcType=VARCHAR}, #{supplierId,jdbcType=VARCHAR},
+		#{parsedDataId,jdbcType=VARCHAR},
+		#{supplierParsedDataId,jdbcType=VARCHAR},
+		#{crawledDataId,jdbcType=VARCHAR}, #{caseNumber,jdbcType=VARCHAR},
+		#{simpleCaseNumber,jdbcType=VARCHAR},
+		#{previousCaseNumber,jdbcType=VARCHAR},
+		#{simplePreviousCaseNumber,jdbcType=VARCHAR},
+		#{ifBeCourt,jdbcType=CHAR}, #{caseCategoryId,jdbcType=INTEGER},
+		#{accuseDate,jdbcType=TIMESTAMP},
+		#{courtId,jdbcType=INTEGER}, #{totalAmountInvolved,jdbcType=DECIMAL}, #{win,jdbcType=VARCHAR},
+		#{deduplicated,jdbcType=BIT}, #{status,jdbcType=INTEGER},
+		#{createdDate,jdbcType=TIMESTAMP},
+		#{updatedDate,jdbcType=TIMESTAMP}, #{insertDate,jdbcType=TIMESTAMP}, #{expiryDate,jdbcType=TIMESTAMP},
+		#{pkId,jdbcType=BIGINT}, #{dataFrom,jdbcType=INTEGER},
+		#{fetchFlag,jdbcType=INTEGER},
+		#{caseTitle,jdbcType=LONGVARCHAR}, #{accuseStatus,jdbcType=LONGVARCHAR},
+		#{accuserListNoAnonymous,jdbcType=LONGVARCHAR},
+		#{appuserListNoAnonymous,jdbcType=LONGVARCHAR},
+		#{partyListNoAnonymous,jdbcType=LONGVARCHAR},
+		#{simpleDetail,jdbcType=LONGVARCHAR}, #{details,jdbcType=LONGVARCHAR},
+		#{trialProcedure,jdbcType=LONGVARCHAR},
+		#{reason,jdbcType=LONGVARCHAR})
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.experian.dto.entity.litigation.LitigationTempParsedDataDetail">
+		update litigation_temp_parsed_data_detail
+		set supplier_id = #{supplierId,jdbcType=VARCHAR},
+		parsed_data_id = #{parsedDataId,jdbcType=VARCHAR},
+		supplier_parsed_data_id = #{supplierParsedDataId,jdbcType=VARCHAR},
+		crawled_data_id = #{crawledDataId,jdbcType=VARCHAR},
+		case_number = #{caseNumber,jdbcType=VARCHAR},
+		simple_case_number = #{simpleCaseNumber,jdbcType=VARCHAR},
+		previous_case_number = #{previousCaseNumber,jdbcType=VARCHAR},
+		simple_previous_case_number = #{simplePreviousCaseNumber,jdbcType=VARCHAR},
+		if_be_court = #{ifBeCourt,jdbcType=CHAR},
+		case_category_id = #{caseCategoryId,jdbcType=INTEGER},
+		accuse_date = #{accuseDate,jdbcType=TIMESTAMP},
+		court_id = #{courtId,jdbcType=INTEGER},
+		total_amount_involved = #{totalAmountInvolved,jdbcType=DECIMAL},
+		win = #{win,jdbcType=VARCHAR},
+		deduplicated = #{deduplicated,jdbcType=BIT},
+		status = #{status,jdbcType=INTEGER},
+		created_date = #{createdDate,jdbcType=TIMESTAMP},
+		updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+		insert_date = #{insertDate,jdbcType=TIMESTAMP},
+		expiry_date = #{expiryDate,jdbcType=TIMESTAMP},
+		pk_id = #{pkId,jdbcType=BIGINT},
+		data_from = #{dataFrom,jdbcType=INTEGER},
+		fetch_flag = #{fetchFlag,jdbcType=INTEGER},
+		case_title = #{caseTitle,jdbcType=LONGVARCHAR},
+		accuse_status = #{accuseStatus,jdbcType=LONGVARCHAR},
+		accuser_list_no_anonymous = #{accuserListNoAnonymous,jdbcType=LONGVARCHAR},
+		appuser_list_no_anonymous =
+		#{appuserListNoAnonymous,jdbcType=LONGVARCHAR},
+		party_list_no_anonymous =
+		#{partyListNoAnonymous,jdbcType=LONGVARCHAR},
+		simple_detail = #{simpleDetail,jdbcType=LONGVARCHAR},
+		details = #{details,jdbcType=LONGVARCHAR},
+		trial_procedure = #{trialProcedure,jdbcType=LONGVARCHAR},
+		reason = #{reason,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select id, supplier_id, parsed_data_id, supplier_parsed_data_id,
+		crawled_data_id,
+		case_number, simple_case_number, previous_case_number,
+		simple_previous_case_number,
+		if_be_court, case_category_id, accuse_date, court_id, total_amount_involved, win,
+		deduplicated, status, created_date, updated_date, insert_date,
+		expiry_date, pk_id,
+		data_from, fetch_flag, case_title, accuse_status, accuser_list_no_anonymous,
+		appuser_list_no_anonymous,
+		party_list_no_anonymous, simple_detail, details, trial_procedure, reason
+		from litigation_temp_parsed_data_detail
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select id, supplier_id, parsed_data_id, supplier_parsed_data_id,
+		crawled_data_id,
+		case_number, simple_case_number, previous_case_number,
+		simple_previous_case_number,
+		if_be_court, case_category_id, accuse_date, court_id, total_amount_involved, win,
+		deduplicated, status, created_date, updated_date, insert_date,
+		expiry_date, pk_id,
+		data_from, fetch_flag, case_title, accuse_status, accuser_list_no_anonymous,
+		appuser_list_no_anonymous,
+		party_list_no_anonymous, simple_detail, details, trial_procedure, reason
+		from litigation_temp_parsed_data_detail
+	</select>
+
+
+	<select id="selectByPkId" parameterType="long" resultType="int">
+		select count(1) from litigation_temp_parsed_data_detail where pk_id =
+		#{pkid}
+	</select>
+
+	<select id="selectByPreCaseNumber" parameterType="string"
+		resultMap="BaseResultMap">
+		select * from litigation_temp_parsed_data_detail where
+		previous_case_number
+		= #{preCaseNumber}
+	</select>
+
+	<select id="selectByCaseNumber" parameterType="string"
+		resultMap="BaseResultMap">
+		select * from litigation_temp_parsed_data_detail where
+		case_number =
+		#{preCaseNumber}
+	</select>
+
+	<select id="selectByCaseSerialNumber" parameterType="string"
+		resultMap="BaseResultMap">
+		select * from litigation_temp_parsed_data_detail where
+		parsed_data_id = #{caseSerialNumber}
+	</select>
+
+	<select id="selectUnFetchData" parameterType="int" resultMap="BaseResultMap">
+		select * from
+		litigation_temp_parsed_data_detail where 1=1
+		<if test="fetchState!=null">
+			and fetch_flag =
+			#{fetchState}
+		</if>
+
+		<if test="parsedStatus != null">
+			and status = #{parsedStatus}
+		</if>
+		order by
+		insert_date ASC
+	</select>
+
+
+	<update id="updateFetchFlagByPrimaryKey" parameterType="hashmap">
+		update
+		litigation_temp_parsed_data_detail set fetch_flag = #{flag} where id =
+		#{id}
+	</update>
+
+	<select id="selectUnFetchDataByPrimaryKey" parameterType="hashmap"
+		resultMap="BaseResultMap">
+		select * from
+		litigation_temp_parsed_data_detail where id =
+		#{id} and
+		fetch_flag = #{fetchState}
+		<if test="parsedStatus != null">
+			and status = #{parsedStatus}
+		</if>
+	</select>
+
+	<select id="selectLastest" parameterType="hashmap" resultMap="BaseResultMap">
+		select * from
+		litigation_temp_parsed_data_detail where 1=1
+		<if test="fetchState != null">
+			and fetch_flag = #{fetchState}
+		</if>
+		<if test="parsedStatus != null">
+			and status = #{parsedStatus}
+		</if>
+		ORDER BY insert_date DESC
+		LIMIT #{num}
+	</select>
+
+	<select id="getOldDataCount" parameterType="hashmap" resultType="int">
+		select count(1) from
+		litigation_temp_parsed_data_detail where 1=1
+		<if test="fetchState != null">
+			and fetch_flag = #{fetchState}
+		</if>
+		<if test="parsedStatus != null">
+			and status = #{parsedStatus}
+		</if>
+	</select>
+	
+	<select id="selectBySupplierId" parameterType="string" resultMap="BaseResultMap">
+		select * from  litigation_temp_parsed_data_detail where supplier_id = #{detailSupplierId}
+	</select>
+</mapper>

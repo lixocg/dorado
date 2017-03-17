@@ -1,0 +1,10 @@
+db1.driver=com.mysql.jdbc.Driver
+db1.database=jdbc:mysql://127.0.0.1/db1?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull
+db1.user=root
+db1.password=root
+
+
+db2.driver=com.mysql.jdbc.Driver
+db2.database=jdbc:mysql://127.0.0.1/db2?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull
+db2.user=root
+db2.password=root

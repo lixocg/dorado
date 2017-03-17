@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.experian.daas.litigation.dao.LitigationTempCrawledDataDao">
+	<resultMap id="BaseResultMap"
+		type="com.experian.dto.entity.litigation.LitigationTempCrawledData">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="supplier_id" jdbcType="VARCHAR" property="supplierId" />
+		<result column="source_url_id" jdbcType="INTEGER" property="sourceUrlId" />
+		<result column="publish_date" jdbcType="TIMESTAMP" property="publishDate" />
+		<result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+		<result column="insert_date" jdbcType="TIMESTAMP" property="insertDate" />
+		<result column="content_url" jdbcType="LONGVARCHAR" property="contentUrl" />
+		<result column="data" jdbcType="LONGVARCHAR" property="data" />
+		<result column="title" jdbcType="LONGVARCHAR" property="title" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from litigation_temp_crawled_data
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.experian.dto.entity.litigation.LitigationTempCrawledData">
+		insert into litigation_temp_crawled_data (id, supplier_id, source_url_id,
+		publish_date, created_date, insert_date,
+		content_url, data, title
+		)
+		values (#{id,jdbcType=VARCHAR}, #{supplierId,jdbcType=VARCHAR},
+		#{sourceUrlId,jdbcType=INTEGER},
+		#{publishDate,jdbcType=TIMESTAMP}, #{createdDate,jdbcType=TIMESTAMP}, #{insertDate,jdbcType=TIMESTAMP},
+		#{contentUrl,jdbcType=LONGVARCHAR}, #{data,jdbcType=LONGVARCHAR},
+		#{title,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.experian.dto.entity.litigation.LitigationTempCrawledData">
+		update litigation_temp_crawled_data
+		set supplier_id = #{supplierId,jdbcType=VARCHAR},
+		source_url_id = #{sourceUrlId,jdbcType=INTEGER},
+		publish_date = #{publishDate,jdbcType=TIMESTAMP},
+		created_date = #{createdDate,jdbcType=TIMESTAMP},
+		insert_date = #{insertDate,jdbcType=TIMESTAMP},
+		content_url = #{contentUrl,jdbcType=LONGVARCHAR},
+		data = #{data,jdbcType=LONGVARCHAR},
+		title = #{title,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select id, supplier_id, source_url_id, publish_date, created_date,
+		insert_date, content_url,
+		data, title
+		from litigation_temp_crawled_data
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select id, supplier_id, source_url_id, publish_date, created_date,
+		insert_date, content_url,
+		data, title
+		from litigation_temp_crawled_data
+	</select>
+
+	<select id="selectBySupplierId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select * from litigation_temp_crawled_data where supplier_id
+		= #{supplierId}
+	</select>
+</mapper>

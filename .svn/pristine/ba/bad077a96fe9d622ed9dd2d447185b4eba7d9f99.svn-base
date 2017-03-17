@@ -1,0 +1,17 @@
+package com.experian.daas.litigation;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+@EnableDiscoveryClient
+@SpringBootApplication
+public class LitigationApplication {
+
+	public static void main(String[] args) {
+		new SpringApplicationBuilder(LitigationApplication.class).web(true).run(args);
+	}
+
+}
+
+

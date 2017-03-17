@@ -1,0 +1,31 @@
+package com.experian.daas.test.brand;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.experian.daas.brand.entity.BrandInfo;
+import com.experian.daas.brand.service.BrandService;
+import com.google.gson.Gson;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring/spring-*.xml")
+public class BrandTest {
+	Logger logger = Logger.getLogger(BrandTest.class);
+
+	@Autowired
+	private BrandService brandService;
+
+	private Gson gson = new Gson();
+
+	@Test
+	public void doPage() {
+		List<BrandInfo> brands = brandService.getBrandByPage(1, 10);
+		System.out.println(gson.toJson(brands));
+	}
+}

@@ -1,0 +1,9 @@
+spring.application.name=dorado-daas-litigation
+server.port=9092
+
+eureka.client.serviceUrl.defaultZone=${eurekaAddress}
+
+
+spring.profiles.active=${profileActive}
+
+

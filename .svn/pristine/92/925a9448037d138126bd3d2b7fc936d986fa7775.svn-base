@@ -1,0 +1,12 @@
+package com.experian.daas.litigation.config;
+
+
+public class ConstantConfig {
+	public static class Queue {
+		public static final String MATCH_SBDNUM_QUEUE = "matchSbdnumQueue";
+
+		public static final int QUEUE_SIZE = 21;
+
+		public static final String QUEUE_NAME_PREFIX = "litigationQueue";
+	}
+}

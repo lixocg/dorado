@@ -1,0 +1,20 @@
+package com.experian.daas.litigation;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.ComponentScan;
+
+import com.experian.core.CoreApplication;
+
+@EnableDiscoveryClient
+@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+@ComponentScan(basePackageClasses = { LitigationApplication.class, CoreApplication.class })
+public class LitigationApplication {
+
+	public static void main(String[] args) {
+		new SpringApplicationBuilder(LitigationApplication.class).web(true).run(args);
+	}
+
+}

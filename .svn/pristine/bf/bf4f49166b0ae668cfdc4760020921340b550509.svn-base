@@ -1,0 +1,42 @@
+package com.experian.core.utils;
+
+import com.experian.core.constant.LitiBusiConstant;
+import com.experian.core.utils.increment.IdEnums;
+import com.experian.core.utils.jedis.JedisSingleUtil;
+
+public class PKUtil {
+	private PKUtil() {
+	};
+
+	public static String key(int flag) throws Exception {
+		String key = null;
+		switch (flag) {
+		case LitiBusiConstant.DataFrom.OPTIX:
+			key = LitiBusiConstant.Prefix.OPTIX + JedisSingleUtil.incr(IdEnums.LITIGATION_DATA.getKey());
+			break;
+		case LitiBusiConstant.DataFrom.DB2_LITIGATION:
+			key = LitiBusiConstant.Prefix.EXPERIAL + JedisSingleUtil.incr(IdEnums.LITIGATION_DATA.getKey());
+			break;
+		case LitiBusiConstant.DataFrom.DB2_LITIGATION_HISTORY:
+			key = LitiBusiConstant.Prefix.EXPERIAL + JedisSingleUtil.incr(IdEnums.LITIGATION_DATA.getKey());
+			break;
+		case LitiBusiConstant.DataFrom.SQLSERVER_LITIGATION:
+			key = LitiBusiConstant.Prefix.EXPERIAL + JedisSingleUtil.incr(IdEnums.LITIGATION_DATA.getKey());
+			break;
+		case LitiBusiConstant.DataFrom.MANUAL:
+			key = LitiBusiConstant.Prefix.EXPERIAL + JedisSingleUtil.incr(IdEnums.LITIGATION_DATA.getKey());
+			break;
+		default:
+			break;
+		}
+		return key;
+	}
+
+	public static String experianKey() throws Exception {
+		return LitiBusiConstant.Prefix.EXPERIAL + JedisSingleUtil.incr(IdEnums.LITIGATION_DATA.getKey());
+	}
+	
+	public static String optixKey() throws Exception{
+		return LitiBusiConstant.Prefix.OPTIX +JedisSingleUtil.incr(IdEnums.LITIGATION_DATA.getKey())+"";
+	}
+}

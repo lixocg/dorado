@@ -1,0 +1,29 @@
+package com.experian.daas.integration.adapter.baseinfo.dao;
+
+import com.experian.daas.integration.adapter.baseinfo.entity.CreditCorpRegistration;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+public interface CreditCorpRegistrationDao {
+	int deleteByPrimaryKey(String sbdnum);
+
+	int insert(CreditCorpRegistration record);
+
+	CreditCorpRegistration selectByPrimaryKey(String sbdnum);
+
+	List<CreditCorpRegistration> selectAll();
+
+	int updateByPrimaryKey(CreditCorpRegistration record);
+
+	/**
+	 * 根据sbdnums批量查询
+	 * 
+	 * @param sbdnums
+	 * @param orderField
+	 *            排序字段
+	 * @return
+	 */
+	List<CreditCorpRegistration> selectBySbdnums(@Param("sbdnums") List<String> sbdnums,
+			@Param("orderField") String orderField);
+}

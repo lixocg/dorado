@@ -1,0 +1,16 @@
+package com.experian.daas.integration.adapter.litigation.dao;
+
+import com.experian.daas.integration.adapter.litigation.entity.LitigationErrorCrawledData;
+import java.util.List;
+
+public interface LitigationErrorCrawledDataDao {
+    int deleteByPrimaryKey(String id);
+
+    int insert(LitigationErrorCrawledData record);
+
+    LitigationErrorCrawledData selectByPrimaryKey(String id);
+
+    List<LitigationErrorCrawledData> selectAll();
+
+    int updateByPrimaryKey(LitigationErrorCrawledData record);
+}

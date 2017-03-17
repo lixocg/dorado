@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Integration</title>
+
+<script src="${ctx}/jquery/jquery.min.js"></script>
+<script>
+	var ctx="${ctx}";
+    function ajaxPost(url,data) {  
+        var returnvalue;  
+        var options = {  
+            type: 'POST',  
+            url: url,  
+            data: data,  
+            async:false,  
+            success: function (result) {  
+            	returnvalue = result;  
+            },  
+            dataType: "json",  
+            error: function (result) {
+            	if(result.status != 200){
+               		 alert(JSON.stringify(result));
+            	}
+            }  
+        };  
+        $.ajax(options);   
+        return returnvalue;  
+    }
+    
+    $(function(){
+    	var isStop = "${isStop}";
+    	if(isStop=="false"){
+    		$("#startDeduplicate").attr("disabled",true);
+    	}
+    	 
+    	 $("#startDeduplicate").bind("click",function(){
+    		 var num = 500;
+    		 if(num=="" || num ==null){
+    			 alert("空空空不行");
+    			 return;
+    		 }
+    		 var data = ajaxPost("${ctx}/litigation/startDeduplicate",{"num":num});
+ 	    	 if(data.status=="0"){
+    		 	alert(JSON.stringify(data.data));
+    		 	$("#startDeduplicate").attr("disabled",true);
+ 	    	 }else{
+ 	    		 alert("失败了");
+ 	    	 }
+    	 });
+    	 
+		$("#stopDeduplicate").bind("click",function(){
+			var data = ajaxPost("${ctx}/litigation/stopDeduplicate",null);
+			 if(data.status=="0"){
+	    		 alert(JSON.stringify(data.data));
+	    		 $("#startDeduplicate").attr("disabled",false);
+	 	    }else{
+	 	    	alert("失败了");
+	 	    }
+    	 });
+		$("#gracefullyStopDeduplicate").bind("click",function(){
+			var data = ajaxPost("${ctx}/litigation/gracefullyStopDeduplicate",null);
+			 if(data.status=="0"){
+	    		 alert(JSON.stringify(data.data));
+	    		 $("#startDeduplicate").attr("disabled",false);
+	 	    }else{
+	 	    	alert("失败了");
+	 	    }
+    	 });
+		
+		
+		$("#oldDeduplicate").bind("click",function(){
+			var data = ajaxPost("${ctx}/litigation/oldDataDeplidate",null);
+			 if(data.status=="0"){
+	    		 alert(JSON.stringify(data.data));
+	    		 $("#oldDeduplicate").attr("disabled",false);
+	 	    }else{
+	 	    	alert("失败了");
+	 	    }
+    	 });
+		
+		
+    });
+    
+</script>
+</head>
+<body>
+<!-- 	跑最新的数据条数：<input type="input" value="1000" id="lastestNum">
+	<hr> -->
+	<!-- <input type="button" value="开始" id="startDeduplicate"><br>
+	<hr>
+	<input type="button" value="停止" id="stopDeduplicate"><br> -->
+	<!-- <hr>
+	<input type="button" value="优雅停止" id="gracefullyStopDeduplicate"><br> -->
+	<input type="button" value="旧数据去重走起" id="oldDeduplicate"><br> 
+</body>
+</html>

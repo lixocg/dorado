@@ -1,0 +1,18 @@
+package com.experian.core.rest;
+
+import org.springframework.web.client.RestTemplate;
+
+import com.experian.core.utils.SpringContextUtil;
+
+public class RestClient {
+    /**
+     * 获得一个RestTemplate客户端
+     *
+     * @return
+     */
+    public static RestTemplate getClient() {
+    	RestTemplate restTemplate = (RestTemplate) SpringContextUtil.getBean("restTemplate");
+        return restTemplate;
+    }
+
+}

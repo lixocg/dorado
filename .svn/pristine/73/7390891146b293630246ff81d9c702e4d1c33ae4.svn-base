@@ -1,0 +1,80 @@
+package com.experian.daas.test.litigation;
+
+import org.apache.log4j.Logger;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.experian.core.constant.LitiBusiConstant;
+import com.experian.daas.litigation.LitigationApplication;
+import com.experian.daas.litigation.component.rabbitmq.ConsumerHandler;
+import com.experian.daas.litigation.component.rabbitmq.RabbitClient;
+import com.experian.daas.litigation.component.rabbitmq.StringConsumer;
+import com.experian.daas.litigation.service.LitigationAdapterService;
+import com.google.gson.Gson;
+
+import scala.util.Random;
+
+@SpringBootTest(classes = LitigationApplication.class)
+@RunWith(SpringRunner.class)
+public class LitigationMqServiceTest {
+	private static final Logger logger = Logger.getLogger(LitigationMqServiceTest.class);
+
+	@Autowired
+	private LitigationAdapterService litigationAdapterService;
+
+	@Autowired
+	private RabbitClient rabbit;
+
+	public static Gson gson = new Gson();
+
+	// @Test
+	// public void xxx() {
+	// for (int i = 0; i < 25; i++) {
+	// rabbit.deleteQueue("litigationQueue" + i);
+	// rabbit.deleteQueue("litigationQueue_" + i);
+	// rabbit.deleteQueue("法院ID取模分组_" + i);
+	// }
+	// rabbit.deleteQueue("matchSbdnumQueue");
+	// rabbit.deleteQueue("matchSbdnumQueue_");
+	// rabbit.deleteQueue("testQueue");
+	// }
+
+	@Test
+	public void test01() throws Exception {
+		litigationAdapterService.oldDataDeplidate(LitiBusiConstant.DataFetchStatus.UN_FETCH,
+				LitiBusiConstant.DataStatus.SUCCESS);
+	}
+
+	@Test
+	public void lis() throws InterruptedException {
+		for (int i = 0; i < 10; i++) {
+			rabbit.reveiceMsg("testQueue" + i, new StringConsumer(new ConsumerHandler() {
+
+				@Override
+				public void handle(String msg) {
+					try {
+						Thread.sleep(500);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println("rev:" + msg);
+				}
+			}));
+		}
+		Thread.sleep(Integer.MAX_VALUE);
+	}
+
+	@Test
+	public void proce() {
+		while (true) {
+			int ran = new Random().nextInt(1000);
+			int mod = ran % 10;
+			System.out.println(ran + "..." + mod);
+			rabbit.sendMsg("testQueue" + mod, ran + "..." + mod);
+		}
+	}
+}

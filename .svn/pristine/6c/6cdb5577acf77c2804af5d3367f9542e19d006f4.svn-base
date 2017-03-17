@@ -1,0 +1,42 @@
+# \u6570\u636e\u5e93\u8fde\u63a5\u53c2\u6570
+###DB2 \u65e7\u8bc9\u8bbc\u6570\u636e\uff0c\u4fe1\u7528\u5e93
+#jdbc.driver=com.ibm.db2.jcc.DB2Driver
+#jdbc.url=jdbc:db2://10.157.211.58:50000/CCSDDB1
+#jdbc.username=erp
+#jdbc.password=CcSerp123
+
+#####DB2 \u4e2d\u592e\u5e93
+#jdbc.driver=com.ibm.db2.jcc.DB2Driver
+#jdbc.url=jdbc\:db2\://10.157.211.58:50000/SBIDDB1
+#jdbc.username=erp
+#jdbc.password=CcSerp123
+
+###postgresql
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/daas
+jdbc.username=root
+jdbc.password=root
+
+###sqlserver
+#jdbc.driver=com.microsoft.sqlserver.jdbc.SQLServerDriver
+#jdbc.url=jdbc:sqlserver://10.157.211.38:1433;databaseName=litigation
+#jdbc.username=litigation
+#jdbc.password=123
+
+# \u5305\u8def\u5f84\u914d\u7f6e
+#####center
+#model.package=com.experian.daas.center.litigation.entity
+#dao.package=com.experian.daas.center.litigation.dao
+#xml.package=com.experian.daas.center.litigation.dao.xml
+
+model.package=com.experian.dto.entity.litigation
+dao.package=com.experian.daas.litigation.dao
+xml.package=com.experian.daas.litigation.dao.xml
+
+#model.package=com.experian.daas.center.litigation.entity
+#dao.package=com.experian.daas.center.litigation.dao
+#xml.package=com.experian.daas.center.litigation.dao.xml
+
+target.project.entity=E:/workspace/dorado/dorado-dto/src/main/java
+target.project.dao=E:/workspace/dorado/dorado-daas/dorado-daas-litigation/src/main/java
+target.project.xml=E:/workspace/dorado/dorado-daas/dorado-daas-litigation/src/main/java

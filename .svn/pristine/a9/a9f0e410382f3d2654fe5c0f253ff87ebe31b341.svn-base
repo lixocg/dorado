@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.experian.daas.brand.dao.BrandInfoDao">
+  <resultMap id="BaseResultMap" type="com.experian.daas.brand.entity.BrandInfo">
+    <id column="REGNO" jdbcType="VARCHAR" property="regno" />
+    <result column="TRIALAFFICHEISSUE" jdbcType="BIGINT" property="trialafficheissue" />
+    <result column="CHANGEAFFICHEISSUE" jdbcType="BIGINT" property="changeafficheissue" />
+    <result column="BRANDCNAME" jdbcType="VARCHAR" property="brandcname" />
+    <result column="BRANDENAME" jdbcType="VARCHAR" property="brandename" />
+    <result column="BRANDSPELL" jdbcType="VARCHAR" property="brandspell" />
+    <result column="BRANDFIRSTSPELL" jdbcType="VARCHAR" property="brandfirstspell" />
+    <result column="BRANDFIGURE" jdbcType="VARCHAR" property="brandfigure" />
+    <result column="APPLYDATE" jdbcType="DATE" property="applydate" />
+    <result column="REGDATE" jdbcType="DATE" property="regdate" />
+    <result column="APPLYMAN1" jdbcType="VARCHAR" property="applyman1" />
+    <result column="CHANGEAFFICHEISSUE1" jdbcType="BIGINT" property="changeafficheissue1" />
+    <result column="CHANGEDATE1" jdbcType="DATE" property="changedate1" />
+    <result column="CHANGETYPE1" jdbcType="CHAR" property="changetype1" />
+    <result column="APPLYMAN2" jdbcType="VARCHAR" property="applyman2" />
+    <result column="CHANGEAFFICHEISSUE2" jdbcType="BIGINT" property="changeafficheissue2" />
+    <result column="CHANGEDATE2" jdbcType="DATE" property="changedate2" />
+    <result column="CHANGETYPE2" jdbcType="CHAR" property="changetype2" />
+    <result column="APPLYMAN3" jdbcType="VARCHAR" property="applyman3" />
+    <result column="CHANGEAFFICHEISSUE3" jdbcType="BIGINT" property="changeafficheissue3" />
+    <result column="CHANGEDATE3" jdbcType="DATE" property="changedate3" />
+    <result column="CHANGETYPE3" jdbcType="CHAR" property="changetype3" />
+    <result column="REGMANADDR" jdbcType="VARCHAR" property="regmanaddr" />
+    <result column="CHANGEAFFICHEISSUE4" jdbcType="BIGINT" property="changeafficheissue4" />
+    <result column="CHANGEDATE4" jdbcType="DATE" property="changedate4" />
+    <result column="AGENTORG" jdbcType="VARCHAR" property="agentorg" />
+    <result column="NOTE" jdbcType="VARCHAR" property="note" />
+    <result column="USEPRODUCT" jdbcType="VARCHAR" property="useproduct" />
+    <result column="INTERTYPE" jdbcType="INTEGER" property="intertype" />
+    <result column="ISVALID" jdbcType="INTEGER" property="isvalid" />
+    <result column="CNAMEINPUTCODE" jdbcType="VARCHAR" property="cnameinputcode" />
+    <result column="REGMANADDRCODE" jdbcType="VARCHAR" property="regmanaddrcode" />
+    <result column="CHANGEPAGE1" jdbcType="BIGINT" property="changepage1" />
+    <result column="CHANGEPAGE2" jdbcType="BIGINT" property="changepage2" />
+    <result column="CHANGEPAGE3" jdbcType="BIGINT" property="changepage3" />
+    <result column="CHANGEPAGE4" jdbcType="BIGINT" property="changepage4" />
+    <result column="TRIAPAGE" jdbcType="BIGINT" property="triapage" />
+    <result column="REGPAGE" jdbcType="BIGINT" property="regpage" />
+    <result column="GROUPCODE" jdbcType="VARCHAR" property="groupcode" />
+    <result column="ENDDATE" jdbcType="DATE" property="enddate" />
+    <result column="SBDNUM" jdbcType="CHAR" property="sbdnum" />
+    <result column="CORPNAMEINDEX" jdbcType="BIGINT" property="corpnameindex" />
+    <result column="UPDATETIME" jdbcType="DATE" property="updatetime" />
+    <result column="CORPNAMEINDEX02" jdbcType="BIGINT" property="corpnameindex02" />
+    <result column="ISCENTER" jdbcType="CHAR" property="iscenter" />
+    <result column="SINOAPPLYMAN1" jdbcType="VARCHAR" property="sinoapplyman1" />
+    <result column="SINOAPPLYMAN2" jdbcType="VARCHAR" property="sinoapplyman2" />
+    <result column="SINOISVALID" jdbcType="CHAR" property="sinoisvalid" />
+    <result column="UPDATETIME_SAVE" jdbcType="DATE" property="updatetimeSave" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_BRANDINFO
+    where REGNO = #{regno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.experian.daas.brand.entity.BrandInfo">
+    insert into T_BRANDINFO (REGNO, TRIALAFFICHEISSUE, CHANGEAFFICHEISSUE, 
+      BRANDCNAME, BRANDENAME, BRANDSPELL, 
+      BRANDFIRSTSPELL, BRANDFIGURE, APPLYDATE, 
+      REGDATE, APPLYMAN1, CHANGEAFFICHEISSUE1, 
+      CHANGEDATE1, CHANGETYPE1, APPLYMAN2, 
+      CHANGEAFFICHEISSUE2, CHANGEDATE2, CHANGETYPE2, 
+      APPLYMAN3, CHANGEAFFICHEISSUE3, CHANGEDATE3, 
+      CHANGETYPE3, REGMANADDR, CHANGEAFFICHEISSUE4, 
+      CHANGEDATE4, AGENTORG, NOTE, 
+      USEPRODUCT, INTERTYPE, ISVALID, 
+      CNAMEINPUTCODE, REGMANADDRCODE, CHANGEPAGE1, 
+      CHANGEPAGE2, CHANGEPAGE3, CHANGEPAGE4, 
+      TRIAPAGE, REGPAGE, GROUPCODE, 
+      ENDDATE, SBDNUM, CORPNAMEINDEX, 
+      UPDATETIME, CORPNAMEINDEX02, ISCENTER, 
+      SINOAPPLYMAN1, SINOAPPLYMAN2, SINOISVALID, 
+      UPDATETIME_SAVE)
+    values (#{regno,jdbcType=VARCHAR}, #{trialafficheissue,jdbcType=BIGINT}, #{changeafficheissue,jdbcType=BIGINT}, 
+      #{brandcname,jdbcType=VARCHAR}, #{brandename,jdbcType=VARCHAR}, #{brandspell,jdbcType=VARCHAR}, 
+      #{brandfirstspell,jdbcType=VARCHAR}, #{brandfigure,jdbcType=VARCHAR}, #{applydate,jdbcType=DATE}, 
+      #{regdate,jdbcType=DATE}, #{applyman1,jdbcType=VARCHAR}, #{changeafficheissue1,jdbcType=BIGINT}, 
+      #{changedate1,jdbcType=DATE}, #{changetype1,jdbcType=CHAR}, #{applyman2,jdbcType=VARCHAR}, 
+      #{changeafficheissue2,jdbcType=BIGINT}, #{changedate2,jdbcType=DATE}, #{changetype2,jdbcType=CHAR}, 
+      #{applyman3,jdbcType=VARCHAR}, #{changeafficheissue3,jdbcType=BIGINT}, #{changedate3,jdbcType=DATE}, 
+      #{changetype3,jdbcType=CHAR}, #{regmanaddr,jdbcType=VARCHAR}, #{changeafficheissue4,jdbcType=BIGINT}, 
+      #{changedate4,jdbcType=DATE}, #{agentorg,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{useproduct,jdbcType=VARCHAR}, #{intertype,jdbcType=INTEGER}, #{isvalid,jdbcType=INTEGER}, 
+      #{cnameinputcode,jdbcType=VARCHAR}, #{regmanaddrcode,jdbcType=VARCHAR}, #{changepage1,jdbcType=BIGINT}, 
+      #{changepage2,jdbcType=BIGINT}, #{changepage3,jdbcType=BIGINT}, #{changepage4,jdbcType=BIGINT}, 
+      #{triapage,jdbcType=BIGINT}, #{regpage,jdbcType=BIGINT}, #{groupcode,jdbcType=VARCHAR}, 
+      #{enddate,jdbcType=DATE}, #{sbdnum,jdbcType=CHAR}, #{corpnameindex,jdbcType=BIGINT}, 
+      #{updatetime,jdbcType=DATE}, #{corpnameindex02,jdbcType=BIGINT}, #{iscenter,jdbcType=CHAR}, 
+      #{sinoapplyman1,jdbcType=VARCHAR}, #{sinoapplyman2,jdbcType=VARCHAR}, #{sinoisvalid,jdbcType=CHAR}, 
+      #{updatetimeSave,jdbcType=DATE})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.experian.daas.brand.entity.BrandInfo">
+    update T_BRANDINFO
+    set TRIALAFFICHEISSUE = #{trialafficheissue,jdbcType=BIGINT},
+      CHANGEAFFICHEISSUE = #{changeafficheissue,jdbcType=BIGINT},
+      BRANDCNAME = #{brandcname,jdbcType=VARCHAR},
+      BRANDENAME = #{brandename,jdbcType=VARCHAR},
+      BRANDSPELL = #{brandspell,jdbcType=VARCHAR},
+      BRANDFIRSTSPELL = #{brandfirstspell,jdbcType=VARCHAR},
+      BRANDFIGURE = #{brandfigure,jdbcType=VARCHAR},
+      APPLYDATE = #{applydate,jdbcType=DATE},
+      REGDATE = #{regdate,jdbcType=DATE},
+      APPLYMAN1 = #{applyman1,jdbcType=VARCHAR},
+      CHANGEAFFICHEISSUE1 = #{changeafficheissue1,jdbcType=BIGINT},
+      CHANGEDATE1 = #{changedate1,jdbcType=DATE},
+      CHANGETYPE1 = #{changetype1,jdbcType=CHAR},
+      APPLYMAN2 = #{applyman2,jdbcType=VARCHAR},
+      CHANGEAFFICHEISSUE2 = #{changeafficheissue2,jdbcType=BIGINT},
+      CHANGEDATE2 = #{changedate2,jdbcType=DATE},
+      CHANGETYPE2 = #{changetype2,jdbcType=CHAR},
+      APPLYMAN3 = #{applyman3,jdbcType=VARCHAR},
+      CHANGEAFFICHEISSUE3 = #{changeafficheissue3,jdbcType=BIGINT},
+      CHANGEDATE3 = #{changedate3,jdbcType=DATE},
+      CHANGETYPE3 = #{changetype3,jdbcType=CHAR},
+      REGMANADDR = #{regmanaddr,jdbcType=VARCHAR},
+      CHANGEAFFICHEISSUE4 = #{changeafficheissue4,jdbcType=BIGINT},
+      CHANGEDATE4 = #{changedate4,jdbcType=DATE},
+      AGENTORG = #{agentorg,jdbcType=VARCHAR},
+      NOTE = #{note,jdbcType=VARCHAR},
+      USEPRODUCT = #{useproduct,jdbcType=VARCHAR},
+      INTERTYPE = #{intertype,jdbcType=INTEGER},
+      ISVALID = #{isvalid,jdbcType=INTEGER},
+      CNAMEINPUTCODE = #{cnameinputcode,jdbcType=VARCHAR},
+      REGMANADDRCODE = #{regmanaddrcode,jdbcType=VARCHAR},
+      CHANGEPAGE1 = #{changepage1,jdbcType=BIGINT},
+      CHANGEPAGE2 = #{changepage2,jdbcType=BIGINT},
+      CHANGEPAGE3 = #{changepage3,jdbcType=BIGINT},
+      CHANGEPAGE4 = #{changepage4,jdbcType=BIGINT},
+      TRIAPAGE = #{triapage,jdbcType=BIGINT},
+      REGPAGE = #{regpage,jdbcType=BIGINT},
+      GROUPCODE = #{groupcode,jdbcType=VARCHAR},
+      ENDDATE = #{enddate,jdbcType=DATE},
+      SBDNUM = #{sbdnum,jdbcType=CHAR},
+      CORPNAMEINDEX = #{corpnameindex,jdbcType=BIGINT},
+      UPDATETIME = #{updatetime,jdbcType=DATE},
+      CORPNAMEINDEX02 = #{corpnameindex02,jdbcType=BIGINT},
+      ISCENTER = #{iscenter,jdbcType=CHAR},
+      SINOAPPLYMAN1 = #{sinoapplyman1,jdbcType=VARCHAR},
+      SINOAPPLYMAN2 = #{sinoapplyman2,jdbcType=VARCHAR},
+      SINOISVALID = #{sinoisvalid,jdbcType=CHAR},
+      UPDATETIME_SAVE = #{updatetimeSave,jdbcType=DATE}
+    where REGNO = #{regno,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select REGNO, TRIALAFFICHEISSUE, CHANGEAFFICHEISSUE, BRANDCNAME, BRANDENAME, BRANDSPELL, 
+    BRANDFIRSTSPELL, BRANDFIGURE, APPLYDATE, REGDATE, APPLYMAN1, CHANGEAFFICHEISSUE1, 
+    CHANGEDATE1, CHANGETYPE1, APPLYMAN2, CHANGEAFFICHEISSUE2, CHANGEDATE2, CHANGETYPE2, 
+    APPLYMAN3, CHANGEAFFICHEISSUE3, CHANGEDATE3, CHANGETYPE3, REGMANADDR, CHANGEAFFICHEISSUE4, 
+    CHANGEDATE4, AGENTORG, NOTE, USEPRODUCT, INTERTYPE, ISVALID, CNAMEINPUTCODE, REGMANADDRCODE, 
+    CHANGEPAGE1, CHANGEPAGE2, CHANGEPAGE3, CHANGEPAGE4, TRIAPAGE, REGPAGE, GROUPCODE, 
+    ENDDATE, SBDNUM, CORPNAMEINDEX, UPDATETIME, CORPNAMEINDEX02, ISCENTER, SINOAPPLYMAN1, 
+    SINOAPPLYMAN2, SINOISVALID, UPDATETIME_SAVE
+    from T_BRANDINFO
+    where REGNO = #{regno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select REGNO, TRIALAFFICHEISSUE, CHANGEAFFICHEISSUE, BRANDCNAME, BRANDENAME, BRANDSPELL, 
+    BRANDFIRSTSPELL, BRANDFIGURE, APPLYDATE, REGDATE, APPLYMAN1, CHANGEAFFICHEISSUE1, 
+    CHANGEDATE1, CHANGETYPE1, APPLYMAN2, CHANGEAFFICHEISSUE2, CHANGEDATE2, CHANGETYPE2, 
+    APPLYMAN3, CHANGEAFFICHEISSUE3, CHANGEDATE3, CHANGETYPE3, REGMANADDR, CHANGEAFFICHEISSUE4, 
+    CHANGEDATE4, AGENTORG, NOTE, USEPRODUCT, INTERTYPE, ISVALID, CNAMEINPUTCODE, REGMANADDRCODE, 
+    CHANGEPAGE1, CHANGEPAGE2, CHANGEPAGE3, CHANGEPAGE4, TRIAPAGE, REGPAGE, GROUPCODE, 
+    ENDDATE, SBDNUM, CORPNAMEINDEX, UPDATETIME, CORPNAMEINDEX02, ISCENTER, SINOAPPLYMAN1, 
+    SINOAPPLYMAN2, SINOISVALID, UPDATETIME_SAVE
+    from T_BRANDINFO
+  </select>
+</mapper>

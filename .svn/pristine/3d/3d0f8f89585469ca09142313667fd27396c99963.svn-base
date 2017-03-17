@@ -1,0 +1,537 @@
+package com.experian.daas.integration.trans.litigation.service.impl;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.experian.core.constant.LitiBusiConstant;
+import com.experian.core.enums.CaseCodeMapEnum;
+import com.experian.core.sharding.sqlsessiontemplate.CustomerContextHolder;
+import com.experian.core.sharding.utils.ReflectionUtils;
+import com.experian.core.utils.PKUtil;
+import com.experian.daas.center.litigation.dao.LitigationCaseCategoryDao;
+import com.experian.daas.center.litigation.entity.LitigationCaseCategory;
+import com.experian.daas.integration.trans.litigation.entity.history.CorpLitigation;
+import com.experian.daas.integration.trans.litigation.entity.history.CorplitigationHistory;
+import com.experian.daas.integration.trans.litigation.entity.history.PCorpLitigation;
+import com.experian.daas.integration.trans.litigation.entity.middle.LitigationTempCrawledData;
+import com.experian.daas.integration.trans.litigation.entity.middle.LitigationTempParsedDataDetail;
+import com.experian.daas.integration.trans.litigation.entity.middle.LitigationTempParty;
+import com.experian.daas.integration.trans.litigation.entity.middle.LitigationTempSourceUrl;
+import com.experian.daas.integration.trans.litigation.history.dao.CorpLitigationDao;
+import com.experian.daas.integration.trans.litigation.history.dao.CorplitigationHistoryDao;
+import com.experian.daas.integration.trans.litigation.history.dao.PCorpLitigationDao;
+import com.experian.daas.integration.trans.litigation.middle.dao.LitigationTempCrawledDataDao;
+import com.experian.daas.integration.trans.litigation.middle.dao.LitigationTempParsedDataDetailDao;
+import com.experian.daas.integration.trans.litigation.middle.dao.LitigationTempPartyDao;
+import com.experian.daas.integration.trans.litigation.middle.dao.LitigationTempSourceUrlDao;
+import com.experian.daas.integration.trans.litigation.service.LitigationTransitService;
+
+/**
+ * 旧数据迁移
+ * 
+ * @author lixiongcheng
+ *
+ */
+@Service("litigationTransitService")
+public class LitigationTransitServiceImpl implements LitigationTransitService {
+	private static final Logger logger = Logger.getLogger(LitigationTransitServiceImpl.class);
+
+	@Resource
+	private CorpLitigationDao corpLitigationDao;
+
+	@Resource
+	private CorplitigationHistoryDao corplitigationHistoryDao;
+
+	@Resource
+	private LitigationTempSourceUrlDao tempSourceUrlDao;
+
+	@Resource
+	private LitigationTempCrawledDataDao tempCrawledDataDao;
+
+	@Resource
+	private LitigationTempParsedDataDetailDao tempParsedDataDetailDao;
+
+	@Resource
+	private LitigationTempPartyDao tempPartyDao;
+
+	@Resource
+	private LitigationCaseCategoryDao caseDategotyDao;
+
+	@Resource
+	private PCorpLitigationDao pCorpLitigationDao;
+
+	public static Map<String, Long> cachedCaseCategory = new HashMap<String, Long>();
+
+	/**
+	 * db2主表数据转到postgresql 临时表
+	 */
+	@Override
+	@Transactional(rollbackFor = RuntimeException.class)
+	public void transmitCorpLitigation(int curPage, int pageSize) {
+		long start = new Date().getTime();
+		List<CorpLitigation> litis = getLitigationByPage(curPage, pageSize);
+		logger.info(Thread.currentThread().getName() + ">>>>诉讼主表查询curpage:" + curPage + ">>pageSize:" + pageSize
+				+ "数据耗时：>>>>>>>>" + (new Date().getTime() - start));
+		if (litis == null || litis.size() == 0) {
+			return;
+		}
+		for (CorpLitigation litigation : litis) {
+			trasmitToPostgresql(litigation, LitiBusiConstant.DataFrom.DB2_LITIGATION);
+		}
+		logger.info(Thread.currentThread().getName() + ">>>>诉讼主表处理curpage:" + curPage + ">>pageSize:" + pageSize
+				+ "数据耗时：>>>>>>>>" + (new Date().getTime() - start));
+	}
+
+	/**
+	 * db2进程表数据转到postgresql 临时表
+	 */
+	@Override
+	@Transactional(rollbackFor = RuntimeException.class)
+	public void transmitCorpLitigationHistory(int curPage, int pageSize) {
+		long start = new Date().getTime();
+		List<CorplitigationHistory> litis = getLitigationHistoryByPage(curPage, pageSize);
+		logger.info(Thread.currentThread().getName() + ">>>>诉讼进程表查询curpage:" + curPage + ">>pageSize:" + pageSize
+				+ "数据耗时：>>>>>>>>" + (new Date().getTime() - start));
+		if (litis == null || litis.size() == 0) {
+			return;
+		}
+		for (CorplitigationHistory ch : litis) {
+			CorpLitigation litigation = copy2Corplitigation(ch);
+			trasmitToPostgresql(litigation, LitiBusiConstant.DataFrom.DB2_LITIGATION_HISTORY);
+		}
+		logger.info(Thread.currentThread().getName() + ">>>>诉讼进程表处理curpage:" + curPage + ">>pageSize:" + pageSize
+				+ "数据耗时：>>>>>>>>" + (new Date().getTime() - start));
+
+	}
+
+	/**
+	 * sqlserver诉讼平台数据迁移，需要先迁移db主表和进程表数据
+	 */
+	@Override
+	@Transactional(rollbackFor = RuntimeException.class)
+	public void transmitSqlserverCorpLitigation(int curPage, int pageSize) {
+		long start = new Date().getTime();
+		List<PCorpLitigation> litis = getSqlserverLitigationByPage(curPage, pageSize);
+		logger.info(Thread.currentThread().getName() + ">>>>诉讼平台查询curpage:" + curPage + ">>pageSize:" + pageSize
+				+ "数据耗时：>>>>>>>>" + (new Date().getTime() - start));
+		if (litis == null || litis.size() == 0) {
+			return;
+		}
+		for (PCorpLitigation pc : litis) {
+			CorpLitigation litigation = sqlServerCopy2Corplitigation(pc);
+			long pkid = Long.valueOf(litigation.getPkid());
+			if (isNotInDb2Data(pkid)) {
+				trasmitToPostgresql(litigation, LitiBusiConstant.DataFrom.SQLSERVER_LITIGATION);
+			}
+		}
+		logger.info(Thread.currentThread().getName() + ">>>>诉讼平台处理curpage:" + curPage + ">>pageSize:" + pageSize
+				+ "数据耗时：>>>>>>>>" + (new Date().getTime() - start));
+	}
+
+	/**
+	 * 在临时表内，诉讼平台的数据是否在db2中不存在
+	 * 
+	 * @param pkid
+	 * @return
+	 */
+	private boolean isNotInDb2Data(long pkid) {
+		CustomerContextHolder.setContextType(CustomerContextHolder.POSTGRESQL);
+		int num = tempParsedDataDetailDao.selectByPkId(pkid);
+		return num == 0;
+	}
+
+	/**
+	 * sqlserver诉讼数据映射到db2主表数据
+	 * 
+	 * @param pCorpLitigation
+	 * @return
+	 */
+	private CorpLitigation sqlServerCopy2Corplitigation(PCorpLitigation pCorpLitigation) {
+		CorpLitigation corpLitigation = new CorpLitigation();
+		try {
+			BeanUtils.copyProperties(pCorpLitigation, corpLitigation, new String[] { "courtid" });
+			if (pCorpLitigation.getCourtid() != null) {
+				corpLitigation.setCourtid(pCorpLitigation.getCourtid().toString());
+			}
+			Long pkId = pCorpLitigation.getPkId();
+			if (pkId != null) {
+				corpLitigation.setPkid(pkId.toString());
+			}
+
+		} catch (Exception e) {
+			logger.error(e);
+			throw new RuntimeException(e.getMessage());
+		}
+		return corpLitigation;
+	}
+
+	/**
+	 * db2进程数据映射到db2主表数据
+	 * 
+	 * @param corplitigationHistory
+	 * @return
+	 */
+	private CorpLitigation copy2Corplitigation(CorplitigationHistory corplitigationHistory) {
+		CorpLitigation corpLitigation = new CorpLitigation();
+		try {
+			BeanUtils.copyProperties(corplitigationHistory, corpLitigation);
+		} catch (Exception e) {
+			logger.error(e);
+			throw new RuntimeException(e.getMessage());
+		}
+		return corpLitigation;
+	}
+
+	/**
+	 * 数据到postgresql
+	 * 
+	 * @param litigation
+	 */
+	private void trasmitToPostgresql(CorpLitigation litigation, Integer fromFlag) {
+		try {
+			// 1.进litigation_source_url 旧数据迁移网址这张表不落
+			// String sourceUrlId = trans2SourceUrl(litigation);
+
+			// 2.进litigation_crawled_data
+			String crawledDataId = trans2CrawledData(litigation);
+
+			// 3.进litigation_parsed_data
+			String parsedDataId = PKUtil.experianKey();
+
+			// 4.进litigation_parsed_data_detail
+			String parsedDataDetailId = trans2ParsedDataDetail(litigation, crawledDataId, parsedDataId, fromFlag);
+
+			// 5.进litigation_party
+			trans2Party(litigation, parsedDataDetailId);
+
+			// 6.更新db2数据获取字段
+			// updateLitigationFetchFlag(litigation.getSbdnum(),
+			// litigation.getInfonum());
+		} catch (Exception e) {
+			logger.error(e);
+		}
+	}
+
+	/**
+	 * 落入企业自然人表
+	 * 
+	 * @param litigation
+	 *            旧数据
+	 * @param parsedDataDetailId
+	 * @throws Exception
+	 */
+	private void trans2Party(CorpLitigation litigation, String parsedDataDetailId) throws Exception {
+		List<LitigationTempParty> partyList = new ArrayList<LitigationTempParty>();
+		for (int i = 1; i <= 15; i++) {
+			LitigationTempParty party = new LitigationTempParty();
+			if (i >= 0 && i <= 5) {
+				Object accuser = ReflectionUtils.getFieldValue(litigation, "accuser" + i);// 原告
+				Object accuserSbdnum = ReflectionUtils.getFieldValue(litigation, "accsbdnum" + i);// 原告sbdnum
+				if (accuser != null && StringUtils.isNoneBlank(accuser.toString())) {
+					party.setName(accuser.toString());
+				}
+				if (accuserSbdnum != null && StringUtils.isNoneBlank(accuserSbdnum.toString())) {
+					party.setSbdnum(accuserSbdnum.toString());
+				}
+				party.setPartyCategoryId(LitiBusiConstant.PartyCategory.ACCUSER);
+			} else if (i >= 6 && i <= 10) {
+				Object appuser = ReflectionUtils.getFieldValue(litigation, "appuser" + (i - 5));// 被告
+				Object appuserSbdnum = ReflectionUtils.getFieldValue(litigation, "appsbdnum" + (i - 5));// 被告sbdnum
+				if (appuser != null && StringUtils.isNoneBlank(appuser.toString())) {
+					party.setName(appuser.toString());
+				}
+				if (appuserSbdnum != null && StringUtils.isNoneBlank(appuserSbdnum.toString())) {
+					party.setSbdnum(appuserSbdnum.toString());
+				}
+				party.setPartyCategoryId(LitiBusiConstant.PartyCategory.ACCUSED);
+			} else if (i >= 11 && i <= 15) {
+				Object partyuser = ReflectionUtils.getFieldValue(litigation, "party" + (i - 10));// 当事人
+				Object partyusersbdnum = ReflectionUtils.getFieldValue(litigation, "partsbdnum" + (i - 10));// 当事人sdbnum
+				if (partyuser != null && StringUtils.isNoneBlank(partyuser.toString())) {
+					party.setName(partyuser.toString());
+				}
+				if (partyusersbdnum != null && StringUtils.isNoneBlank(partyusersbdnum.toString())) {
+					party.setSbdnum(partyusersbdnum.toString());
+				}
+				party.setPartyCategoryId(LitiBusiConstant.PartyCategory.PARTIES);
+			}
+			if (StringUtils.isEmpty(party.getName())) {
+				continue;
+			}
+			String partyId = PKUtil.experianKey();
+			party.setId(partyId);
+			party.setSupplierId(partyId);
+			party.setParsedDataDetailId(parsedDataDetailId);
+			party.setUpdatedDate(litigation.getUpdatetime());
+			party.setAccuseDate(litigation.getAccdate());
+			party.setInsertDate(new Date());
+			partyList.add(party);
+		}
+		if (!CollectionUtils.isEmpty(partyList)) {
+			CustomerContextHolder.setContextType(CustomerContextHolder.POSTGRESQL);
+			tempPartyDao.batchInset(partyList);
+		}
+	}
+
+	/**
+	 * 落入诉讼案件详情表临时表
+	 * 
+	 * @param litigation
+	 * @param crawledDataId
+	 * @param parsedDataId
+	 * @return
+	 * @throws Exception
+	 */
+	private String trans2ParsedDataDetail(CorpLitigation litigation, String crawledDataId, String parsedDataId,
+			Integer flag) throws Exception {
+		LitigationTempParsedDataDetail parsedDataDetail = new LitigationTempParsedDataDetail();
+		String parsedDataDetailId = PKUtil.experianKey();
+		String supplierId = litigation.getSbdnum()+"_"+litigation.getInfonum();
+		parsedDataDetail.setId(parsedDataDetailId);
+		parsedDataDetail.setSupplierId(supplierId);
+		parsedDataDetail.setParsedDataId(parsedDataId);
+		parsedDataDetail.setCrawledDataId(crawledDataId);
+		parsedDataDetail.setCaseNumber(replaceBrackets(litigation.getCaseid()));
+		parsedDataDetail.setIfBeCourt(litigation.getIfbecourt());
+		parsedDataDetail.setCaseCategoryId(transCaseCategoryId(litigation.getCasecode(), litigation.getCaseid()));
+		parsedDataDetail.setAccuseDate(litigation.getAccdate());
+		String courtId = litigation.getCourtid();
+		if (StringUtils.isNoneBlank(courtId) && !"NULL".equals(courtId)) {// 数据库里有NULL这种怪胎
+			try {
+				parsedDataDetail.setCourtId(Integer.valueOf(litigation.getCourtid()));
+			} catch (Exception e) {
+				logger.error(e);
+				logger.error("法院转错，id:" + litigation.getCourtid());
+			}
+		}
+		parsedDataDetail.setSimpleDetail(transSimpleDetail(litigation.getSimplecase(), litigation.getNoticedetails()));
+		parsedDataDetail.setDetails(transDetail(litigation.getNoticedetails(), litigation.getMinutecase()));
+		parsedDataDetail.setCreatedDate(litigation.getObtainingdate());
+		parsedDataDetail.setStatus(LitiBusiConstant.ParsedStatus.SUCCESS);
+		String pkid = litigation.getPkid();
+		if (StringUtils.isNoneBlank(pkid)) {
+			parsedDataDetail.setPkId(Long.valueOf(pkid));
+		}
+		parsedDataDetail.setUpdatedDate(litigation.getUpdatetime());
+		parsedDataDetail.setDataFrom(flag);
+		parsedDataDetail.setInsertDate(new Date());
+		parsedDataDetail.setFetchFlag(LitiBusiConstant.DataFetchStatus.UN_FETCH);
+		CustomerContextHolder.setContextType(CustomerContextHolder.POSTGRESQL);
+		tempParsedDataDetailDao.insert(parsedDataDetail);
+		return parsedDataDetailId;
+	}
+
+	/**
+	 * 落入抓取数据表临时表
+	 * 
+	 * @param litigation
+	 * @param sourceUrlId
+	 * @return
+	 * @throws Exception
+	 */
+	private String trans2CrawledData(CorpLitigation litigation) throws Exception {
+		LitigationTempCrawledData crawledData = new LitigationTempCrawledData();
+		String crawledDataId = PKUtil.experianKey();
+		crawledData.setId(crawledDataId);
+		crawledData.setSupplierId(crawledDataId);
+		crawledData.setSourceUrlId(crawledDataId);
+		crawledData.setContentUrl(litigation.getLitigationagenturl());
+		crawledData.setCreatedDate(litigation.getObtainingdate());
+		crawledData.setInsertDate(new Date());
+		CustomerContextHolder.setContextType(CustomerContextHolder.POSTGRESQL);
+		tempCrawledDataDao.insert(crawledData);
+		return crawledDataId;
+	}
+
+	/**
+	 * 落入网址表临时表
+	 * 
+	 * @param litigation
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unused")
+	private String trans2SourceUrl(CorpLitigation litigation) throws Exception {
+		LitigationTempSourceUrl sourceUrl = new LitigationTempSourceUrl();
+		String sourceUrlId = PKUtil.experianKey();
+		sourceUrl.setId(sourceUrlId);
+		sourceUrl.setCreatedDate(litigation.getObtainingdate());
+		CustomerContextHolder.setContextType(CustomerContextHolder.POSTGRESQL);
+		tempSourceUrlDao.insert(sourceUrl);
+		return sourceUrlId;
+	}
+
+	/**
+	 * 旧库简单案由入新库转换
+	 * 
+	 * @param simplecase
+	 *            旧库 简单案由
+	 * @param noticedetails
+	 *            旧库 公告详情
+	 * @return 新库 公告详情
+	 */
+	private String transSimpleDetail(String simplecase, String noticedetails) {
+		if (StringUtils.isEmpty(simplecase) && StringUtils.isNotEmpty(noticedetails)) {
+			return noticedetails;
+		}
+		return simplecase;
+	}
+
+	/**
+	 * 详细案由
+	 * 
+	 * @param noticeDetails
+	 *            公告详情
+	 * @param minuteCase
+	 *            详细案由
+	 * @return
+	 */
+	private String transDetail(String noticeDetails, String minuteCase) {
+		// 1.若公告详情和详细案由均有值，则优先选择详细案由
+		if (StringUtils.isNoneBlank(noticeDetails) && StringUtils.isNotBlank(minuteCase)) {
+			return minuteCase;
+		}
+		// 2.若公告详情和详细案由只有一个有值，则选取有值得
+		if (StringUtils.isBlank(noticeDetails) && StringUtils.isNoneBlank(minuteCase)) {
+			return minuteCase;
+		}
+		if (StringUtils.isBlank(minuteCase) && StringUtils.isNoneBlank(noticeDetails)) {
+			return noticeDetails;
+		}
+		// 3.若公告详情和详细案由均为空，则为空
+		return null;
+	}
+
+	/**
+	 * 旧库案件类型入新库
+	 * 
+	 * @param casecode
+	 *            旧库 案件分类
+	 * @param caseId
+	 *            旧库 案号
+	 * @return 新库案件类型
+	 */
+	private Integer transCaseCategoryId(String casecode, String caseId) {
+		if (StringUtils.isEmpty(casecode)) {
+			return null;
+		}
+		if ("NULL".equals(casecode)) {// 库里有NULL值
+			return null;
+		}
+		if (StringUtils.isEmpty(caseId)) {
+			return getCachedCaseCategoryId(casecode);
+		}
+		if (casecode.startsWith("01") && caseId.contains("执")) {
+			return 7;// 执行公告
+		} else if (casecode.startsWith("02") && caseId.contains("执")) {
+			return 6;// 执行案件
+		} else {
+			return getCachedCaseCategoryId(casecode);
+		}
+	}
+
+	private Integer getCachedCaseCategoryId(String casecode) {
+		if (cachedCaseCategory.size() == 0) {
+			List<LitigationCaseCategory> lccs = caseDategotyDao.selectAll();
+			for (LitigationCaseCategory lcc : lccs) {
+				cachedCaseCategory.put(lcc.getCode(), lcc.getId());
+			}
+		}
+		int rs = 0;
+		try {
+			rs = cachedCaseCategory.get(CaseCodeMapEnum.valueOf("O_" + casecode).getCaseCode()).intValue();
+		} catch (Exception e) {
+			logger.error("casecode案件分类查找失败！>>>>>>>>>>>>>>>" + casecode);
+			// 没找到
+			rs = 0;
+		}
+		return rs;
+
+	}
+
+	@Override
+	public Integer getCorpLitigationCount() {
+		CustomerContextHolder.setContextType(CustomerContextHolder.DB2_CREDIT);
+		return corpLitigationDao.getCorpLitigationCount();
+	}
+
+	/**
+	 * 分页获取诉讼主标数据
+	 * 
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
+	private List<CorpLitigation> getLitigationByPage(int pageNum, int pageSize) {
+		CustomerContextHolder.setContextType(CustomerContextHolder.DB2_CREDIT);
+		return corpLitigationDao.getCorpLitigationByPage((pageNum - 1) * pageSize + 1, pageNum * pageSize);
+	}
+
+	@Override
+	public Integer getLitigationHistroyCount() {
+		CustomerContextHolder.setContextType(CustomerContextHolder.DB2_CREDIT);
+		return corplitigationHistoryDao.getLitigationHistroyCount();
+	}
+
+	/**
+	 * 分页获取DB2_CREDIT进程表数据
+	 * 
+	 * @param curPage
+	 * @param pageSize
+	 * @return
+	 */
+	private List<CorplitigationHistory> getLitigationHistoryByPage(int pageNum, int pageSize) {
+		CustomerContextHolder.setContextType(CustomerContextHolder.DB2_CREDIT);
+		return corplitigationHistoryDao.getLitigationHistroyByPage((pageNum - 1) * pageSize + 1, pageNum * pageSize);
+	}
+
+	@Override
+	public Integer getSqlserverCorpLitigationCount() {
+		CustomerContextHolder.setContextType(CustomerContextHolder.SQLSERVER);
+		return pCorpLitigationDao.getSqlserverCorpLitigationCount();
+	}
+
+	/**
+	 * 分页获取诉讼平台诉讼数据
+	 * 
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
+	private List<PCorpLitigation> getSqlserverLitigationByPage(int pageNum, int pageSize) {
+		CustomerContextHolder.setContextType(CustomerContextHolder.SQLSERVER);
+		return pCorpLitigationDao.getSqlserverCorpLitigationByPage((pageNum - 1) * pageSize + 1, pageNum * pageSize);
+	}
+
+	private String replaceBrackets(String str) {
+		String chineseLeftHalf = "(";
+		String chineseRightHalf = ")";
+		String chineseLeftFull = "（";
+		String chineseRightFull = "）";
+		String englishLeftFull = "（";
+		String englishRightFull = "）";
+
+		String englishLeftHalf = "(";
+		String englishRightHalf = ")";
+		if (StringUtils.isEmpty(str)) {
+			return null;
+		}
+
+		return str.replace(chineseLeftHalf, englishLeftHalf).replace(chineseRightHalf, englishRightHalf)
+				.replace(chineseLeftFull, englishLeftHalf).replace(chineseRightFull, englishRightHalf)
+				.replace(englishLeftFull, englishLeftHalf).replace(englishRightFull, englishRightHalf);
+	}
+
+}

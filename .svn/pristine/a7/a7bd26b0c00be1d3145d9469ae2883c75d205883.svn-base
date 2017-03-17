@@ -1,0 +1,827 @@
+package com.experian.daas.brand.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * 映射表： T_BRANDINFO
+ */
+public class BrandInfo implements Serializable {
+    /**
+     * 映射字段： REGNO
+     */
+    private String regno;
+
+    /**
+     * 映射字段： TRIALAFFICHEISSUE
+     */
+    private Long trialafficheissue;
+
+    /**
+     * 映射字段： CHANGEAFFICHEISSUE
+     */
+    private Long changeafficheissue;
+
+    /**
+     * 映射字段： BRANDCNAME
+     */
+    private String brandcname;
+
+    /**
+     * 映射字段： BRANDENAME
+     */
+    private String brandename;
+
+    /**
+     * 映射字段： BRANDSPELL
+     */
+    private String brandspell;
+
+    /**
+     * 映射字段： BRANDFIRSTSPELL
+     */
+    private String brandfirstspell;
+
+    /**
+     * 映射字段： BRANDFIGURE
+     */
+    private String brandfigure;
+
+    /**
+     * 映射字段： APPLYDATE
+     */
+    private Date applydate;
+
+    /**
+     * 映射字段： REGDATE
+     */
+    private Date regdate;
+
+    /**
+     * 映射字段： APPLYMAN1
+     */
+    private String applyman1;
+
+    /**
+     * 映射字段： CHANGEAFFICHEISSUE1
+     */
+    private Long changeafficheissue1;
+
+    /**
+     * 映射字段： CHANGEDATE1
+     */
+    private Date changedate1;
+
+    /**
+     * 映射字段： CHANGETYPE1
+     */
+    private String changetype1;
+
+    /**
+     * 映射字段： APPLYMAN2
+     */
+    private String applyman2;
+
+    /**
+     * 映射字段： CHANGEAFFICHEISSUE2
+     */
+    private Long changeafficheissue2;
+
+    /**
+     * 映射字段： CHANGEDATE2
+     */
+    private Date changedate2;
+
+    /**
+     * 映射字段： CHANGETYPE2
+     */
+    private String changetype2;
+
+    /**
+     * 映射字段： APPLYMAN3
+     */
+    private String applyman3;
+
+    /**
+     * 映射字段： CHANGEAFFICHEISSUE3
+     */
+    private Long changeafficheissue3;
+
+    /**
+     * 映射字段： CHANGEDATE3
+     */
+    private Date changedate3;
+
+    /**
+     * 映射字段： CHANGETYPE3
+     */
+    private String changetype3;
+
+    /**
+     * 映射字段： REGMANADDR
+     */
+    private String regmanaddr;
+
+    /**
+     * 映射字段： CHANGEAFFICHEISSUE4
+     */
+    private Long changeafficheissue4;
+
+    /**
+     * 映射字段： CHANGEDATE4
+     */
+    private Date changedate4;
+
+    /**
+     * 映射字段： AGENTORG
+     */
+    private String agentorg;
+
+    /**
+     * 映射字段： NOTE
+     */
+    private String note;
+
+    /**
+     * 映射字段： USEPRODUCT
+     */
+    private String useproduct;
+
+    /**
+     * 映射字段： INTERTYPE
+     */
+    private Integer intertype;
+
+    /**
+     * 映射字段： ISVALID
+     */
+    private Integer isvalid;
+
+    /**
+     * 映射字段： CNAMEINPUTCODE
+     */
+    private String cnameinputcode;
+
+    /**
+     * 映射字段： REGMANADDRCODE
+     */
+    private String regmanaddrcode;
+
+    /**
+     * 映射字段： CHANGEPAGE1
+     */
+    private Long changepage1;
+
+    /**
+     * 映射字段： CHANGEPAGE2
+     */
+    private Long changepage2;
+
+    /**
+     * 映射字段： CHANGEPAGE3
+     */
+    private Long changepage3;
+
+    /**
+     * 映射字段： CHANGEPAGE4
+     */
+    private Long changepage4;
+
+    /**
+     * 映射字段： TRIAPAGE
+     */
+    private Long triapage;
+
+    /**
+     * 映射字段： REGPAGE
+     */
+    private Long regpage;
+
+    /**
+     * 映射字段： GROUPCODE
+     */
+    private String groupcode;
+
+    /**
+     * 映射字段： ENDDATE
+     */
+    private Date enddate;
+
+    /**
+     * 映射字段： SBDNUM
+     */
+    private String sbdnum;
+
+    /**
+     * 映射字段： CORPNAMEINDEX
+     */
+    private Long corpnameindex;
+
+    /**
+     * 映射字段： UPDATETIME
+     */
+    private Date updatetime;
+
+    /**
+     * 映射字段： CORPNAMEINDEX02
+     */
+    private Long corpnameindex02;
+
+    /**
+     * 映射字段： ISCENTER
+     */
+    private String iscenter;
+
+    /**
+     * 映射字段： SINOAPPLYMAN1
+     */
+    private String sinoapplyman1;
+
+    /**
+     * 映射字段： SINOAPPLYMAN2
+     */
+    private String sinoapplyman2;
+
+    /**
+     * 映射字段： SINOISVALID
+     */
+    private String sinoisvalid;
+
+    /**
+     * 映射字段： UPDATETIME_SAVE
+     */
+    private Date updatetimeSave;
+
+    private static final long serialVersionUID = 1L;
+
+    public String getRegno() {
+        return regno;
+    }
+
+    public void setRegno(String regno) {
+        this.regno = regno == null ? null : regno.trim();
+    }
+
+    public Long getTrialafficheissue() {
+        return trialafficheissue;
+    }
+
+    public void setTrialafficheissue(Long trialafficheissue) {
+        this.trialafficheissue = trialafficheissue;
+    }
+
+    public Long getChangeafficheissue() {
+        return changeafficheissue;
+    }
+
+    public void setChangeafficheissue(Long changeafficheissue) {
+        this.changeafficheissue = changeafficheissue;
+    }
+
+    public String getBrandcname() {
+        return brandcname;
+    }
+
+    public void setBrandcname(String brandcname) {
+        this.brandcname = brandcname == null ? null : brandcname.trim();
+    }
+
+    public String getBrandename() {
+        return brandename;
+    }
+
+    public void setBrandename(String brandename) {
+        this.brandename = brandename == null ? null : brandename.trim();
+    }
+
+    public String getBrandspell() {
+        return brandspell;
+    }
+
+    public void setBrandspell(String brandspell) {
+        this.brandspell = brandspell == null ? null : brandspell.trim();
+    }
+
+    public String getBrandfirstspell() {
+        return brandfirstspell;
+    }
+
+    public void setBrandfirstspell(String brandfirstspell) {
+        this.brandfirstspell = brandfirstspell == null ? null : brandfirstspell.trim();
+    }
+
+    public String getBrandfigure() {
+        return brandfigure;
+    }
+
+    public void setBrandfigure(String brandfigure) {
+        this.brandfigure = brandfigure == null ? null : brandfigure.trim();
+    }
+
+    public Date getApplydate() {
+        return applydate;
+    }
+
+    public void setApplydate(Date applydate) {
+        this.applydate = applydate;
+    }
+
+    public Date getRegdate() {
+        return regdate;
+    }
+
+    public void setRegdate(Date regdate) {
+        this.regdate = regdate;
+    }
+
+    public String getApplyman1() {
+        return applyman1;
+    }
+
+    public void setApplyman1(String applyman1) {
+        this.applyman1 = applyman1 == null ? null : applyman1.trim();
+    }
+
+    public Long getChangeafficheissue1() {
+        return changeafficheissue1;
+    }
+
+    public void setChangeafficheissue1(Long changeafficheissue1) {
+        this.changeafficheissue1 = changeafficheissue1;
+    }
+
+    public Date getChangedate1() {
+        return changedate1;
+    }
+
+    public void setChangedate1(Date changedate1) {
+        this.changedate1 = changedate1;
+    }
+
+    public String getChangetype1() {
+        return changetype1;
+    }
+
+    public void setChangetype1(String changetype1) {
+        this.changetype1 = changetype1 == null ? null : changetype1.trim();
+    }
+
+    public String getApplyman2() {
+        return applyman2;
+    }
+
+    public void setApplyman2(String applyman2) {
+        this.applyman2 = applyman2 == null ? null : applyman2.trim();
+    }
+
+    public Long getChangeafficheissue2() {
+        return changeafficheissue2;
+    }
+
+    public void setChangeafficheissue2(Long changeafficheissue2) {
+        this.changeafficheissue2 = changeafficheissue2;
+    }
+
+    public Date getChangedate2() {
+        return changedate2;
+    }
+
+    public void setChangedate2(Date changedate2) {
+        this.changedate2 = changedate2;
+    }
+
+    public String getChangetype2() {
+        return changetype2;
+    }
+
+    public void setChangetype2(String changetype2) {
+        this.changetype2 = changetype2 == null ? null : changetype2.trim();
+    }
+
+    public String getApplyman3() {
+        return applyman3;
+    }
+
+    public void setApplyman3(String applyman3) {
+        this.applyman3 = applyman3 == null ? null : applyman3.trim();
+    }
+
+    public Long getChangeafficheissue3() {
+        return changeafficheissue3;
+    }
+
+    public void setChangeafficheissue3(Long changeafficheissue3) {
+        this.changeafficheissue3 = changeafficheissue3;
+    }
+
+    public Date getChangedate3() {
+        return changedate3;
+    }
+
+    public void setChangedate3(Date changedate3) {
+        this.changedate3 = changedate3;
+    }
+
+    public String getChangetype3() {
+        return changetype3;
+    }
+
+    public void setChangetype3(String changetype3) {
+        this.changetype3 = changetype3 == null ? null : changetype3.trim();
+    }
+
+    public String getRegmanaddr() {
+        return regmanaddr;
+    }
+
+    public void setRegmanaddr(String regmanaddr) {
+        this.regmanaddr = regmanaddr == null ? null : regmanaddr.trim();
+    }
+
+    public Long getChangeafficheissue4() {
+        return changeafficheissue4;
+    }
+
+    public void setChangeafficheissue4(Long changeafficheissue4) {
+        this.changeafficheissue4 = changeafficheissue4;
+    }
+
+    public Date getChangedate4() {
+        return changedate4;
+    }
+
+    public void setChangedate4(Date changedate4) {
+        this.changedate4 = changedate4;
+    }
+
+    public String getAgentorg() {
+        return agentorg;
+    }
+
+    public void setAgentorg(String agentorg) {
+        this.agentorg = agentorg == null ? null : agentorg.trim();
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
+    }
+
+    public String getUseproduct() {
+        return useproduct;
+    }
+
+    public void setUseproduct(String useproduct) {
+        this.useproduct = useproduct == null ? null : useproduct.trim();
+    }
+
+    public Integer getIntertype() {
+        return intertype;
+    }
+
+    public void setIntertype(Integer intertype) {
+        this.intertype = intertype;
+    }
+
+    public Integer getIsvalid() {
+        return isvalid;
+    }
+
+    public void setIsvalid(Integer isvalid) {
+        this.isvalid = isvalid;
+    }
+
+    public String getCnameinputcode() {
+        return cnameinputcode;
+    }
+
+    public void setCnameinputcode(String cnameinputcode) {
+        this.cnameinputcode = cnameinputcode == null ? null : cnameinputcode.trim();
+    }
+
+    public String getRegmanaddrcode() {
+        return regmanaddrcode;
+    }
+
+    public void setRegmanaddrcode(String regmanaddrcode) {
+        this.regmanaddrcode = regmanaddrcode == null ? null : regmanaddrcode.trim();
+    }
+
+    public Long getChangepage1() {
+        return changepage1;
+    }
+
+    public void setChangepage1(Long changepage1) {
+        this.changepage1 = changepage1;
+    }
+
+    public Long getChangepage2() {
+        return changepage2;
+    }
+
+    public void setChangepage2(Long changepage2) {
+        this.changepage2 = changepage2;
+    }
+
+    public Long getChangepage3() {
+        return changepage3;
+    }
+
+    public void setChangepage3(Long changepage3) {
+        this.changepage3 = changepage3;
+    }
+
+    public Long getChangepage4() {
+        return changepage4;
+    }
+
+    public void setChangepage4(Long changepage4) {
+        this.changepage4 = changepage4;
+    }
+
+    public Long getTriapage() {
+        return triapage;
+    }
+
+    public void setTriapage(Long triapage) {
+        this.triapage = triapage;
+    }
+
+    public Long getRegpage() {
+        return regpage;
+    }
+
+    public void setRegpage(Long regpage) {
+        this.regpage = regpage;
+    }
+
+    public String getGroupcode() {
+        return groupcode;
+    }
+
+    public void setGroupcode(String groupcode) {
+        this.groupcode = groupcode == null ? null : groupcode.trim();
+    }
+
+    public Date getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(Date enddate) {
+        this.enddate = enddate;
+    }
+
+    public String getSbdnum() {
+        return sbdnum;
+    }
+
+    public void setSbdnum(String sbdnum) {
+        this.sbdnum = sbdnum == null ? null : sbdnum.trim();
+    }
+
+    public Long getCorpnameindex() {
+        return corpnameindex;
+    }
+
+    public void setCorpnameindex(Long corpnameindex) {
+        this.corpnameindex = corpnameindex;
+    }
+
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    public Long getCorpnameindex02() {
+        return corpnameindex02;
+    }
+
+    public void setCorpnameindex02(Long corpnameindex02) {
+        this.corpnameindex02 = corpnameindex02;
+    }
+
+    public String getIscenter() {
+        return iscenter;
+    }
+
+    public void setIscenter(String iscenter) {
+        this.iscenter = iscenter == null ? null : iscenter.trim();
+    }
+
+    public String getSinoapplyman1() {
+        return sinoapplyman1;
+    }
+
+    public void setSinoapplyman1(String sinoapplyman1) {
+        this.sinoapplyman1 = sinoapplyman1 == null ? null : sinoapplyman1.trim();
+    }
+
+    public String getSinoapplyman2() {
+        return sinoapplyman2;
+    }
+
+    public void setSinoapplyman2(String sinoapplyman2) {
+        this.sinoapplyman2 = sinoapplyman2 == null ? null : sinoapplyman2.trim();
+    }
+
+    public String getSinoisvalid() {
+        return sinoisvalid;
+    }
+
+    public void setSinoisvalid(String sinoisvalid) {
+        this.sinoisvalid = sinoisvalid == null ? null : sinoisvalid.trim();
+    }
+
+    public Date getUpdatetimeSave() {
+        return updatetimeSave;
+    }
+
+    public void setUpdatetimeSave(Date updatetimeSave) {
+        this.updatetimeSave = updatetimeSave;
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        BrandInfo other = (BrandInfo) that;
+        return (this.getRegno() == null ? other.getRegno() == null : this.getRegno().equals(other.getRegno()))
+            && (this.getTrialafficheissue() == null ? other.getTrialafficheissue() == null : this.getTrialafficheissue().equals(other.getTrialafficheissue()))
+            && (this.getChangeafficheissue() == null ? other.getChangeafficheissue() == null : this.getChangeafficheissue().equals(other.getChangeafficheissue()))
+            && (this.getBrandcname() == null ? other.getBrandcname() == null : this.getBrandcname().equals(other.getBrandcname()))
+            && (this.getBrandename() == null ? other.getBrandename() == null : this.getBrandename().equals(other.getBrandename()))
+            && (this.getBrandspell() == null ? other.getBrandspell() == null : this.getBrandspell().equals(other.getBrandspell()))
+            && (this.getBrandfirstspell() == null ? other.getBrandfirstspell() == null : this.getBrandfirstspell().equals(other.getBrandfirstspell()))
+            && (this.getBrandfigure() == null ? other.getBrandfigure() == null : this.getBrandfigure().equals(other.getBrandfigure()))
+            && (this.getApplydate() == null ? other.getApplydate() == null : this.getApplydate().equals(other.getApplydate()))
+            && (this.getRegdate() == null ? other.getRegdate() == null : this.getRegdate().equals(other.getRegdate()))
+            && (this.getApplyman1() == null ? other.getApplyman1() == null : this.getApplyman1().equals(other.getApplyman1()))
+            && (this.getChangeafficheissue1() == null ? other.getChangeafficheissue1() == null : this.getChangeafficheissue1().equals(other.getChangeafficheissue1()))
+            && (this.getChangedate1() == null ? other.getChangedate1() == null : this.getChangedate1().equals(other.getChangedate1()))
+            && (this.getChangetype1() == null ? other.getChangetype1() == null : this.getChangetype1().equals(other.getChangetype1()))
+            && (this.getApplyman2() == null ? other.getApplyman2() == null : this.getApplyman2().equals(other.getApplyman2()))
+            && (this.getChangeafficheissue2() == null ? other.getChangeafficheissue2() == null : this.getChangeafficheissue2().equals(other.getChangeafficheissue2()))
+            && (this.getChangedate2() == null ? other.getChangedate2() == null : this.getChangedate2().equals(other.getChangedate2()))
+            && (this.getChangetype2() == null ? other.getChangetype2() == null : this.getChangetype2().equals(other.getChangetype2()))
+            && (this.getApplyman3() == null ? other.getApplyman3() == null : this.getApplyman3().equals(other.getApplyman3()))
+            && (this.getChangeafficheissue3() == null ? other.getChangeafficheissue3() == null : this.getChangeafficheissue3().equals(other.getChangeafficheissue3()))
+            && (this.getChangedate3() == null ? other.getChangedate3() == null : this.getChangedate3().equals(other.getChangedate3()))
+            && (this.getChangetype3() == null ? other.getChangetype3() == null : this.getChangetype3().equals(other.getChangetype3()))
+            && (this.getRegmanaddr() == null ? other.getRegmanaddr() == null : this.getRegmanaddr().equals(other.getRegmanaddr()))
+            && (this.getChangeafficheissue4() == null ? other.getChangeafficheissue4() == null : this.getChangeafficheissue4().equals(other.getChangeafficheissue4()))
+            && (this.getChangedate4() == null ? other.getChangedate4() == null : this.getChangedate4().equals(other.getChangedate4()))
+            && (this.getAgentorg() == null ? other.getAgentorg() == null : this.getAgentorg().equals(other.getAgentorg()))
+            && (this.getNote() == null ? other.getNote() == null : this.getNote().equals(other.getNote()))
+            && (this.getUseproduct() == null ? other.getUseproduct() == null : this.getUseproduct().equals(other.getUseproduct()))
+            && (this.getIntertype() == null ? other.getIntertype() == null : this.getIntertype().equals(other.getIntertype()))
+            && (this.getIsvalid() == null ? other.getIsvalid() == null : this.getIsvalid().equals(other.getIsvalid()))
+            && (this.getCnameinputcode() == null ? other.getCnameinputcode() == null : this.getCnameinputcode().equals(other.getCnameinputcode()))
+            && (this.getRegmanaddrcode() == null ? other.getRegmanaddrcode() == null : this.getRegmanaddrcode().equals(other.getRegmanaddrcode()))
+            && (this.getChangepage1() == null ? other.getChangepage1() == null : this.getChangepage1().equals(other.getChangepage1()))
+            && (this.getChangepage2() == null ? other.getChangepage2() == null : this.getChangepage2().equals(other.getChangepage2()))
+            && (this.getChangepage3() == null ? other.getChangepage3() == null : this.getChangepage3().equals(other.getChangepage3()))
+            && (this.getChangepage4() == null ? other.getChangepage4() == null : this.getChangepage4().equals(other.getChangepage4()))
+            && (this.getTriapage() == null ? other.getTriapage() == null : this.getTriapage().equals(other.getTriapage()))
+            && (this.getRegpage() == null ? other.getRegpage() == null : this.getRegpage().equals(other.getRegpage()))
+            && (this.getGroupcode() == null ? other.getGroupcode() == null : this.getGroupcode().equals(other.getGroupcode()))
+            && (this.getEnddate() == null ? other.getEnddate() == null : this.getEnddate().equals(other.getEnddate()))
+            && (this.getSbdnum() == null ? other.getSbdnum() == null : this.getSbdnum().equals(other.getSbdnum()))
+            && (this.getCorpnameindex() == null ? other.getCorpnameindex() == null : this.getCorpnameindex().equals(other.getCorpnameindex()))
+            && (this.getUpdatetime() == null ? other.getUpdatetime() == null : this.getUpdatetime().equals(other.getUpdatetime()))
+            && (this.getCorpnameindex02() == null ? other.getCorpnameindex02() == null : this.getCorpnameindex02().equals(other.getCorpnameindex02()))
+            && (this.getIscenter() == null ? other.getIscenter() == null : this.getIscenter().equals(other.getIscenter()))
+            && (this.getSinoapplyman1() == null ? other.getSinoapplyman1() == null : this.getSinoapplyman1().equals(other.getSinoapplyman1()))
+            && (this.getSinoapplyman2() == null ? other.getSinoapplyman2() == null : this.getSinoapplyman2().equals(other.getSinoapplyman2()))
+            && (this.getSinoisvalid() == null ? other.getSinoisvalid() == null : this.getSinoisvalid().equals(other.getSinoisvalid()))
+            && (this.getUpdatetimeSave() == null ? other.getUpdatetimeSave() == null : this.getUpdatetimeSave().equals(other.getUpdatetimeSave()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getRegno() == null) ? 0 : getRegno().hashCode());
+        result = prime * result + ((getTrialafficheissue() == null) ? 0 : getTrialafficheissue().hashCode());
+        result = prime * result + ((getChangeafficheissue() == null) ? 0 : getChangeafficheissue().hashCode());
+        result = prime * result + ((getBrandcname() == null) ? 0 : getBrandcname().hashCode());
+        result = prime * result + ((getBrandename() == null) ? 0 : getBrandename().hashCode());
+        result = prime * result + ((getBrandspell() == null) ? 0 : getBrandspell().hashCode());
+        result = prime * result + ((getBrandfirstspell() == null) ? 0 : getBrandfirstspell().hashCode());
+        result = prime * result + ((getBrandfigure() == null) ? 0 : getBrandfigure().hashCode());
+        result = prime * result + ((getApplydate() == null) ? 0 : getApplydate().hashCode());
+        result = prime * result + ((getRegdate() == null) ? 0 : getRegdate().hashCode());
+        result = prime * result + ((getApplyman1() == null) ? 0 : getApplyman1().hashCode());
+        result = prime * result + ((getChangeafficheissue1() == null) ? 0 : getChangeafficheissue1().hashCode());
+        result = prime * result + ((getChangedate1() == null) ? 0 : getChangedate1().hashCode());
+        result = prime * result + ((getChangetype1() == null) ? 0 : getChangetype1().hashCode());
+        result = prime * result + ((getApplyman2() == null) ? 0 : getApplyman2().hashCode());
+        result = prime * result + ((getChangeafficheissue2() == null) ? 0 : getChangeafficheissue2().hashCode());
+        result = prime * result + ((getChangedate2() == null) ? 0 : getChangedate2().hashCode());
+        result = prime * result + ((getChangetype2() == null) ? 0 : getChangetype2().hashCode());
+        result = prime * result + ((getApplyman3() == null) ? 0 : getApplyman3().hashCode());
+        result = prime * result + ((getChangeafficheissue3() == null) ? 0 : getChangeafficheissue3().hashCode());
+        result = prime * result + ((getChangedate3() == null) ? 0 : getChangedate3().hashCode());
+        result = prime * result + ((getChangetype3() == null) ? 0 : getChangetype3().hashCode());
+        result = prime * result + ((getRegmanaddr() == null) ? 0 : getRegmanaddr().hashCode());
+        result = prime * result + ((getChangeafficheissue4() == null) ? 0 : getChangeafficheissue4().hashCode());
+        result = prime * result + ((getChangedate4() == null) ? 0 : getChangedate4().hashCode());
+        result = prime * result + ((getAgentorg() == null) ? 0 : getAgentorg().hashCode());
+        result = prime * result + ((getNote() == null) ? 0 : getNote().hashCode());
+        result = prime * result + ((getUseproduct() == null) ? 0 : getUseproduct().hashCode());
+        result = prime * result + ((getIntertype() == null) ? 0 : getIntertype().hashCode());
+        result = prime * result + ((getIsvalid() == null) ? 0 : getIsvalid().hashCode());
+        result = prime * result + ((getCnameinputcode() == null) ? 0 : getCnameinputcode().hashCode());
+        result = prime * result + ((getRegmanaddrcode() == null) ? 0 : getRegmanaddrcode().hashCode());
+        result = prime * result + ((getChangepage1() == null) ? 0 : getChangepage1().hashCode());
+        result = prime * result + ((getChangepage2() == null) ? 0 : getChangepage2().hashCode());
+        result = prime * result + ((getChangepage3() == null) ? 0 : getChangepage3().hashCode());
+        result = prime * result + ((getChangepage4() == null) ? 0 : getChangepage4().hashCode());
+        result = prime * result + ((getTriapage() == null) ? 0 : getTriapage().hashCode());
+        result = prime * result + ((getRegpage() == null) ? 0 : getRegpage().hashCode());
+        result = prime * result + ((getGroupcode() == null) ? 0 : getGroupcode().hashCode());
+        result = prime * result + ((getEnddate() == null) ? 0 : getEnddate().hashCode());
+        result = prime * result + ((getSbdnum() == null) ? 0 : getSbdnum().hashCode());
+        result = prime * result + ((getCorpnameindex() == null) ? 0 : getCorpnameindex().hashCode());
+        result = prime * result + ((getUpdatetime() == null) ? 0 : getUpdatetime().hashCode());
+        result = prime * result + ((getCorpnameindex02() == null) ? 0 : getCorpnameindex02().hashCode());
+        result = prime * result + ((getIscenter() == null) ? 0 : getIscenter().hashCode());
+        result = prime * result + ((getSinoapplyman1() == null) ? 0 : getSinoapplyman1().hashCode());
+        result = prime * result + ((getSinoapplyman2() == null) ? 0 : getSinoapplyman2().hashCode());
+        result = prime * result + ((getSinoisvalid() == null) ? 0 : getSinoisvalid().hashCode());
+        result = prime * result + ((getUpdatetimeSave() == null) ? 0 : getUpdatetimeSave().hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", regno=").append(regno);
+        sb.append(", trialafficheissue=").append(trialafficheissue);
+        sb.append(", changeafficheissue=").append(changeafficheissue);
+        sb.append(", brandcname=").append(brandcname);
+        sb.append(", brandename=").append(brandename);
+        sb.append(", brandspell=").append(brandspell);
+        sb.append(", brandfirstspell=").append(brandfirstspell);
+        sb.append(", brandfigure=").append(brandfigure);
+        sb.append(", applydate=").append(applydate);
+        sb.append(", regdate=").append(regdate);
+        sb.append(", applyman1=").append(applyman1);
+        sb.append(", changeafficheissue1=").append(changeafficheissue1);
+        sb.append(", changedate1=").append(changedate1);
+        sb.append(", changetype1=").append(changetype1);
+        sb.append(", applyman2=").append(applyman2);
+        sb.append(", changeafficheissue2=").append(changeafficheissue2);
+        sb.append(", changedate2=").append(changedate2);
+        sb.append(", changetype2=").append(changetype2);
+        sb.append(", applyman3=").append(applyman3);
+        sb.append(", changeafficheissue3=").append(changeafficheissue3);
+        sb.append(", changedate3=").append(changedate3);
+        sb.append(", changetype3=").append(changetype3);
+        sb.append(", regmanaddr=").append(regmanaddr);
+        sb.append(", changeafficheissue4=").append(changeafficheissue4);
+        sb.append(", changedate4=").append(changedate4);
+        sb.append(", agentorg=").append(agentorg);
+        sb.append(", note=").append(note);
+        sb.append(", useproduct=").append(useproduct);
+        sb.append(", intertype=").append(intertype);
+        sb.append(", isvalid=").append(isvalid);
+        sb.append(", cnameinputcode=").append(cnameinputcode);
+        sb.append(", regmanaddrcode=").append(regmanaddrcode);
+        sb.append(", changepage1=").append(changepage1);
+        sb.append(", changepage2=").append(changepage2);
+        sb.append(", changepage3=").append(changepage3);
+        sb.append(", changepage4=").append(changepage4);
+        sb.append(", triapage=").append(triapage);
+        sb.append(", regpage=").append(regpage);
+        sb.append(", groupcode=").append(groupcode);
+        sb.append(", enddate=").append(enddate);
+        sb.append(", sbdnum=").append(sbdnum);
+        sb.append(", corpnameindex=").append(corpnameindex);
+        sb.append(", updatetime=").append(updatetime);
+        sb.append(", corpnameindex02=").append(corpnameindex02);
+        sb.append(", iscenter=").append(iscenter);
+        sb.append(", sinoapplyman1=").append(sinoapplyman1);
+        sb.append(", sinoapplyman2=").append(sinoapplyman2);
+        sb.append(", sinoisvalid=").append(sinoisvalid);
+        sb.append(", updatetimeSave=").append(updatetimeSave);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
+}

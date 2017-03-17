@@ -1,0 +1,53 @@
+package com.experian.dsrc.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.experian.dsrc.service.DiscoveryService;
+import com.experian.dto.ServiceDto;
+import com.netflix.appinfo.InstanceInfo;
+
+@RestController
+@RequestMapping("/services")
+public class ServiceController {
+
+	@Autowired
+	private DiscoveryService discoveryService;
+
+	@RequestMapping("/litigation")
+	public List<ServiceDto> getLitigationService() {
+		List<InstanceInfo> instances = discoveryService.getLitigationServiceInstances();
+		List<ServiceDto> result = new ArrayList<ServiceDto>();
+
+		for (InstanceInfo instance : instances) {
+			ServiceDto service = new ServiceDto();
+			service.setAppName(instance.getAppName());
+			service.setInstanceId(instance.getInstanceId());
+			service.setHomepageUrl(instance.getHomePageUrl());
+			result.add(service);
+		}
+
+		return result;
+	}
+
+	@RequestMapping("/baseinfo")
+	public List<ServiceDto> getBaseinfoService() {
+		List<InstanceInfo> instances = discoveryService.getBaseInfoServiceInstances();
+		List<ServiceDto> result = new ArrayList<ServiceDto>();
+
+		for (InstanceInfo instance : instances) {
+			ServiceDto service = new ServiceDto();
+			service.setAppName(instance.getAppName());
+			service.setInstanceId(instance.getInstanceId());
+			service.setHomepageUrl(instance.getHomePageUrl());
+			result.add(service);
+		}
+
+		return result;
+	}
+
+}

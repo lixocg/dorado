@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.experian.daas.integration.adapter.baseinfo.dao.CreditCorpBaseInfoDao">
+	<resultMap id="BaseResultMap"
+		type="com.experian.daas.integration.adapter.baseinfo.entity.CreditCorpBaseInfo">
+		<result column="SBDNUM" jdbcType="CHAR" property="sbdnum" />
+		<result column="CORPNAME" jdbcType="VARCHAR" property="corpname" />
+		<result column="BUSIADDR" jdbcType="VARCHAR" property="busiaddr" />
+		<result column="BUSIZIP" jdbcType="VARCHAR" property="busizip" />
+		<result column="BUSITELAREACODE" jdbcType="VARCHAR" property="busitelareacode" />
+		<result column="BUSITEL" jdbcType="VARCHAR" property="busitel" />
+		<result column="BUSIFAX" jdbcType="VARCHAR" property="busifax" />
+		<result column="URL" jdbcType="VARCHAR" property="url" />
+		<result column="EMAIL" jdbcType="VARCHAR" property="email" />
+		<result column="BISMAJORREVENUES" jdbcType="DECIMAL" property="bismajorrevenues" />
+		<result column="BISTOTALASSETS" jdbcType="DECIMAL" property="bistotalassets" />
+		<result column="BISTOTALEMPLOYEES" jdbcType="INTEGER" property="bistotalemployees" />
+		<result column="BISCHIEFEXECUTE" jdbcType="VARCHAR" property="bischiefexecute" />
+		<result column="DISTRICTCODE" jdbcType="CHAR" property="districtcode" />
+		<result column="MAINTRADECODE" jdbcType="CHAR" property="maintradecode" />
+		<result column="MAINSBDTRADECODE" jdbcType="CHAR" property="mainsbdtradecode" />
+		<result column="LEGALSTATUSCODE" jdbcType="CHAR" property="legalstatuscode" />
+		<result column="INSTITUTIONALCODE" jdbcType="VARCHAR" property="institutionalcode" />
+		<result column="COUNTRYCODE" jdbcType="CHAR" property="countrycode" />
+		<result column="INVESTORCOUNTRYCODE" jdbcType="CHAR"
+			property="investorcountrycode" />
+		<result column="PRIORITY" jdbcType="CHAR" property="priority" />
+		<result column="REGISTERCAPITAL" jdbcType="DECIMAL" property="registercapital" />
+		<result column="STARTINGDATE" jdbcType="DATE" property="startingdate" />
+		<result column="OPERATIONSTATUS" jdbcType="CHAR" property="operationstatus" />
+		<result column="COMPANYSTATUS" jdbcType="CHAR" property="companystatus" />
+		<result column="COMPANYTYPE" jdbcType="CHAR" property="companytype" />
+		<result column="UPDATETIME" jdbcType="DATE" property="updatetime" />
+		<result column="SBDMNUM" jdbcType="CHAR" property="sbdmnum" />
+		<result column="FREETEL" jdbcType="VARCHAR" property="freetel" />
+		<result column="IFLARGEBUS" jdbcType="CHAR" property="iflargebus" />
+		<result column="REPTYPE" jdbcType="CHAR" property="reptype" />
+		<result column="CREPORTDATE" jdbcType="DATE" property="creportdate" />
+		<result column="FINANCEDATE" jdbcType="DATE" property="financedate" />
+		<result column="IFLISTEDCOMPANY" jdbcType="CHAR" property="iflistedcompany" />
+		<result column="CONTROLSBDNUM" jdbcType="CHAR" property="controlsbdnum" />
+		<result column="PRODUCTCODE" jdbcType="CHAR" property="productcode" />
+		<result column="PRODUCTCODE2" jdbcType="CHAR" property="productcode2" />
+		<result column="IFSHOWFINANCE" jdbcType="CHAR" property="ifshowfinance" />
+		<result column="CORPNAMEINDEX" jdbcType="BIGINT" property="corpnameindex" />
+		<result column="CORPNAMEINDEX02" jdbcType="BIGINT" property="corpnameindex02" />
+		<result column="CORPNAMEINDEX03" jdbcType="BIGINT" property="corpnameindex03" />
+		<result column="BUSITEL1" jdbcType="VARCHAR" property="busitel1" />
+		<result column="BUSITEL2" jdbcType="VARCHAR" property="busitel2" />
+		<result column="BUSITEL3" jdbcType="VARCHAR" property="busitel3" />
+		<result column="BUSITEL4" jdbcType="VARCHAR" property="busitel4" />
+		<result column="BUSIFAX1" jdbcType="VARCHAR" property="busifax1" />
+		<result column="BUSIFAX2" jdbcType="VARCHAR" property="busifax2" />
+		<result column="BUSITEL1FLAG" jdbcType="CHAR" property="busitel1flag" />
+		<result column="BUSITEL2FLAG" jdbcType="CHAR" property="busitel2flag" />
+		<result column="BUSITEL3FLAG" jdbcType="CHAR" property="busitel3flag" />
+		<result column="BUSITEL4FLAG" jdbcType="CHAR" property="busitel4flag" />
+		<result column="BUSIFAX1FLAG" jdbcType="CHAR" property="busifax1flag" />
+		<result column="BUSIFAX2FLAG" jdbcType="CHAR" property="busifax2flag" />
+		<result column="ADDRVERACITY" jdbcType="DECIMAL" property="addrveracity" />
+		<result column="ISSHOWADDR" jdbcType="CHAR" property="isshowaddr" />
+		<result column="BUSIADDR_OLD" jdbcType="VARCHAR" property="busiaddrOld" />
+		<result column="IFDEBT" jdbcType="CHAR" property="ifdebt" />
+		<result column="IFSECRET" jdbcType="CHAR" property="ifsecret" />
+		<result column="IFLISTEDCOMPANY1" jdbcType="CHAR" property="iflistedcompany1" />
+		<result column="TRADECODE_BAK" jdbcType="CHAR" property="tradecodeBak" />
+		<result column="IFDELIST" jdbcType="CHAR" property="ifdelist" />
+		<result column="IFLISTEDCOMPANY_HK" jdbcType="CHAR"
+			property="iflistedcompanyHk" />
+		<result column="MAINPRODUCT" jdbcType="CLOB" property="mainproduct" />
+		<result column="NOTE" jdbcType="CLOB" property="note" />
+		<result column="BRIEFINTRO" jdbcType="CLOB" property="briefintro" />
+	</resultMap>
+	<insert id="insert"
+		parameterType="com.experian.daas.integration.adapter.baseinfo.entity.CreditCorpBaseInfo">
+		insert into V_CORPBASEINFO (SBDNUM, CORPNAME, BUSIADDR,
+		BUSIZIP, BUSITELAREACODE, BUSITEL,
+		BUSIFAX, URL, EMAIL,
+		BISMAJORREVENUES, BISTOTALASSETS, BISTOTALEMPLOYEES,
+		BISCHIEFEXECUTE,
+		DISTRICTCODE, MAINTRADECODE,
+		MAINSBDTRADECODE, LEGALSTATUSCODE,
+		INSTITUTIONALCODE,
+		COUNTRYCODE, INVESTORCOUNTRYCODE, PRIORITY,
+		REGISTERCAPITAL, STARTINGDATE, OPERATIONSTATUS,
+		COMPANYSTATUS,
+		COMPANYTYPE, UPDATETIME,
+		SBDMNUM, FREETEL, IFLARGEBUS,
+		REPTYPE,
+		CREPORTDATE, FINANCEDATE,
+		IFLISTEDCOMPANY, CONTROLSBDNUM, PRODUCTCODE,
+		PRODUCTCODE2, IFSHOWFINANCE, CORPNAMEINDEX,
+		CORPNAMEINDEX02,
+		CORPNAMEINDEX03, BUSITEL1,
+		BUSITEL2, BUSITEL3, BUSITEL4,
+		BUSIFAX1,
+		BUSIFAX2, BUSITEL1FLAG,
+		BUSITEL2FLAG, BUSITEL3FLAG, BUSITEL4FLAG,
+		BUSIFAX1FLAG, BUSIFAX2FLAG, ADDRVERACITY,
+		ISSHOWADDR, BUSIADDR_OLD,
+		IFDEBT,
+		IFSECRET, IFLISTEDCOMPANY1, TRADECODE_BAK,
+		IFDELIST,
+		IFLISTEDCOMPANY_HK, MAINPRODUCT,
+		NOTE, BRIEFINTRO)
+		values
+		(#{sbdnum,jdbcType=CHAR}, #{corpname,jdbcType=VARCHAR},
+		#{busiaddr,jdbcType=VARCHAR},
+		#{busizip,jdbcType=VARCHAR},
+		#{busitelareacode,jdbcType=VARCHAR}, #{busitel,jdbcType=VARCHAR},
+		#{busifax,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{bismajorrevenues,jdbcType=DECIMAL},
+		#{bistotalassets,jdbcType=DECIMAL},
+		#{bistotalemployees,jdbcType=INTEGER},
+		#{bischiefexecute,jdbcType=VARCHAR}, #{districtcode,jdbcType=CHAR},
+		#{maintradecode,jdbcType=CHAR},
+		#{mainsbdtradecode,jdbcType=CHAR},
+		#{legalstatuscode,jdbcType=CHAR},
+		#{institutionalcode,jdbcType=VARCHAR},
+		#{countrycode,jdbcType=CHAR},
+		#{investorcountrycode,jdbcType=CHAR}, #{priority,jdbcType=CHAR},
+		#{registercapital,jdbcType=DECIMAL}, #{startingdate,jdbcType=DATE},
+		#{operationstatus,jdbcType=CHAR},
+		#{companystatus,jdbcType=CHAR},
+		#{companytype,jdbcType=CHAR}, #{updatetime,jdbcType=DATE},
+		#{sbdmnum,jdbcType=CHAR}, #{freetel,jdbcType=VARCHAR},
+		#{iflargebus,jdbcType=CHAR},
+		#{reptype,jdbcType=CHAR},
+		#{creportdate,jdbcType=DATE}, #{financedate,jdbcType=DATE},
+		#{iflistedcompany,jdbcType=CHAR}, #{controlsbdnum,jdbcType=CHAR},
+		#{productcode,jdbcType=CHAR},
+		#{productcode2,jdbcType=CHAR},
+		#{ifshowfinance,jdbcType=CHAR}, #{corpnameindex,jdbcType=BIGINT},
+		#{corpnameindex02,jdbcType=BIGINT},
+		#{corpnameindex03,jdbcType=BIGINT}, #{busitel1,jdbcType=VARCHAR},
+		#{busitel2,jdbcType=VARCHAR}, #{busitel3,jdbcType=VARCHAR},
+		#{busitel4,jdbcType=VARCHAR},
+		#{busifax1,jdbcType=VARCHAR},
+		#{busifax2,jdbcType=VARCHAR}, #{busitel1flag,jdbcType=CHAR},
+		#{busitel2flag,jdbcType=CHAR}, #{busitel3flag,jdbcType=CHAR},
+		#{busitel4flag,jdbcType=CHAR},
+		#{busifax1flag,jdbcType=CHAR},
+		#{busifax2flag,jdbcType=CHAR}, #{addrveracity,jdbcType=DECIMAL},
+		#{isshowaddr,jdbcType=CHAR}, #{busiaddrOld,jdbcType=VARCHAR},
+		#{ifdebt,jdbcType=CHAR},
+		#{ifsecret,jdbcType=CHAR},
+		#{iflistedcompany1,jdbcType=CHAR}, #{tradecodeBak,jdbcType=CHAR},
+		#{ifdelist,jdbcType=CHAR}, #{iflistedcompanyHk,jdbcType=CHAR},
+		#{mainproduct,jdbcType=CLOB},
+		#{note,jdbcType=CLOB},
+		#{briefintro,jdbcType=CLOB})
+	</insert>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select SBDNUM, CORPNAME,
+		BUSIADDR, BUSIZIP, BUSITELAREACODE, BUSITEL,
+		BUSIFAX, URL,
+		EMAIL,
+		BISMAJORREVENUES, BISTOTALASSETS, BISTOTALEMPLOYEES, BISCHIEFEXECUTE,
+		DISTRICTCODE,
+		MAINTRADECODE, MAINSBDTRADECODE, LEGALSTATUSCODE,
+		INSTITUTIONALCODE, COUNTRYCODE,
+		INVESTORCOUNTRYCODE, PRIORITY,
+		REGISTERCAPITAL, STARTINGDATE,
+		OPERATIONSTATUS, COMPANYSTATUS,
+		COMPANYTYPE, UPDATETIME, SBDMNUM, FREETEL, IFLARGEBUS, REPTYPE,
+		CREPORTDATE,
+		FINANCEDATE,
+		IFLISTEDCOMPANY, CONTROLSBDNUM, PRODUCTCODE,
+		PRODUCTCODE2, IFSHOWFINANCE,
+		CORPNAMEINDEX,
+		CORPNAMEINDEX02,
+		CORPNAMEINDEX03, BUSITEL1, BUSITEL2, BUSITEL3, BUSITEL4, BUSIFAX1,
+		BUSIFAX2, BUSITEL1FLAG, BUSITEL2FLAG, BUSITEL3FLAG, BUSITEL4FLAG,
+		BUSIFAX1FLAG, BUSIFAX2FLAG,
+		ADDRVERACITY, ISSHOWADDR, BUSIADDR_OLD,
+		IFDEBT, IFSECRET, IFLISTEDCOMPANY1,
+		TRADECODE_BAK,
+		IFDELIST,
+		IFLISTEDCOMPANY_HK, MAINPRODUCT, NOTE, BRIEFINTRO
+		from V_CORPBASEINFO
+	</select>
+
+	<!--分界线 -->
+	<select id="selectByCorpName" parameterType="string" resultMap="BaseResultMap">
+		select * from V_CORPBASEINFO where CORPNAME = #{corpName} order by
+		priority,updatetime desc,sbdnum
+	</select>
+</mapper>

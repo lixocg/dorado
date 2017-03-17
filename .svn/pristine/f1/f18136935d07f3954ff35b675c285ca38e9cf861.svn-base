@@ -1,0 +1,46 @@
+package com.experian.core.aspect;
+
+import org.apache.log4j.Logger;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+import com.experian.core.database.sharding.sqlsessiontemplate.CustomerContextHolder;
+
+/**
+ * @author bin
+ * Dao执行完后，切换回默认数据源
+ */
+@Component
+@Aspect
+public class DataSourceAspect {
+
+	Logger logger = Logger.getLogger(DataSourceAspect.class);
+
+	@Pointcut("execution(* com.experian..*Service.*(..))")
+	public void daoPoint() {
+	}
+	@Before("daoPoint()")
+	public void before(JoinPoint jp) {
+		CustomerContextHolder.setContextType(CustomerContextHolder.POSTGRESQL);
+		logger.info("before current datasource:"+CustomerContextHolder.getContextType());
+	}
+
+	@AfterThrowing(pointcut = "daoPoint()", throwing = "ex")
+	public void doThrowing(JoinPoint jp, Throwable ex) {
+		CustomerContextHolder.setContextType(CustomerContextHolder.POSTGRESQL);
+		logger.info("exception current datasource:"+CustomerContextHolder.getContextType());
+		logger.error(ex);
+		logger.error(">>>>>>>>>>>>"+CustomerContextHolder.getContextType());
+	}
+
+	@After("daoPoint()")
+	public void after(JoinPoint jp) {
+		CustomerContextHolder.setContextType(CustomerContextHolder.POSTGRESQL);
+		logger.info("after current datasource:"+CustomerContextHolder.getContextType());
+	}
+}

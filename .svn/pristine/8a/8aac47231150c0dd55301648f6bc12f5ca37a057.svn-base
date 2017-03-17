@@ -1,0 +1,20 @@
+package com.experian.daas.baseinfo.rest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.experian.daas.baseinfo.service.BaseInfoService;
+
+@RestController
+@RequestMapping("/base/info")
+public class BaseInfoRest {
+	@Autowired
+	private BaseInfoService baseInfoService;
+
+	@RequestMapping("/match/{corpName}")
+	public String match(@PathVariable("corpName") String corpName) throws Exception {
+		return baseInfoService.match(corpName);
+	}
+}

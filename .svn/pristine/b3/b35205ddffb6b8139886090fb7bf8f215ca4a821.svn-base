@@ -1,0 +1,32 @@
+package com.experian.web.controller.baseinfo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
+
+import com.experian.core.pojo.R;
+
+@Controller
+@RequestMapping("baseinfo")
+public class BaseInfoController {
+	private static RestTemplate rest = new RestTemplate();
+	
+	@RequestMapping("page")
+	public String page(){
+		return "baseinfo/page";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/matchsbdnum")
+	public R<String> matchsbdnum(@RequestParam String name) {
+		try {
+			String sbdnum = rest.getForObject("http://localhost:9091/baseinfo/match/"+name, String.class);
+			return new R<String>(sbdnum);
+		} catch (Exception e) {
+			return new R<String>(R.FAILED, e.getMessage());
+		}
+
+	}
+}

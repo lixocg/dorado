@@ -1,0 +1,15 @@
+package com.experian.daas.litigation.component.rabbitmq;
+
+import com.rabbitmq.client.MessageProperties;
+
+public class Producer extends EndPoint {
+
+	public Producer(String queue, String host, int port, String user, String password) throws Exception {
+		super(queue, host, port, user, password);
+	}
+
+	public void sendJsonMessage(String json) throws Exception {
+		channel.basicPublish("", queue, MessageProperties.TEXT_PLAIN, json.getBytes("utf-8"));
+	}
+
+}
