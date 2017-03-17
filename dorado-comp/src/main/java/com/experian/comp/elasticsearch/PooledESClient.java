@@ -20,8 +20,8 @@ import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.experian.comp.elasticsearch.config.ESRestClientConfig;
-import com.experian.comp.elasticsearch.config.PoolConfig;
+import com.experian.comp.elasticsearch.config.ESConfig.ConfigInfo;
+import com.experian.comp.elasticsearch.config.ESConfig.PoolConfig;
 import com.experian.comp.elasticsearch.modle.MultiMatch;
 import com.experian.comp.elasticsearch.modle.Query;
 import com.experian.comp.elasticsearch.param.ESRequest;
@@ -35,6 +35,7 @@ import com.experian.comp.utility.GsonUtil;
 import com.experian.core.pojo.R;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
+
 
 /**
  * 有连接池的EsRestClient
@@ -56,15 +57,15 @@ public class PooledESClient implements ApplicationListener<ContextRefreshedEvent
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		ApplicationContext applicationContext = event.getApplicationContext();
 		PoolConfig poolConfig = applicationContext.getBean(PoolConfig.class);
-		ESRestClientConfig esRestClientConfig = applicationContext.getBean(ESRestClientConfig.class);
-		initPooled(poolConfig, esRestClientConfig);
+		ConfigInfo configInfo = applicationContext.getBean(ConfigInfo.class);
+		initPooled(poolConfig, configInfo);
 
 	}
 
-	public void initPooled(PoolConfig poolConfig, ESRestClientConfig esRestClientConfig) {
+	public void initPooled(PoolConfig poolConfig, ConfigInfo configInfo) {
 		synchronized (this) {
 			if (this.pool == null) {
-				pool = new GenericObjectPool<RestClient>(new PooledESClientFactory(esRestClientConfig));
+				pool = new GenericObjectPool<RestClient>(new PooledESClientFactory(configInfo));
 				pool.setMaxIdle(poolConfig.getMaxIdle());
 				pool.setMinIdle(poolConfig.getMinIdle());
 				pool.setMaxTotal(poolConfig.getMaxTotal());

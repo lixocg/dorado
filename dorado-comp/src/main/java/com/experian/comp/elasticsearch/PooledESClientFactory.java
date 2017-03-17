@@ -14,19 +14,19 @@ import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestClientBuilder.HttpClientConfigCallback;
 import org.springframework.stereotype.Component;
 
-import com.experian.comp.elasticsearch.config.ESRestClientConfig;
+import com.experian.comp.elasticsearch.config.ESConfig.ConfigInfo;
 
 @Component
 public class PooledESClientFactory extends BasePooledObjectFactory<RestClient> {
-	private ESRestClientConfig esRestClientConfig;
+	private ConfigInfo configInfo;
 
-	public PooledESClientFactory(ESRestClientConfig esRestClientConfig) {
-		this.esRestClientConfig = esRestClientConfig;
+	public PooledESClientFactory(ConfigInfo configInfo) {
+		this.configInfo = configInfo;
 	}
 
 	@Override
 	public RestClient create() throws Exception {
-		return createRestCient(esRestClientConfig);
+		return createRestCient(configInfo);
 	}
 
 	@Override
@@ -34,13 +34,13 @@ public class PooledESClientFactory extends BasePooledObjectFactory<RestClient> {
 		return new DefaultPooledObject<RestClient>(obj);
 	}
 
-	private RestClient createRestCient(ESRestClientConfig esRestClientConfig) {
+	private RestClient createRestCient(ConfigInfo configInfo) {
 		RestClientBuilder builder = RestClient.builder(
-				esRestClientConfig.getHttpHosts().toArray(new HttpHost[esRestClientConfig.getHttpHosts().size()]));
-		if (esRestClientConfig.isUserKey()) {
+				configInfo.getHttpHosts().toArray(new HttpHost[configInfo.getHttpHosts().size()]));
+		if (configInfo.isUserKey()) {
 			final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 			credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(
-					esRestClientConfig.getUserName(), esRestClientConfig.getPassword()));
+					configInfo.getUserName(), configInfo.getPassword()));
 			builder.setHttpClientConfigCallback(new HttpClientConfigCallback() {
 				@Override
 				public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpClientBuilder) {

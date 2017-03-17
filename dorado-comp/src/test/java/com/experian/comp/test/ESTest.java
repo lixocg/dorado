@@ -149,7 +149,7 @@ public class ESTest {
 		ESRequest<SearchParam> esRequest = new ESRequest<>();
 		
 		SearchParam content = new SearchParam();
-		content.setQuery("E");
+		content.setQuery("E1");
 		content.setFileds(new String[]{"serialCaseNumber"});
 		
 		esRequest.setContent(content );
