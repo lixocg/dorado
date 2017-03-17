@@ -80,7 +80,7 @@ public class PooledESClient implements ApplicationListener<ContextRefreshedEvent
 	 * @param esRequest
 	 * @return
 	 */
-	public ESResponse<Void> addDoc(ESRequest<Document> esRequest) {
+	public <T> ESResponse<Void> addDoc(ESRequest<Document<T>> esRequest) {
 		RestClient restClient = null;
 		ESResponse<Void> esResponse = null;
 		if (pool != null) {
@@ -126,14 +126,14 @@ public class PooledESClient implements ApplicationListener<ContextRefreshedEvent
 	 * @param esRequest
 	 * @return
 	 */
-	public ESResponse<Void> addBulkDoc(ESRequest<List<Document>> esRequest) {
+	public <T> ESResponse<Void> addBulkDoc(ESRequest<List<Document<T>>> esRequest) {
 		RestClient restClient = null;
 		ESResponse<Void> esResponse = null;
 		if (pool != null) {
 			try {
 				restClient = pool.borrowObject();
 
-				List<Document> docs = esRequest.getContent();
+				List<Document<T>> docs = esRequest.getContent();
 				if (CollectionUtils.isEmpty(docs)) {
 					return new ESResponse<Void>(R.FAILED, "无文档");
 				}
@@ -141,7 +141,7 @@ public class PooledESClient implements ApplicationListener<ContextRefreshedEvent
 				// "1" } }
 				// { "field1" : "value1" }
 				StringBuilder sb = new StringBuilder();
-				for (Document doc : docs) {
+				for (Document<T> doc : docs) {
 					sb.append("{ \"index\" : { \"_index\" : \"" + esRequest.getIndex() + "\", \"_type\" : \""
 							+ esRequest.getType() + "\", \"_id\" : \"" + doc.getId() + "\" } }\n");
 					sb.append(GsonUtil.toJson(doc.getContent()));

@@ -25,7 +25,7 @@ public class ESTest {
 
 	@Test
 	public void testSingleAdd() {
-		ESRequest<Document> esRequest = new ESRequest<>();
+		ESRequest<Document<Litigation>> esRequest = new ESRequest<>();
 		Litigation l = new Litigation();
 		l.setId("E1");
 		l.setCaseNumber("执123");
@@ -53,7 +53,7 @@ public class ESTest {
 
 		esRequest.setIndex("litigation");
 		esRequest.setType("detail");
-		Document doc = new Document();
+		Document<Litigation> doc = new Document<Litigation>();
 		doc.setId(l.getId());
 		doc.setContent(l);
 		esRequest.setContent(doc);
@@ -63,10 +63,10 @@ public class ESTest {
 
 	@Test
 	public void testBulkAdd() {
-		ESRequest<List<Document>> esRequest = new ESRequest<>();
-		List<Document> docs = Lists.newArrayList();
+		ESRequest<List<Document<Litigation>>> esRequest = new ESRequest<>();
+		List<Document<Litigation>> docs = Lists.newArrayList();
 		for (int i = 2; i < 11; i++) {
-			Document doc = new Document();
+			Document<Litigation> doc = new Document<Litigation>();
 			Litigation l = new Litigation();
 			l.setId("E" + i);
 			if (i % 2 == 0) {
@@ -134,7 +134,6 @@ public class ESTest {
 			doc.setContent(l);
 			docs.add(doc);
 		}
-
 
 		esRequest.setContent(docs);
 		esRequest.setIndex("litigation");

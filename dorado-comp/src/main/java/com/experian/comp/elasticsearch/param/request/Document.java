@@ -1,8 +1,14 @@
 package com.experian.comp.elasticsearch.param.request;
 
-public class Document {
+/**
+ * 构建文档
+ * 
+ * @author lixiongcheng
+ *
+ */
+public class Document<T> {
 	private String id;
-	private Object content;
+	private T content;
 
 	public String getId() {
 		return id;
@@ -12,11 +18,11 @@ public class Document {
 		this.id = id;
 	}
 
-	public Object getContent() {
+	public T getContent() {
 		return content;
 	}
 
-	public void setContent(Object content) {
+	public void setContent(T content) {
 		this.content = content;
 	}
 

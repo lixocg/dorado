@@ -31,11 +31,11 @@ public class ESClientUtil {
 		return esClient;
 	}
 
-	public static ESResponse<Void> addDoc(ESRequest<Document> esRequest) {
+	public static <T> ESResponse<Void> addDoc(ESRequest<Document<T>> esRequest) {
 		return getClient().addDoc(esRequest);
 	}
 
-	public static ESResponse<Void> addBulkDoc(ESRequest<List<Document>> esRequest) {
+	public static <T> ESResponse<Void> addBulkDoc(ESRequest<List<Document<T>>> esRequest) {
 		return getClient().addBulkDoc(esRequest);
 	}
 
