@@ -23,6 +23,7 @@ import org.springframework.util.ClassUtils;
 import com.experian.comp.elasticsearch.annotation.Document;
 import com.experian.comp.elasticsearch.annotation.Field;
 import com.experian.comp.elasticsearch.annotation.Nested;
+import com.experian.comp.elasticsearch.annotation.NestedType;
 import com.experian.comp.elasticsearch.enums.FieldType;
 import com.experian.comp.elasticsearch.modle.Mapping;
 import com.experian.comp.utility.GsonUtil;
@@ -88,7 +89,12 @@ public class DocumentScan {
 						Map<String, Object> v4 = Maps.newHashMap();
 						v4.put("type", field.type());
 						if(field.type().equals(FieldType.Nested)){
-							
+							NestedType nestedType = f.getAnnotation(NestedType.class);
+							if(nestedType==null){
+								throw new RuntimeException(String.format("内嵌属性[%s]未指明内嵌类，用@NestedType", f.getName()));
+							}
+							Class<?> nestedClass = nestedType.clazz();
+							java.lang.reflect.Field[] nestedFields = nestedClass.getFields();
 						}
 						v4.put("store",field.store());
 						v4.put("index", field.index());

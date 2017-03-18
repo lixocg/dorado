@@ -5,7 +5,7 @@ import com.experian.comp.elasticsearch.annotation.Field;
 import com.experian.comp.elasticsearch.annotation.FieldIndex;
 import com.experian.comp.elasticsearch.annotation.Nested;
 
-@Nested(name="parties")
+@Nested
 public class Party {
 	@Field(index = FieldIndex.not_analyzed, store = true)
 	private String id;
