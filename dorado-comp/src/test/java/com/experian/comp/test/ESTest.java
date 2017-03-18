@@ -25,6 +25,15 @@ import com.google.gson.Gson;
 @RunWith(SpringRunner.class)
 public class ESTest {
 	public static Gson gson = new Gson();
+	
+	@Test
+	public void createMapping(){
+		ESRequest<Class<Litigation>> esRequest = new ESRequest<>();
+		esRequest.setIndex("litigation");
+		esRequest.setType("detail");
+		ESResponse<Void> response = ESClientUtil.createMapping(esRequest);
+		System.out.println(gson.toJson(response));
+	}
 
 	@Test
 	public void testSingleAdd() {
@@ -151,7 +160,7 @@ public class ESTest {
 		ESRequest<SearchParam> esRequest = new ESRequest<>();
 
 		SearchParam content = new SearchParam();
-		content.setKeyword("E1");
+		content.setKeyword("E");
 		content.setFileds(new String[] { "serialCaseNumber" });
 
 		esRequest.setContent(content);
@@ -166,7 +175,7 @@ public class ESTest {
 		ESRequest<SearchParam> esRequest = new ESRequest<>();
 
 		SearchParam searcParam = new SearchParam();
-		searcParam.setFileds(new String[] { "serialCaseNumber" });
+		//searcParam.setFileds(new String[] { "serialCaseNumber" });
 		List<BoolParam> filters = Lists.newArrayList();
 		BoolParam fp1 = new BoolParam();
 		fp1.setBoolType((byte) 2);
@@ -188,12 +197,12 @@ public class ESTest {
 		ESRequest<SearchParam> esRequest = new ESRequest<>();
 
 		SearchParam searcParam = new SearchParam();
-		searcParam.setFileds(new String[] { "serialCaseNumber" });
+		//searcParam.setFileds(new String[] { "serialCaseNumber" });
 		List<BoolParam> filters = Lists.newArrayList();
 		BoolParam fp1 = new BoolParam();
-		fp1.setBoolType((byte) 2);
-		fp1.setKey("sbd");
-		fp1.setValue("1234");
+		fp1.setBoolType((byte) 1);
+		fp1.setKey("id");
+		fp1.setValue("E1006");
 		fp1.setNested(true);
 		fp1.setNestedPath("parties");
 		filters.add(fp1);

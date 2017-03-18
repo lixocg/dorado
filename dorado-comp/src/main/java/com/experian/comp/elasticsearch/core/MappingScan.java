@@ -107,20 +107,27 @@ public class MappingScan {
 							Map<String, Object> nestedVal1 = Maps.newHashMap();
 							Map<String, Object> nestedVal2 = Maps.newHashMap();
 							nestedVal1.put("properties", nestedVal2);
+							nestedVal1.put("type", fieldAnnotation.type().toString().toLowerCase());
 							v3.put(field.getName(), nestedVal1);
 							for (java.lang.reflect.Field nestedField : nestedFields) {
 								Field nestedFieldAnnotation = nestedField.getAnnotation(Field.class);
 								Map<String, Object> nestedVal3 = Maps.newHashMap();
-								nestedVal3.put("type", nestedFieldAnnotation.type());
+								nestedVal3.put("type", nestedFieldAnnotation.type().toString().toLowerCase());
 								nestedVal3.put("store", nestedFieldAnnotation.store());
 								nestedVal3.put("index", nestedFieldAnnotation.index());
+								if(nestedFieldAnnotation.type().equals(FieldType.Date)){
+									nestedVal3.put("format",nestedFieldAnnotation.format());
+								}
 								nestedVal2.put(nestedField.getName(), nestedVal3);
 							}
 
 						} else {
-							v4.put("type", fieldAnnotation.type());
+							v4.put("type", fieldAnnotation.type().toString().toLowerCase());
 							v4.put("store", fieldAnnotation.store());
 							v4.put("index", fieldAnnotation.index());
+							if(fieldAnnotation.type().equals(FieldType.Date)){
+								v4.put("format",fieldAnnotation.format());
+							}
 							v3.put(field.getName(), v4);
 						}
 					}

@@ -30,6 +30,10 @@ public class ESClientUtil {
 		}
 		return esClient;
 	}
+	
+	public static <T> ESResponse<Void> createMapping(ESRequest<Class<T>> esRequest){
+		return getClient().createMapping(esRequest);
+	}
 
 	public static <T> ESResponse<Void> addDoc(ESRequest<Document<T>> esRequest) {
 		return getClient().addDoc(esRequest);
