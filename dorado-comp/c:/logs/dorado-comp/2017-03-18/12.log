@@ -1,0 +1,366 @@
+2017-03-18 12:18:26,602 [main] [INFO] org.springframework.test.context.support.AbstractTestContextBootstrapper.buildDefaultMergedContextConfiguration[319]- Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.experian.comp.test.ESTest], using SpringBootContextLoader
+2017-03-18 12:18:26,617 [main] [INFO] org.springframework.test.context.support.AbstractContextLoader.generateDefaultLocations[264]- Could not detect default resource locations for test class [com.experian.comp.test.ESTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-18 12:18:26,782 [main] [INFO] org.springframework.test.context.support.AbstractTestContextBootstrapper.getDefaultTestExecutionListenerClassNames[260]- Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener]
+2017-03-18 12:18:26,828 [main] [INFO] org.springframework.test.context.support.AbstractTestContextBootstrapper.getTestExecutionListeners[187]- Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@199f6a5e, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@31004e76, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@b1f3e1c, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3026a5f8, org.springframework.test.context.transaction.TransactionalTestExecutionListener@395a557a, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@59a1da00, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@10ef63f9, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@548c791e, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@5263cbef, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@15e1e22b, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@20c78046, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@9b6847a]
+2017-03-18 12:18:27,870 [main] [INFO] org.springframework.context.support.AbstractApplicationContext.prepareRefresh[582]- Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@149e8424: startup date [Sat Mar 18 12:18:27 CST 2017]; root of context hierarchy
+2017-03-18 12:18:28,268 [main] [INFO] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>[155]- JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-03-18 12:18:28,321 [main] [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization[325]- Bean 'configurationPropertiesRebinderAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$1e6fdc1a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-03-18 12:18:28,481 [background-preinit] [INFO] org.hibernate.validator.internal.util.Version.<clinit>[30]- HV000001: Hibernate Validator 5.2.4.Final
+2017-03-18 12:18:28,944 [main] [INFO] org.springframework.boot.SpringApplication.logStartupProfileInfo[665]- The following profiles are active: dev
+2017-03-18 12:18:28,950 [main] [INFO] org.springframework.context.support.AbstractApplicationContext.prepareRefresh[582]- Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7e23fb6c: startup date [Sat Mar 18 12:18:28 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@149e8424
+2017-03-18 12:18:31,394 [main] [INFO] org.springframework.beans.factory.support.DefaultListableBeanFactory.registerBeanDefinition[821]- Overriding bean definition for bean 'managementServletContext' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.actuate.autoconfigure.EndpointWebMvcHypermediaManagementContextConfiguration; factoryMethodName=managementServletContext; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/actuate/autoconfigure/EndpointWebMvcHypermediaManagementContextConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.actuate.autoconfigure.EndpointWebMvcAutoConfiguration; factoryMethodName=managementServletContext; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/actuate/autoconfigure/EndpointWebMvcAutoConfiguration.class]]
+2017-03-18 12:18:31,812 [main] [WARN] org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses[389]- Cannot enhance @Configuration bean definition 'refreshScope' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2017-03-18 12:18:32,292 [main] [INFO] org.springframework.cloud.context.scope.GenericScope.setSerializationId[263]- BeanFactory id=e0d4b4d0-288e-3986-a202-15769c7a11d5
+2017-03-18 12:18:32,594 [main] [INFO] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>[155]- JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-03-18 12:18:32,892 [main] [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization[325]- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$255d91d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-03-18 12:18:33,202 [main] [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization[325]- Bean 'org.springframework.cloud.netflix.metrics.MetricsInterceptorConfiguration$MetricsRestTemplateConfiguration' of type [class org.springframework.cloud.netflix.metrics.MetricsInterceptorConfiguration$MetricsRestTemplateConfiguration$$EnhancerBySpringCGLIB$$34827f5e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-03-18 12:18:33,278 [main] [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization[325]- Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$1e6fdc1a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-03-18 12:18:36,350 [main] [INFO] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache[534]- Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@7e23fb6c: startup date [Sat Mar 18 12:18:28 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@149e8424
+2017-03-18 12:18:36,366 [main] [INFO] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache[566]- Detected ResponseBodyAdvice bean in org.springframework.boot.actuate.autoconfigure.EndpointWebMvcHypermediaManagementContextConfiguration$ActuatorEndpointLinksAdvice
+2017-03-18 12:18:36,683 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-03-18 12:18:36,684 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-03-18 12:18:36,851 [main] [INFO] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler[354]- Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-03-18 12:18:36,852 [main] [INFO] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler[354]- Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-03-18 12:18:36,900 [main] [INFO] org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.initExceptionHandlerAdviceCache[277]- Detected ResponseBodyAdvice implementation in org.springframework.boot.actuate.autoconfigure.EndpointWebMvcHypermediaManagementContextConfiguration$ActuatorEndpointLinksAdvice
+2017-03-18 12:18:36,970 [main] [INFO] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler[354]- Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-03-18 12:18:38,168 [main] [INFO] org.elasticsearch.node.Node.<init>[149]- [M-Twins] version[2.4.1], pid[49545], build[c67dc32/2016-09-27T18:57:55Z]
+2017-03-18 12:18:38,169 [main] [INFO] org.elasticsearch.node.Node.<init>[151]- [M-Twins] initializing ...
+2017-03-18 12:18:38,178 [main] [INFO] org.elasticsearch.plugins.PluginsService.<init>[180]- [M-Twins] modules [], plugins [], sites []
+2017-03-18 12:18:38,233 [main] [INFO] org.elasticsearch.env.NodeEnvironment.maybeLogPathDetails[290]- [M-Twins] using [1] data paths, mounts [[/Volumes/Goer (/dev/disk0s5)]], net usable_space [12.5gb], net total_space [56.2gb], spins? [unknown], types [hfs]
+2017-03-18 12:18:38,233 [main] [INFO] org.elasticsearch.env.NodeEnvironment.maybeLogHeapDetails[305]- [M-Twins] heap size [1.7gb], compressed ordinary object pointers [true]
+2017-03-18 12:18:38,238 [main] [WARN] org.elasticsearch.env.NodeEnvironment.maybeWarnFileDescriptors[315]- [M-Twins] max file descriptors [10240] for elasticsearch process likely too low, consider increasing to at least [65536]
+2017-03-18 12:18:40,623 [main] [WARN] org.elasticsearch.bootstrap.Natives.<clinit>[48]- JNA not found. native methods will be disabled.
+java.lang.ClassNotFoundException: com.sun.jna.Native
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:308)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:191)
+	at org.elasticsearch.bootstrap.Natives.<clinit>(Natives.java:45)
+	at org.elasticsearch.bootstrap.BootstrapInfo.isMemoryLocked(BootstrapInfo.java:44)
+	at org.elasticsearch.monitor.process.ProcessProbe.processInfo(ProcessProbe.java:130)
+	at org.elasticsearch.monitor.process.ProcessService.<init>(ProcessService.java:44)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)
+	at org.elasticsearch.common.inject.DefaultConstructionProxyFactory$1.newInstance(DefaultConstructionProxyFactory.java:50)
+	at org.elasticsearch.common.inject.ConstructorInjector.construct(ConstructorInjector.java:86)
+	at org.elasticsearch.common.inject.ConstructorBindingImpl$Factory.get(ConstructorBindingImpl.java:104)
+	at org.elasticsearch.common.inject.ProviderToInternalFactoryAdapter$1.call(ProviderToInternalFactoryAdapter.java:47)
+	at org.elasticsearch.common.inject.InjectorImpl.callInContext(InjectorImpl.java:886)
+	at org.elasticsearch.common.inject.ProviderToInternalFactoryAdapter.get(ProviderToInternalFactoryAdapter.java:43)
+	at org.elasticsearch.common.inject.Scopes$1$1.get(Scopes.java:59)
+	at org.elasticsearch.common.inject.InternalFactoryToProviderAdapter.get(InternalFactoryToProviderAdapter.java:46)
+	at org.elasticsearch.common.inject.SingleParameterInjector.inject(SingleParameterInjector.java:42)
+	at org.elasticsearch.common.inject.SingleParameterInjector.getAll(SingleParameterInjector.java:66)
+	at org.elasticsearch.common.inject.ConstructorInjector.construct(ConstructorInjector.java:85)
+	at org.elasticsearch.common.inject.ConstructorBindingImpl$Factory.get(ConstructorBindingImpl.java:104)
+	at org.elasticsearch.common.inject.SingleParameterInjector.inject(SingleParameterInjector.java:42)
+	at org.elasticsearch.common.inject.SingleParameterInjector.getAll(SingleParameterInjector.java:66)
+	at org.elasticsearch.common.inject.ConstructorInjector.construct(ConstructorInjector.java:85)
+	at org.elasticsearch.common.inject.ConstructorBindingImpl$Factory.get(ConstructorBindingImpl.java:104)
+	at org.elasticsearch.common.inject.ProviderToInternalFactoryAdapter$1.call(ProviderToInternalFactoryAdapter.java:47)
+	at org.elasticsearch.common.inject.InjectorImpl.callInContext(InjectorImpl.java:886)
+	at org.elasticsearch.common.inject.ProviderToInternalFactoryAdapter.get(ProviderToInternalFactoryAdapter.java:43)
+	at org.elasticsearch.common.inject.Scopes$1$1.get(Scopes.java:59)
+	at org.elasticsearch.common.inject.InternalFactoryToProviderAdapter.get(InternalFactoryToProviderAdapter.java:46)
+	at org.elasticsearch.common.inject.InjectorBuilder$1.call(InjectorBuilder.java:201)
+	at org.elasticsearch.common.inject.InjectorBuilder$1.call(InjectorBuilder.java:193)
+	at org.elasticsearch.common.inject.InjectorImpl.callInContext(InjectorImpl.java:879)
+	at org.elasticsearch.common.inject.InjectorBuilder.loadEagerSingletons(InjectorBuilder.java:193)
+	at org.elasticsearch.common.inject.InjectorBuilder.injectDynamically(InjectorBuilder.java:175)
+	at org.elasticsearch.common.inject.InjectorBuilder.build(InjectorBuilder.java:110)
+	at org.elasticsearch.common.inject.Guice.createInjector(Guice.java:93)
+	at org.elasticsearch.common.inject.Guice.createInjector(Guice.java:70)
+	at org.elasticsearch.common.inject.ModulesBuilder.createInjector(ModulesBuilder.java:46)
+	at org.elasticsearch.node.Node.<init>(Node.java:213)
+	at org.elasticsearch.node.Node.<init>(Node.java:140)
+	at org.elasticsearch.node.NodeBuilder.build(NodeBuilder.java:143)
+	at org.elasticsearch.node.NodeBuilder.node(NodeBuilder.java:150)
+	at org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration.createNodeClient(ElasticsearchAutoConfiguration.java:107)
+	at org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration.createClient(ElasticsearchAutoConfiguration.java:95)
+	at org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration.elasticsearchClient(ElasticsearchAutoConfiguration.java:84)
+	at org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration$$EnhancerBySpringCGLIB$$cd3efa55.CGLIB$elasticsearchClient$1(<generated>)
+	at org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration$$EnhancerBySpringCGLIB$$cd3efa55$$FastClassBySpringCGLIB$$5b2a1df4.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:356)
+	at org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration$$EnhancerBySpringCGLIB$$cd3efa55.elasticsearchClient(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:162)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:588)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1128)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1022)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:512)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:754)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:866)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:542)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:761)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:371)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:111)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:189)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:131)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:230)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:228)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:287)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:289)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:247)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2017-03-18 12:18:41,449 [main] [INFO] org.elasticsearch.node.Node.<init>[225]- [M-Twins] initialized
+2017-03-18 12:18:41,450 [main] [INFO] org.elasticsearch.node.Node.start[251]- [M-Twins] starting ...
+2017-03-18 12:18:41,452 [main] [INFO] org.elasticsearch.transport.TransportService.doStart[184]- [M-Twins] publish_address {local[1]}, bound_addresses {local[1]}
+2017-03-18 12:18:41,457 [main] [INFO] org.elasticsearch.discovery.DiscoveryService.doStart[86]- [M-Twins] elasticsearch/zt_pILvzTe-Pb15e9Rnazg
+2017-03-18 12:18:41,464 [elasticsearch[M-Twins][clusterService#updateTask][T#1]] [INFO] org.elasticsearch.cluster.service.InternalClusterService.runTasksForExecutor[580]- [M-Twins] new_master {M-Twins}{zt_pILvzTe-Pb15e9Rnazg}{local}{local[1]}{local=true}, reason: local-disco-initial_connect(master)
+2017-03-18 12:18:41,471 [main] [INFO] org.elasticsearch.node.Node.start[300]- [M-Twins] started
+2017-03-18 12:18:41,544 [elasticsearch[M-Twins][clusterService#updateTask][T#1]] [INFO] org.elasticsearch.gateway.GatewayService$GatewayRecoveryListener$1.clusterStateProcessed[268]- [M-Twins] recovered [0] indices into cluster_state
+2017-03-18 12:18:42,489 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/metrics/{name:.*}],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.MetricsMvcEndpoint.value(java.lang.String)
+2017-03-18 12:18:42,490 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/metrics || /metrics.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:18:42,491 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/beans || /beans.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:18:42,492 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/dump || /dump.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:18:42,493 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/trace || /trace.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:18:42,495 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/resume || /resume.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-03-18 12:18:42,496 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/info || /info.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:18:42,497 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/archaius || /archaius.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:18:42,498 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/restart || /restart.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.context.restart.RestartMvcEndpoint.invoke()
+2017-03-18 12:18:42,501 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/autoconfig || /autoconfig.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:18:42,505 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/env/{name:.*}],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EnvironmentMvcEndpoint.value(java.lang.String)
+2017-03-18 12:18:42,506 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/env || /env.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:18:42,507 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/configprops || /configprops.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:18:42,508 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/health || /health.json],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.HealthMvcEndpoint.invoke(java.security.Principal)
+2017-03-18 12:18:42,509 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/heapdump || /heapdump.json],methods=[GET],produces=[application/octet-stream]}" onto public void org.springframework.boot.actuate.endpoint.mvc.HeapdumpMvcEndpoint.invoke(boolean,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException,javax.servlet.ServletException
+2017-03-18 12:18:42,510 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/refresh || /refresh.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-03-18 12:18:42,511 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/mappings || /mappings.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:18:42,512 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/actuator || /actuator.json],produces=[application/json]}" onto public org.springframework.hateoas.ResourceSupport org.springframework.boot.actuate.endpoint.mvc.HalJsonMvcEndpoint.links()
+2017-03-18 12:18:42,515 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/env],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.context.environment.EnvironmentManagerMvcEndpoint.value(java.util.Map<java.lang.String, java.lang.String>)
+2017-03-18 12:18:42,516 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/env/reset],methods=[POST]}" onto public java.util.Map<java.lang.String, java.lang.Object> org.springframework.cloud.context.environment.EnvironmentManagerMvcEndpoint.reset()
+2017-03-18 12:18:42,517 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/features || /features.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:18:42,518 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/pause || /pause.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-03-18 12:18:43,113 [main] [INFO] org.springframework.ui.freemarker.SpringTemplateLoader.<init>[61]- SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.web.context.support.GenericWebApplicationContext@7e23fb6c: startup date [Sat Mar 18 12:18:28 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@149e8424] and template loader path [classpath:/templates/]
+2017-03-18 12:18:43,115 [main] [INFO] org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer.postProcessTemplateLoaders[127]- ClassTemplateLoader for Spring macros added to FreeMarker configuration
+2017-03-18 12:18:43,452 [main] [WARN] org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration.configureArchaius[137]- No spring.application.name found, defaulting to 'application'
+2017-03-18 12:18:43,461 [main] [WARN] com.netflix.config.sources.URLConfigurationSource.<init>[121]- No URLs will be polled as dynamic configuration sources.
+2017-03-18 12:18:43,461 [main] [INFO] com.netflix.config.sources.URLConfigurationSource.<init>[122]- To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-03-18 12:18:43,478 [main] [WARN] com.netflix.config.sources.URLConfigurationSource.<init>[121]- No URLs will be polled as dynamic configuration sources.
+2017-03-18 12:18:43,479 [main] [INFO] com.netflix.config.sources.URLConfigurationSource.<init>[122]- To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-03-18 12:18:44,512 [main] [INFO] org.springframework.boot.StartupInfoLogger.logStarted[57]- Started ESTest in 17.455 seconds (JVM running for 18.897)
+2017-03-18 12:18:45,128 [Thread-6] [INFO] org.springframework.context.support.AbstractApplicationContext.doClose[987]- Closing org.springframework.web.context.support.GenericWebApplicationContext@7e23fb6c: startup date [Sat Mar 18 12:18:28 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@149e8424
+2017-03-18 12:18:45,139 [Thread-6] [INFO] org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration.destroy[134]- Closing Elasticsearch client
+2017-03-18 12:18:45,139 [Thread-6] [INFO] org.elasticsearch.node.Node.stop[310]- [M-Twins] stopping ...
+2017-03-18 12:18:45,141 [Thread-6] [INFO] org.elasticsearch.node.Node.stop[340]- [M-Twins] stopped
+2017-03-18 12:18:45,141 [Thread-6] [INFO] org.elasticsearch.node.Node.close[358]- [M-Twins] closing ...
+2017-03-18 12:18:45,188 [Thread-6] [INFO] org.elasticsearch.node.Node.close[436]- [M-Twins] closed
+2017-03-18 12:19:07,392 [main] [INFO] org.springframework.test.context.support.AbstractTestContextBootstrapper.buildDefaultMergedContextConfiguration[319]- Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.experian.comp.test.ESTest], using SpringBootContextLoader
+2017-03-18 12:19:07,400 [main] [INFO] org.springframework.test.context.support.AbstractContextLoader.generateDefaultLocations[264]- Could not detect default resource locations for test class [com.experian.comp.test.ESTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-18 12:19:07,547 [main] [INFO] org.springframework.test.context.support.AbstractTestContextBootstrapper.getDefaultTestExecutionListenerClassNames[260]- Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener]
+2017-03-18 12:19:07,577 [main] [INFO] org.springframework.test.context.support.AbstractTestContextBootstrapper.getTestExecutionListeners[187]- Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@37d179fb, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@199f6a5e, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@31004e76, org.springframework.test.context.support.DirtiesContextTestExecutionListener@b1f3e1c, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3026a5f8, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@395a557a, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@59a1da00, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@10ef63f9, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@548c791e, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5263cbef, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@15e1e22b, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@20c78046]
+2017-03-18 12:19:08,371 [main] [INFO] org.springframework.context.support.AbstractApplicationContext.prepareRefresh[582]- Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@149e8424: startup date [Sat Mar 18 12:19:08 CST 2017]; root of context hierarchy
+2017-03-18 12:19:08,698 [main] [INFO] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>[155]- JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-03-18 12:19:08,744 [background-preinit] [INFO] org.hibernate.validator.internal.util.Version.<clinit>[30]- HV000001: Hibernate Validator 5.2.4.Final
+2017-03-18 12:19:08,745 [main] [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization[325]- Bean 'configurationPropertiesRebinderAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$ba619aac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-03-18 12:19:09,267 [main] [INFO] org.springframework.boot.SpringApplication.logStartupProfileInfo[665]- The following profiles are active: dev
+2017-03-18 12:19:09,276 [main] [INFO] org.springframework.context.support.AbstractApplicationContext.prepareRefresh[582]- Refreshing org.springframework.web.context.support.GenericWebApplicationContext@444760c4: startup date [Sat Mar 18 12:19:09 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@149e8424
+2017-03-18 12:19:11,587 [main] [INFO] org.springframework.beans.factory.support.DefaultListableBeanFactory.registerBeanDefinition[821]- Overriding bean definition for bean 'managementServletContext' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.actuate.autoconfigure.EndpointWebMvcHypermediaManagementContextConfiguration; factoryMethodName=managementServletContext; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/actuate/autoconfigure/EndpointWebMvcHypermediaManagementContextConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.actuate.autoconfigure.EndpointWebMvcAutoConfiguration; factoryMethodName=managementServletContext; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/actuate/autoconfigure/EndpointWebMvcAutoConfiguration.class]]
+2017-03-18 12:19:11,958 [main] [WARN] org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses[389]- Cannot enhance @Configuration bean definition 'refreshScope' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2017-03-18 12:19:12,357 [main] [INFO] org.springframework.cloud.context.scope.GenericScope.setSerializationId[263]- BeanFactory id=e0d4b4d0-288e-3986-a202-15769c7a11d5
+2017-03-18 12:19:12,620 [main] [INFO] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>[155]- JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-03-18 12:19:12,880 [main] [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization[325]- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9e4797af] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-03-18 12:19:13,207 [main] [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization[325]- Bean 'org.springframework.cloud.netflix.metrics.MetricsInterceptorConfiguration$MetricsRestTemplateConfiguration' of type [class org.springframework.cloud.netflix.metrics.MetricsInterceptorConfiguration$MetricsRestTemplateConfiguration$$EnhancerBySpringCGLIB$$d0743df0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-03-18 12:19:13,305 [main] [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization[325]- Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$ba619aac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-03-18 12:19:15,943 [main] [INFO] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache[534]- Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@444760c4: startup date [Sat Mar 18 12:19:09 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@149e8424
+2017-03-18 12:19:15,966 [main] [INFO] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache[566]- Detected ResponseBodyAdvice bean in org.springframework.boot.actuate.autoconfigure.EndpointWebMvcHypermediaManagementContextConfiguration$ActuatorEndpointLinksAdvice
+2017-03-18 12:19:16,253 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-03-18 12:19:16,255 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-03-18 12:19:16,418 [main] [INFO] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler[354]- Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-03-18 12:19:16,418 [main] [INFO] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler[354]- Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-03-18 12:19:16,460 [main] [INFO] org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.initExceptionHandlerAdviceCache[277]- Detected ResponseBodyAdvice implementation in org.springframework.boot.actuate.autoconfigure.EndpointWebMvcHypermediaManagementContextConfiguration$ActuatorEndpointLinksAdvice
+2017-03-18 12:19:16,532 [main] [INFO] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler[354]- Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-03-18 12:19:17,591 [main] [INFO] org.elasticsearch.node.Node.<init>[149]- [Deacon Frost] version[2.4.1], pid[49555], build[c67dc32/2016-09-27T18:57:55Z]
+2017-03-18 12:19:17,591 [main] [INFO] org.elasticsearch.node.Node.<init>[151]- [Deacon Frost] initializing ...
+2017-03-18 12:19:17,595 [main] [INFO] org.elasticsearch.plugins.PluginsService.<init>[180]- [Deacon Frost] modules [], plugins [], sites []
+2017-03-18 12:19:17,622 [main] [INFO] org.elasticsearch.env.NodeEnvironment.maybeLogPathDetails[290]- [Deacon Frost] using [1] data paths, mounts [[/Volumes/Goer (/dev/disk0s5)]], net usable_space [12.5gb], net total_space [56.2gb], spins? [unknown], types [hfs]
+2017-03-18 12:19:17,623 [main] [INFO] org.elasticsearch.env.NodeEnvironment.maybeLogHeapDetails[305]- [Deacon Frost] heap size [1.7gb], compressed ordinary object pointers [true]
+2017-03-18 12:19:17,625 [main] [WARN] org.elasticsearch.env.NodeEnvironment.maybeWarnFileDescriptors[315]- [Deacon Frost] max file descriptors [10240] for elasticsearch process likely too low, consider increasing to at least [65536]
+2017-03-18 12:19:19,223 [main] [WARN] org.elasticsearch.bootstrap.Natives.<clinit>[48]- JNA not found. native methods will be disabled.
+java.lang.ClassNotFoundException: com.sun.jna.Native
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:308)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:191)
+	at org.elasticsearch.bootstrap.Natives.<clinit>(Natives.java:45)
+	at org.elasticsearch.bootstrap.BootstrapInfo.isMemoryLocked(BootstrapInfo.java:44)
+	at org.elasticsearch.monitor.process.ProcessProbe.processInfo(ProcessProbe.java:130)
+	at org.elasticsearch.monitor.process.ProcessService.<init>(ProcessService.java:44)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)
+	at org.elasticsearch.common.inject.DefaultConstructionProxyFactory$1.newInstance(DefaultConstructionProxyFactory.java:50)
+	at org.elasticsearch.common.inject.ConstructorInjector.construct(ConstructorInjector.java:86)
+	at org.elasticsearch.common.inject.ConstructorBindingImpl$Factory.get(ConstructorBindingImpl.java:104)
+	at org.elasticsearch.common.inject.ProviderToInternalFactoryAdapter$1.call(ProviderToInternalFactoryAdapter.java:47)
+	at org.elasticsearch.common.inject.InjectorImpl.callInContext(InjectorImpl.java:886)
+	at org.elasticsearch.common.inject.ProviderToInternalFactoryAdapter.get(ProviderToInternalFactoryAdapter.java:43)
+	at org.elasticsearch.common.inject.Scopes$1$1.get(Scopes.java:59)
+	at org.elasticsearch.common.inject.InternalFactoryToProviderAdapter.get(InternalFactoryToProviderAdapter.java:46)
+	at org.elasticsearch.common.inject.SingleParameterInjector.inject(SingleParameterInjector.java:42)
+	at org.elasticsearch.common.inject.SingleParameterInjector.getAll(SingleParameterInjector.java:66)
+	at org.elasticsearch.common.inject.ConstructorInjector.construct(ConstructorInjector.java:85)
+	at org.elasticsearch.common.inject.ConstructorBindingImpl$Factory.get(ConstructorBindingImpl.java:104)
+	at org.elasticsearch.common.inject.SingleParameterInjector.inject(SingleParameterInjector.java:42)
+	at org.elasticsearch.common.inject.SingleParameterInjector.getAll(SingleParameterInjector.java:66)
+	at org.elasticsearch.common.inject.ConstructorInjector.construct(ConstructorInjector.java:85)
+	at org.elasticsearch.common.inject.ConstructorBindingImpl$Factory.get(ConstructorBindingImpl.java:104)
+	at org.elasticsearch.common.inject.ProviderToInternalFactoryAdapter$1.call(ProviderToInternalFactoryAdapter.java:47)
+	at org.elasticsearch.common.inject.InjectorImpl.callInContext(InjectorImpl.java:886)
+	at org.elasticsearch.common.inject.ProviderToInternalFactoryAdapter.get(ProviderToInternalFactoryAdapter.java:43)
+	at org.elasticsearch.common.inject.Scopes$1$1.get(Scopes.java:59)
+	at org.elasticsearch.common.inject.InternalFactoryToProviderAdapter.get(InternalFactoryToProviderAdapter.java:46)
+	at org.elasticsearch.common.inject.InjectorBuilder$1.call(InjectorBuilder.java:201)
+	at org.elasticsearch.common.inject.InjectorBuilder$1.call(InjectorBuilder.java:193)
+	at org.elasticsearch.common.inject.InjectorImpl.callInContext(InjectorImpl.java:879)
+	at org.elasticsearch.common.inject.InjectorBuilder.loadEagerSingletons(InjectorBuilder.java:193)
+	at org.elasticsearch.common.inject.InjectorBuilder.injectDynamically(InjectorBuilder.java:175)
+	at org.elasticsearch.common.inject.InjectorBuilder.build(InjectorBuilder.java:110)
+	at org.elasticsearch.common.inject.Guice.createInjector(Guice.java:93)
+	at org.elasticsearch.common.inject.Guice.createInjector(Guice.java:70)
+	at org.elasticsearch.common.inject.ModulesBuilder.createInjector(ModulesBuilder.java:46)
+	at org.elasticsearch.node.Node.<init>(Node.java:213)
+	at org.elasticsearch.node.Node.<init>(Node.java:140)
+	at org.elasticsearch.node.NodeBuilder.build(NodeBuilder.java:143)
+	at org.elasticsearch.node.NodeBuilder.node(NodeBuilder.java:150)
+	at org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration.createNodeClient(ElasticsearchAutoConfiguration.java:107)
+	at org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration.createClient(ElasticsearchAutoConfiguration.java:95)
+	at org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration.elasticsearchClient(ElasticsearchAutoConfiguration.java:84)
+	at org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration$$EnhancerBySpringCGLIB$$6930b8e7.CGLIB$elasticsearchClient$1(<generated>)
+	at org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration$$EnhancerBySpringCGLIB$$6930b8e7$$FastClassBySpringCGLIB$$32fc038e.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:356)
+	at org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration$$EnhancerBySpringCGLIB$$6930b8e7.elasticsearchClient(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:162)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:588)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1128)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1022)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:512)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:754)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:866)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:542)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:761)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:371)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:111)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:189)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:131)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:230)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:228)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:287)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:289)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:247)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2017-03-18 12:19:20,281 [main] [INFO] org.elasticsearch.node.Node.<init>[225]- [Deacon Frost] initialized
+2017-03-18 12:19:20,282 [main] [INFO] org.elasticsearch.node.Node.start[251]- [Deacon Frost] starting ...
+2017-03-18 12:19:20,285 [main] [INFO] org.elasticsearch.transport.TransportService.doStart[184]- [Deacon Frost] publish_address {local[1]}, bound_addresses {local[1]}
+2017-03-18 12:19:20,290 [main] [INFO] org.elasticsearch.discovery.DiscoveryService.doStart[86]- [Deacon Frost] elasticsearch/4H4B5TBjQfiNlqDNso9Avg
+2017-03-18 12:19:20,299 [elasticsearch[Deacon Frost][clusterService#updateTask][T#1]] [INFO] org.elasticsearch.cluster.service.InternalClusterService.runTasksForExecutor[580]- [Deacon Frost] new_master {Deacon Frost}{4H4B5TBjQfiNlqDNso9Avg}{local}{local[1]}{local=true}, reason: local-disco-initial_connect(master)
+2017-03-18 12:19:20,305 [main] [INFO] org.elasticsearch.node.Node.start[300]- [Deacon Frost] started
+2017-03-18 12:19:20,351 [elasticsearch[Deacon Frost][clusterService#updateTask][T#1]] [INFO] org.elasticsearch.gateway.GatewayService$GatewayRecoveryListener$1.clusterStateProcessed[268]- [Deacon Frost] recovered [0] indices into cluster_state
+2017-03-18 12:19:21,368 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/features || /features.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:19:21,370 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/refresh || /refresh.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-03-18 12:19:21,372 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/resume || /resume.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-03-18 12:19:21,374 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/heapdump || /heapdump.json],methods=[GET],produces=[application/octet-stream]}" onto public void org.springframework.boot.actuate.endpoint.mvc.HeapdumpMvcEndpoint.invoke(boolean,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException,javax.servlet.ServletException
+2017-03-18 12:19:21,376 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/restart || /restart.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.context.restart.RestartMvcEndpoint.invoke()
+2017-03-18 12:19:21,378 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/trace || /trace.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:19:21,379 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/autoconfig || /autoconfig.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:19:21,381 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/metrics/{name:.*}],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.MetricsMvcEndpoint.value(java.lang.String)
+2017-03-18 12:19:21,382 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/metrics || /metrics.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:19:21,383 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/env],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.context.environment.EnvironmentManagerMvcEndpoint.value(java.util.Map<java.lang.String, java.lang.String>)
+2017-03-18 12:19:21,383 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/env/reset],methods=[POST]}" onto public java.util.Map<java.lang.String, java.lang.Object> org.springframework.cloud.context.environment.EnvironmentManagerMvcEndpoint.reset()
+2017-03-18 12:19:21,385 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/configprops || /configprops.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:19:21,386 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/info || /info.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:19:21,387 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/actuator || /actuator.json],produces=[application/json]}" onto public org.springframework.hateoas.ResourceSupport org.springframework.boot.actuate.endpoint.mvc.HalJsonMvcEndpoint.links()
+2017-03-18 12:19:21,390 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/health || /health.json],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.HealthMvcEndpoint.invoke(java.security.Principal)
+2017-03-18 12:19:21,392 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/pause || /pause.json],methods=[POST]}" onto public java.lang.Object org.springframework.cloud.endpoint.GenericPostableMvcEndpoint.invoke()
+2017-03-18 12:19:21,395 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/mappings || /mappings.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:19:21,399 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/beans || /beans.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:19:21,401 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/env/{name:.*}],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EnvironmentMvcEndpoint.value(java.lang.String)
+2017-03-18 12:19:21,401 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/env || /env.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:19:21,403 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/archaius || /archaius.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:19:21,404 [main] [INFO] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register[543]- Mapped "{[/dump || /dump.json],methods=[GET],produces=[application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2017-03-18 12:19:21,910 [main] [INFO] org.springframework.ui.freemarker.SpringTemplateLoader.<init>[61]- SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.web.context.support.GenericWebApplicationContext@444760c4: startup date [Sat Mar 18 12:19:09 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@149e8424] and template loader path [classpath:/templates/]
+2017-03-18 12:19:21,912 [main] [INFO] org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer.postProcessTemplateLoaders[127]- ClassTemplateLoader for Spring macros added to FreeMarker configuration
+2017-03-18 12:19:22,222 [main] [WARN] org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration.configureArchaius[137]- No spring.application.name found, defaulting to 'application'
+2017-03-18 12:19:22,231 [main] [WARN] com.netflix.config.sources.URLConfigurationSource.<init>[121]- No URLs will be polled as dynamic configuration sources.
+2017-03-18 12:19:22,231 [main] [INFO] com.netflix.config.sources.URLConfigurationSource.<init>[122]- To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-03-18 12:19:22,241 [main] [WARN] com.netflix.config.sources.URLConfigurationSource.<init>[121]- No URLs will be polled as dynamic configuration sources.
+2017-03-18 12:19:22,242 [main] [INFO] com.netflix.config.sources.URLConfigurationSource.<init>[122]- To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-03-18 12:19:23,141 [main] [INFO] org.springframework.boot.StartupInfoLogger.logStarted[57]- Started ESTest in 15.407 seconds (JVM running for 16.326)
+2017-03-18 12:19:23,655 [Thread-6] [INFO] org.springframework.context.support.AbstractApplicationContext.doClose[987]- Closing org.springframework.web.context.support.GenericWebApplicationContext@444760c4: startup date [Sat Mar 18 12:19:09 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@149e8424
+2017-03-18 12:19:23,665 [Thread-6] [INFO] org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration.destroy[134]- Closing Elasticsearch client
+2017-03-18 12:19:23,665 [Thread-6] [INFO] org.elasticsearch.node.Node.stop[310]- [Deacon Frost] stopping ...
+2017-03-18 12:19:23,667 [Thread-6] [INFO] org.elasticsearch.node.Node.stop[340]- [Deacon Frost] stopped
+2017-03-18 12:19:23,667 [Thread-6] [INFO] org.elasticsearch.node.Node.close[358]- [Deacon Frost] closing ...
+2017-03-18 12:19:23,673 [Thread-6] [INFO] org.elasticsearch.node.Node.close[436]- [Deacon Frost] closed

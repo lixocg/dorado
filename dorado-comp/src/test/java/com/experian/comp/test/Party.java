@@ -1,11 +1,11 @@
 package com.experian.comp.test;
 
 
-import com.experian.comp.elasticsearch.annotation.Document;
 import com.experian.comp.elasticsearch.annotation.Field;
 import com.experian.comp.elasticsearch.annotation.FieldIndex;
+import com.experian.comp.elasticsearch.annotation.Nested;
 
-@Document
+@Nested(name="parties")
 public class Party {
 	@Field(index = FieldIndex.not_analyzed, store = true)
 	private String id;

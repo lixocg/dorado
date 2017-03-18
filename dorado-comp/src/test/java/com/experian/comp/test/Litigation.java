@@ -8,9 +8,9 @@ import com.experian.comp.elasticsearch.annotation.Field;
 import com.experian.comp.elasticsearch.annotation.FieldIndex;
 import com.experian.comp.elasticsearch.enums.FieldType;
 
-@Document
+@Document(indexName="litigiation",type="detail")
 public class Litigation {
-	@Field(index = FieldIndex.not_analyzed, store = true)
+	@Field(type = FieldType.String,index = FieldIndex.not_analyzed, store = true)
 	private String id;
 	
 	@Field(type = FieldType.String, index = FieldIndex.not_analyzed, store = true)
