@@ -5,6 +5,11 @@ import java.util.Map;
 
 import com.experian.comp.elasticsearch.modle.Query;
 
+/**
+ * 最终请求elasticsearch查询参数
+ * @author lixiongcheng
+ *
+ */
 public class SearchRequest {
 	private Query query;
 

@@ -10,8 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.experian.comp.CompApplication;
+import com.experian.comp.elasticsearch.core.DocumentScan;
 import com.experian.comp.elasticsearch.param.ESRequest;
 import com.experian.comp.elasticsearch.param.ESResponse;
+import com.experian.comp.elasticsearch.param.request.BoolParam;
 import com.experian.comp.elasticsearch.param.request.Document;
 import com.experian.comp.elasticsearch.param.request.SearchParam;
 import com.experian.comp.utility.ESClientUtil;
@@ -55,7 +57,7 @@ public class ESTest {
 		esRequest.setType("detail");
 		Document<Litigation> doc = new Document<Litigation>();
 		doc.setId(l.getId());
-		doc.setContent(l);
+		doc.setDoc(l);
 		esRequest.setContent(doc);
 		ESResponse<Void> response = ESClientUtil.addDoc(esRequest);
 		System.out.println(gson.toJson(response));
@@ -131,7 +133,7 @@ public class ESTest {
 			l.setParties(parties);
 
 			doc.setId(l.getId());
-			doc.setContent(l);
+			doc.setDoc(l);
 			docs.add(doc);
 		}
 
@@ -141,20 +143,71 @@ public class ESTest {
 		ESResponse<Void> response = ESClientUtil.addBulkDoc(esRequest);
 		System.out.println(gson.toJson(response));
 	}
-	
+
 	@Test
 	public void testMultiQuery() {
-		
+
 		ESRequest<SearchParam> esRequest = new ESRequest<>();
-		
+
 		SearchParam content = new SearchParam();
-		content.setQuery("E1");
-		content.setFileds(new String[]{"serialCaseNumber"});
-		
-		esRequest.setContent(content );
+		content.setKeyword("E1");
+		content.setFileds(new String[] { "serialCaseNumber" });
+
+		esRequest.setContent(content);
 		esRequest.setIndex("litigation");
 		esRequest.setType("detail");
-		ESResponse<Litigation> res = ESClientUtil.search(esRequest,Litigation.class);
+		ESResponse<Litigation> res = ESClientUtil.search(esRequest, Litigation.class);
 		System.err.println(GsonUtil.toJson(res));
+	}
+
+	@Test
+	public void testBoolFiler() {
+		ESRequest<SearchParam> esRequest = new ESRequest<>();
+
+		SearchParam searcParam = new SearchParam();
+		searcParam.setFileds(new String[] { "serialCaseNumber" });
+		List<BoolParam> filters = Lists.newArrayList();
+		BoolParam fp1 = new BoolParam();
+		fp1.setBoolType((byte) 2);
+		fp1.setKey("corpName");
+		fp1.setValue("Experian中国");
+		filters.add(fp1);
+
+		searcParam.setBools(filters);
+
+		esRequest.setContent(searcParam);
+		esRequest.setIndex("litigation");
+		esRequest.setType("detail");
+		ESResponse<Litigation> res = ESClientUtil.search(esRequest, Litigation.class);
+		System.err.println(GsonUtil.toJson(res));
+	}
+	
+	@Test
+	public void testNestedBoolFiler() {
+		ESRequest<SearchParam> esRequest = new ESRequest<>();
+
+		SearchParam searcParam = new SearchParam();
+		searcParam.setFileds(new String[] { "serialCaseNumber" });
+		List<BoolParam> filters = Lists.newArrayList();
+		BoolParam fp1 = new BoolParam();
+		fp1.setBoolType((byte) 2);
+		fp1.setKey("sbd");
+		fp1.setValue("1234");
+		fp1.setNested(true);
+		fp1.setNestedPath("parties");
+		filters.add(fp1);
+
+		searcParam.setBools(filters);
+
+		esRequest.setContent(searcParam);
+		esRequest.setIndex("litigation");
+		esRequest.setType("detail");
+		ESResponse<Litigation> res = ESClientUtil.search(esRequest, Litigation.class);
+		System.err.println(GsonUtil.toJson(res));
+	}
+	
+	@Test
+	public void testScan(){
+		new  DocumentScan(new String[]{"com.experian.comp.test"});
 	}
 }

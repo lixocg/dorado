@@ -1,4 +1,4 @@
-package com.experian.comp.elasticsearch.modle;
+package com.experian.comp.elasticsearch.param.request;
 
 public class AggsParam {
 	private String key;

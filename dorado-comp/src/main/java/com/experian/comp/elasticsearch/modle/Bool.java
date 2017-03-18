@@ -9,13 +9,13 @@ public class Bool {
 
 	private List<Must> must;
 
-	private Integer minimum_should_match;
+	private Byte minimum_should_match;
 
-	public Integer getMinimum_should_match() {
+	public Byte getMinimum_should_match() {
 		return minimum_should_match;
 	}
 
-	public void setMinimum_should_match(Integer minimum_should_match) {
+	public void setMinimum_should_match(Byte minimum_should_match) {
 		this.minimum_should_match = minimum_should_match;
 	}
 

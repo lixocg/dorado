@@ -8,7 +8,7 @@ package com.experian.comp.elasticsearch.param.request;
  */
 public class Document<T> {
 	private String id;
-	private T content;
+	private T doc;
 
 	public String getId() {
 		return id;
@@ -18,12 +18,12 @@ public class Document<T> {
 		this.id = id;
 	}
 
-	public T getContent() {
-		return content;
+	public T getDoc() {
+		return doc;
 	}
 
-	public void setContent(T content) {
-		this.content = content;
+	public void setDoc(T doc) {
+		this.doc = doc;
 	}
 
 }

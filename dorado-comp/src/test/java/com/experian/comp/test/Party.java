@@ -1,9 +1,22 @@
 package com.experian.comp.test;
 
+
+import com.experian.comp.elasticsearch.annotation.Document;
+import com.experian.comp.elasticsearch.annotation.Field;
+import com.experian.comp.elasticsearch.annotation.FieldIndex;
+
+@Document
 public class Party {
+	@Field(index = FieldIndex.not_analyzed, store = true)
 	private String id;
+
+	@Field(index = FieldIndex.not_analyzed, store = true)
 	private String name;
+
+	@Field(index = FieldIndex.not_analyzed, store = true)
 	private String sbd;
+
+	@Field(index = FieldIndex.not_analyzed, store = true)
 	private int type;
 
 	public int getType() {

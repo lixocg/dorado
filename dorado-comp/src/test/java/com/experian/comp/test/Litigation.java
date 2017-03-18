@@ -3,14 +3,35 @@ package com.experian.comp.test;
 import java.util.Date;
 import java.util.List;
 
+import com.experian.comp.elasticsearch.annotation.Document;
+import com.experian.comp.elasticsearch.annotation.Field;
+import com.experian.comp.elasticsearch.annotation.FieldIndex;
+import com.experian.comp.elasticsearch.enums.FieldType;
+
+@Document
 public class Litigation {
+	@Field(index = FieldIndex.not_analyzed, store = true)
 	private String id;
+	
+	@Field(type = FieldType.String, index = FieldIndex.not_analyzed, store = true)
 	private String caseNumber;
+	
+	@Field(type = FieldType.String, index = FieldIndex.not_analyzed, store = true)
 	private String serialCaseNumber;
+	
+	@Field(type = FieldType.String, index = FieldIndex.not_analyzed, store = true)
 	private String corpName;
+	
+	@Field(type = FieldType.String, index = FieldIndex.not_analyzed, store = true)
 	private String sbd;
+	
+	@Field(type = FieldType.String, index = FieldIndex.not_analyzed, store = true)
 	private float amount;
+	
+	@Field(type = FieldType.Date, index = FieldIndex.not_analyzed,store = true)
 	private Date insertDate;
+	
+	@Field(type = FieldType.Nested, index = FieldIndex.not_analyzed,store = true)
 	private List<Party> parties;
 
 	public String getId() {

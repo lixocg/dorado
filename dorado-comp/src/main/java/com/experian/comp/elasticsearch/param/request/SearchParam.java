@@ -2,30 +2,42 @@ package com.experian.comp.elasticsearch.param.request;
 
 import java.util.List;
 
-import com.experian.comp.elasticsearch.modle.AggsParam;
-import com.experian.comp.elasticsearch.modle.FilterParam;
-
+/**
+ * 查询参数
+ * 
+ * @author lixiongcheng
+ *
+ */
 public class SearchParam {
-	private String index;
-
-	private String type;
-
+	/**
+	 * 分页条数
+	 */
 	private Integer size = 0;
 
+	/**
+	 * 分页页码
+	 */
 	private Integer page = 0;
 
-	private String query;// 关键词
+	/**
+	 * 关键词
+	 */
+	private String keyword;
 
-	private String[] fileds;// 多个关键词^比重...{ "name^8", "productName^8", "desc^1"
-							// }
+	/**
+	 * 多个关键词^比重...{ "name^8", "productName^8", "desc^1" }
+	 */
+	private String[] fileds;
 
-	private int flag = 1;
+	/**
+	 * 组合查询(bool)参数
+	 */
+	private List<BoolParam> bools;
 
-	private List<FilterParam> filters;
-
+	/**
+	 * 聚合查询
+	 */
 	private List<AggsParam> aggs;
-	
-	
 
 	public String[] getFileds() {
 		return fileds;
@@ -43,20 +55,12 @@ public class SearchParam {
 		this.aggs = aggs;
 	}
 
-	public List<FilterParam> getFilters() {
-		return filters;
+	public List<BoolParam> getBools() {
+		return bools;
 	}
 
-	public void setFilters(List<FilterParam> filters) {
-		this.filters = filters;
-	}
-
-	public int getFlag() {
-		return flag;
-	}
-
-	public void setFlag(int flag) {
-		this.flag = flag;
+	public void setBools(List<BoolParam> bools) {
+		this.bools = bools;
 	}
 
 	public Integer getPage() {
@@ -75,27 +79,12 @@ public class SearchParam {
 		this.size = size;
 	}
 
-	public String getQuery() {
-		return query;
+	public String getKeyword() {
+		return keyword;
 	}
 
-	public void setQuery(String query) {
-		this.query = query;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
-	public String getIndex() {
-		return index;
-	}
-
-	public void setIndex(String index) {
-		this.index = index;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 }
