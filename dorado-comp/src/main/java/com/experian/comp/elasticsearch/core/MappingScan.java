@@ -26,10 +26,15 @@ import com.experian.comp.elasticsearch.annotation.Nested;
 import com.experian.comp.elasticsearch.annotation.NestedType;
 import com.experian.comp.elasticsearch.enums.FieldType;
 import com.experian.comp.elasticsearch.modle.Mapping;
-import com.experian.comp.utility.GsonUtil;
 import com.google.common.collect.Maps;
 
-public class DocumentScan {
+/**
+ * 实体elasticsearch Mapping映射
+ * 
+ * @author lixiongcheng
+ *
+ */
+public class MappingScan {
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	private static final String RESOURCE_PATTERN = "/**/*.class";
@@ -41,7 +46,7 @@ public class DocumentScan {
 	private List<TypeFilter> typeFilters = new LinkedList<TypeFilter>();
 
 	private Set<Class<?>> classSet = new HashSet<Class<?>>();
-	
+
 	/**
 	 * 构造函数
 	 * 
@@ -50,17 +55,17 @@ public class DocumentScan {
 	 * @param annotationFilter
 	 *            指定扫描包中含有特定注解标记的bean,支持多个注解
 	 */
-	public DocumentScan(String[] packagesToScan) {
+	public MappingScan(String[] packagesToScan) {
 		if (packagesToScan != null) {
 			for (String packagePath : packagesToScan) {
 				this.packagesList.add(packagePath);
 			}
 			// 加载文档参数
-			scanDoc();
+			scanMapping();
 		}
 	}
 
-	private void scanDoc() {
+	private void scanMapping() {
 		typeFilters.add(new AnnotationTypeFilter(Document.class, false));
 		typeFilters.add(new AnnotationTypeFilter(Nested.class, false));
 		Set<Class<?>> set = null;
@@ -69,39 +74,58 @@ public class DocumentScan {
 			Iterator<Class<?>> it = set.iterator();
 			while (it.hasNext()) {
 				Class<?> clazz = it.next();
+				if (!clazz.isAnnotationPresent(Document.class)) {
+					continue;
+				}
 				Document doc = clazz.getAnnotation(Document.class);
 				Mapping _mapping = new Mapping();
 				Map<String, Map<String, Map<String, Map<String, Map<String, Object>>>>> mapping = Maps.newHashMap();
 				Map<String, Map<String, Map<String, Map<String, Object>>>> v1 = Maps.newHashMap();
 				Map<String, Map<String, Map<String, Object>>> v2 = Maps.newHashMap();
 				Map<String, Map<String, Object>> v3 = Maps.newHashMap();
-				v2.put("properties", v3 );
-				v1.put(doc.type(), v2 );
-				mapping.put("mappings", v1 );
-				_mapping.setMapping(mapping );
-				
+				v2.put("properties", v3);
+				v1.put(doc.type(), v2);
+				mapping.put("mappings", v1);
+				_mapping.setMapping(mapping);
+				_mapping.setRawClass(clazz);
+
 				java.lang.reflect.Field[] fields = clazz.getDeclaredFields();
-				
+
 				if (fields != null && fields.length != 0) {
-					
-					for (java.lang.reflect.Field f :fields) {
-						Field field = f.getAnnotation(Field.class);
+
+					for (java.lang.reflect.Field field : fields) {
+						Field fieldAnnotation = field.getAnnotation(Field.class);
 						Map<String, Object> v4 = Maps.newHashMap();
-						v4.put("type", field.type());
-						if(field.type().equals(FieldType.Nested)){
-							NestedType nestedType = f.getAnnotation(NestedType.class);
-							if(nestedType==null){
-								throw new RuntimeException(String.format("内嵌属性[%s]未指明内嵌类，用@NestedType", f.getName()));
+						if (fieldAnnotation.type().equals(FieldType.Nested)) {
+							NestedType nestedTypeAnnotation = field.getAnnotation(NestedType.class);
+							if (nestedTypeAnnotation == null) {
+								throw new RuntimeException(
+										String.format("内嵌属性[%s]未指明内嵌类，用@NestedType注解标识", field.getName()));
 							}
-							Class<?> nestedClass = nestedType.clazz();
-							java.lang.reflect.Field[] nestedFields = nestedClass.getFields();
+							Class<?> nestedClass = nestedTypeAnnotation.clazz();
+							java.lang.reflect.Field[] nestedFields = nestedClass.getDeclaredFields();
+							Map<String, Object> nestedVal1 = Maps.newHashMap();
+							Map<String, Object> nestedVal2 = Maps.newHashMap();
+							nestedVal1.put("properties", nestedVal2);
+							v3.put(field.getName(), nestedVal1);
+							for (java.lang.reflect.Field nestedField : nestedFields) {
+								Field nestedFieldAnnotation = nestedField.getAnnotation(Field.class);
+								Map<String, Object> nestedVal3 = Maps.newHashMap();
+								nestedVal3.put("type", nestedFieldAnnotation.type());
+								nestedVal3.put("store", nestedFieldAnnotation.store());
+								nestedVal3.put("index", nestedFieldAnnotation.index());
+								nestedVal2.put(nestedField.getName(), nestedVal3);
+							}
+
+						} else {
+							v4.put("type", fieldAnnotation.type());
+							v4.put("store", fieldAnnotation.store());
+							v4.put("index", fieldAnnotation.index());
+							v3.put(field.getName(), v4);
 						}
-						v4.put("store",field.store());
-						v4.put("index", field.index());
-						v3.put(f.getName(), v4 );
 					}
 				}
-				System.out.println(GsonUtil.toJson(_mapping));
+				MappingHolder.getInstance().register(_mapping);
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -109,7 +133,7 @@ public class DocumentScan {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 将符合条件的Bean以Class集合的形式返回
 	 * 

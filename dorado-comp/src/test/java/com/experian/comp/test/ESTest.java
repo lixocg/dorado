@@ -10,7 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.experian.comp.CompApplication;
-import com.experian.comp.elasticsearch.core.DocumentScan;
+import com.experian.comp.elasticsearch.core.MappingHolder;
+import com.experian.comp.elasticsearch.core.MappingScan;
 import com.experian.comp.elasticsearch.param.ESRequest;
 import com.experian.comp.elasticsearch.param.ESResponse;
 import com.experian.comp.elasticsearch.param.request.BoolParam;
@@ -208,6 +209,7 @@ public class ESTest {
 	
 	@Test
 	public void testScan(){
-		new  DocumentScan(new String[]{"com.experian.comp.test"});
+		new  MappingScan(new String[]{"com.experian.comp.test"});
+		System.out.println(MappingHolder.getInstance().getMapping(Litigation.class));
 	}
 }

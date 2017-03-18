@@ -1,22 +1,22 @@
 package com.experian.comp.test;
 
-
 import com.experian.comp.elasticsearch.annotation.Field;
 import com.experian.comp.elasticsearch.annotation.FieldIndex;
 import com.experian.comp.elasticsearch.annotation.Nested;
+import com.experian.comp.elasticsearch.enums.FieldType;
 
 @Nested
 public class Party {
-	@Field(index = FieldIndex.not_analyzed, store = true)
+	@Field(type = FieldType.String, index = FieldIndex.not_analyzed, store = true)
 	private String id;
 
-	@Field(index = FieldIndex.not_analyzed, store = true)
+	@Field(type = FieldType.String, index = FieldIndex.not_analyzed, store = true)
 	private String name;
 
-	@Field(index = FieldIndex.not_analyzed, store = true)
+	@Field(type = FieldType.String, index = FieldIndex.not_analyzed, store = true)
 	private String sbd;
 
-	@Field(index = FieldIndex.not_analyzed, store = true)
+	@Field(type = FieldType.Integer, index = FieldIndex.not_analyzed, store = true)
 	private int type;
 
 	public int getType() {

@@ -14,7 +14,7 @@ public class RabbitUtil {
 	private RabbitUtil() {
 	}
 
-	public static volatile RabbitClient rabbit;
+	private static volatile RabbitClient rabbit;
 
 	public static RabbitClient getRabbit(){
 		if(rabbit==null){
