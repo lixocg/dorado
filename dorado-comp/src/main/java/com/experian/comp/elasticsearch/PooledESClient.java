@@ -30,6 +30,7 @@ import com.experian.comp.elasticsearch.modle.Query;
 import com.experian.comp.elasticsearch.modle.Should;
 import com.experian.comp.elasticsearch.param.ESRequest;
 import com.experian.comp.elasticsearch.param.ESResponse;
+import com.experian.comp.elasticsearch.param.request.AggsParam;
 import com.experian.comp.elasticsearch.param.request.BoolParam;
 import com.experian.comp.elasticsearch.param.request.Document;
 import com.experian.comp.elasticsearch.param.request.SearchParam;
@@ -213,6 +214,9 @@ public class PooledESClient extends AbstractPooledESClient {
 		// 设置组合查询(bool)
 		setBoolQuery(query, searchParam);
 
+		// 设置聚合
+		setGroupBy(searchRequest, searchParam);
+
 		searchRequest.setQuery(query);
 
 		String endpoint = "/" + esRequest.getIndex() + "/" + esRequest.getType() + "/_search";
@@ -245,6 +249,40 @@ public class PooledESClient extends AbstractPooledESClient {
 			esResponse = new ESResponse<>(R.FAILED, "请求失败");
 		}
 		return esResponse;
+	}
+
+	private void setGroupBy(SearchRequest searchRequest, SearchParam searchParam) {
+		if (!CollectionUtils.isEmpty(searchParam.getAggs())) {
+			Map<String, Map<String, Map<String, Object>>> aggs = new HashMap<>();
+			searchRequest.setAggs(aggs);
+			for (AggsParam agg : searchParam.getAggs()) {
+				if (agg.isNested()) {
+					Map<String, Map<String, Object>> value = new HashMap<>();
+
+					Map<String, Object> pathMap = new HashMap<>();
+					pathMap.put("path", agg.getNestedPath());
+					value.put("nested", pathMap);
+
+					Map<String, Object> aggNestedMap = new HashMap<>();
+					Map<String, Object> aggNestedValueMap = new HashMap<>();
+					Map<String, Object> aggNestedValueFieldMap = new HashMap<>();
+					aggNestedValueFieldMap.put("field", agg.getNestedPath() + "." + agg.getKey());
+					aggNestedValueMap.put("terms", aggNestedValueFieldMap);
+					aggNestedMap.put("group_by_" + agg.getKey(), aggNestedValueMap);
+					value.put("aggs", aggNestedMap);
+
+					aggs.put(agg.getKey(), value);
+
+				} else {
+
+					Map<String, Map<String, Object>> value = new HashMap<>();
+					Map<String, Object> termValue = new HashMap<>();
+					termValue.put("field", agg.getKey());
+					value.put("terms", termValue);
+					aggs.put(agg.getKey(), value);
+				}
+			}
+		}
 	}
 
 	private void setBoolQuery(Query query, SearchParam searchParam) {

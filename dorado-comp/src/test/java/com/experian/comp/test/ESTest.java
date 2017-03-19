@@ -1,9 +1,12 @@
 package com.experian.comp.test;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.http.client.HttpClient;
 import org.assertj.core.util.Lists;
+import org.json.JSONArray;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,12 +17,16 @@ import com.experian.comp.elasticsearch.mapping.MappingHolder;
 import com.experian.comp.elasticsearch.mapping.MappingScan;
 import com.experian.comp.elasticsearch.param.ESRequest;
 import com.experian.comp.elasticsearch.param.ESResponse;
+import com.experian.comp.elasticsearch.param.request.AggsParam;
 import com.experian.comp.elasticsearch.param.request.BoolParam;
 import com.experian.comp.elasticsearch.param.request.Document;
 import com.experian.comp.elasticsearch.param.request.SearchParam;
+import com.experian.comp.elasticsearch.param.response.SearchResponse;
 import com.experian.comp.utility.ElasticSeacrhUtil;
 import com.experian.core.utils.GsonUtil;
 import com.google.gson.Gson;
+
+import net.minidev.json.JSONObject;
 
 @SpringBootTest(classes = CompApplication.class)
 @RunWith(SpringRunner.class)
@@ -218,6 +225,24 @@ public class ESTest {
 		esRequest.setContent(searcParam);
 		esRequest.setIndex("litigation");
 		esRequest.setType("detail");
+		ESResponse<Litigation> res = ElasticSeacrhUtil.search(esRequest, Litigation.class);
+		System.err.println(GsonUtil.toJson(res));
+	}
+	
+	@Test
+	public void testAggsQuery() {
+		ESRequest<SearchParam> esRequest = new ESRequest<>();
+		esRequest.setIndex("litigation");
+		esRequest.setType("detail");
+		SearchParam searchParam = new SearchParam();
+		esRequest.setContent(searchParam);
+
+		List<AggsParam> aggs = new ArrayList<>();
+		AggsParam agg1 = new AggsParam();
+		agg1.setKey("serialCaseNumber");
+		aggs.add(agg1);
+		searchParam.setAggs(aggs);
+		
 		ESResponse<Litigation> res = ElasticSeacrhUtil.search(esRequest, Litigation.class);
 		System.err.println(GsonUtil.toJson(res));
 	}

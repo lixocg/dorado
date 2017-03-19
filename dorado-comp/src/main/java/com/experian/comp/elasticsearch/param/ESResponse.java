@@ -7,13 +7,13 @@ import com.experian.core.pojo.R;
 public class ESResponse<T> {
 	private String code;
 
-	private String msg;
-
-	private List<T> data;
-
 	private int total;
 
 	private long took;
+
+	private String msg;
+
+	private List<T> data;
 
 	public ESResponse() {
 		this.code = R.SUCCESS;
