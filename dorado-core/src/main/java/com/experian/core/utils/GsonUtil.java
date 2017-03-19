@@ -1,4 +1,4 @@
-package com.experian.comp.utility;
+package com.experian.core.utils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

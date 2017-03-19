@@ -17,6 +17,7 @@ import org.elasticsearch.client.RestClient;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import com.experian.comp.elasticsearch.enums.RequestMethod;
 import com.experian.comp.elasticsearch.mapping.MappingHolder;
 import com.experian.comp.elasticsearch.modle.Bool;
 import com.experian.comp.elasticsearch.modle.Condition;
@@ -35,8 +36,8 @@ import com.experian.comp.elasticsearch.param.request.SearchParam;
 import com.experian.comp.elasticsearch.param.request.SearchRequest;
 import com.experian.comp.elasticsearch.param.response.Hit;
 import com.experian.comp.elasticsearch.param.response.SearchResponse;
-import com.experian.comp.utility.GsonUtil;
 import com.experian.core.pojo.R;
+import com.experian.core.utils.GsonUtil;
 import com.google.common.collect.Lists;
 
 /**
@@ -48,6 +49,33 @@ import com.google.common.collect.Lists;
 @Component
 public class PooledESClient extends AbstractPooledESClient {
 	private static final Logger logger = Logger.getLogger(PooledESClient.class);
+
+	/**
+	 * 索引是否存在
+	 * 
+	 * @param index
+	 *            索引名
+	 * @return
+	 */
+	public boolean ifIndexExist(String index) {
+		String endpoint = "/" + index;
+		Response response = super.performRequest(RequestMethod.GET, endpoint, index);
+		if (response != null && response.getStatusLine().getStatusCode() == 200) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 删除索引
+	 * 
+	 * @param index
+	 */
+	public void removeIndex(String index) {
+		String endpoint = "/" + index;
+		this.performRequest(RequestMethod.DELETE, endpoint, index);
+	}
 
 	/**
 	 * 创建一个mapping
@@ -96,34 +124,26 @@ public class PooledESClient extends AbstractPooledESClient {
 	 * @return
 	 */
 	public <T> ESResponse<Void> addDoc(ESRequest<Document<T>> esRequest) {
-		RestClient restClient = null;
 		ESResponse<Void> esResponse = null;
-		try {
-			restClient = getRestClient();
-			String docJson = GsonUtil.toJson(esRequest.getContent().getDoc());
-			HttpEntity entity = new NStringEntity(docJson, ContentType.APPLICATION_JSON);
-			System.out.println("addDoc:" + docJson);
-			String endpoint = "/" + esRequest.getIndex() + "/" + esRequest.getType() + "/"
-					+ esRequest.getContent().getId();
-			Response response = null;
+		String docJson = GsonUtil.toJson(esRequest.getContent().getDoc());
+		System.out.println("addDoc:" + docJson);
+		String endpoint = "/" + esRequest.getIndex() + "/" + esRequest.getType() + "/" + esRequest.getContent().getId();
+		Response response = null;
+		response = this.performRequest(RequestMethod.PUT, endpoint, docJson);
+
+		if (response != null) {
+			String content = null;
 			try {
-				response = getRestClient().performRequest("PUT", endpoint, new HashMap<String, String>(), entity);
-			} catch (IOException e) {
-				logger.error("", e);
+				content = IOUtils.toString(response.getEntity().getContent());
+			} catch (UnsupportedOperationException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-
-			if (response != null) {
-				String content = IOUtils.toString(response.getEntity().getContent());
-				esResponse = new ESResponse<Void>(response.getStatusLine().getStatusCode() + "", content);
-			} else {
-				esResponse = new ESResponse<Void>(R.FAILED, "请求失败");
-			}
-
-		} catch (Exception e) {
-			logger.error("", e);
-		} finally {
-			returnObject(restClient);
+			esResponse = new ESResponse<Void>(response.getStatusLine().getStatusCode() + "", content);
+		} else {
+			esResponse = new ESResponse<Void>(R.FAILED, "请求失败");
 		}
+
 		return esResponse;
 	}
 
@@ -134,50 +154,38 @@ public class PooledESClient extends AbstractPooledESClient {
 	 * @return
 	 */
 	public <T> ESResponse<Void> addBulkDoc(ESRequest<List<Document<T>>> esRequest) {
-		RestClient restClient = null;
 		ESResponse<Void> esResponse = null;
-		try {
-			restClient = getRestClient();
 
-			List<Document<T>> docs = esRequest.getContent();
-			if (CollectionUtils.isEmpty(docs)) {
-				return new ESResponse<Void>(R.FAILED, "无文档");
-			}
-			// { "index" : { "_index" : "test", "_type" : "type1", "_id" :
-			// "1" } }
-			// { "field1" : "value1" }
-			StringBuilder sb = new StringBuilder();
-			for (Document<T> doc : docs) {
-				sb.append("{ \"index\" : { \"_index\" : \"" + esRequest.getIndex() + "\", \"_type\" : \""
-						+ esRequest.getType() + "\", \"_id\" : \"" + doc.getId() + "\" } }\n");
-				sb.append(GsonUtil.toJson(doc.getDoc()));
-				sb.append("\n");
-			}
-
-			String endpoint = "/" + esRequest.getIndex() + "/" + esRequest.getType() + "/_bulk";
-			Response response = null;
-			try {
-				HttpEntity entity = new NStringEntity(sb.toString(), ContentType.APPLICATION_JSON);
-				logger.info("请求内容：" + sb.toString());
-				response = restClient.performRequest("PUT", endpoint, new HashMap<String, String>(), entity);
-			} catch (IOException e) {
-				logger.error("", e);
-				return new ESResponse<>(R.FAILED, e.getMessage());
-			}
-
-			if (response != null) {
-				String content = IOUtils.toString(response.getEntity().getContent());
-				esResponse = new ESResponse<Void>(response.getStatusLine().getStatusCode() + "", content);
-			} else {
-				esResponse = new ESResponse<Void>(R.FAILED, "请求失败");
-			}
-
-		} catch (Exception e) {
-			logger.error("", e);
-			return new ESResponse<>(R.FAILED, e.getMessage());
-		} finally {
-			returnObject(restClient);
+		List<Document<T>> docs = esRequest.getContent();
+		if (CollectionUtils.isEmpty(docs)) {
+			return new ESResponse<Void>(R.FAILED, "无文档");
 		}
+		StringBuilder sb = new StringBuilder();
+		for (Document<T> doc : docs) {
+			sb.append("{ \"index\" : { \"_index\" : \"" + esRequest.getIndex() + "\", \"_type\" : \""
+					+ esRequest.getType() + "\", \"_id\" : \"" + doc.getId() + "\" } }\n");
+			sb.append(GsonUtil.toJson(doc.getDoc()));
+			sb.append("\n");
+		}
+
+		String endpoint = "/" + esRequest.getIndex() + "/" + esRequest.getType() + "/_bulk";
+		Response response = null;
+		logger.info("addBulkDoc：" + sb.toString());
+		response = this.performRequest(RequestMethod.PUT, endpoint, sb.toString());
+
+		if (response != null) {
+			String content = null;
+			try {
+				content = IOUtils.toString(response.getEntity().getContent());
+			} catch (UnsupportedOperationException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			esResponse = new ESResponse<Void>(response.getStatusLine().getStatusCode() + "", content);
+		} else {
+			esResponse = new ESResponse<Void>(R.FAILED, "请求失败");
+		}
+
 		return esResponse;
 	}
 
@@ -190,65 +198,51 @@ public class PooledESClient extends AbstractPooledESClient {
 	 * @return
 	 */
 	public <T> ESResponse<T> search(ESRequest<SearchParam> esRequest, Class<?> clazz) {
-		RestClient restClient = null;
 		ESResponse<T> esResponse = null;
-		try {
-			restClient = getRestClient();
+		SearchParam searchParam = esRequest.getContent();
+		SearchRequest searchRequest = new SearchRequest();
+		if (searchParam.getPage() > 0 && searchParam.getSize() > 0) {
+			searchRequest.setFrom(searchParam.getPage() * searchParam.getSize());
+			searchRequest.setSize(searchParam.getSize());
+		}
 
-			String endpoint = "/" + esRequest.getIndex() + "/" + esRequest.getType() + "/_search";
-			SearchParam searchParam = esRequest.getContent();
-			SearchRequest searchRequest = new SearchRequest();
-			if (searchParam.getPage() > 0 && searchParam.getSize() > 0) {
-				searchRequest.setFrom(searchParam.getPage() * searchParam.getSize());
-				searchRequest.setSize(searchParam.getSize());
-			}
+		Query query = new Query();
+		// 设置多值域关键字查询(keywords)
+		setMultiQuery(query, searchParam);
 
-			Query query = new Query();
-			// 设置多值域关键字查询(keywords)
-			setMultiQuery(query, searchParam);
+		// 设置组合查询(bool)
+		setBoolQuery(query, searchParam);
 
-			// 设置组合查询(bool)
-			setBoolQuery(query, searchParam);
+		searchRequest.setQuery(query);
 
-			searchRequest.setQuery(query);
+		String endpoint = "/" + esRequest.getIndex() + "/" + esRequest.getType() + "/_search";
+		String requestBody = GsonUtil.toJson(searchRequest);
+		System.out.println("searchRequest:" + requestBody);
+		Response response = super.performRequest(RequestMethod.GET, endpoint, requestBody);
 
-			Response response = null;
+		if (response != null) {
+			String content = null;
 			try {
-				String requestBody = GsonUtil.toJson(searchRequest);
-				System.out.println("searchRequest:" + requestBody);
-				HttpEntity entity = new NStringEntity(requestBody, ContentType.APPLICATION_JSON);
-				response = restClient.performRequest("GET", endpoint, new HashMap<String, String>(), entity);
-			} catch (IOException e) {
+				content = IOUtils.toString(response.getEntity().getContent());
+			} catch (UnsupportedOperationException | IOException e) {
 				e.printStackTrace();
-				return new ESResponse<>(R.FAILED, e.getMessage());
 			}
-
-			if (response != null) {
-				String content = IOUtils.toString(response.getEntity().getContent());
-				System.out.println(content);
-				SearchResponse<T> searchResponse = GsonUtil.fromJson(content, SearchResponse.class, clazz);
-				esResponse = new ESResponse<>();
-				esResponse.setCode(response.getStatusLine().getStatusCode() + "");
-				if (searchResponse != null) {
-					esResponse.setTotal(searchResponse.getHits().getTotal());
-					esResponse.setTook(searchResponse.getTook());
-					List<T> data = Lists.newArrayList();
-					for (Hit<T> hit : searchResponse.getHits().getHits()) {
-						data.add(hit.get_source());
-					}
-					esResponse.setData(data);
-				} else {
-					esResponse.setMsg("查询异常");
+			SearchResponse<T> searchResponse = GsonUtil.fromJson(content, SearchResponse.class, clazz);
+			esResponse = new ESResponse<>();
+			esResponse.setCode(response.getStatusLine().getStatusCode() + "");
+			if (searchResponse != null) {
+				esResponse.setTotal(searchResponse.getHits().getTotal());
+				esResponse.setTook(searchResponse.getTook());
+				List<T> data = Lists.newArrayList();
+				for (Hit<T> hit : searchResponse.getHits().getHits()) {
+					data.add(hit.get_source());
 				}
+				esResponse.setData(data);
 			} else {
-				esResponse = new ESResponse<>(R.FAILED, "请求失败");
+				esResponse.setMsg("查询异常");
 			}
-
-		} catch (Exception e) {
-			logger.error("", e);
-			return new ESResponse<>(R.FAILED, e.getMessage());
-		} finally {
-			returnObject(restClient);
+		} else {
+			esResponse = new ESResponse<>(R.FAILED, "请求失败");
 		}
 		return esResponse;
 	}

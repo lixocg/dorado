@@ -3,7 +3,7 @@ package com.experian.comp.elasticsearch.mapping;
 import java.util.Map;
 
 import com.experian.comp.elasticsearch.modle.Mapping;
-import com.experian.comp.utility.GsonUtil;
+import com.experian.core.utils.GsonUtil;
 import com.google.common.collect.Maps;
 
 /**

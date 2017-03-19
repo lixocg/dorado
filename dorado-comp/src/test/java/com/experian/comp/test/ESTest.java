@@ -17,8 +17,8 @@ import com.experian.comp.elasticsearch.param.ESResponse;
 import com.experian.comp.elasticsearch.param.request.BoolParam;
 import com.experian.comp.elasticsearch.param.request.Document;
 import com.experian.comp.elasticsearch.param.request.SearchParam;
-import com.experian.comp.utility.ESClientUtil;
-import com.experian.comp.utility.GsonUtil;
+import com.experian.comp.utility.ElasticSeacrhUtil;
+import com.experian.core.utils.GsonUtil;
 import com.google.gson.Gson;
 
 @SpringBootTest(classes = CompApplication.class)
@@ -27,11 +27,17 @@ public class ESTest {
 	public static Gson gson = new Gson();
 	
 	@Test
+	public void ifIndexExist(){
+		boolean e = ElasticSeacrhUtil.ifIndexExist("litigation");
+		System.out.println(e);
+	}
+	
+	@Test
 	public void createMapping(){
 		ESRequest<Class<Litigation>> esRequest = new ESRequest<>();
 		esRequest.setIndex("litigation");
 		esRequest.setType("detail");
-		ESResponse<Void> response = ESClientUtil.createMapping(esRequest,Litigation.class);
+		ESResponse<Void> response = ElasticSeacrhUtil.createMapping(esRequest,Litigation.class);
 		System.out.println(gson.toJson(response));
 	}
 
@@ -69,7 +75,7 @@ public class ESTest {
 		doc.setId(l.getId());
 		doc.setDoc(l);
 		esRequest.setContent(doc);
-		ESResponse<Void> response = ESClientUtil.addDoc(esRequest);
+		ESResponse<Void> response = ElasticSeacrhUtil.addDoc(esRequest);
 		System.out.println(gson.toJson(response));
 	}
 
@@ -150,7 +156,7 @@ public class ESTest {
 		esRequest.setContent(docs);
 		esRequest.setIndex("litigation");
 		esRequest.setType("detail");
-		ESResponse<Void> response = ESClientUtil.addBulkDoc(esRequest);
+		ESResponse<Void> response = ElasticSeacrhUtil.addBulkDoc(esRequest);
 		System.out.println(gson.toJson(response));
 	}
 
@@ -166,7 +172,7 @@ public class ESTest {
 		esRequest.setContent(content);
 		esRequest.setIndex("litigation");
 		esRequest.setType("detail");
-		ESResponse<Litigation> res = ESClientUtil.search(esRequest, Litigation.class);
+		ESResponse<Litigation> res = ElasticSeacrhUtil.search(esRequest, Litigation.class);
 		System.err.println(GsonUtil.toJson(res));
 	}
 
@@ -188,7 +194,7 @@ public class ESTest {
 		esRequest.setContent(searcParam);
 		esRequest.setIndex("litigation");
 		esRequest.setType("detail");
-		ESResponse<Litigation> res = ESClientUtil.search(esRequest, Litigation.class);
+		ESResponse<Litigation> res = ElasticSeacrhUtil.search(esRequest, Litigation.class);
 		System.err.println(GsonUtil.toJson(res));
 	}
 	
@@ -212,7 +218,7 @@ public class ESTest {
 		esRequest.setContent(searcParam);
 		esRequest.setIndex("litigation");
 		esRequest.setType("detail");
-		ESResponse<Litigation> res = ESClientUtil.search(esRequest, Litigation.class);
+		ESResponse<Litigation> res = ElasticSeacrhUtil.search(esRequest, Litigation.class);
 		System.err.println(GsonUtil.toJson(res));
 	}
 	

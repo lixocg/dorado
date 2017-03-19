@@ -11,18 +11,19 @@ import com.experian.core.utils.SpringContextUtil;
 
 /**
  * elasticsearch操作工具
+ * 
  * @author lixiongcheng
  *
  */
-public class ESClientUtil {
-	private ESClientUtil() {
+public class ElasticSeacrhUtil {
+	private ElasticSeacrhUtil() {
 	}
 
 	public static volatile PooledESClient esClient;
 
 	public static PooledESClient getClient() {
 		if (esClient == null) {
-			synchronized (ESClientUtil.class) {
+			synchronized (ElasticSeacrhUtil.class) {
 				if (esClient == null) {
 					esClient = SpringContextUtil.getBean(PooledESClient.class);
 				}
@@ -30,9 +31,9 @@ public class ESClientUtil {
 		}
 		return esClient;
 	}
-	
-	public static ESResponse<Void> createMapping(ESRequest<?> esRequest,Class<?> cls){
-		return getClient().createMapping(esRequest,cls);
+
+	public static ESResponse<Void> createMapping(ESRequest<?> esRequest, Class<?> cls) {
+		return getClient().createMapping(esRequest, cls);
 	}
 
 	public static <T> ESResponse<Void> addDoc(ESRequest<Document<T>> esRequest) {
@@ -43,9 +44,15 @@ public class ESClientUtil {
 		return getClient().addBulkDoc(esRequest);
 	}
 
-	public static <T> ESResponse<T> search(ESRequest<SearchParam> esRequest,Class<?> clazz) {
-		return getClient().search(esRequest,clazz);
+	public static <T> ESResponse<T> search(ESRequest<SearchParam> esRequest, Class<?> clazz) {
+		return getClient().search(esRequest, clazz);
 	}
 
-	
+	public static boolean ifIndexExist(String index) {
+		return getClient().ifIndexExist(index);
+	}
+
+	public static void removeIndex(String index) {
+		getClient().removeIndex(index);
+	}
 }
