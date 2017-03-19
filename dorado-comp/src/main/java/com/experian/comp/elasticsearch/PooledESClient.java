@@ -17,7 +17,7 @@ import org.elasticsearch.client.RestClient;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.experian.comp.elasticsearch.core.MappingHolder;
+import com.experian.comp.elasticsearch.mapping.MappingHolder;
 import com.experian.comp.elasticsearch.modle.Bool;
 import com.experian.comp.elasticsearch.modle.Condition;
 import com.experian.comp.elasticsearch.modle.Filter;

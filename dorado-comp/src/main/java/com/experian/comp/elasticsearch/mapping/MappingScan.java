@@ -1,4 +1,4 @@
-package com.experian.comp.elasticsearch.core;
+package com.experian.comp.elasticsearch.mapping;
 
 import java.io.IOException;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package com.experian.comp.elasticsearch.core;
+package com.experian.comp.elasticsearch.mapping;
 
 import java.util.Map;
 

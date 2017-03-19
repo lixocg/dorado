@@ -12,7 +12,7 @@ import org.springframework.core.Ordered;
 
 import com.experian.comp.elasticsearch.config.ESConfig.ConfigInfo;
 import com.experian.comp.elasticsearch.config.ESConfig.PoolConfig;
-import com.experian.comp.elasticsearch.core.MappingScan;
+import com.experian.comp.elasticsearch.mapping.MappingScan;
 
 public abstract class AbstractPooledESClient implements ApplicationEventPublisherAware, ApplicationListener<ContextRefreshedEvent>,Ordered {
 	private static final Logger logger = Logger.getLogger(AbstractPooledESClient.class);
