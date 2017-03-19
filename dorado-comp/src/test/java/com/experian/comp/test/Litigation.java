@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.experian.comp.elasticsearch.annotation.Document;
 import com.experian.comp.elasticsearch.annotation.Field;
-import com.experian.comp.elasticsearch.annotation.FieldIndex;
 import com.experian.comp.elasticsearch.annotation.NestedType;
+import com.experian.comp.elasticsearch.enums.FieldIndex;
 import com.experian.comp.elasticsearch.enums.FieldType;
 
 @Document(indexName="litigiation",type="detail")

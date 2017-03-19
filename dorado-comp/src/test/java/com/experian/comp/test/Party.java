@@ -1,8 +1,8 @@
 package com.experian.comp.test;
 
 import com.experian.comp.elasticsearch.annotation.Field;
-import com.experian.comp.elasticsearch.annotation.FieldIndex;
 import com.experian.comp.elasticsearch.annotation.Nested;
+import com.experian.comp.elasticsearch.enums.FieldIndex;
 import com.experian.comp.elasticsearch.enums.FieldType;
 
 @Nested

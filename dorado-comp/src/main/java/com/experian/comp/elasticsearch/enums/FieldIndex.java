@@ -1,4 +1,4 @@
-package com.experian.comp.elasticsearch.annotation;
+package com.experian.comp.elasticsearch.enums;
 
 /**
  * 字段分词

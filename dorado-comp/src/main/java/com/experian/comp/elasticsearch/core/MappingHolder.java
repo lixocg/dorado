@@ -6,6 +6,11 @@ import com.experian.comp.elasticsearch.modle.Mapping;
 import com.experian.comp.utility.GsonUtil;
 import com.google.common.collect.Maps;
 
+/**
+ * mapping entity扫描注册对象
+ * @author lixiongcheng
+ *
+ */
 public class MappingHolder {
 	private static volatile MappingHolder instance;
 

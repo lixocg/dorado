@@ -31,8 +31,8 @@ public class ESClientUtil {
 		return esClient;
 	}
 	
-	public static <T> ESResponse<Void> createMapping(ESRequest<Class<T>> esRequest){
-		return getClient().createMapping(esRequest);
+	public static ESResponse<Void> createMapping(ESRequest<?> esRequest,Class<?> cls){
+		return getClient().createMapping(esRequest,cls);
 	}
 
 	public static <T> ESResponse<Void> addDoc(ESRequest<Document<T>> esRequest) {

@@ -31,7 +31,7 @@ public class ESTest {
 		ESRequest<Class<Litigation>> esRequest = new ESRequest<>();
 		esRequest.setIndex("litigation");
 		esRequest.setType("detail");
-		ESResponse<Void> response = ESClientUtil.createMapping(esRequest);
+		ESResponse<Void> response = ESClientUtil.createMapping(esRequest,Litigation.class);
 		System.out.println(gson.toJson(response));
 	}
 
@@ -200,9 +200,9 @@ public class ESTest {
 		//searcParam.setFileds(new String[] { "serialCaseNumber" });
 		List<BoolParam> filters = Lists.newArrayList();
 		BoolParam fp1 = new BoolParam();
-		fp1.setBoolType((byte) 1);
-		fp1.setKey("id");
-		fp1.setValue("E1006");
+		fp1.setBoolType((byte) 2);
+		fp1.setKey("name");
+		fp1.setValue("Experian中国");
 		fp1.setNested(true);
 		fp1.setNestedPath("parties");
 		filters.add(fp1);

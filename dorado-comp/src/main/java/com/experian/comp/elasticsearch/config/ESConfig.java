@@ -70,19 +70,6 @@ public class ESConfig implements EnvironmentAware {
 
 		private String password;
 
-		/**
-		 * 创建Mapping所要扫描的实体包
-		 */
-		private String[] basePackages;
-
-		public String[] getBasePackages() {
-			return basePackages;
-		}
-
-		public void setBasePackages(String[] basePackages) {
-			this.basePackages = basePackages;
-		}
-
 		public List<HttpHost> getHttpHosts() {
 			return httpHosts;
 		}

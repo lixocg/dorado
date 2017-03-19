@@ -35,7 +35,6 @@ import com.experian.comp.elasticsearch.param.request.SearchParam;
 import com.experian.comp.elasticsearch.param.request.SearchRequest;
 import com.experian.comp.elasticsearch.param.response.Hit;
 import com.experian.comp.elasticsearch.param.response.SearchResponse;
-import com.experian.comp.test.Litigation;
 import com.experian.comp.utility.GsonUtil;
 import com.experian.core.pojo.R;
 import com.google.common.collect.Lists;
@@ -50,14 +49,23 @@ import com.google.common.collect.Lists;
 public class PooledESClient extends AbstractPooledESClient {
 	private static final Logger logger = Logger.getLogger(PooledESClient.class);
 
-	public <T> ESResponse<Void> createMapping(ESRequest<Class<T>> esRequest) {
+	/**
+	 * 创建一个mapping
+	 * 
+	 * @param esRequest
+	 *            请求题，需要有index，type，并且和@Document注解的indexName，type相同
+	 * @param cls
+	 *            那个实体对象的映射成es mapping
+	 * @return
+	 */
+	public ESResponse<Void> createMapping(ESRequest<?> esRequest, Class<?> cls) {
 		RestClient restClient = null;
 		ESResponse<Void> esResponse = null;
 		try {
 			restClient = getRestClient();
-			String docJson = MappingHolder.getInstance().getMapping(Litigation.class);
+			String docJson = MappingHolder.getInstance().getMapping(cls);
 			HttpEntity entity = new NStringEntity(docJson, ContentType.APPLICATION_JSON);
-			System.out.println("addDoc:" + docJson);
+			System.out.println("createMapping:" + docJson);
 			String endpoint = "/" + esRequest.getIndex();
 			Response response = null;
 			try {
@@ -173,6 +181,14 @@ public class PooledESClient extends AbstractPooledESClient {
 		return esResponse;
 	}
 
+	/**
+	 * 搜索
+	 * 
+	 * @param esRequest
+	 * @param clazz
+	 *            返回实体
+	 * @return
+	 */
 	public <T> ESResponse<T> search(ESRequest<SearchParam> esRequest, Class<?> clazz) {
 		RestClient restClient = null;
 		ESResponse<T> esResponse = null;
@@ -351,12 +367,12 @@ public class PooledESClient extends AbstractPooledESClient {
 		Filter filter = new Filter();
 		if (f.getType() == 1) {// match
 			Map<String, Object> match = new HashMap<>();
-			match.put(f.getKey(), f.getValue());
+			match.put(f.getNestedPath() + "." + f.getKey(), f.getValue());
 			filter.setMatch(match);
 		}
 		if (f.getType() == 2) {// term
 			Map<String, Object> term = new HashMap<>();
-			term.put(f.getKey(), f.getValue());
+			term.put(f.getNestedPath() + "." + f.getKey(), f.getValue());
 			filter.setTerm(term);
 		}
 

@@ -7,6 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.experian.comp.elasticsearch.enums.FieldIndex;
 import com.experian.comp.elasticsearch.enums.FieldType;
 
 /**
