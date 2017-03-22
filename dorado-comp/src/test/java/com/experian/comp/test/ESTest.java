@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.http.client.HttpClient;
+import org.apache.log4j.Logger;
 import org.assertj.core.util.Lists;
 import org.json.JSONArray;
 import org.junit.Test;
@@ -31,6 +32,8 @@ import net.minidev.json.JSONObject;
 @SpringBootTest(classes = CompApplication.class)
 @RunWith(SpringRunner.class)
 public class ESTest {
+	private static final Logger logger = Logger.getLogger(ESTest.class);
+	
 	public static Gson gson = new Gson();
 	
 	@Test
@@ -244,7 +247,7 @@ public class ESTest {
 		searchParam.setAggs(aggs);
 		
 		ESResponse<Litigation> res = ElasticSeacrhUtil.search(esRequest, Litigation.class);
-		System.err.println(GsonUtil.toJson(res));
+		logger.info(GsonUtil.toJson(res));
 	}
 	
 	@Test
